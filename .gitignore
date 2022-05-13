@@ -1,0 +1,27 @@
+### Yii template
+engine/data/config.php
+engine/data/dbconfig.php
+.git/
+.idea/
+.sync/
+.sync/0BD8/
+.vscode/
+_notes/
+backup/
+bzfto/
+uploads/
+uploads/cache/
+uploads/files/
+uploads/fotos/
+uploads/icons/
+uploads/posts/
+uploads/thumbs/
+bzfto-1/
+CherApp/content/
+engine/cache/
+engine/cache/*
+engine/system/
+engine/system/CSS
+engine/system/HTML
+engine/system/URL
+wp-admin/

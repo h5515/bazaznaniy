@@ -1,0 +1,191 @@
+
+/*************************** Основные пункты */
+#mainmenug{
+    position:relative;
+   
+	
+    height:40px;
+    margin:0px auto;
+    padding:0;
+    width:960px;
+    z-index:10 /* для отображения подпунктов поверх остальных блоков */
+}
+#mainmenug ul, /* сбрасываем поля и отступы у списков */
+#mainmenug ul ul {
+	list-style:none;
+    padding:0;
+    margin:0;
+
+
+
+}
+#mainmenug ul {	
+    clear:left;
+    position:relative;
+    right:50%;
+    height:40px;
+    float:right;
+    text-align:center;
+    font:12px Arial, Helvetica, sans-serif;
+	text-transform:uppercase;   
+
+
+}
+#mainmenug ul li {
+	border-right: 1px solid #222;
+	box-shadow: 1px 0 0 #444;
+	-moz-box-shadow: 1px 0 0 #444;
+	-o-box-shadow: 1px 0 0 #444;
+	-ms-box-shadow: 1px 0 0 #444;
+	-webkit-box-shadow: 1px 0 0 #444;	
+    position:relative;
+    left:50%;
+    float:left;
+    height:40px;
+    padding:0;
+    margin:0
+
+
+background-color: #111;
+	background-image: -moz-linear-gradient(#444, #111); 
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#444), to(#111));	
+	background-image: -webkit-linear-gradient(#444, #111);	
+	background-image: -o-linear-gradient(#444, #111);
+	background-image: -ms-linear-gradient(#444, #111);
+	background-image: linear-gradient(#444, #111);
+	
+
+}
+#mainmenug ul li:last-child {
+	border:none;
+	box-shadow:none
+}	
+#mainmenug ul li a {
+    display:block;
+    color: #ccc;
+    text-decoration: none;
+    padding:13px 20px
+}
+#mainmenug ul li a:hover {
+	background-color: #FE5CB6;
+    background-image: -moz-linear-gradient(#5F1C60,  #FE5CB6);	
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#5F1C60), to(#FE5CB6));
+	background-image: -webkit-linear-gradient(#5F1C60, #FE5CB6);
+	background-image: -o-linear-gradient(#5F1C60, #FE5CB6);
+	background-image: -ms-linear-gradient(#5F1C60, #FE5CB6);
+	background-image: linear-gradient(#5F1C60, #FE5CB6);
+	color: #fafafa
+}
+#mainmenug ul li:hover > ul {
+	opacity: 1;
+	visibility: visible;
+	margin: 0;
+}
+ 
+/*************************** Выпадающие подпункты */
+#mainmenug ul li ul {
+	background: #444;
+	background: -moz-linear-gradient(#444, #111);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#444), to(#111));
+	background: -webkit-linear-gradient(#444, #111);    
+	background: -o-linear-gradient(#444, #111);	
+	background: -ms-linear-gradient(#444, #111);	
+	background: linear-gradient(#444, #111);		
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-o-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	transition: all .2s ease-in-out;
+	-webkit-transition: all .2s ease-in-out;
+	-moz-transition: all .2s ease-in-out;
+	-ms-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;	
+	text-transform:none;
+	opacity: 0;
+	visibility: hidden;
+    position:absolute;
+    left:0;
+    top:40px;
+    font-size:12px;
+	height:auto;
+    width:150px    
+}
+#mainmenug ul li ul li {
+	border:none;
+	box-shadow: 0 1px 0 #111, 0 2px 0 #666;
+	-moz-box-shadow: 0 1px 0 #111, 0 2px 0 #666;
+	-o-box-shadow: 0 1px 0 #111, 0 2px 0 #666;
+	-webkit-box-shadow: 0 1px 0 #111, 0 2px 0 #666;
+	-ms-box-shadow: 0 1px 0 #111, 0 2px 0 #666;
+    position:relative;
+	left:0;
+    float:none;
+    height:auto;
+    margin:0;
+    text-align:left !important;
+}
+#mainmenug ul li ul li:last-child {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+#mainmenug ul li ul li a {
+    padding:10px 8px;
+    border:none
+}
+
+/*************************** Выпадающие пункты второго уровня */
+#mainmenug ul li ul li ul {
+	top: 0;
+	left: 150px;
+	margin: 0 0 0 20px;
+	_margin: 0; /*IE6 only*/
+	box-shadow: -1px 0 0 rgba(255,255,255,.3);
+	-moz-box-shadow: -1px 0 0 rgba(255,255,255,.3);
+	-o-box-shadow: -1px 0 0 rgba(255,255,255,.3);
+	-ms-box-shadow: -1px 0 0 rgba(255,255,255,.3);
+	-webkit-box-shadow: -1px 0 0 rgba(255,255,255,.3);	
+}
+
+/* Стрелочки на подпунктах */
+#mainmenug ul ul li:first-child > a {
+	border-radius: 3px 3px 0 0;
+	-moz-border-radius: 3px 3px 0 0;
+	-o-border-radius: 3px 3px 0 0;
+	-ms-border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;	
+}
+#mainmenug ul ul li:first-child > a:after {
+	content: '';
+	position: absolute;
+	left: 40px;
+	top: -6px;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid #444;
+}
+#mainmenug ul ul ul li:first-child a:after {
+	left: -6px;
+	top: 50%;
+	margin-top: -6px;
+	border-left: 0;	
+	border-bottom: 6px solid transparent;
+	border-top: 6px solid transparent;
+	border-right: 6px solid #3b3b3b;
+}
+#mainmenug ul ul li:first-child a:hover:after {border-bottom-color: #04acec}
+
+#mainmenug ul ul ul li:first-child a:hover:after {
+	border-right-color: #0299d3; 
+	border-bottom-color: transparent; 	
+}
+#mainmenug ul ul li:last-child > a {
+	-moz-border-radius: 0 0 3px 3px;
+	-webkit-border-radius: 0 0 3px 3px;
+	border-radius: 0 0 3px 3px;
+}
+
+#mainmenug .active {
+color: red;
+}

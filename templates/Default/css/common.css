@@ -1,0 +1,108 @@
+#wrapper .container .spedbar {
+    padding: 10px 20px;
+    border-bottom: 1px #D9DDE1 solid;
+    font-size: 20px;
+    color: #B0B4B9;
+}
+
+#wrapper .container .spedbar a {
+    font-size: 16px;
+    margin: 0px 10px;
+    color: #B0B4B9;
+}
+
+#wrapper .container {
+    float: right;
+    width: 970px;
+    background: #FFF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#wrapper .container .padding {
+    padding: 30px;
+}
+
+#wrapper .container .category-title {
+    font-size: 20px;
+    margin-bottom: 25px;
+    color: #404E5C;
+    padding-top: 30px;
+}
+
+#wrapper .container .category-title .com {
+    background: url(../images/icon-comment.png) no-repeat left 3px;
+    padding-left: 25px;
+}
+
+#wrapper .container .category-title .com a {
+    color: #77BD7F;
+}
+
+#wrapper .container .category-title p {
+    float: right;
+}
+
+#wrapper .container .category-title p a {
+    font-size: 15px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+    margin-left: 8px;
+}
+
+.block-news ol {
+    width: 242px;
+    height: 229px;
+    padding-top: 22px;
+    border: 1px #E6E9EB solid;
+    transition: all 0.2s ease-in-out !important;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    float: left;
+    text-align: center;
+    margin: 0 16px 22px 0;
+}
+
+.block-news ol:hover {
+    border: 1px #77BD7F solid;
+    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.25), 0 1px 43px rgba(0, 0, 0, 0.22);
+}
+
+.block-news ol:hover .shottitle {
+    font-weight: bold;
+    /*border: 1px solid black;*/
+    margin-top: 20px;
+    position: absolute;
+}
+
+.block-news ol:hover img {
+    transform: scale(1.1);
+    /*max-width: 100%;*/
+}
+
+/*.block-news OL:nth-child(3n+3)
+{
+	margin-right: 0px;
+}*/
+.block-news ol img {
+    width: auto;
+    max-width: 260px;
+    height: 151px;
+    transition: all 0.2s ease-in-out !important;
+    /*margin: auto;*/
+}
+
+.block-news ol .title {
+    margin: 10px 0;
+}
+
+.block-news ol .title a {
+    font-size: 15px;
+}
+
+.block-news ol .date {
+    color: #8C959D;
+}

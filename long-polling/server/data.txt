@@ -1,0 +1,186 @@
+<tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7941" target="_black">
+
+    OC-7941
+</a></td><td title="
+                просьба слить в одного контрагента ООО " Евроотель"="" "="">
+                просьба слить в одного контрагента ООО "Евроотель"
+    
+</td><td class="nowrap">09.06.21 18:44</td><td class="nowrap" data-hv="Obnovleno">09.06.21 20:39</td><td>    Не назначен
+</td><td>            Nikolay Eskov
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7946" target="_black">
+
+    OC-7946
+</a></td><td title="
+                отчеты агента ТТ Бел
+    
+">
+                отчеты агента ТТ Бел
+    
+</td><td class="nowrap">09.06.21 20:31</td><td class="nowrap" data-hv="Obnovleno">09.06.21 20:37</td><td>    Не назначен
+</td><td>            Aleksandr Isaev
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7944" target="_black">
+
+    OC-7944
+</a></td><td title="
+                СРОЧНО! Закрытие месяца
+    
+">
+                СРОЧНО! Закрытие месяца
+    
+</td><td class="nowrap">09.06.21 19:02</td><td class="nowrap" data-hv="Obnovleno">09.06.21 20:36</td><td>    Не назначен
+</td><td>            Dmitriy Trushin
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7696" target="_black">
+
+    OC-7696
+</a></td><td title="
+                4303487 
+    
+">
+                4303487 
+    
+</td><td class="nowrap">31.05.21 19:29</td><td class="nowrap" data-hv="Obnovleno">09.06.21 20:28</td><td>            Roman Kruglenko
+    </td><td>            Marianna Shchelkunova
+    </td><td>Минор</td><td>Development</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7945" target="_black">
+
+    OC-7945
+</a></td><td title="
+                Срочно! Выгрузить заказы MICE в ЕРП
+    
+">
+                Срочно! Выгрузить заказы MICE в ЕРП
+    
+</td><td class="nowrap">09.06.21 19:17</td><td class="nowrap" data-hv="Obnovleno">09.06.21 20:06</td><td>            Kirill Kachaev
+    </td><td>            Dmitriy Trushin
+    </td><td>Минор</td><td>Development</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7904" target="_black">
+
+    OC-7904
+</a></td><td title="
+                САМО 4486290 актуализация
+    
+">
+                САМО 4486290 актуализация
+    
+</td><td class="nowrap">08.06.21 17:17</td><td class="nowrap" data-hv="Obnovleno">09.06.21 19:15</td><td>            Kirill Kachaev
+    </td><td>            Roman Kuvshinov
+    </td><td>Минор</td><td>Development</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7929" target="_black">
+
+    OC-7929
+</a></td><td title="
+                не создана реализация по заявкам мая
+    
+">
+                не создана реализация по заявкам мая
+    
+</td><td class="nowrap">09.06.21 13:16</td><td class="nowrap" data-hv="Obnovleno">09.06.21 13:33</td><td>    Не назначен
+</td><td>            Dmitriy Trushin
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7868" target="_black">
+
+    OC-7868
+</a></td><td title="
+                Прошу разнести оплат на договор ONLT019291 в размере 34754,4 от 10 сентября 2020
+    
+">
+                Прошу разнести оплат на договор ONLT019291 в размере 34754,4 от 10 сентября 2020
+    
+</td><td class="nowrap">07.06.21 19:17</td><td class="nowrap" data-hv="Obnovleno">09.06.21 12:38</td><td>            Roman Kruglenko
+    </td><td>            Dmitriy Trushin
+    </td><td>Минор</td><td>Development</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7919" target="_black">
+
+    OC-7919
+</a></td><td title="
+                Нет заказа 4478568 в ЕРП
+    
+">
+                Нет заказа 4478568 в ЕРП
+    
+</td><td class="nowrap">08.06.21 21:56</td><td class="nowrap" data-hv="Obnovleno">09.06.21 10:35</td><td>            Kirill Kachaev
+    </td><td>            Roman Kuvshinov
+    </td><td>Минор</td><td>Development</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7918" target="_black">
+
+    OC-7918
+</a></td><td title="
+                счета фактуры на АВ за апрель
+    
+">
+                счета фактуры на АВ за апрель
+    
+</td><td class="nowrap">08.06.21 21:40</td><td class="nowrap" data-hv="Obnovleno">09.06.21 10:06</td><td>    Не назначен
+</td><td>            Aleksandr Isaev
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7897" target="_black">
+
+    OC-7897
+</a></td><td title="
+                Tunis ошибки при загрузке России.
+    
+">
+                Tunis ошибки при загрузке России.
+    
+</td><td class="nowrap">08.06.21 15:51</td><td class="nowrap" data-hv="Obnovleno">08.06.21 15:53</td><td>    Не назначен
+</td><td>            Dmitriy Trushin
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7896" target="_black">
+
+    OC-7896
+</a></td><td title="
+                Tunis актуализация.
+    
+">
+                Tunis актуализация.
+    
+</td><td class="nowrap">08.06.21 15:27</td><td class="nowrap" data-hv="Obnovleno">08.06.21 15:52</td><td>    Не назначен
+</td><td>            Dmitriy Trushin
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7886" target="_black">
+
+    OC-7886
+</a></td><td title="
+                не обновился заказ клиента с последующими бухгалтерскими документами
+    
+">
+                не обновился заказ клиента с последующими бухгалтерскими документами
+    
+</td><td class="nowrap">08.06.21 10:10</td><td class="nowrap" data-hv="Obnovleno">08.06.21 13:52</td><td>            Roman Kruglenko
+    </td><td>            Nikolay Eskov
+    </td><td>Минор</td><td>Development</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7884" target="_black">
+
+    OC-7884
+</a></td><td title="
+                Порядок начисления АВ по агентскому договору
+    
+">
+                Порядок начисления АВ по агентскому договору
+    
+</td><td class="nowrap">07.06.21 21:38</td><td class="nowrap" data-hv="Obnovleno">08.06.21 09:19</td><td>    Не назначен
+</td><td>            Aleksandr Isaev
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7813" target="_black">
+
+    OC-7813
+</a></td><td title="
+                 5124059 платеж не отображается по номеру заказа 
+    
+">
+                 5124059 платеж не отображается по номеру заказа 
+    
+</td><td class="nowrap">04.06.21 16:54</td><td class="nowrap" data-hv="Obnovleno">07.06.21 19:58</td><td>            Roman Kruglenko
+    </td><td>            Marianna Shchelkunova
+    </td><td>Минор</td><td>Development</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7839" target="_black">
+
+    OC-7839
+</a></td><td title="
+                закрытие мая, заказ января
+    
+">
+                закрытие мая, заказ января
+    
+</td><td class="nowrap">05.06.21 01:56</td><td class="nowrap" data-hv="Obnovleno">07.06.21 09:21</td><td>    Не назначен
+</td><td>            Marianna Shchelkunova
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr><tr><td align="center" data-hv="check"><input type="checkbox" class="nReag"></td><td class="nowrap" data-hv="kod"><a href="https://jira.tui.ru/browse/OC-7162" target="_black">
+
+    OC-7162
+</a></td><td title="
+                Задвоение остатков по субсчетам
+    
+">
+                Задвоение остатков по субсчетам
+    
+</td><td class="nowrap">13.04.21 00:32</td><td class="nowrap" data-hv="Obnovleno">04.06.21 14:40</td><td>    Не назначен
+</td><td>            Marianna Shchelkunova
+    </td><td>Минор</td><td>Backlog</td><td>1C - Поддержка ERP</td></tr>

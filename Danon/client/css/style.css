@@ -1,0 +1,213 @@
+.formlogin
+{
+	display: block;
+	width: 435px;
+	border: 3px double #999999;
+	padding: 18px 35px 20px;
+	/*+border-radius: 4px;*/
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #E0E0E0;
+	/*+box-shadow: 0 0 10px 3px #E0E0E0;*/
+	-moz-box-shadow: 0 0 10px 3px #E0E0E0;
+	-webkit-box-shadow: 0 0 10px 3px #E0E0E0;
+	box-shadow: 0 0 10px 3px #E0E0E0;
+	margin: 111px auto 0;
+}
+.formlogin IMG
+{
+	height: 130px;
+	position: absolute;
+	margin-left: -25px;
+	margin-top: -11px;
+	max-width: 237px;
+}
+.frmod
+{
+	display: block;
+	text-align: right;
+	margin: 21px 0 -19px;
+}
+.frmod SPAN
+{
+	width: 60px;
+	display: inline-block;
+	margin: 0 0 5px 0;
+}
+.frmod INPUT
+{
+	width: 139px;
+}
+.divbut
+{
+	text-align: right;
+	margin-top: 22px;
+}
+.divbut INPUT
+{
+	cursor: pointer;
+	margin-top: 8px;
+}
+.error
+{
+	display: none;
+	font-weight: bold;
+	color: #E50000;
+}
+.formuser
+{
+	border: 2px ridge #919191;
+	position: fixed;
+	right: 0;
+	cursor: default;
+	margin-right: 13px;
+	display: inline-flex;
+	padding: 12px;
+	/*+border-radius: 5px;*/
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	border-radius: 5px;
+	z-index: 10;
+	background-color: #F1F1F1;
+	/*+box-shadow: 0 0 2px 2px #ADACAC;*/
+	-moz-box-shadow: 0 0 2px 2px #ADACAC;
+	-webkit-box-shadow: 0 0 2px 2px #ADACAC;
+	box-shadow: 0 0 2px 2px #ADACAC;
+}
+.avatarimg IMG
+{
+	/*+border-radius: 50%;*/
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-khtml-border-radius: 50%;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	float: left;
+	margin: 0 9px 0 0;
+}
+.username
+{
+	font-size: 16px;
+	font-weight: bold;
+	color: #0019F1;
+}
+.butuot
+{
+	text-align: right;
+	margin-top: 42px;
+}
+.butuot INPUT
+{
+	cursor: pointer;
+}
+.samuser
+{
+	display: block;
+	white-space: nowrap;
+}
+.userlogin
+{
+	display: block;
+	float: left;
+	position: absolute;
+	left: 65px;
+	top: 28px;
+	color: #5E5E63;
+	margin-left: 8px;
+}
+#mybox
+{
+	width: auto;
+	background-color: #252F48;
+	cursor: default;
+	z-index: 100;
+	/*border-top: 4px solid #EDB749;*/
+	border: 1px solid black;
+	padding: 0px;
+}
+.table_dark
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 14px;
+	width: 523px;
+	/*float: left;*/
+	text-align: left;
+	border-collapse: collapse;
+	background: #252F48;
+	margin: 10px;
+}
+.table_dark TH
+{
+	color: #EDB749;
+	border-bottom: 1px solid #37B5A5;
+	padding: 12px 17px;
+}
+.table_dark TD
+{
+	color: #69FF6B;
+	transition: 1s;
+	border-bottom: 1px solid #37B5A5;
+	border-right: 1px solid #37B5A5;
+	border-left: 1px solid #37B5A5;
+	padding: 7px 5px !important;
+	font-weight: bold;
+	white-space: nowrap;
+	max-width: 190px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.table_dark TR:last-child TD
+{
+	border-bottom: none;
+	border-bottom: 1px solid #37B5A5;
+}
+.table_dark TD:last-child
+{
+	border-right: 1px solid #37B5A5;
+}
+.table_dark TR:hover TD
+{
+	text-decoration: underline;
+}
+.nowrap
+{
+	white-space: nowrap;
+}
+.bloktimer
+{
+	/*position: absolute;*/
+	color: #EDB749;
+	font-weight: bold;
+	margin: 8px 0 -9px 13px;
+	font-family: serif;
+	font-size: 19px;
+}
+.nReag
+{
+	transform: scale(2.0);
+	cursor: pointer;
+	border: 1px solid black;
+}
+.nereagir
+{
+	margin-top: 21px;
+}
+TD A
+{
+	color: #D5D5D5;
+}
+.knopka
+{
+	margin: 18px 0 -21px 23px;
+}
+.klientlogo
+{
+	height: 40px;
+	position: absolute;
+	left: 67px;
+	margin-top: 32px;
+}

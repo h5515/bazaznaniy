@@ -1,0 +1,36 @@
+Array
+(
+    [email] => h5515@mail.ru
+    [password] => $2y$10$B3pBgzS3d6CADjxia0qdbO4db5up5FOOmZI6mIe8htKJKF7X2IxpS
+    [name] => test
+    [user_id] => 2
+    [news_num] => 6
+    [comm_num] => 3
+    [user_group] => 2
+    [lastdate] => 1603635940
+    [reg_date] => 1603176240
+    [banned] => 
+    [allow_mail] => 1
+    [info] => 
+    [signature] => 
+    [foto] => 
+    [fullname] => 
+    [land] => 
+    [favorites] => 
+    [pm_all] => 0
+    [pm_unread] => 0
+    [time_limit] => 
+    [xfields] => 
+    [allowed_ip] => 
+    [hash] => e64ac8c6351abd92e104a017832ecf9b
+    [logged_ip] => 128.73.152.83
+    [restricted] => 0
+    [restricted_days] => 0
+    [restricted_date] => 
+    [timezone] => 
+    [news_subscribe] => 1
+    [comments_reply_subscribe] => 1
+    [twofactor_auth] => 0
+    [cat_add] => 
+    [cat_allow_addnews] => 
+)

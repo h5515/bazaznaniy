@@ -1,0 +1,56 @@
+/*
+Error: File to import not found or unreadable: bootstrap.
+       Load paths:
+         D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/Configuration/SassFrameworks/bourbon
+         D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/Configuration/SassFrameworks/neat
+         D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/Configuration/SassFrameworks/base
+        on line 3 of C:\server\data\htdocs\YandexDisk\phpmyadmin\themes\pmahomme\scss\theme.scss
+
+1: @import "direction";
+2: @import "variables";
+3: @import "bootstrap";
+4: @import "common";
+5: @import "enum-editor";
+6: @import "gis";
+7: @import "navigation";
+8: @import "designer";
+
+Backtrace:
+C:\server\data\htdocs\YandexDisk\phpmyadmin\themes\pmahomme\scss\theme.scss:3
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/import_node.rb:67:in `rescue in import'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/import_node.rb:45:in `import'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/import_node.rb:28:in `imported_file'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/import_node.rb:37:in `css_import?'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:314:in `visit_import'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/stack.rb:79:in `block in with_base'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/stack.rb:135:in `with_frame'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/stack.rb:79:in `with_base'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:162:in `visit'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:52:in `map'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:161:in `visit'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/visitors/perform.rb:10:in `visit'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/root_node.rb:36:in `css_tree'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/tree/root_node.rb:20:in `render'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/engine.rb:290:in `render'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:400:in `run'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:63:in `process_result'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/base.rb:52:in `parse'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/base.rb:19:in `parse!'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/lib/ruby/gems/2.4.0/gems/sass-3.5.3/bin/sass:13:in `<top (required)>'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/bin/sass:23:in `load'
+D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/ruby/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: bootstrap.\A        Load paths:\A          D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/Configuration/SassFrameworks/bourbon\A          D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/Configuration/SassFrameworks/neat\A          D:/Program Files/Dreamweaver/Adobe Dreamweaver 2020/Configuration/SassFrameworks/base\A         on line 3 of C:\server\data\htdocs\YandexDisk\phpmyadmin\themes\pmahomme\scss\theme.scss\A \A 1: @import \"direction\";\A 2: @import \"variables\";\A 3: @import \"bootstrap\";\A 4: @import \"common\";\A 5: @import \"enum-editor\";\A 6: @import \"gis\";\A 7: @import \"navigation\";\A 8: @import \"designer\";"; }
