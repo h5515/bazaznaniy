@@ -84,27 +84,27 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 	}
 
 	if ($allow_login and $allow_user) {
-
+		include(ENGINE_DIR ."/data/supconfig.php");
 		$bd2 = new db;
-		$bd2->connect(DBUSER, DBPASS, $gl_bd, DBHOST);
+		$bd2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
 		$member_id = $bd2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
 
 
-		if (empty($member_id)) {
-			$rows = $bd2->query("SELECT Project FROM " . USERPREFIX . "_project");
-			$db3 = new db;
-			foreach ($rows as $prj) {
-				$db3->connect(DBUSER, DBPASS, "bz_" . $prj['Project'], DBHOST);
-				$member_id = $db3->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
-				if (!empty($member_id)) {
-					set_cookie("site_bz", $prj['Project'], 365);
-					$_COOKIE['site_bz'] = $prj['Project'];
-					break;
-				}
-				$db3->close();
-			}
-			$db3->free();
-		}
+		// if (empty($member_id)) {
+		// 	$rows = $bd2->query("SELECT Project FROM " . USERPREFIX . "_project");
+		// 	$db3 = new db;
+		// 	foreach ($rows as $prj) {
+		// 		$db3->connect(DBUSER, DBPASS, "bz_" . $prj['Project'], DBHOST);
+		// 		$member_id = $db3->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
+		// 		if (!empty($member_id)) {
+		// 			set_cookie("site_bz", $prj['Project'], 365);
+		// 			$_COOKIE['site_bz'] = $prj['Project'];
+		// 			break;
+		// 		}
+		// 		$db3->close();
+		// 	}
+		// 	$db3->free();
+		// }
 
 		$bd2->free();
 
@@ -127,7 +127,8 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 			include(ENGINE_DIR ."/modules/ldapconnect.php");
 			$is_logged = ldap_auth($_POST['login_name'], $_POST['login_password']);
 			if ($is_logged && is_null($member_id['avtoriz_ad'])) {
-				$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
+				//$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
+				die('Пользователь не найден в базе данных. Обратитесь к Администратору.');
 			}
 		}
 
@@ -206,16 +207,16 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 
 			$db->query("UPDATE LOW_PRIORITY " . USERPREFIX . "_users SET {$new_pass_hash}lastdate='{$_TIME}', hash='{$hash}', logged_ip='{$_IP}' WHERE user_id='{$member_id['user_id']}'");
 
-			if ($user_group[$member_id['user_group']]['allow_admin']) {
+			// if ($user_group[$member_id['user_group']]['allow_admin']) {
 
-				$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '101', '')");
-			}
+			// 	$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '101', '')");
+			// }
 
-			if ($user_group[$member_id['user_group']]['rid'] == 1) {
+			if ($member_id['administrator'] == 6458) {
 				$_SESSION['super_admin'] = true;
 			}
 
-			if ($config['twofactor_auth'] and $member_id['twofactor_auth']) {
+			/*if ($config['twofactor_auth'] and $member_id['twofactor_auth']) {
 
 				$is_logged = false;
 
@@ -259,11 +260,11 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 				header("Cache-Control: no-store, no-cache, must-revalidate");
 				header("Cache-Control: post-check=0, pre-check=0", false);
 				header("Pragma: no-cache");
-			} else {
+			} else {*/
 
 				$attempt_login = true;
 				$dostup_bz = true;
-			}
+			//}
 		} else {
 
 			$is_logged = false;
@@ -366,8 +367,11 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 	} else {
 		$dostup_bz = true;
 	}
-
-	$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_SESSION['dle_user_id']) . "'");
+	include(ENGINE_DIR ."/data/supconfig.php");
+	$db2 = new db;
+	$db2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
+	$member_id = $db2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_SESSION['dle_user_id']) . "'");
+	$db2->free();
 	//and md5($member_id['password']) == $_SESSION['dle_password']
 	if ($member_id['user_id'] and $member_id['password']) {
 
@@ -482,7 +486,7 @@ if (!$allow_login) {
 	}
 }
 
-if ($is_logged) {
+/*if ($is_logged) {
 
 	if ($config['online_status']) $stime = 1200;
 	else $stime = 14400;
@@ -502,13 +506,13 @@ if ($is_logged) {
 
 	/*	if ($config['ip_control'] == '2' and !check_netz($member_id['logged_ip'], $_IP) and !isset($_POST['login'])) $is_logged = false;
 	elseif ($config['ip_control'] == '1' and $user_group[$member_id['user_group']]['allow_admin'] and !check_netz($member_id['logged_ip'], $_IP) and !isset($_POST['login'])) $is_logged = false;*/
-}
+//}
 
 if ($is_logged) {
 
 	$dle_login_hash = sha1(SECURE_AUTH_KEY . $member_id['user_id'] . sha1($member_id['password']) . $member_id['hash']);
 
-	if ($user_group[$member_id['user_group']]['time_limit']) {
+	/*if ($user_group[$member_id['user_group']]['time_limit']) {
 		if ($member_id['time_limit'] != "" and (intval($member_id['time_limit']) < $_TIME)) {
 
 			$db->query("UPDATE " . USERPREFIX . "_users SET user_group='{$user_group[$member_id['user_group']]['rid']}', time_limit='' WHERE user_id='{$member_id['user_id']}'");
@@ -567,7 +571,7 @@ if ($is_logged) {
 			$db->query("UPDATE " . USERPREFIX . "_users SET user_group='{$user_group[$member_id['user_group']]['force_rating_group']}' WHERE user_id='{$member_id['user_id']}'");
 			$member_id['user_group'] = $user_group[$member_id['user_group']]['force_rating_group'];
 		}
-	}
+	}*/
 } else {
 	$dostup_bz = true;
 	$member_id = array();

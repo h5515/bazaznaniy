@@ -683,72 +683,6 @@ if ( $config[ 'allow_registration' ] ) {
 
   include_once( DLEPlugins::Check( ENGINE_DIR . '/modules/sitelogin.php' ) );
 
-  if ( $_SESSION[ 'twofactor_auth' ] ) {
-
-    $twofactor_alert = <<<HTML
-<div id="twofactor" title="{$lang['twofactor_title']}" style="display:none;" >{$lang['twofactor_alert']}
-<br /><input type="text" name="dle-promt-text" id="dle-promt-text" style="width:100%;" class="ui-widget-content ui-corner-all" value="" />
-<div id="twofactor_response" style="color:red"></div>
-</div>
-HTML;
-
-    $onload_scripts[] = <<<HTML
-$('#twofactor').dialog({
-	autoOpen: true,
-	show: 'fade',
-	hide: 'fade',
-	width: 450,
-	resizable: false,
-	dialogClass: "dle-popup-twofactor",
-	buttons: {
-		"{$lang['p_cancel']}" : function() { 
-			$(this).dialog("close");						
-		}, 
-		"{$lang['p_enter']}": function() {
-			if ( $("#dle-promt-text").val().length < 1) {
-				 $("#dle-promt-text").addClass('ui-state-error');
-			} else {
-				var pin = $("#dle-promt-text").val();
-				$.post(dle_root + "engine/ajax/controller.php?mod=twofactor", { pin: pin, skin: dle_skin }, function(data){
-				
-					if ( data.success ) {
-					
-						window.location = window.location.pathname + window.location.search;
-						
-					} else if (data.error) {
-						
-						$("#twofactor_response").html(data.errorinfo);
-						$(".dle-popup-twofactor").css('max-height', '');
-						$("#twofactor").css('height', 'auto');
-						
-					}
-					
-				}, "json");
-
-			}		
-		}
-	}
-});
-HTML;
-
-  } else {
-
-    if ( $is_logged ) {
-
-      set_cookie( "dle_newpm", $member_id[ 'pm_unread' ], 365 );
-
-      if ( !isset( $_COOKIE[ 'dle_newpm' ] ) )$_COOKIE[ 'dle_newpm' ] = 0;
-
-      if ( $member_id[ 'pm_unread' ] > intval( $_COOKIE[ 'dle_newpm' ] )AND!$smartphone_detected ) {
-
-        include_once( DLEPlugins::Check( ENGINE_DIR . '/modules/pm_alert.php' ) );
-
-      }
-
-    }
-
-  }
-
 } else {
 
   $_IP = get_ip();
@@ -758,14 +692,7 @@ HTML;
 
 if ( !$is_logged )$member_id[ 'user_group' ] = 5;
 
-if ( isset( $banned_info[ 'ip' ] ) )$blockip = check_ip( $banned_info[ 'ip' ] );
-else $blockip = false;
-
-if ( ( $is_logged AND $member_id[ 'banned' ] == "yes" )OR $blockip ) {
-
-  include_once( DLEPlugins::Check( ENGINE_DIR . '/modules/banned.php' ) );
-
-}
+$blockip = false;
 
 if ( $do == "preview" ) {
 
@@ -791,6 +718,8 @@ $tpl->set( '{group}', $user_group[ $member_id[ 'user_group' ] ][ 'group_prefix' 
 if ( $is_logged ) {
 
   $tpl->set( '{login}', $member_id[ 'name' ] );
+  $tpl->set( '{first_name}', $member_id[ 'first_name' ] );
+  $tpl->set( '{fullname}', $member_id[ 'fullname' ] );
   $tpl->set( '{new-pm}', $member_id[ 'pm_unread' ] );
   $tpl->set( '{all-pm}', $member_id[ 'pm_all' ] );
 
@@ -842,18 +771,7 @@ if ( $is_logged ) {
 
     if ( $member_id[ 'foto' ] ) {
 
-      if ( strpos( $member_id[ 'foto' ], "//" ) === 0 )$avatar = "http:" . $member_id[ 'foto' ];
-      else $avatar = $member_id[ 'foto' ];
-
-      $avatar = @parse_url( $avatar );
-
-      if ( $avatar[ 'host' ] ) {
-
-        $tpl->set( '{foto}', $member_id[ 'foto' ] );
-
-      } else $tpl->set( '{foto}', $config[ 'http_home_url' ] . "uploads/fotos/" . $member_id[ 'foto' ] );
-
-      unset( $avatar );
+      $tpl->set( '{foto}', $supconfig[ 'dirfoto' ] . $member_id[ 'foto' ] );
 
     } else $tpl->set( '{foto}', "{THEME}/dleimages/noavatar.png" );
   }

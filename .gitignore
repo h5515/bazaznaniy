@@ -25,3 +25,4 @@ engine/system/CSS
 engine/system/HTML
 engine/system/URL
 wp-admin/
+engine/data/supconfig.php

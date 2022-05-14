@@ -62,7 +62,7 @@ function ldap_auth($user, $pass)
         // try to bind/authenticate against ldap
         $ldapbind = ldap_bind($ldapconn, $ldap_user, $ldap_pass);
 
-        if (($ldapbind) && (is_null($member_id['avtoriz_ad']))) {
+/*        if (($ldapbind) && (is_null($member_id['avtoriz_ad']))) {
             ldap_get_option($ldapconn, LDAP_OPT_DIAGNOSTIC_MESSAGE, $extended_error);
 
             if (!empty($extended_error)) {
@@ -120,7 +120,7 @@ function ldap_auth($user, $pass)
                     //langdate( "j.m.Y", $row['reg_date'] )
                 }
             }
-        }
+        }*/
     }
     ldap_close($ldapconn);
     return  $ldapbind;

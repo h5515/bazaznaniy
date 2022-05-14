@@ -5,11 +5,8 @@
 		<a data-toggle="dropdown" class="btn-border" href="{profile-link}">
 		<div class="avatar">
 			<span class="cover mini" style="background-image: url({foto});"></span>
-			<b class="over">{login}</b><!--<span title="Новые сообщения - {new-pm}" class="pm_num">{new-pm}</span>-->
+			<b class="over">{first_name}</b>
 			</div>
-            [group=1,2]
-           <!-- <span title="Ожидают публикации - {approve-count}" class="pm_num"><span class="{approve-numclass}">{approve-count}</span></span>-->
-            [/group]
 		</a>
 	
 		<div class="dropdown-form dot">
@@ -21,12 +18,13 @@
 			</div> 
 			[not-dostup]
 			<ul class="login_pane__menu">
-				<li><a href="{pm-link}">Сообщения <span class="right grey"><b>{new-pm}</b> из {all-pm}</span></a></li>
-				<li><a href="{favorites-link}">Закладки <span class="right grey"><b>{favorite-count}</b></span></a></li>
-				<li><a href="{newposts-link}">Непрочитанные статьи</a></li>
-                [group=1,2]
+			{* <li><a href="#">{fullname}<a></li> *}
+				{* <li><a href="{pm-link}">Сообщения <span class="right grey"><b>{new-pm}</b> из {all-pm}</span></a></li>
+				<li><a href="{favorites-link}">Закладки <span class="right grey"><b>{favorite-count}</b></span></a></li> *}
+				<li><span class="center"><a href="#">{fullname}</a></span></li>
+                {* [group=1,2]
                 <li><a href="{approve-link}">Ожидают публикацию <span class="{approve-class}"><b>{approve-count}</b></span></a></li>
-                [/group]
+                [/group] *}
 			</ul>
 			[/not-dostup]
 			<div class="login_pane__foot">

@@ -85,27 +85,13 @@
               {catmenu} </nav>
               [available=main] 
               [not-group=5]
-                <div class="chone">
-                <a href="index.php?newsid=9" target="_blank"> <img src="images/ctonovogo.png"><span>Что нового в БЗ?</span></a>
+                <div class="chone center">
+                <a href="#"> {*<img src="images/ctonovogo.png">*}<span>Создать базу знаний</span></a>
                 </div>
                 [/not-group]
               [/available]
-            
-            <!--<div class="soc_links">
-								<a class="soc_vk" href="#" title="Мы вКонтакте">
-									<svg class="icon icon-vk"><use xlink:href="#icon-vk"></use></svg>
-								</a>
-								<a class="soc_tw" href="#" title="Мы в Twitter">
-									<svg class="icon icon-tw"><use xlink:href="#icon-tw"></use></svg>
-								</a>
-								<a class="soc_fb" href="#" title="Мы в Facebook">
-									<svg class="icon icon-fb"><use xlink:href="#icon-fb"></use></svg>
-								</a>
-								<a class="soc_gp" href="#" title="Мы в Google">
-									<svg class="icon icon-gp"><use xlink:href="#icon-gp"></use></svg>
-								</a>
-							</div>--> 
-			  [available=cat] 
+
+        [available=cat] 
 			  [group=1,2]
               <script src="{THEME}/js/Catmenu.js"></script> 
 			  
