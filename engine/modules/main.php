@@ -503,7 +503,7 @@ $ajax .= <<<HTML
 var dle_root       = '{$config['http_home_url']}';
 var dle_admin      = '{$config['admin_path']}';
 var dle_login_hash = '{$dle_login_hash}';
-var dle_group      = {$member_id['user_group']};
+//var dle_group      = {$member_id['user_group']};
 var dle_skin       = '{$config['skin']}';
 var dle_wysiwyg    = '{$config['allow_comments_wysiwyg']}';
 var quick_wysiwyg  = '{$config['allow_quick_wysiwyg']}';
@@ -824,6 +824,10 @@ $js_array = build_css( $css_array, $config ) . "\n" . build_js( $js_array, $conf
 
   } else msgbox( $lang[ 'all_err_1' ], $lang[ 'news_err_27' ] );
   $dostup_bz = false;
+}
+
+if (isset($_GET['error'])){
+  msgbox( 'Ошибка!',  $_GET['error']);
 }
 
 if ( $need_404 ) {

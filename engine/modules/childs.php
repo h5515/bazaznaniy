@@ -20,8 +20,8 @@ if ($catmay == "no") {
 
   $db->connect(DBUSER, DBPASS, $gl_bd, DBHOST);
 
-  $not_allow_cats = explode(',', $user_group[$member_id['user_group']]['not_allow_cats']);
-  $sql = "SELECT id, icon, name, alt_name  FROM dle_category WHERE parentid = '" . $sid . "' AND NOT id regexp '[[:<:]](" . implode('|', $not_allow_cats) . ")[[:>:]]' ORDER BY posi";
+  // $not_allow_cats = explode(',', $user_group[$member_id['user_group']]['not_allow_cats']); ' AND NOT id regexp '[[:<:]](" . implode('|', $not_allow_cats) . ")[[:>:]]'
+  $sql = "SELECT id, icon, name, alt_name  FROM dle_category WHERE parentid = '" . $sid . "' ORDER BY posi";
   $result = $db->query($sql);
   echo '<div class="container"><div class="padding"><article class="block-news"><div id="dle-content">';
   if (!empty($result)) {
@@ -50,10 +50,17 @@ if ($catmay == "no") {
 			  </ol></article>';
     }
   }
-  if ((trim($user_group[$member_id['user_group']]['allow_bz']) != '') || ($user_group[$member_id['user_group']]['id'] == '1')) {
-    $bzid = explode(',', $user_group[$member_id['user_group']]['allow_bz']);
+  if (isset($member_id['name'])) {
+    $sql = "SELECT id FROM dle_project WHERE avtor = '{$member_id['name']}'";
+    $rows = $db->query($sql);
+    foreach ($rows as $key => $value) {
+       $bzid[] = $value['id'];
+    }
+  }
+  if ((isset($bzid)) || ($_SESSION['super_admin'])) {
+    //$bzid = explode(',', $bzid);
 
-    if ($user_group[$member_id['user_group']]['id'] == '1')
+    if ($_SESSION['super_admin'])
       $sql = "SELECT Project, id_cat FROM dle_project ";
     else
       $sql = "SELECT Project, id_cat FROM dle_project WHERE id regexp '[[:<:]](" . implode('|', $bzid) . ")[[:>:]]'";

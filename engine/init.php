@@ -28,7 +28,7 @@ date_default_timezone_set( $config[ 'date_adjust' ] );
 require_once( ENGINE_DIR . '/modules/functions.php' );
 
 dle_session();
-check_xss();
+//check_xss();
 
 if(isset($_GET['project'])) {
   $_SESSION['dbname'] = $_GET['project'];

@@ -20,8 +20,14 @@
 <link rel="stylesheet" href="{THEME}/css/easySelectStyle.css" type="text/css">
 <link href="{THEME}/css/tagify.css" rel="stylesheet" type="text/css">
 <link href="{THEME}/css/mycss.css" rel="stylesheet" type="text/css">
+<link href="{THEME}/css/new/new.css" rel="stylesheet" type="text/css">
 <link href="{THEME}/css/iosCheckbox-theme.scss" rel="stylesheet" type="text/css">
+
+<link href="/kendo/styles/kendo.common.min.css?v=4" rel="stylesheet">
+{* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet"> *}
+<link href="/kendo/styles/kendo.default-ocean-blue.min.css?v=4" rel="stylesheet">
 	
+<script src="/kendo/js/kendo.all.min.js?v=11"></script>
 <script src="{THEME}/js/iziModal.js"></script> 
 <script src="{THEME}/js/mayscript.js?v=4"></script> 
 <script src="{THEME}/js/jquery.cookie.js"></script> 
@@ -86,7 +92,9 @@
               [available=main] 
               [not-group=5]
                 <div class="chone center">
-                <a href="#"> {*<img src="images/ctonovogo.png">*}<span>Создать базу знаний</span></a>
+                {* <a href="#"> <img src="images/ctonovogo.png"><span>Создать базу знаний</span></a> *}
+                <button type="button" id="addbz">Создать базу знаний</button>
+                <div id="addbzwindow"></div>
                 </div>
                 [/not-group]
               [/available]
@@ -247,6 +255,7 @@
     
 	{AJAX} 
 <script src="{THEME}/js/lib.js"></script> 
+<script src="{THEME}/js/new/new.js"></script> 
 <script>
 		jQuery(function($){
 			$.get("{THEME}/images/sprite.svg", function(data) {
