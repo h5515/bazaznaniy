@@ -3,7 +3,7 @@ htmlm = `
   <li><span class='popmenu polosniz' elem='menu_del'></span></li>
   <li><span class='popmenu' elem='edit_name'> Редактировать имя </span></li>
   <li><span class='popmenu' elem='edit_obl'> Изменить обложку </span></li>
-  <li><span class='popmenu' elem='delete'> Архивировать </span></li>
+  <li><span class='popmenu' elem='arhive'> Архивировать </span></li>
   <li><span class='popmenu' elem='delete'> Удалить </span></li>
 </ul>
 `;
@@ -20,7 +20,9 @@ menus = $("#menu").kendoContextMenu({
     showOn: "click",
     open: openmenu,
     select: selectmenu,
-    close: function(e) {}
+    close: function(e) {
+        menus.element.find("[elem=noarhive]").text(' Архивировать ').attr('elem', 'arhive');
+    }
 }).data("kendoContextMenu");
 
 function openmenu(e) {
@@ -36,6 +38,9 @@ function openmenu(e) {
         imageUrl: bg,
         url: urls,
     }, menus.element.children("li:first"));
+    if ($elem.closest('ol').find(".bzarhive")[0]) {
+        menus.element.find("[elem=arhive]").text(' Восстановить ').attr('elem', 'noarhive');
+    }
 }
 
 function selectmenu(e) {
@@ -103,5 +108,40 @@ function selectmenu(e) {
             editobloz.open()
         }, 50)
     }
-
+    if (poper == 'arhive') {
+        kendo.confirm("Архивировать базу знаний: <b>" + namebz + "?</b>").then(function() {
+            dt = {
+                rezim: 'arhive',
+                category: catid,
+                idcategory: idcategory,
+                project: project,
+            }
+            getajax('/php/add_bz.php', dt);
+        });
+        $('.k-window-title').text('Архивировать?');
+    }
+    if (poper == 'noarhive') {
+        kendo.confirm("Восстановить базу знаний: <b>" + namebz + "?</b>").then(function() {
+            dt = {
+                rezim: 'noarhive',
+                category: catid,
+                idcategory: idcategory,
+                project: project,
+            }
+            getajax('/php/add_bz.php', dt);
+        });
+        $('.k-window-title').text('Архивировать?');
+    }
+    if (poper == 'delete') {
+        kendo.confirm("Точно удалить базу знаний: <b>" + namebz + "?</b> Все статьи будут удалены.").then(function() {
+            dt = {
+                rezim: 'delete',
+                category: catid,
+                idcategory: idcategory,
+                project: project,
+            }
+            getajax('/php/add_bz.php', dt);
+        });
+        $('.k-window-title').text('Удалить?');
+    }
 }

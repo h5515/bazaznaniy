@@ -45,3 +45,10 @@ div#buttonContainer {
     position: absolute;
     right: 21px;
 }
+
+img.bzarhive {
+    height: 19px;
+    position: relative;
+    margin-bottom: -3px;
+    margin-right: 0px;
+}

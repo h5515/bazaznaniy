@@ -87,6 +87,24 @@ $catimg = "";
 
 
 if ($_POST['category'] == 1) {
+    if ($_REQUEST['rezim'] == 'arhive') {
+        if (empty($_POST['idcategory'])) {
+            $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
+            die($err);
+        }
+        $db->query("UPDATE dle_category SET arhiv = 1 WHERE  id = {$_POST['idcategory']}");
+        $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.shottitle').prepend(`<img src='/images/archive.png' class='bzarhive' title='База знаний в архиве'>`)";
+        die($scr);
+    }
+    if ($_REQUEST['rezim'] == 'noarhive') {
+        if (empty($_POST['idcategory'])) {
+            $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
+            die($err);
+        }
+        $db->query("UPDATE dle_category SET arhiv = 0 WHERE  id = {$_POST['idcategory']}");
+        $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.bzarhive').remove()";
+        die($scr);
+    }
     if ($_REQUEST['rezim'] == 'izmenobloz') {
         if (empty($_POST['idcategory'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
@@ -130,6 +148,24 @@ if ($_POST['category'] == 1) {
 }
 
 if ($_POST['category'] == 2) {
+    if ($_REQUEST['rezim'] == 'arhive') {
+        if (empty($_POST['idcategory'])) {
+            $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
+            die($err);
+        }
+        $db->query("UPDATE dle_project SET arhiv = 1 WHERE  project = '{$_POST['project']}'");
+        $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.shottitle').prepend(`<img src='/images/archive.png' class='bzarhive' title='База знаний в архиве'>`)";
+        die($scr);
+    }
+    if ($_REQUEST['rezim'] == 'noarhive') {
+        if (empty($_POST['idcategory'])) {
+            $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
+            die($err);
+        }
+        $db->query("UPDATE dle_project SET arhiv = 0 WHERE  project = '{$_POST['project']}'");
+        $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.bzarhive').remove()";
+        die($scr);
+    }
     if ($_REQUEST['rezim'] == 'izmenobloz') {
         if (empty($_POST['idcategory'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';

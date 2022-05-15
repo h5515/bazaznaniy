@@ -21,9 +21,15 @@ if ($catmay == "no") {
   $db->connect(DBUSER, DBPASS, $gl_bd, DBHOST);
 
   // $not_allow_cats = explode(',', $user_group[$member_id['user_group']]['not_allow_cats']); ' AND NOT id regexp '[[:<:]](" . implode('|', $not_allow_cats) . ")[[:>:]]'
-  $sql = "SELECT id, icon, name, alt_name  FROM dle_category WHERE parentid = '" . $sid . "' ORDER BY posi";
+  $barhiv = '';
+  if ($_GET['bzarhiv']!='true')
+    $barhiv = "AND arhiv = 0";
+    else $barhiv = "AND arhiv = 1";
+
+  $sql = "SELECT id, icon, name, alt_name, arhiv  FROM dle_category WHERE parentid = '" . $sid . "' $barhiv ORDER BY posi";
   $result = $db->query($sql);
   $editbtn = '<li class="edit_btn"><a onclick="return false" href="#"><i title="Редактировать"></i></a></li>';
+  $starhiv = "<img src='/images/archive.png' class='bzarhive' title='База знаний в архиве'/>";
   echo '<div class="container"><div class="padding"><article class="block-news"><div id="dle-content"><div class="dle-center">';
   if (!empty($result)) {
 
@@ -44,9 +50,12 @@ if ($catmay == "no") {
       } else {
         $url = $PHP_SELF . '?do=cat&' . $prjlink . 'category=' . $row['alt_name'] . $prjlink;
       }
-
+      $harhiv = '';
+      if ($row['arhiv']==1)
+        $harhiv = $starhiv;
+        
       echo "<ol sid='{$row['id']}' cat='1' idcat='{$row['id']}'>$editbtn<a href='$url' class='menuurl'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
-			  </div><div class='shottitle'>{$row['name']}</div></a></ol>";
+			  </div><div class='shottitle'>$harhiv {$row['name']}</div></a></ol>";
     }
   }
   if (isset($member_id['name'])) {
@@ -60,9 +69,9 @@ if ($catmay == "no") {
     //$bzid = explode(',', $bzid);
 
     if ($_SESSION['super_admin'])
-      $sql = "SELECT Project, id_cat FROM dle_project ";
+      $sql = "SELECT Project, id_cat, arhiv FROM dle_project where not id = -1 $barhiv";
     else
-      $sql = "SELECT Project, id_cat FROM dle_project WHERE id regexp '[[:<:]](" . implode('|', $bzid) . ")[[:>:]]'";
+      $sql = "SELECT Project, id_cat, arhiv FROM dle_project WHERE id regexp '[[:<:]](" . implode('|', $bzid) . ")[[:>:]]' $barhiv";
     $row = $db->query($sql);
     $db2 = new db;
     $db3 = new db;
@@ -81,9 +90,12 @@ if ($catmay == "no") {
           $icon = "{THEME}/dleimages/bz.png";
         }
         $url = $PHP_SELF . '?do=cat&project=' . $row['Project'] . '&category=' . $result['alt_name'];
-
+        $harhiv = '';
+        if ($row['arhiv']==1)
+          $harhiv = $starhiv;
+          
         echo "<ol sid='{$result['id']}' cat='2' idcat='{$result['id']}' project='{$row['Project']}'>$editbtn<a href='$url'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
-			  </div><div class='shottitle'>{$result['name']}</div></a></ol>";
+			  </div><div class='shottitle'>$harhiv {$result['name']}</div></a></ol>";
       }
     }
     $db3->close();
