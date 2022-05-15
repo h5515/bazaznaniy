@@ -1,0 +1,78 @@
+<div class="cldownload">
+    <button type="button" data-role="button" data-icon="download" onclick="downloadobl();">Скачать обложку</button>
+</div>
+<div id="id_edit_obloz">
+    <article class="block-news">
+        <div id="dle-content">
+            <div class="dle-center">
+
+            </div>
+        </div>
+    </article>
+    <div style="margin-top: 10px;">
+        <input name="obloz" id="oblozfile" type="file" style="height:auto" onchange="oblimagesbuild(this)" accept=".jpg,.png" />
+        <input type="hidden" name="baseimg">
+        <div class="k-form-hint"><span>Вы можете загружать только: JPG, PNG</span></div>
+    </div>
+</div>
+<div class="delobloz">
+    <button type="button" data-role="button" data-icon="delete" onclick="removeobloz();">Удалить обложку</button>
+</div>
+<div id="buttonContainer">
+    <p>
+        <button type="button" data-role="button" data-icon="save" class="k-button-solid-primary" onclick="saveobloz();">Сохранить</button>
+        <button type="button" data-role="button" data-icon="close" onclick="editobloz.close();">Отмена</button>
+    </p>
+</div>
+
+
+<script>
+    function downloadobl() {
+        var bg = $('#id_edit_obloz').find('.circleimg').css('background-image');
+        bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
+        var a = document.createElement('a');
+        a.href = bg;
+        a.download = $('#id_edit_obloz').find('.shottitle').text();
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    function removeobloz() {
+        $('#id_edit_obloz').find('.circleimg').css('background', 'url(/templates/Default/dleimages/bz.png)');
+        $("[name=baseimg]").val('del');
+    }
+
+    function saveobloz() {
+        editobloz.close();
+        if ($("[name=baseimg]").val() == "") {
+            return;
+        }
+        catid = $("#id_edit_obloz ol").attr('cat');
+        idcategory = $("#id_edit_obloz ol").attr('idcat');
+        project = $("#id_edit_obloz ol").attr('project');
+        dt = {
+            rezim: 'izmenobloz',
+            category: catid,
+            idcategory: idcategory,
+            project: project,
+            imgbz: $("[name=baseimg]").val(),
+        }
+        getajax('/php/add_bz.php', dt);
+    }
+
+    function oblimagesbuild(el) {
+        var file = $(el).get(0);
+        var file64 = el.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function() {
+            $("[name=baseimg]").val(reader.result)
+        }
+        reader.readAsDataURL(file64);
+        var preview = window.URL.createObjectURL(file.files[0]);
+        $(el).closest('#id_edit_obloz').find('.circleimg').css('background', 'url(' + preview + ')');
+    }
+    kendo.init("#buttonContainer");
+    kendo.init(".delobloz");
+    kendo.init(".cldownload");
+</script>

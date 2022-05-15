@@ -721,7 +721,7 @@ body {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    margin-left: 9px;
+    /* margin-left: 9px; */
 }
 
 .foot_menu {
@@ -2091,7 +2091,7 @@ body {
 .edit_btn>a:hover>i,
 .edit_btn>a:hover:after,
 .edit_btn>a:hover:before {
-    background-color: #3394e6;
+    background-color: #3394e6 !important;
 }
 
 .edit_btn>a:hover {
@@ -5204,6 +5204,13 @@ fieldset .soc_links>a {
     margin-left: 2px;
 }
 
+.dle-center {
+    justify-content: center;
+    display: inline-flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
 .container {
     float: right;
     width: 100%;
@@ -5211,6 +5218,7 @@ fieldset .soc_links>a {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    padding-bottom: 20px;
 }
 
 .container .padding {
@@ -5246,16 +5254,18 @@ fieldset .soc_links>a {
 }
 
 .shottitle {
-    height: 44px;
+    /* height: 44px; */
+    line-height: 1.1;
     overflow: hidden;
-    margin-top: 23px;
+    margin-top: 4px;
     width: 200px;
-    font-size: 21px;
+    font-size: 18px;
+    color: #6AAEE8;
     white-space: normal;
     transition: all 0.2s ease-in-out !important;
 }
 
-.shottitle a:link {
+.block-news a:link {
     color: #497ddd;
     white-space: nowrap;
 }
@@ -5266,17 +5276,18 @@ fieldset .soc_links>a {
 	color: #EF7D55;
 }*/
 
-.shottitle a:hover {
+.block-news a:hover {
     /*color: #7C55EE;*/
     text-decoration: none;
     /*font-weight: 500;*/
 }
 
-.shottitle a:active {
+.block-news a:active {
     color: #497ddd;
 }
 
-.block-news ol {
+
+/*.block-news ol {
     width: 240px;
     height: 360px;
     padding-top: 5px;
@@ -5316,6 +5327,7 @@ fieldset .soc_links>a {
 .block-news ol .date {
     color: #8c959d;
 }
+*/
 
 .afs-error {
     /*Общий стиль для всех ошибок*/

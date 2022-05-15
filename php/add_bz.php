@@ -41,64 +41,197 @@ function base64ToFile($data, $path)
     fclose($destination);
 }
 
-if (empty($member_id['name'])){
-    die( "Hacking attempt!" );
+function saveimg()
+{
+    $imil = "";
+    if (isset($_POST['imgbz']) && $_POST['imgbz'] != "") {
+        $rnam = uniqid();
+        $imfile = ROOT_DIR . "uploads/icons/" . $rnam . ".png";
+        $imil = "/uploads/icons/" . $rnam . ".png";
+        base64ToFile($_POST['imgbz'], $imfile);
+    }
+    return $imil;
 }
+
+if (empty($member_id['name'])) {
+    die("Hacking attempt!");
+}
+
+function stop($txt){
+    $str = "";
+    if (isset($_POST['ajax']))
+        $str = "Error: $txt";
+    else
+    header("Location: ../../index.php?error=$txt");
+    die($str);
+}
+
+// if (empty($_REQUEST['namebaza']))
+//     die();
+
+$ajax = false;
+
+    $ajax = true;
 
 $p_name = $db->safesql(trim(clear_html($_REQUEST['namebaza'])));
-$p_baze = $db->safesql(trim(clear_html($_REQUEST['namebd'])));
+$p_baze = strtolower($db->safesql(trim(clear_html($_REQUEST['namebd']))));
 
 if (preg_match("/[^а-яА-ЯёЁa-zA-Z0-9 \-_]+/u", $p_name)) {
-    header("Location: ../../index.php?error=Найдены неподходящие символы в имени базы знаний - <b>$p_name</b> (не подходят все, кроме: а-я, А-Я, a-z, A-Z, 0-9, -, _, пробел)");
-    die();
+    stop("Найдены неподходящие символы в имени базы знаний - <b>$p_name</b> (не подходят все, кроме: а-я, А-Я, a-z, A-Z, 0-9, -, _, пробел)");
 }
 if (preg_match("/[^a-zA-Z0-9\-_]+/", $p_baze)) {
-    header("Location: ../../index.php?error=Найдены неподходящие символы в имени базы SQL - <b>$p_baze</b> (не подходят все, кроме: a-z, A-Z, 0-9, -, _)");
-    die();
+    stop("Найдены неподходящие символы в имени базы SQL - <b>$p_baze</b> (не подходят все, кроме: a-z, A-Z, 0-9, -, _)");
 }
 
-$row = $db->super_query("SELECT count(Name) as count FROM " . USERPREFIX . "_project WHERE Name='{$p_name}'");
-if ($row['count'] > 0) {
-    header('Location: ../../index.php?error=Имя базы знаний - <b>' . $p_name . '</b> уже существует.');
-    die();
-}
-$row = $db->super_query("SELECT count(Project) as count FROM " . USERPREFIX . "_project WHERE Project='{$p_baze}'");
-if ($row['count'] > 0) {
-    header('Location: ../../index.php?error=База данных SQL- <b>' . $p_baze . '</b> уже существует.');
-    die();
-}
 $catimg = "";
-if (isset($_POST['imgbz'])&&$_POST['imgbz']!=""){
-    $rnam = uniqid();
-    $imfile = ROOT_DIR."uploads/icons/".$rnam.".png";
-    $catimg = "/uploads/icons/".$rnam.".png";
-    base64ToFile($_POST['imgbz'], $imfile);
+
+
+if ($_POST['category'] == 1) {
+    if ($_REQUEST['rezim'] == 'izmenobloz') {
+        if (empty($_POST['idcategory'])) {
+            $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
+            die($err);
+        }
+        $sql = "SELECT icon FROM dle_category WHERE  id = {$_POST['idcategory']}";
+        $row = $db->super_query($sql);
+        if (isset($row['icon']) && $row['icon'] <> '') {
+            $file = ROOT_DIR . $row['icon'];
+            if (file_exists($file))
+                unlink($file);
+        }
+        if ($_POST['imgbz'] != 'del')
+            $catimg = saveimg();
+
+        $sql = "UPDATE dle_category SET icon = '$catimg' WHERE id = {$_POST['idcategory']}";
+        $db->query($sql);
+        if ($catimg == '')
+            $catimg = '/templates/Default/dleimages/bz.png';
+        $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.circleimg').css('background','url($catimg)');";
+        die($scr);
+    }
+
+    $row = $db->super_query("SELECT count(id) as count FROM " . USERPREFIX . "_category WHERE alt_name='{$p_baze}'");
+    if ($row['count'] > 0) {
+        stop('Латинское имя базы знаний - <b>' . $p_baze . '</b> уже существует.');
+    }
+    if ($_REQUEST['rezim'] == 'izmenname') {
+        if (empty($_POST['idcategory'])) {
+            stop('Что-то пошло не так. Отсутствует ID базы.');
+        }
+        $sql = "UPDATE dle_category SET name = '$p_name', alt_name = '$p_baze' WHERE id = {$_POST['idcategory']}";
+        $db->query($sql);
+        $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.shottitle').text('$p_name');";
+        die($scr);
+    } else {
+        $catimg = saveimg();
+        $sql = "INSERT INTO " . USERPREFIX . "_category (Name, alt_name, posi, icon) value ('{$p_name}','{$p_baze}',1 ,'{$catimg}')";
+        $db->query($sql);
+    }
 }
 
-$sql = 'CREATE DATABASE bz_' . $p_baze;
-$db->query($sql);
+if ($_POST['category'] == 2) {
+    if ($_REQUEST['rezim'] == 'izmenobloz') {
+        if (empty($_POST['idcategory'])) {
+            $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
+            die($err);
+        }
+        if (empty($_POST['project'])) {
+            stop('Что-то пошло не так. Отсутствует имя проекта.');
+        }
+        $db2 = new db;
+        $dbname = 'bz_' . $_POST['project'];
+        $db2->connect(DBUSER, DBPASS, $dbname, DBHOST);
+        $sql = "SELECT icon FROM dle_category WHERE  id = {$_POST['idcategory']}";
+        $row = $db2->super_query($sql);
+        if (isset($row['icon']) && $row['icon'] <> '') {
+            $file = ROOT_DIR . $row['icon'];
+            if (file_exists($file))
+                unlink($file);
+        }
+        if ($_POST['imgbz'] != 'del')
+            $catimg = saveimg();
 
-$db2 = new db;
-$db2->connect(DBUSER, DBPASS, 'bz_' . $p_baze, DBHOST);
-$filename = ENGINE_DIR.'/data/bd_install.sql';
-$templine = '';
-$lines = file($filename);
-foreach ($lines as $line)
-{
-if (substr($line, 0, 2) == '--' || $line == '')
-  continue;
-$templine .= $line;
-if (substr(trim($line), -1, 1) == ';'){
-  $db2->query(($templine));
-  $templine = '';
-  }
+        $sql = "UPDATE dle_category SET icon = '$catimg' WHERE id = {$_POST['idcategory']}";
+        $db2->query($sql);
+        $db2->close();
+        $db2->free();
+        if ($catimg == '')
+            $catimg = '/templates/Default/dleimages/bz.png';
+        $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.circleimg').css('background','url($catimg)');";
+        die($scr);
+    }
+
+    $row = $db->super_query("SELECT count(Name) as count FROM " . USERPREFIX . "_project WHERE Name='{$p_name}'");
+    if ($row['count'] > 0) {
+        stop('Имя базы знаний - <b>' . $p_name . '</b> уже существует.');
+    }
+    $row = $db->super_query("SELECT count(Project) as count FROM " . USERPREFIX . "_project WHERE Project='{$p_baze}'");
+    if ($row['count'] > 0) {
+        stop('База данных SQL- <b>' . $p_baze . '</b> уже существует.');
+    }
+
+    if ($_REQUEST['rezim'] == 'izmenname') {
+        if (empty($_POST['project'])) {
+            stop('Что-то пошло не так. Отсутствует имя проекта.');
+        }
+        $db2 = new db;
+        $dbname = 'bz_' . $_POST['project'];
+        $nextDbname = 'bz_' .$p_baze;
+        $db2->connect(DBUSER, DBPASS, $dbname, DBHOST);
+        $sql = "SHOW tables";
+        $rows = $db2->query($sql);
+        $tables = [];
+        foreach ($rows as $key => $value) {
+            $tables[] = $value["Tables_in_" . $dbname];
+        }
+        $db2->query("SET FOREIGN_KEY_CHECKS = 0;");
+        $sql = 'CREATE DATABASE ' . $nextDbname;
+        $db2->query($sql);
+        foreach ($tables as $table) {
+            $newTable = $nextDbname . "." . $table;
+            $table = $dbname . "." . $table;
+            $db2->query("RENAME TABLE $table TO $newTable;");
+        }
+        $db2->query("SET FOREIGN_KEY_CHECKS = 1;");
+        $db2->query("DROP DATABASE $dbname");
+        $db2->close();
+        $db2->free();
+
+        $db->query("UPDATE dle_project SET name = '$p_name', project = '$p_baze' WHERE project = '{$_POST['project']}'");
+        $db2 = new db;
+        $db2->connect(DBUSER, DBPASS, $nextDbname, DBHOST);
+        $db2->query("UPDATE dle_category SET name='$p_name', alt_name='$p_baze' WHERE id = {$_POST['idcategory']}");
+        $db2->close();
+        $db2->free();
+        $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.shottitle').text('$p_name');$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').attr('project','$p_baze');";
+        die($scr);
+    } else {
+        $sql = 'CREATE DATABASE bz_' . $p_baze;
+        $db->query($sql);
+
+        $db2 = new db;
+        $db2->connect(DBUSER, DBPASS, 'bz_' . $p_baze, DBHOST);
+        $filename = ENGINE_DIR . '/data/bd_install.sql';
+        $templine = '';
+        $lines = file($filename);
+        foreach ($lines as $line) {
+            if (substr($line, 0, 2) == '--' || $line == '')
+                continue;
+            $templine .= $line;
+            if (substr(trim($line), -1, 1) == ';') {
+                $db2->query(($templine));
+                $templine = '';
+            }
+        }
+        $catimg = saveimg();
+        $sql = "INSERT INTO " . USERPREFIX . "_category (Name, alt_name, posi, icon) value ('{$p_name}','{$p_baze}',1 ,'{$catimg}')";
+        $db2->query($sql);
+        $row['id'] = $db2->insert_id();
+        $db2->free();
+
+        $db->query("INSERT INTO " . USERPREFIX . "_project (Name, Project,id_cat,avtor) 
+    values ('{$p_name}','{$p_baze}', {$row['id']}, '{$member_id['name']}')");
+    }
 }
-$p_baze = strtolower($p_baze);
-$sql = "INSERT INTO " . USERPREFIX . "_category (Name, alt_name, posi, icon) value ('{$p_name}','{$p_baze}',1 ,'{$catimg}')";
-$db2->query($sql);
-$row[ 'id' ] = $db2->insert_id();
-$db2->free();
 
-$db->query("INSERT INTO " . USERPREFIX . "_project (Name, Project,id_cat,avtor) 
-values ('{$p_name}','{$p_baze}', {$row['id']}, '{$member_id['name']}')");
 header('Location: ../../index.php');

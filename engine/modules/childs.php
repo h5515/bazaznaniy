@@ -23,7 +23,8 @@ if ($catmay == "no") {
   // $not_allow_cats = explode(',', $user_group[$member_id['user_group']]['not_allow_cats']); ' AND NOT id regexp '[[:<:]](" . implode('|', $not_allow_cats) . ")[[:>:]]'
   $sql = "SELECT id, icon, name, alt_name  FROM dle_category WHERE parentid = '" . $sid . "' ORDER BY posi";
   $result = $db->query($sql);
-  echo '<div class="container"><div class="padding"><article class="block-news"><div id="dle-content">';
+  $editbtn = '<li class="edit_btn"><a onclick="return false" href="#"><i title="Редактировать"></i></a></li>';
+  echo '<div class="container"><div class="padding"><article class="block-news"><div id="dle-content"><div class="dle-center">';
   if (!empty($result)) {
 
 
@@ -44,17 +45,15 @@ if ($catmay == "no") {
         $url = $PHP_SELF . '?do=cat&' . $prjlink . 'category=' . $row['alt_name'] . $prjlink;
       }
 
-
-      echo '<article class="block-news"><ol><a href="' . $url . '"><img src="' . $icon . '" alt="' . $row['name'] . '" /></a>
-			  <div class="shottitle"><a href="' . $url . '">' . $row['name'] . '</a></div>
-			  </ol></article>';
+      echo "<ol sid='{$row['id']}' cat='1' idcat='{$row['id']}'>$editbtn<a href='$url' class='menuurl'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
+			  </div><div class='shottitle'>{$row['name']}</div></a></ol>";
     }
   }
   if (isset($member_id['name'])) {
     $sql = "SELECT id FROM dle_project WHERE avtor = '{$member_id['name']}'";
     $rows = $db->query($sql);
     foreach ($rows as $key => $value) {
-       $bzid[] = $value['id'];
+      $bzid[] = $value['id'];
     }
   }
   if ((isset($bzid)) || ($_SESSION['super_admin'])) {
@@ -83,9 +82,8 @@ if ($catmay == "no") {
         }
         $url = $PHP_SELF . '?do=cat&project=' . $row['Project'] . '&category=' . $result['alt_name'];
 
-        echo '<article class="block-news"><ol><a href="' . $url . '"><img src="' . $icon . '" alt="' . $result['name'] . '" /></a>
-			  <div class="shottitle"><a href="' . $url . '">' . $result['name'] . '</a></div>
-			  </ol></article>';
+        echo "<ol sid='{$result['id']}' cat='2' idcat='{$result['id']}' project='{$row['Project']}'>$editbtn<a href='$url'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
+			  </div><div class='shottitle'>{$result['name']}</div></a></ol>";
       }
     }
     $db3->close();
@@ -93,7 +91,7 @@ if ($catmay == "no") {
     $db2->close();
     $db2->free();
   }
-  echo '</div></article></div></div>';
+  echo '</div></article></div></div></div>';
 } else {
 
 

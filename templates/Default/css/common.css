@@ -52,28 +52,62 @@
     margin-left: 8px;
 }
 
+.circlenews {
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
+    background-color: #EAF3FF;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.circleimg {
+    background-position: 50% 50% !important;
+    background-repeat: no-repeat !important;
+    -webkit-background-size: contain !important;
+    background-size: contain !important;
+    border: none;
+    border-radius: 100px;
+    width: 160px;
+    height: 160px;
+    margin: auto;
+    position: relative;
+    top: 20px;
+    transition: all 0.2s ease-in-out !important;
+}
+
 .block-news ol {
-    width: 242px;
-    height: 229px;
-    padding-top: 22px;
-    border: 1px #E6E9EB solid;
+    width: 220px;
+    height: 200px;
+    padding-top: 17px !important;
     transition: all 0.2s ease-in-out !important;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     float: left;
     text-align: center;
-    margin: 0 16px 22px 0;
+    margin: 0 16px 34px 0;
+    padding: 0;
 }
 
-.block-news ol:hover {
-    border: 1px #77BD7F solid;
-    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.25), 0 1px 43px rgba(0, 0, 0, 0.22);
+.block-news ol:hover .circlenews {
+    /* border: 1px #77BD7F solid; */
+    box-shadow: rgb(0 0 0 / 40%) 0px 2px 4px, rgb(0 0 0 / 30%) 0px 7px 13px -3px, rgb(0 0 0 / 20%) 0px -3px 0px inset;
+    /* transform: scale(1.05); */
+}
+
+.block-news ol:hover .circleimg {
+    transform: scale(1.1);
 }
 
 .block-news ol:hover .shottitle {
+    transform: scale(1.2);
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+
+/*.block-news ol:hover .shottitle {
     font-weight: bold;
-    /*border: 1px solid black;*/
     margin-top: 20px;
     position: absolute;
 }
@@ -81,8 +115,10 @@
 .block-news ol:hover img {
     transform: scale(1.1);
     /*max-width: 100%;*/
-}
 
+
+}
+*/
 /*.block-news OL:nth-child(3n+3)
 {
 	margin-right: 0px;
@@ -93,16 +129,16 @@
     height: 151px;
     transition: all 0.2s ease-in-out !important;
     /*margin: auto;*/
+    
+    margin-left: -50px;
+    margin-top: 10px;
 }
-
 .block-news ol .title {
     margin: 10px 0;
 }
-
 .block-news ol .title a {
     font-size: 15px;
 }
-
 .block-news ol .date {
     color: #8C959D;
 }

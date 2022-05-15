@@ -1,0 +1,47 @@
+.dle-center .edit_btn {
+    list-style: none;
+    position: absolute;
+    display: unset;
+    margin-left: 55px;
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+}
+
+.block-news ol:hover .edit_btn {
+    opacity: 1;
+}
+
+.dle-center .edit_btn>a>i,
+.dle-center .edit_btn>a::before,
+.dle-center .edit_btn>a::after {
+    background-color: #d9d8d8;
+}
+
+.k-menu-link .k-image {
+    max-height: 25px;
+    max-width: 25px;
+}
+
+.dle-center a {
+    text-align: center;
+}
+
+#id_edit_obloz ol {
+    padding: 0 !important;
+    margin: 0;
+}
+
+div#buttonContainer {
+    margin-top: 15px;
+    float: right;
+}
+
+.delobloz {
+    position: absolute;
+    margin-top: 15px;
+}
+
+.cldownload {
+    position: absolute;
+    right: 21px;
+}
