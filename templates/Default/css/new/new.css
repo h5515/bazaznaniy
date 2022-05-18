@@ -52,3 +52,15 @@ img.bzarhive {
     margin-bottom: -3px;
     margin-right: 0px;
 }
+
+#buttonadduser {
+    display: block;
+    margin-bottom: 13px;
+}
+
+.dostupitems {
+    border-top: 1px solid #d1d1d1;
+    height: 318px;
+    min-height: 318px;
+    overflow: auto;
+}
