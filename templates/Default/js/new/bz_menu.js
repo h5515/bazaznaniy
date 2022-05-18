@@ -1,11 +1,11 @@
 htmlm = `
 <ul id='menu' style='display:none;'>
   <li><span class='popmenu polosniz' elem='menu_del'></span></li>
-  <li><span class='popmenu' elem='dostup'> Доступ </span></li>
-  <li><span class='popmenu' elem='edit_name'> Редактировать имя </span></li>
-  <li><span class='popmenu' elem='edit_obl'> Изменить обложку </span></li>
-  <li><span class='popmenu' elem='arhive'> Архивировать </span></li>
-  <li><span class='popmenu' elem='delete'> Удалить </span></li>
+  <li><span class='k-icon k-i-lock'></span><span class='popmenu' elem='dostup'> Доступ </span></li>
+  <li><span class='k-icon k-i-edit-tools'></span><span class='popmenu' elem='edit_name'> Редактировать имя </span></li>
+  <li><span class='k-icon k-i-image-edit'></span><span class='popmenu' elem='edit_obl'> Изменить обложку </span></li>
+  <li><span class='k-icon k-i-file-zip'></span><span class='popmenu' elem='arhive'> Архивировать </span></li>
+  <li><span class='k-icon k-i-delete'></span><span class='popmenu' elem='delete'> Удалить </span></li>
 </ul>
 `
 
@@ -76,7 +76,7 @@ function selectmenu(e) {
         windostup = $('#iddostup').kendoWindow({
             width: '600px',
             title: 'Настройки доступа для ' + namebz,
-            content: '/tpl/dostup_bz.html',
+            content: '/tpl/dostup_bz.php?idcat=' + idcategory + '&project=' + project + '&category=' + catid,
             visible: false,
             modal: true,
             pinned: false,

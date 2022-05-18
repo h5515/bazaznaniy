@@ -18,6 +18,16 @@
 
 
 <script>
+    idcat = "<?php echo $_GET['idcat']?>";
+    project = "<?php echo $_GET['project']?>";
+    category = "<?php echo $_GET['category']?>";
+    dt = {
+        user_hash: dle_login_hash,
+        idcategory: idcat,
+        project: project,
+        category: category,
+    }
+    getajaxhtml('/php/dostup.php', dt, '.dostupitems');
     kendo.init("#buttonadduser");
     kendo.init(".dostupbutend");
 </script>

@@ -3692,3 +3692,31 @@ function if_check($matches)
 	return preg_replace_callback($regex, "if_check", $matches);
 }
 
+function shablon_load($file){
+	$file = ROOT_DIR."/tpl/template/".$file;
+	if (!file_exists($file))
+		die("Template not found: " .$file);
+	return file_get_contents($file);
+}
+
+function compile_table($shablon, $row)
+{
+    global $member_id, $db, $config;
+    //$baza = DBNAME;
+    //$rows = $db->query("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='$baza'  AND `TABLE_NAME`='$table'");
+    foreach ($row as $key => $value) {
+        $shablon = str_replace('{' . $key . '}', stripslashes($row[$key]), $shablon);
+        if ((isset($row[$key])) && ($row[$key] != '')) {
+            $shablon = str_replace('[' . $key . ']', "", $shablon);
+            $shablon = str_replace('[/' . $key . ']', "", $shablon);
+            $shablon = str_replace('{' . $key . '}', $row[$key], $shablon);
+            $shablon = preg_replace("#\[not-" . $key . "\](.+?)\[/not-" . $key . "\]#is", "", $shablon);
+        } else {
+            $shablon = str_replace('[not-' . $key . ']', "", $shablon);
+            $shablon = str_replace('[/not-' . $key . ']', "", $shablon);
+            $shablon = str_replace('{' . $key . '}', "", $shablon);
+            $shablon = preg_replace("#\[" . $key . "\](.+?)\[/" . $key . "\]#is", "", $shablon);
+        }
+    }
+    return $shablon;
+}

@@ -105,6 +105,7 @@ function getajax(get, data) {
     ShowLoading('')
     dt = {
         ajax: true,
+        user_hash: dle_login_hash,
     }
     data = merge_options(dt, data);
     $.ajax({
@@ -127,12 +128,43 @@ function getajax(get, data) {
             HideLoading('')
         },
         error: function(request, status, err) {
+            alert('Ошибка: Полное описание ошибки в консоле браузера.');
             if (status == 'timeout') {
                 console.log('Время ожидания сервера истекло. ' + err)
             } else {
                 console.log(status + ' - ' + err)
             }
             HideLoading('')
+        }
+    })
+}
+
+function getajaxhtml(get, data, loadelem) {
+    kendo.ui.progress($(loadelem), true);
+    dt = {
+        ajax: true,
+        user_hash: dle_login_hash,
+    }
+    data = merge_options(dt, data);
+    $.ajax({
+        type: 'POST',
+        url: get,
+        data: data,
+        timeout: 300000,
+        success: function(b) {
+            $(loadelem).html(b);
+
+            kendo.ui.progress($(loadelem), false);
+        },
+        error: function(request, status, err) {
+            alert('Ошибка: Полное описание ошибки в консоле браузера.');
+            if (status == 'timeout') {
+                console.log('Время ожидания сервера истекло. ' + err)
+            } else {
+                console.log(status + ' - ' + err)
+            }
+
+            kendo.ui.progress($(loadelem), false);
         }
     })
 }

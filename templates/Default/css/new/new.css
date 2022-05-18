@@ -64,3 +64,35 @@ img.bzarhive {
     min-height: 318px;
     overflow: auto;
 }
+
+.k-menu-link .k-icon {
+    margin-right: 3px;
+}
+
+.cldostup img {
+    max-height: 18px;
+    margin: 0 5px -4px 0px;
+}
+
+.cldostup {
+    padding: 5px;
+    border-bottom: solid 1px #d1d1d1;
+}
+
+.cldostup .name {
+    float: left;
+    max-width: 346px;
+    overflow: hidden;
+}
+
+.cldostup .remove {
+    float: right;
+    width: 16px;
+    margin-left: 4px;
+}
+
+.cldostup .action {
+    float: right;
+    text-align: right;
+    width: 140px;
+}
