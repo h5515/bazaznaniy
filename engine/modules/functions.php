@@ -3720,3 +3720,9 @@ function compile_table($shablon, $row)
     }
     return $shablon;
 }
+
+function sentajax($data)
+{
+	$contents = json_encode($data,JSON_UNESCAPED_UNICODE);
+	echo $contents;
+}

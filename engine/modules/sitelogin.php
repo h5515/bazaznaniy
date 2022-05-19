@@ -575,7 +575,7 @@ if ($is_logged) {
 } else {
 	$dostup_bz = true;
 	$member_id = array();
-	$dle_login_hash = sha1(SECURE_AUTH_KEY . $_IP);
+	//$dle_login_hash = sha1(SECURE_AUTH_KEY . $_IP);
 }
 
 if (!$is_logged and $attempt_login) {
@@ -586,6 +586,3 @@ if (!$is_logged and $attempt_login) {
 	$_SESSION['dle_user_id'] = 0;
 	$_SESSION['dle_password'] = "";
 }
-
-?>
-

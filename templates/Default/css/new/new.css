@@ -75,8 +75,13 @@ img.bzarhive {
 }
 
 .cldostup {
-    padding: 5px;
+    display: list-item;
+    padding: 10px 8px 7px;
     border-bottom: solid 1px #d1d1d1;
+}
+
+.cldostup:hover {
+    background-color: #e7e7e7;
 }
 
 .cldostup .name {
@@ -88,6 +93,7 @@ img.bzarhive {
 .cldostup .remove {
     float: right;
     width: 16px;
+    border: 1px solid transparent;
     margin-left: 4px;
 }
 
@@ -95,4 +101,46 @@ img.bzarhive {
     float: right;
     text-align: right;
     width: 140px;
+}
+
+.userLink {
+    padding: 0;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.action-clean {
+    right: 27px;
+    position: relative;
+}
+
+.remove .k-icon.k-i-close-outline:before {
+    color: #a5a5a5;
+}
+
+.remove .k-icon.k-i-close-outline:hover:before {
+    color: #d11717;
+}
+
+.remove .k-icon.k-i-close-outline {
+    cursor: pointer;
+    margin-top: -2px;
+}
+
+.strel::after {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #212121;
+    content: "";
+    height: 0;
+    position: relative;
+    top: 10px;
+    width: 0;
+    right: -12px;
+    margin-top: -2px;
+}
+
+.strel {
+    border-bottom: 1px dotted #333;
+    cursor: pointer;
 }

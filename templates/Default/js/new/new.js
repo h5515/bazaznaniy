@@ -105,9 +105,9 @@ function getajax(get, data) {
     ShowLoading('')
     dt = {
         ajax: true,
-        user_hash: dle_login_hash,
+        user_hash: dle_login_hash
     }
-    data = merge_options(dt, data);
+    data = merge_options(dt, data)
     $.ajax({
         type: 'POST',
         url: get,
@@ -128,7 +128,7 @@ function getajax(get, data) {
             HideLoading('')
         },
         error: function(request, status, err) {
-            alert('Ошибка: Полное описание ошибки в консоле браузера.');
+            alert('Ошибка: Полное описание ошибки в консоле браузера.')
             if (status == 'timeout') {
                 console.log('Время ожидания сервера истекло. ' + err)
             } else {
@@ -140,31 +140,38 @@ function getajax(get, data) {
 }
 
 function getajaxhtml(get, data, loadelem) {
-    kendo.ui.progress($(loadelem), true);
+    kendo.ui.progress($(loadelem), true)
     dt = {
-        ajax: true,
-        user_hash: dle_login_hash,
+        ajax_json: true,
+        user_hash: dle_login_hash
     }
-    data = merge_options(dt, data);
+    data = merge_options(dt, data)
     $.ajax({
         type: 'POST',
         url: get,
         data: data,
         timeout: 300000,
         success: function(b) {
-            $(loadelem).html(b);
-
-            kendo.ui.progress($(loadelem), false);
+            if (IsJsonString(b)) {
+                var bArray = JSON.parse(b)
+                if (bArray['script_after'])
+                    eval(bArray['script'])
+                if (bArray['html'])
+                    $(loadelem).html(bArray['html']);
+                if (bArray['script'])
+                    eval(bArray['script'])
+            }
+            kendo.ui.progress($(loadelem), false)
         },
         error: function(request, status, err) {
-            alert('Ошибка: Полное описание ошибки в консоле браузера.');
+            alert('Ошибка: Полное описание ошибки в консоле браузера.')
             if (status == 'timeout') {
                 console.log('Время ожидания сервера истекло. ' + err)
             } else {
                 console.log(status + ' - ' + err)
             }
 
-            kendo.ui.progress($(loadelem), false);
+            kendo.ui.progress($(loadelem), false)
         }
     })
 }

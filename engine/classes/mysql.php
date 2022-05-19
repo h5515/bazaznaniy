@@ -292,7 +292,7 @@ class db
 
 		$trace[$level]['file'] = str_replace(ROOT_DIR, "", $trace[$level]['file']);
 
-		echo <<<HTML
+		$html = <<<HTML
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -347,10 +347,18 @@ body {
 </body>
 </html>
 HTML;
+
+ if (empty($_POST['ajax_json']))
+	echo $html;
+	else {
+		$data = array(
+    		"html" => $html,
+    		"script" => $_POST['script_error']
+		);
+		sentajax($data);
+	}
 		
 		die();
 	}
 
 }
-
-?>
