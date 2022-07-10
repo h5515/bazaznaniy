@@ -5,8 +5,10 @@ if ($('.fix_grid')[0]) {
 }
 
 $('#addbz').kendoButton({
-    icon: 'add'
+    icon: 'add',
+    themeColor: "primary"
 })
+
 
 $('#addbz').click(function() {
     if (!$('#addbzwindow')[0]) {
@@ -65,7 +67,8 @@ function rus_to_latin(str) {
             'э': 'e',
             'ю': 'u',
             'я': 'ya',
-            ' ': '_'
+            ' ': '_',
+            '-': '_'
         },
         n_str = []
 

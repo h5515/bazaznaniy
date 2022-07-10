@@ -620,15 +620,15 @@ function set_vars($file, $data)
 
 	if (is_array($data) or is_int($data)) {
 
-		if (isset($_COOKIE['dbname'])){
-			$dir = $_COOKIE['dbname'].'/';
-			file_put_contents(ENGINE_DIR . '/cache/system/'. $dir . $file . '.php', json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
-		@chmod(ENGINE_DIR . '/cache/system/'. $dir . $file . '.php', 0666);
-		}else{
+		if (isset($_COOKIE['dbname'])) {
+			$dir = $_COOKIE['dbname'] . '/';
+			file_put_contents(ENGINE_DIR . '/cache/system/' . $dir . $file . '.php', json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
+			@chmod(ENGINE_DIR . '/cache/system/' . $dir . $file . '.php', 0666);
+		} else {
 			$dir = '';
 
-		file_put_contents(ENGINE_DIR . '/cache/system/'. $dir . $file . '.php', json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
-		@chmod(ENGINE_DIR . '/cache/system/'. $dir . $file . '.php', 0666);
+			file_put_contents(ENGINE_DIR . '/cache/system/' . $dir . $file . '.php', json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), LOCK_EX);
+			@chmod(ENGINE_DIR . '/cache/system/' . $dir . $file . '.php', 0666);
 		}
 	}
 }
@@ -638,16 +638,16 @@ function get_vars($file)
 	$file = totranslit($file, true, false);
 	$catalog = '';
 	if (isset($_COOKIE['dbname'])) {
-		$catalog = ENGINE_DIR . '/cache/system/' . $_COOKIE['dbname'].'/';
-		if (!file_exists($catalog)){
+		$catalog = ENGINE_DIR . '/cache/system/' . $_COOKIE['dbname'] . '/';
+		if (!file_exists($catalog)) {
 			if (!mkdir($catalog, 0777, true)) {
-				die('Не удалось создать директорию - '.$catalog);
+				die('Не удалось создать директорию - ' . $catalog);
 			}
 		}
-		$catalog = $_COOKIE['dbname'].'/';
+		$catalog = $_COOKIE['dbname'] . '/';
 	}
 
-	$data = @file_get_contents(ENGINE_DIR . '/cache/system/'.$catalog . $file . '.php');
+	$data = @file_get_contents(ENGINE_DIR . '/cache/system/' . $catalog . $file . '.php');
 
 	if ($data !== false) {
 
@@ -688,25 +688,25 @@ function dle_cache($prefix, $cache_id = false, $member_prefix = false)
 
 	$catalog = '';
 	if (isset($_COOKIE['dbname'])) {
-		$catalog = ENGINE_DIR . '/cache/' . $_COOKIE['dbname'].'/';
-		if (!file_exists($catalog)){
+		$catalog = ENGINE_DIR . '/cache/' . $_COOKIE['dbname'] . '/';
+		if (!file_exists($catalog)) {
 			if (!mkdir($catalog, 0777, true)) {
-				die('Не удалось создать директорию - '.$catalog);
+				die('Не удалось создать директорию - ' . $catalog);
 			}
 		}
-		$catalog = $_COOKIE['dbname'].'/';
+		$catalog = $_COOKIE['dbname'] . '/';
 	}
 
-	$buffer = @file_get_contents(ENGINE_DIR . "/cache/".$catalog . $key . ".tmp");
+	$buffer = @file_get_contents(ENGINE_DIR . "/cache/" . $catalog . $key . ".tmp");
 
 	if ($buffer !== false and $config['clear_cache']) {
 
-		$file_date = @filemtime(ENGINE_DIR . "/cache/".$catalog . $key . ".tmp");
+		$file_date = @filemtime(ENGINE_DIR . "/cache/" . $catalog . $key . ".tmp");
 		$file_date = time() - $file_date;
 
 		if ($file_date > ($config['clear_cache'] * 60)) {
 			$buffer = false;
-			@unlink(ENGINE_DIR . "/cache/".$catalog . $key . ".tmp");
+			@unlink(ENGINE_DIR . "/cache/" . $catalog . $key . ".tmp");
 		}
 
 		return $buffer;
@@ -744,17 +744,17 @@ function create_cache($prefix, $cache_text, $cache_id = false, $member_prefix = 
 
 	$catalog = '';
 	if (isset($_COOKIE['dbname'])) {
-		$catalog = ENGINE_DIR . '/cache/' . $_COOKIE['dbname'].'/';
-		if (!file_exists($catalog)){
+		$catalog = ENGINE_DIR . '/cache/' . $_COOKIE['dbname'] . '/';
+		if (!file_exists($catalog)) {
 			if (!mkdir($catalog, 0777, true)) {
-				die('Не удалось создать директорию - '.$catalog);
+				die('Не удалось создать директорию - ' . $catalog);
 			}
 		}
-		$catalog = $_COOKIE['dbname'].'/';
+		$catalog = $_COOKIE['dbname'] . '/';
 	}
 
-	file_put_contents(ENGINE_DIR . "/cache/".$catalog . $key . ".tmp", $cache_text, LOCK_EX);
-	@chmod(ENGINE_DIR . "/cache/".$catalog . $key . ".tmp", 0666);
+	file_put_contents(ENGINE_DIR . "/cache/" . $catalog . $key . ".tmp", $cache_text, LOCK_EX);
+	@chmod(ENGINE_DIR . "/cache/" . $catalog . $key . ".tmp", 0666);
 
 	return true;
 }
@@ -779,27 +779,27 @@ function clear_cache($cache_areas = false)
 	$catalog = '';
 	$catl = '';
 	if (isset($_COOKIE['dbname'])) {
-		$catalog = ENGINE_DIR . '/cache/' . $_COOKIE['dbname'].'/';
-		if (!file_exists($catalog)){
+		$catalog = ENGINE_DIR . '/cache/' . $_COOKIE['dbname'] . '/';
+		if (!file_exists($catalog)) {
 			if (!mkdir($catalog, 0777, true)) {
-				die('Не удалось создать директорию - '.$catalog);
+				die('Не удалось создать директорию - ' . $catalog);
 			}
 		}
-		$catalog = '/'. $_COOKIE['dbname'];
-		$catl = $_COOKIE['dbname'].'/';
+		$catalog = '/' . $_COOKIE['dbname'];
+		$catl = $_COOKIE['dbname'] . '/';
 	}
 
-	$fdir = opendir(ENGINE_DIR . '/cache'.$catalog);
+	$fdir = opendir(ENGINE_DIR . '/cache' . $catalog);
 
 	while ($file = readdir($fdir)) {
-		if ($file != '.htaccess' and !is_dir(ENGINE_DIR . '/cache/'. $catl . $file)) {
+		if ($file != '.htaccess' and !is_dir(ENGINE_DIR . '/cache/' . $catl . $file)) {
 
 			if ($cache_areas) {
 
-				foreach ($cache_areas as $cache_area) if (stripos($file, $cache_area) === 0) @unlink(ENGINE_DIR . '/cache/'. $catl . $file);
+				foreach ($cache_areas as $cache_area) if (stripos($file, $cache_area) === 0) @unlink(ENGINE_DIR . '/cache/' . $catl . $file);
 			} else {
 
-				@unlink(ENGINE_DIR . '/cache/'. $catl . $file);
+				@unlink(ENGINE_DIR . '/cache/' . $catl . $file);
 			}
 		}
 	}
@@ -1059,7 +1059,6 @@ function custom_comments($matches = array())
 	if ($config['allow_cmod']) {
 
 		$where[] = "cm.approve=1";
-		
 	}
 	$where[] = "p.arhiv=0";
 
@@ -1900,17 +1899,17 @@ HTML;
 
 		$onlineview_ext = array('doc', 'docx', 'odt', 'pdf', 'xls', 'xlsx');
 
-		if (isset($_COOKIE['dbname'])){
+		if (isset($_COOKIE['dbname'])) {
 			$prjlink = '&project=' . $_COOKIE['dbname'];
-			}else{
+		} else {
 			$prjlink = '';
-			}
+		}
 
 		if (in_array($type, $onlineview_ext)) {
 
 			$tpl->set('[allow-online]', "");
 			$tpl->set('[/allow-online]', "");
-			$tpl->set('{online-view-link}', "https://docs.google.com/viewer?url=" . urlencode($root . "index.php?do=download&id=" . $row['id'] . $area . "&viewonline=1".$prjlink));
+			$tpl->set('{online-view-link}', "https://docs.google.com/viewer?url=" . urlencode($root . "index.php?do=download&id=" . $row['id'] . $area . "&viewonline=1" . $prjlink));
 		} else {
 
 			$tpl->set('{online-view-link}', "");
@@ -1957,11 +1956,11 @@ HTML;
 
 		if ($area) $area_link = str_replace("&", "&amp;", $area);
 
-		
+
 
 		$tpl->set('{name}', $row['name']);
 		$tpl->set('{extension}', $type);
-		$tpl->set('{link}', $config['http_home_url'] . "index.php?do=download&id=" . $row['id'] . $area_link.$prjlink);
+		$tpl->set('{link}', $config['http_home_url'] . "index.php?do=download&id=" . $row['id'] . $area_link . $prjlink);
 		$tpl->set('{id}', $row['id']);
 
 		$tpl->compile('attachment');
@@ -2358,9 +2357,9 @@ function get_categories($id, $separator = " &raquo;")
 	if ($config['allow_alt_url']) $list = "<a href=\"" . $config['http_home_url'] . get_url($id) . "/\">{$cat_info[$id]['name']}</a>";
 	else {
 		if (isset($_COOKIE['dbname']))
-                $prjlink = '&project=' . $_COOKIE['dbname'].'&';
-                else
-                $prjlink = '';
+			$prjlink = '&project=' . $_COOKIE['dbname'] . '&';
+		else
+			$prjlink = '';
 		if ($_GET['stroka'] == "ok")
 			$list = $cat_info[$id]['name'];
 		else
@@ -2371,9 +2370,9 @@ function get_categories($id, $separator = " &raquo;")
 		if ($config['allow_alt_url']) $list = "<a href=\"" . $config['http_home_url'] . get_url($parent_id) . "/\">{$cat_info[$parent_id]['name']}</a>" . $separator . $list;
 		else {
 			if (isset($_COOKIE['dbname']))
-                $prjlink = '&project=' . $_COOKIE['dbname'].'&';
-                else
-                $prjlink = '';
+				$prjlink = '&project=' . $_COOKIE['dbname'] . '&';
+			else
+				$prjlink = '';
 			if ($_GET['stroka'] == "ok")
 				$list = $cat_info[$parent_id]['name'] . $separator . $list;
 			else
@@ -2423,9 +2422,9 @@ function get_breadcrumbcategories($id, $separator = "&raquo;", $last_link = true
 	$pos = 2;
 
 	if (isset($_COOKIE['dbname']))
-	$prjlink = 'project=' . $_COOKIE['dbname'].'&';
+		$prjlink = 'project=' . $_COOKIE['dbname'] . '&';
 	else
-	$prjlink = '';
+		$prjlink = '';
 
 	if ($last_link) {
 
@@ -3692,37 +3691,114 @@ function if_check($matches)
 	return preg_replace_callback($regex, "if_check", $matches);
 }
 
-function shablon_load($file){
-	$file = ROOT_DIR."/tpl/template/".$file;
+function shablon_load($file)
+{
+	$file = ROOT_DIR . "/tpl/template/" . $file;
 	if (!file_exists($file))
-		die("Template not found: " .$file);
+		die("Template not found: " . $file);
 	return file_get_contents($file);
 }
 
 function compile_table($shablon, $row)
 {
-    global $member_id, $db, $config;
-    //$baza = DBNAME;
-    //$rows = $db->query("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='$baza'  AND `TABLE_NAME`='$table'");
-    foreach ($row as $key => $value) {
-        $shablon = str_replace('{' . $key . '}', stripslashes($row[$key]), $shablon);
-        if ((isset($row[$key])) && ($row[$key] != '')) {
-            $shablon = str_replace('[' . $key . ']', "", $shablon);
-            $shablon = str_replace('[/' . $key . ']', "", $shablon);
-            $shablon = str_replace('{' . $key . '}', $row[$key], $shablon);
-            $shablon = preg_replace("#\[not-" . $key . "\](.+?)\[/not-" . $key . "\]#is", "", $shablon);
-        } else {
-            $shablon = str_replace('[not-' . $key . ']', "", $shablon);
-            $shablon = str_replace('[/not-' . $key . ']', "", $shablon);
-            $shablon = str_replace('{' . $key . '}', "", $shablon);
-            $shablon = preg_replace("#\[" . $key . "\](.+?)\[/" . $key . "\]#is", "", $shablon);
-        }
-    }
-    return $shablon;
+	global $member_id, $db, $config;
+	//$baza = DBNAME;
+	//$rows = $db->query("SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='$baza'  AND `TABLE_NAME`='$table'");
+	foreach ($row as $key => $value) {
+		$shablon = str_replace('{' . $key . '}', stripslashes($row[$key]), $shablon);
+		if ((isset($row[$key])) && ($row[$key] != '')) {
+			$shablon = str_replace('[' . $key . ']', "", $shablon);
+			$shablon = str_replace('[/' . $key . ']', "", $shablon);
+			$shablon = str_replace('{' . $key . '}', $row[$key], $shablon);
+			$shablon = preg_replace("#\[not-" . $key . "\](.+?)\[/not-" . $key . "\]#is", "", $shablon);
+		} else {
+			$shablon = str_replace('[not-' . $key . ']', "", $shablon);
+			$shablon = str_replace('[/not-' . $key . ']', "", $shablon);
+			$shablon = str_replace('{' . $key . '}', "", $shablon);
+			$shablon = preg_replace("#\[" . $key . "\](.+?)\[/" . $key . "\]#is", "", $shablon);
+		}
+	}
+	return $shablon;
 }
 
 function sentajax($data)
 {
-	$contents = json_encode($data,JSON_UNESCAPED_UNICODE);
+	$contents = json_encode($data, JSON_UNESCAPED_UNICODE);
 	echo $contents;
+}
+
+function check_adgrup()
+{
+	global $member_id, $db;
+	if (isset($member_id['grups']) && $member_id['grups'] != '') {
+		$rows = $db->query("SELECT guid FROM hv_s_adgrup WHERE id in({$member_id['grups']}) AND guid<>'' AND guid is not null");
+		foreach ($rows as $key => $value) {
+			if (isset($member_id['ad_grup']))
+				$member_id['ad_grup'] .= ', ';
+
+			$member_id['ad_grup'] .= "'" . $value['guid'] . "'";
+		}
+	} else
+		$member_id['ad_grup'] = '';
+
+
+	if ($member_id['ad_grup'] != '')
+		$ad_grup = "OR ad_grup in({$member_id['ad_grup']})";
+	else
+		$ad_grup = '';
+
+	if (isset($member_id['manager']) && $member_id['manager'] != '')
+		$manager = "OR user_grup = '{$member_id['manager']}'";
+	else
+		$manager = '';
+
+	$rows = $db->query("SELECT * FROM dle_cat_dostup WHERE user = '{$member_id['name']}' OR user_grup = '{$member_id['name']}' $manager $ad_grup ORDER BY roly");
+	$rols = array();
+	foreach ($rows as $key => $value) {
+		if (!isset($rols[$value['id_category']]['roly'])) {
+			if ($value['roly'] != 5) {
+				$rols[$value['id_category']]['roly'] = array(
+					"id" => $value['id_category'],
+					"roly" => $value['roly'],
+					"category" => $value['category'],
+					"project" => $value['project']
+				);
+				if ($value['user'] != '')
+					$rols[$value['id_category']]['mod'] = 'user';
+				if ($value['user_grup'] != '' || $value['ad_grup'] != '')
+					$rols[$value['id_category']]['mod'] = 'grup';
+			}
+		} else {
+			if ($rols[$value['id_category']]['roly'] > $value['roly'] || $value['user'] != '') {
+				if ($rols[$value['id_category']]['mod'] != 'user') {
+					$rols[$value['id_category']]['roly'] = array(
+						"id" => $value['id_category'],
+						"roly" => $value['roly'],
+						"category" => $value['category'],
+						"project" => $value['project']
+					);
+					if ($value['user'] != '')
+						$rols[$value['id_category']]['mod'] = 'user';
+					if ($value['user_grup'] != '' || $value['ad_grup'] != '')
+						$rols[$value['id_category']]['mod'] = 'grup';
+				}
+			}
+			if ($value['roly'] = '5') {
+				if ($rols[$value['id_category']]['mod'] != 'user')
+					unset($rols[$value['id_category']]);
+			}
+		}
+	}
+	$member_id['dostup'] = $rols;
+	foreach ($rols as $key => $value) {
+		if ($value['roly']['category'] == '1') {
+			if (isset($member_id['spis_category']))
+				$member_id['spis_category'] .= ', ';
+			$member_id['spis_category'] .= "'" . $value['roly']['id'] . "'";
+		} else {
+			if (isset($member_id['spis_project']))
+				$member_id['spis_project'] .= ', ';
+			$member_id['spis_project'] .= "'" . $value['roly']['project'] . "'";
+		}
+	}
 }

@@ -26,14 +26,18 @@ if ($catmay == "no") {
     $barhiv = "AND arhiv = 0";
     else $barhiv = "AND arhiv = 1";
 
-  $sql = "SELECT id, icon, name, alt_name, arhiv  FROM dle_category WHERE parentid = '" . $sid . "' $barhiv ORDER BY posi";
+  if ($_SESSION['super_admin'])
+  $sql = "SELECT id, icon, name, alt_name, arhiv  FROM dle_category WHERE parentid = 0 $barhiv ORDER BY posi";
+  else{
+    if (isset($member_id['spis_category'])&&$member_id['spis_category']!='')
+    $sql = "SELECT id, icon, name, alt_name, arhiv  FROM dle_category WHERE parentid = 0 $barhiv AND id in ({$member_id['spis_category']}) ORDER BY posi";
+  }
+
   $result = $db->query($sql);
   $editbtn = '<li class="edit_btn"><a onclick="return false" href="#"><i title="Редактировать"></i></a></li>';
   $starhiv = "<img src='/images/archive.png' class='bzarhive' title='База знаний в архиве'/>";
   echo '<div class="container"><div class="padding"><article class="block-news"><div id="dle-content"><div class="dle-center">';
   if (!empty($result)) {
-
-
     while ($row = $db->get_row($result)) {
       if ($row['icon']) {
         $icon = $row['icon'];
@@ -53,8 +57,13 @@ if ($catmay == "no") {
       $harhiv = '';
       if ($row['arhiv']==1)
         $harhiv = $starhiv;
+
+        if ($member_id['dostup'][$row['id']]['roly']['roly']=='1')
+          $tempedit = $editbtn;
+        else 
+          $tempedit = '';
         
-      echo "<ol sid='{$row['id']}' cat='1' idcat='{$row['id']}'>$editbtn<a href='$url' class='menuurl'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
+      echo "<ol sid='{$row['id']}' cat='1' idcat='{$row['id']}'>$tempedit<a href='$url' class='menuurl'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
 			  </div><div class='shottitle'>$harhiv {$row['name']}</div></a></ol>";
     }
   }
@@ -69,9 +78,9 @@ if ($catmay == "no") {
     //$bzid = explode(',', $bzid);
 
     if ($_SESSION['super_admin'])
-      $sql = "SELECT Project, id_cat, arhiv FROM dle_project where not id = -1 $barhiv";
+      $sql = "SELECT id, Project, id_cat, arhiv FROM dle_project where not id = -1 $barhiv";
     else
-      $sql = "SELECT Project, id_cat, arhiv FROM dle_project WHERE id regexp '[[:<:]](" . implode('|', $bzid) . ")[[:>:]]' $barhiv";
+      $sql = "SELECT id, Project, id_cat, arhiv FROM dle_project WHERE id regexp '[[:<:]](" . implode('|', $bzid) . ")[[:>:]]' $barhiv";
     $row = $db->query($sql);
     $db2 = new db;
     $db3 = new db;
@@ -94,7 +103,7 @@ if ($catmay == "no") {
         if ($row['arhiv']==1)
           $harhiv = $starhiv;
           
-        echo "<ol sid='{$result['id']}' cat='2' idcat='{$result['id']}' project='{$row['Project']}'>$editbtn<a href='$url'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
+        echo "<ol sid='{$result['id']}' cat='2' idcat='{$result['id']}' project='{$row['Project']}' project_id='{$row['id']}'>$editbtn<a href='$url'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
 			  </div><div class='shottitle'>$harhiv {$result['name']}</div></a></ol>";
       }
     }

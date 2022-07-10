@@ -1,0 +1,24 @@
+.k-button-solid-primary.k-active,
+.k-button-solid-primary:active {
+    border-color: #e0574d;
+    background-color: #e0574d;
+}
+
+.k-button-solid-primary.k-hover,
+.k-button-solid-primary:hover {
+    border-color: #df7007;
+    background-color: #f37e0e;
+}
+
+.k-button:focus,
+.k-button:hover {
+    text-decoration: none;
+    outline: 0;
+}
+
+.k-button-solid-primary {
+    border-color: #fb8d24;
+    color: #fff;
+    background-color: #fb8d24;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .02));
+}

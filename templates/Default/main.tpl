@@ -25,9 +25,10 @@
     <link href="{THEME}/css/new/new.css" rel="stylesheet" type="text/css">
     <link href="{THEME}/css/iosCheckbox-theme.scss" rel="stylesheet" type="text/css">
 
-    <link href="/kendo/styles/kendo.common.min.css?v=4" rel="stylesheet">
-    {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet"> *}
-    <link href="/kendo/styles/kendo.default-ocean-blue.min.css?v=4" rel="stylesheet">
+    {* <link href="/kendo/styles/kendo.fiori.min.css?v=4" rel="stylesheet"> *}
+    {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet">  *}
+    <link href="/kendo/styles/kendo.default-main.min.css?v=4" rel="stylesheet">
+    <link href="{THEME}/css/mykendo.css" rel="stylesheet" type="text/css">
 
     <script src="/kendo/js/kendo.all.min.js?v=11"></script>
     <script src="{THEME}/js/iziModal.js"></script>
@@ -63,8 +64,9 @@
               <div class="midside">
                 <div id="header_menu">
                   <!-- Логотип -->
-                  <a class="logotype" href="/"> <span class="logo_icon"><img src="images/logo.ico" width="42"
-                        height="42" alt="" /></span> <span class="logo_title">База знаний ФТО</span> </a>
+                  <a class="logotype" href="/"> <span class="logo_icon"><img src="images/logo.ico" width="22"
+                        height="22" alt="" style="margin-top: 6px; margin-right: -10px;" /></span> <span
+                      class="logo_title">База знаний ФТО</span> </a>
                   <!-- / Логотип -->
                   <!-- Основное Меню -->
                   [not-dostup]
@@ -80,16 +82,7 @@
                         class="mt_3"></i> </span> <span class="menu_toggle__title"> Меню </span> </button>
                   <!-- / Кнопка вызова меню -->
                   {login}
-                  <!-- Кнопка вызова меню -->
-                  <button id="search_btn"> <span>
-                      <svg class="icon icon-search">
-                        <use xlink:href="#icon-search"></use>
-                      </svg>
-                      <svg class="icon icon-cross">
-                        <use xlink:href="#icon-cross"></use>
-                      </svg>
-                    </span> </button>
-                  <!-- / Кнопка вызова меню -->
+
                 </div>
               </div>
               [not-dostup]
@@ -103,6 +96,36 @@
                 <div class="chone center">
                   {* <a href="#"> <img src="images/ctonovogo.png"><span>Создать базу знаний</span></a> *}
                   <button type="button" id="addbz">Создать базу знаний</button>
+                  <div class="clmacategory">
+                    <button type="button" data-role="button" categor="1" id="idvnut">Внутренние инструкции</button>
+                    <button type="button" data-role="button" categor="2" id="idzac">Инструкции заказчика</button>
+                  </div>
+                  <script>
+                 
+                    kendo.init(".clmacategory");
+                    $('.clmacategory button').on('click', function() {
+                      cat = $(this).attr('categor');
+                      $('.clmacategory button').removeClass('k-button-solid-warning');
+
+                      but = localStorage.getItem('catbut');
+                      if (but == cat) {
+                        $(this).removeClass('k-button-solid-warning');
+                        $('.container [cat="1"]').css('display', '');
+                        $('.container [cat="2"]').css('display', '');
+                        localStorage.removeItem('catbut');
+                        return;
+                      }
+                      $(this).addClass('k-button-solid-warning');
+                      if (cat == '1') {
+                        $('.container [cat="2"]').css('display', 'none');
+                        $('.container [cat="1"]').css('display', '');
+                      } else {
+                        $('.container [cat="1"]').css('display', 'none');
+                        $('.container [cat="2"]').css('display', '');
+                      }
+                      localStorage.setItem('catbut', cat);
+                    })
+                  </script>
                 </div>
                 [/not-group]
                 [/available]
@@ -278,6 +301,8 @@
       document.body.insertBefore(div, document.body.childNodes[0]);
       });
       });
+      $('.container').css('opacity','1');
+      $('body').css('overflow','auto');
     </script>
     <script src="{THEME}/js/Srcfooter.js"></script>
     [available=cat]
@@ -359,6 +384,7 @@ updateData({sectionId, questionId, questionList});
         jQuery('html, body').animate({ scrollTop: destination }, 1100);
         return false;
       })
+      
     </script>
 
     <script src="{THEME}/js/rascras.js"></script>

@@ -7,7 +7,15 @@ htmlm = `
   <li><span class='k-icon k-i-file-zip'></span><span class='popmenu' elem='arhive'> Архивировать </span></li>
   <li><span class='k-icon k-i-delete'></span><span class='popmenu' elem='delete'> Удалить </span></li>
 </ul>
-`
+`;
+
+
+but = localStorage.getItem('catbut');
+if (but) {
+    localStorage.removeItem('catbut');
+    $('.clmacategory [categor="' + but + '"]').click();
+}
+
 
 $('#dle-content .dle-center').append(htmlm)
 var menus
@@ -50,9 +58,11 @@ function selectmenu(e) {
     poper = $(e.item).find('.popmenu').attr('elem')
     catid = $elem.closest('ol').attr('cat')
     idcategory = $elem.closest('ol').attr('idcat')
-    project = ''
+    project = '';
+    project_id = '';
     if (catid == 2) {
-        project = $elem.closest('ol').attr('project')
+        project = $elem.closest('ol').attr('project');
+        project_id = $elem.closest('ol').attr('project_id');
     }
     if (poper == 'edit_name') {
         kendo.prompt('Новое имя:', namebz).then(function(data) {
@@ -62,7 +72,7 @@ function selectmenu(e) {
                 idcategory: idcategory,
                 namebaza: data,
                 project: project,
-                namebd: rus_to_latin(data)
+                namebd: rus_to_latin($.trim(data))
             }
             getajax('/php/add_bz.php', dt)
         })
@@ -71,12 +81,12 @@ function selectmenu(e) {
     }
     if (poper == 'dostup') {
         if (!$('#iddostup')[0]) {
-            $('#addbz').after('<div id = "iddostup" > < /div>')
+            $('#addbz').after('<div id="iddostup"></div>')
         }
         windostup = $('#iddostup').kendoWindow({
             width: '600px',
             title: 'Настройки доступа для ' + namebz,
-            content: '/tpl/dostup_bz.php?idcat=' + idcategory + '&project=' + project + '&category=' + catid,
+            content: '/tpl/dostup_bz.php?idcat=' + idcategory + '&project=' + project_id + '&category=' + catid,
             visible: false,
             modal: true,
             pinned: false,
@@ -87,9 +97,13 @@ function selectmenu(e) {
                 this.center()
             },
             close: function(e) {
-                $('html, body').css('overflow', '');
+                $(document).off('click', '.dostupitems .remove');
+                $(document).off('click', '.clspis');
                 setTimeout(() => {
                     $('#iddostup').remove();
+                    $('.k-window').remove();
+                    $('.combobox-options').remove();
+                    $('html, body').css('overflow', '');
                 }, 400);
             }
         }).data('kendoWindow')

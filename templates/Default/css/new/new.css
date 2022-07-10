@@ -2,7 +2,7 @@
     list-style: none;
     position: absolute;
     display: unset;
-    margin-left: 55px;
+    margin-left: 41px;
     opacity: 0;
     transition: all 0.2s ease-in-out;
 }
@@ -105,7 +105,7 @@ img.bzarhive {
 
 .userLink {
     padding: 0;
-    display: inline-block;
+    display: flex;
     white-space: nowrap;
 }
 
@@ -143,4 +143,35 @@ img.bzarhive {
 .strel {
     border-bottom: 1px dotted #333;
     cursor: pointer;
+}
+
+.avadostup {
+    position: relative;
+    width: 21px;
+    height: 21px;
+}
+
+.clmacategory {
+    padding-top: 14px;
+    position: relative;
+    top: 24px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.clmacategory button {
+    margin-bottom: 10px;
+    width: 181px;
+}
+
+.container {
+    opacity: 0;
+    transition: all ease 300ms;
+}
+
+body {
+    overflow: hidden;
 }

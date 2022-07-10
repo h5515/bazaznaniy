@@ -705,6 +705,12 @@ if ( $do == "preview" ) {
   die();
 }
 
+if (!$is_logged){
+  $tpl->load_template( 'avtorization.tpl');
+  $tpl->compile( 'avtoriz' );
+  die($tpl->result[ 'avtoriz' ]);
+}
+
 
 $tpl->load_template( 'login.tpl' );
 
@@ -763,18 +769,6 @@ if ( $is_logged ) {
 
   }
 
-  if ( count( explode( "@", $member_id[ 'foto' ] ) ) == 2 ) {
-
-    $tpl->set( '{foto}', 'https://www.gravatar.com/avatar/' . md5( trim( $member_id[ 'foto' ] ) ) . '?s=' . intval( $user_group[ $member_id[ 'user_group' ] ][ 'max_foto' ] ) );
-
-  } else {
-
-    if ( $member_id[ 'foto' ] ) {
-
-      $tpl->set( '{foto}', $supconfig[ 'dirfoto' ] . $member_id[ 'foto' ] );
-
-    } else $tpl->set( '{foto}', "{THEME}/dleimages/noavatar.png" );
-  }
 
 } else {
 

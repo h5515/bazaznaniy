@@ -54,8 +54,8 @@
 
 .circlenews {
     border-radius: 100px;
-    width: 200px;
-    height: 200px;
+    width: 110px;
+    height: 110px;
     background-color: #EAF3FF;
     transition: all 0.2s ease-in-out !important;
 }
@@ -67,26 +67,27 @@
     background-size: contain !important;
     border: none;
     border-radius: 100px;
-    width: 160px;
-    height: 160px;
+    width: 94px;
+    height: 76px;
     margin: auto;
     position: relative;
-    top: 20px;
+    top: 18px;
     transition: all 0.2s ease-in-out !important;
 }
 
 .block-news ol {
-    width: 220px;
-    height: 200px;
+    width: 110px;
+    height: 110px;
     padding-top: 17px !important;
     transition: all 0.2s ease-in-out !important;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    float: left;
+    /* float: left; */
     text-align: center;
-    margin: 0 16px 34px 0;
+    margin: 0 16px 1px 0;
     padding: 0;
+    height: fit-content;
 }
 
 .block-news ol:hover .circlenews {
@@ -100,9 +101,9 @@
 }
 
 .block-news ol:hover .shottitle {
-    transform: scale(1.2);
-    font-weight: 600;
-    margin-top: 8px;
+    /* transform: scale(1.2); */
+    /* font-weight: 600; */
+    /* margin-top: 8px; */
 }
 
 

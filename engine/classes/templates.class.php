@@ -1320,7 +1320,7 @@ class dle_template
         $this->user_data['{foto}'] = 'https://www.gravatar.com/avatar/' . md5(trim($member_id['foto'])) . '?s=' . intval($user_group[$member_id['user_group']]['max_foto']);
       } else {
 
-        if ($member_id['foto']) {
+       /* if ($member_id['foto']) {
 
           if (strpos($member_id['foto'], "//") === 0) $avatar = "http:" . $member_id['foto'];
           else $avatar = $member_id['foto'];
@@ -1331,7 +1331,15 @@ class dle_template
 
             $this->user_data['{foto}'] = $member_id['foto'];
           } else $this->user_data['{foto}'] = $config['http_home_url'] . "uploads/fotos/" . $member_id['foto'];
-        } else $this->user_data['{foto}'] = "{THEME}/dleimages/noavatar.png";
+        } else $this->user_data['{foto}'] = "{THEME}/dleimages/noavatar.png";*/
+
+        if (isset($member_id['foto']) && $member_id['foto'] != '') {
+          if (!file_exists(ROOT_DIR . "/uploads/fotos/" . $member_id['foto'])) {
+            $this->user_data['{foto}'] = "/templates/Default/dleimages/noavatar.png";
+          } else {
+            $this->user_data['{foto}'] = $config['http_home_url'] . "uploads/fotos/" . $member_id['foto'];
+          }
+      } else $this->user_data['{foto}'] = "/templates/Default/dleimages/noavatar.png";
       }
 
       $this->user_data['{profile-login}'] = stripslashes($member_id['name']);

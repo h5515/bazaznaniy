@@ -14,12 +14,17 @@
  Use: authorization of visitors to the site
 =====================================================
 */
-
-if (!defined('DATALIFEENGINE')) {
-	header("HTTP/1.1 403 Forbidden");
-	header('Location: ../../');
-	die("Hacking attempt!");
+if ($_POST['avtkey']!='jfdskal289234pfg$#84532'){
+    die("Hacking attempt!");
 }
+session_start();
+define( 'DATALIFEENGINE', true );
+define( 'ROOT_DIR', '../..' );
+define( 'ENGINE_DIR', '..' );
+include ENGINE_DIR . '/data/config.php';
+require_once ENGINE_DIR . '/classes/mysql.php';
+require_once ENGINE_DIR . '/data/dbconfig.php';
+require_once ENGINE_DIR . '/modules/functions.php';
 
 $_IP = get_ip();
 $_TIME = time();
@@ -58,7 +63,7 @@ $is_logged = false;
 $member_id = array();
 $attempt_login = false;
 
-if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password'] and $_POST['login'] == "submit") {
+if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 
 	$_POST['login_name'] = mb_strtolower((string)$_POST['login_name']);
 	$_POST['login_password'] = (string)$_POST['login_password'];
@@ -84,9 +89,9 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 	}
 
 	if ($allow_login and $allow_user) {
-		include(ENGINE_DIR ."/data/supconfig.php");
+	//	include(ENGINE_DIR ."/data/supconfig.php");
 		$bd2 = new db;
-		$bd2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
+//		$bd2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
 		$member_id = $bd2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
 
 
@@ -216,6 +221,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 				$_SESSION['super_admin'] = true;
 			}
 
+			
 			/*if ($config['twofactor_auth'] and $member_id['twofactor_auth']) {
 
 				$is_logged = false;
@@ -367,9 +373,9 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 	} else {
 		$dostup_bz = true;
 	}
-	// include(ENGINE_DIR ."/data/supconfig.php");
+	include(ENGINE_DIR ."/data/supconfig.php");
 	$db2 = new db;
-//	$db2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
+	$db2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
 	$member_id = $db2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_SESSION['dle_user_id']) . "'");
 	$db2->free();
 	//and md5($member_id['password']) == $_SESSION['dle_password']
@@ -511,7 +517,13 @@ if (!$allow_login) {
 if ($is_logged) {
 
 	$dle_login_hash = sha1(SECURE_AUTH_KEY . $member_id['user_id'] . sha1($member_id['password']) . $member_id['hash']);
-	check_adgrup();
+
+    $dat = array(
+        "session" => $member_id['hash'],
+        "status" => "OK"
+    );
+    echo json_encode($dat);
+
 	/*if ($user_group[$member_id['user_group']]['time_limit']) {
 		if ($member_id['time_limit'] != "" and (intval($member_id['time_limit']) < $_TIME)) {
 
@@ -577,6 +589,9 @@ if ($is_logged) {
 	$member_id = array();
 	//$dle_login_hash = sha1(SECURE_AUTH_KEY . $_IP);
 }
+
+if (isset($member_id['name']))
+check_adgrup();
 
 
 if (!$is_logged and $attempt_login) {
