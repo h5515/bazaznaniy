@@ -856,7 +856,7 @@ function get_mass_cats($id)
 
 function custom_comments($matches = array())
 {
-	global $db, $is_logged, $member_id, $cat_info, $config, $user_group, $category_id, $_TIME, $lang, $smartphone_detected, $dle_module, $allow_comments_ajax, $PHP_SELF, $dle_login_hash, $replace_links;
+	global $db,$db_gl, $is_logged, $member_id, $cat_info, $config, $user_group, $category_id, $_TIME, $lang, $smartphone_detected, $dle_module, $allow_comments_ajax, $PHP_SELF, $dle_login_hash, $replace_links;
 
 	if (!count($matches)) return "";
 
@@ -1129,8 +1129,8 @@ function custom_comments($matches = array())
 
 		$tpl = new dle_template();
 		$tpl->dir = TEMPLATE_DIR;
-
-		$comments = new DLE_Comments($db, $custom_limit, $custom_limit);
+		
+		$comments = new DLE_Comments($db_gl, $custom_limit, $custom_limit);
 		$comments->query = $sql_select;
 		$content = $comments->build_customcomments($tpl, $custom_template . '.tpl');
 
@@ -2315,30 +2315,33 @@ function get_url($id)
 	return $url;
 }
 
-function get_idcategories($id)
+function get_idcategories($id, $cat = null)
 {
 
 	global $cat_info;
 
 	if (!$id) return;
 
-	$parent_id = $cat_info[$id]['parentid'];
+	if (empty($cat))
+		$cat = $cat_info; 
 
-	$list = $cat_info[$id]['id'];
+	$parent_id = $cat[$id]['parentid'];
+
+	$list = $cat[$id]['id'];
 
 
 	while ($parent_id) {
 
-		$list = $cat_info[$parent_id]['id'];
+		$list = $cat[$parent_id]['id'];
 
-		$parent_id = $cat_info[$parent_id]['parentid'];
+		$parent_id = $cat[$parent_id]['parentid'];
 
-		if (!$cat_info[$parent_id]['id']) {
+		if (!$cat[$parent_id]['id']) {
 			break;
 		}
 
 		if ($parent_id) {
-			if ($cat_info[$parent_id]['parentid'] == $cat_info[$parent_id]['id']) break;
+			if ($cat[$parent_id]['parentid'] == $cat[$parent_id]['id']) break;
 		}
 	}
 
@@ -3729,12 +3732,15 @@ function sentajax($data)
 
 function check_adgrup()
 {
-	global $member_id, $db;
+	global $member_id;
+	$db2 = new db;
+	$db2->connect(DBUSER, DBPASS, DBGNAME, DBHOST);
 	if (isset($member_id['grups']) && $member_id['grups'] != '') {
-		$rows = $db->query("SELECT guid FROM hv_s_adgrup WHERE id in({$member_id['grups']}) AND guid<>'' AND guid is not null");
+		$rows = $db2->query("SELECT guid FROM hv_s_adgrup WHERE id in({$member_id['grups']}) AND guid<>'' AND guid is not null");
 		foreach ($rows as $key => $value) {
 			if (isset($member_id['ad_grup']))
 				$member_id['ad_grup'] .= ', ';
+			if (empty($member_id['ad_grup'])) $member_id['ad_grup'] = '';
 
 			$member_id['ad_grup'] .= "'" . $value['guid'] . "'";
 		}
@@ -3752,53 +3758,82 @@ function check_adgrup()
 	else
 		$manager = '';
 
-	$rows = $db->query("SELECT * FROM dle_cat_dostup WHERE user = '{$member_id['name']}' OR user_grup = '{$member_id['name']}' $manager $ad_grup ORDER BY roly");
-	$rols = array();
+	$rows = $db2->query("SELECT * FROM dle_cat_dostup WHERE user = '{$member_id['name']}' OR user_grup = '{$member_id['name']}' $manager $ad_grup ORDER BY roly");
 	foreach ($rows as $key => $value) {
-		if (!isset($rols[$value['id_category']]['roly'])) {
+		if (empty($rols))
+			$rols = array();
+		$cat = $value['category'];
+		if ($cat == 1)
+			$bz = "{$value['id_category']}";
+		else
+			$bz = "{$value['project']}";
+		if (!isset($rols[$cat][$bz]['roly'])) {
 			if ($value['roly'] != 5) {
-				$rols[$value['id_category']]['roly'] = array(
+				$rols[$cat][$bz] = array(
 					"id" => $value['id_category'],
 					"roly" => $value['roly'],
 					"category" => $value['category'],
 					"project" => $value['project']
 				);
 				if ($value['user'] != '')
-					$rols[$value['id_category']]['mod'] = 'user';
+					$rols[$cat][$bz]['mod'] = 'user';
 				if ($value['user_grup'] != '' || $value['ad_grup'] != '')
-					$rols[$value['id_category']]['mod'] = 'grup';
+					$rols[$cat][$bz]['mod'] = 'grup';
 			}
 		} else {
-			if ($rols[$value['id_category']]['roly'] > $value['roly'] || $value['user'] != '') {
-				if ($rols[$value['id_category']]['mod'] != 'user') {
-					$rols[$value['id_category']]['roly'] = array(
+			if ($rols[$cat][$bz]['roly'] > $value['roly'] || ($value['user'] != '' && $value['roly'] != 5)) {
+				if ($rols[$cat][$bz]['mod'] != 'user') {
+					$rols[$cat][$bz] = array(
 						"id" => $value['id_category'],
 						"roly" => $value['roly'],
 						"category" => $value['category'],
 						"project" => $value['project']
 					);
 					if ($value['user'] != '')
-						$rols[$value['id_category']]['mod'] = 'user';
+						$rols[$cat][$bz]['mod'] = 'user';
 					if ($value['user_grup'] != '' || $value['ad_grup'] != '')
-						$rols[$value['id_category']]['mod'] = 'grup';
+						$rols[$cat][$bz]['mod'] = 'grup';
 				}
 			}
 			if ($value['roly'] = '5') {
-				if ($rols[$value['id_category']]['mod'] != 'user')
-					unset($rols[$value['id_category']]);
+				if ($rols[$cat][$bz]['mod'] != 'user')
+					unset($rols[$cat][$bz]);
 			}
 		}
 	}
-	$member_id['dostup'] = $rols;
-	foreach ($rols as $key => $value) {
-		if ($value['roly']['category'] == '1') {
+	if (isset($rols))
+		$member_id['dostup'] = $rols;
+
+	if (isset($rols['1']))
+		foreach ($rols['1'] as $key => $value) {
 			if (isset($member_id['spis_category']))
 				$member_id['spis_category'] .= ', ';
-			$member_id['spis_category'] .= "'" . $value['roly']['id'] . "'";
-		} else {
+			if (empty($member_id['spis_category'])) $member_id['spis_category'] = '';
+			$member_id['spis_category'] .= "'" . $value['id'] . "'";
+		}
+	if (isset($rols['2']))
+		foreach ($rols['2'] as $key => $value) {
 			if (isset($member_id['spis_project']))
 				$member_id['spis_project'] .= ', ';
-			$member_id['spis_project'] .= "'" . $value['roly']['project'] . "'";
+			if (empty($member_id['spis_project'])) $member_id['spis_project'] = '';
+			$member_id['spis_project'] .= "'" . $value['project'] . "'";
 		}
-	}
+	$db2->close();
+	$db2->free();
+}
+
+function check_dostup($cat, $projcet, $roly)
+{
+	global $member_id;
+	$dostup = true;
+	if (isset($member_id['dostup'])) {
+		if ($cat == 1)
+			if ($member_id['dostup'][$cat][$projcet]['roly'] != $roly)
+				$dostup = false;
+		if ($cat == 2)
+			if ($member_id['dostup'][$cat][$projcet]['roly'] != $roly)
+				$dostup = false;
+	} else $dostup = false;
+	if (isset($_SESSION['super_admin']) && $_SESSION['super_admin']) $dostup = true;
+	return $dostup;
 }

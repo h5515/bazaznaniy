@@ -1,6 +1,6 @@
 <?php
 
-@session_start();
+/*@session_start();
 @error_reporting( E_ALL ^ E_WARNING ^ E_NOTICE );
 @ini_set( 'display_errors', true );
 @ini_set( 'html_errors', false );
@@ -18,7 +18,7 @@ require_once ENGINE_DIR . '/data/dbconfig.php';
 require_once ENGINE_DIR . '/modules/functions.php';
 require_once ENGINE_DIR . '/modules/sitelogin.php';
 require_once ROOT_DIR . '/language/' . $config[ 'langs' ] . '/website.lng';
-require_once( DLEPlugins::Check( ENGINE_DIR . '/modules/functions.php' ) );
+require_once( DLEPlugins::Check( ENGINE_DIR . '/modules/functions.php' ) );*/
 
 function build_like_and( $values, $field_name ) {
   $names = explode( ',', $values );
@@ -64,6 +64,10 @@ if ( !$category_id == '' ) {
 
 $tagcheck = $_POST[ 'tagcheck' ];
 
+$news_ids = '';
+$my_id = '';
+$favorites = '';
+$noread = '';
 
 if ( !$tagson == "" ) {
   if ( $tagcheck == 'true' ) {
@@ -145,6 +149,7 @@ if ( $_POST[ 'command' ] == 'myst' ) {
   $sql = "SELECT id  FROM " . PREFIX . "_post $catserch $autor $arhiv $arh";
   $row = $db->query( $sql );
   $news_id = array();
+  $my_id = array();
   while ( $row = $db->get_row() ) {
     $my_id[] = $row[ 'id' ];
   }
@@ -390,8 +395,10 @@ if ( $comand == 'all' ) {
 if ( $comand == 'hide' ) {
 
   $row = $db->super_query( "SELECT COUNT(DISTINCT tag) as count FROM " . PREFIX . "_tags $catserch $tagson $news_ids $my_id $favorites $noread  " );
-
-  if ( $row[ 'count' ] >= $config[ 'tags_number' ] ) {
+  $count = intval($row[ 'count']);
+  $confconfig = $config[ 'tags_number' ];
+  if ( $count >= $confconfig  ) {
+    $a = $_POST;
     if ( !$category_id == '' ) {
       echo "<div class=\"tags_more\"><a href=\"#\" onClick=\"AllTag(" . $category_id . ",'all')\">" . $lang[ 'all_tags' ] . "</a></div>";
     } else {

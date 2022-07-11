@@ -97,7 +97,12 @@ if (isset($_GET['searc'])) {
     ?>
 </div>
 
+<div class="footerspis">
+<button type="button" data-role="button" data-icon="close-outline" onclick="$('#idspisok').data('kendoWindow').close();">Закрыть</button>
+</div>
+
 <script>
+    kendo.init(".footerspis");
     var rez;
     var tim;
     rez = "<?php echo $_GET['spis'];?>";
@@ -120,7 +125,7 @@ if (isset($_GET['searc'])) {
         }, 300);
     })
     $(document).on('click', '.clspis', function() {
-        fullname = $(this).find('.hedfullname').text();
+        fullname = $(this).find('.spisfullname').text();
         name = $(this).attr('data-name');
         manager = $(this).attr('data-usergrup');
         adgrup = $(this).attr('data-adgrup');
@@ -184,12 +189,17 @@ if (isset($_GET['searc'])) {
     }
 
     .divspis {
-        height: 98%;
+        height: 90%;
         margin-top: 20px;
         overflow-y: auto;
     }
     .imagspis img{
         max-height: 18px;
     margin: 0 5px -4px 0px;
+    }
+    .footerspis{
+        direction: rtl; 
+        border-top: 1px solid #cbcbcb;
+    padding-top: 2px;  
     }
 </style>

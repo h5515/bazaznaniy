@@ -22,18 +22,18 @@ if ($catmay == "no") {
 
   // $not_allow_cats = explode(',', $user_group[$member_id['user_group']]['not_allow_cats']); ' AND NOT id regexp '[[:<:]](" . implode('|', $not_allow_cats) . ")[[:>:]]'
   $barhiv = '';
-  if ($_GET['bzarhiv']!='true')
+  if ($_GET['bzarhiv'] != 'true')
     $barhiv = "AND arhiv = 0";
-    else $barhiv = "AND arhiv = 1";
-
+  else $barhiv = "AND arhiv = 1";
+  $sql = '';
   if ($_SESSION['super_admin'])
-  $sql = "SELECT id, icon, name, alt_name, arhiv  FROM dle_category WHERE parentid = 0 $barhiv ORDER BY posi";
-  else{
-    if (isset($member_id['spis_category'])&&$member_id['spis_category']!='')
-    $sql = "SELECT id, icon, name, alt_name, arhiv  FROM dle_category WHERE parentid = 0 $barhiv AND id in ({$member_id['spis_category']}) ORDER BY posi";
+    $sql = "SELECT id, icon, name, alt_name, arhiv  FROM dle_category WHERE parentid = 0 $barhiv ORDER BY posi";
+  else {
+    if (isset($member_id['spis_category']) && $member_id['spis_category'] != '')
+      $sql = "SELECT id, icon, name, alt_name, arhiv  FROM dle_category WHERE parentid = 0 $barhiv AND id in ({$member_id['spis_category']}) ORDER BY posi";
   }
-
-  $result = $db->query($sql);
+  if ($sql != '')
+    $result = $db->query($sql);
   $editbtn = '<li class="edit_btn"><a onclick="return false" href="#"><i title="Редактировать"></i></a></li>';
   $starhiv = "<img src='/images/archive.png' class='bzarhive' title='База знаний в архиве'/>";
   echo '<div class="container"><div class="padding"><article class="block-news"><div id="dle-content"><div class="dle-center">';
@@ -55,32 +55,35 @@ if ($catmay == "no") {
         $url = $PHP_SELF . '?do=cat&' . $prjlink . 'category=' . $row['alt_name'] . $prjlink;
       }
       $harhiv = '';
-      if ($row['arhiv']==1)
+      if ($row['arhiv'] == 1)
         $harhiv = $starhiv;
 
-        if ($member_id['dostup'][$row['id']]['roly']['roly']=='1')
-          $tempedit = $editbtn;
-        else 
-          $tempedit = '';
-        
+      if (check_dostup(1, $row['id'], 1) || (isset($_SESSION['super_admin']) && $_SESSION['super_admin']))
+        $tempedit = $editbtn;
+      else
+        $tempedit = '';
+
       echo "<ol sid='{$row['id']}' cat='1' idcat='{$row['id']}'>$tempedit<a href='$url' class='menuurl'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
 			  </div><div class='shottitle'>$harhiv {$row['name']}</div></a></ol>";
     }
   }
-  if (isset($member_id['name'])) {
-    $sql = "SELECT id FROM dle_project WHERE avtor = '{$member_id['name']}'";
-    $rows = $db->query($sql);
-    foreach ($rows as $key => $value) {
-      $bzid[] = $value['id'];
-    }
-  }
+  // if (isset($member_id['name'])) {
+  //   $sql = "SELECT id FROM dle_project WHERE avtor = '{$member_id['name']}'";
+  //   $rows = $db->query($sql);
+  //   foreach ($rows as $key => $value) {
+  //     $bzid[] = $value['id'];
+  //   }
+  // }
+  if (isset($member_id['spis_project']) && $member_id['spis_project'] != '')
+    $bzid =  $member_id['spis_project'];
+
   if ((isset($bzid)) || ($_SESSION['super_admin'])) {
     //$bzid = explode(',', $bzid);
 
     if ($_SESSION['super_admin'])
       $sql = "SELECT id, Project, id_cat, arhiv FROM dle_project where not id = -1 $barhiv";
     else
-      $sql = "SELECT id, Project, id_cat, arhiv FROM dle_project WHERE id regexp '[[:<:]](" . implode('|', $bzid) . ")[[:>:]]' $barhiv";
+      $sql = "SELECT id, Project, id_cat, arhiv FROM dle_project WHERE id in ($bzid) $barhiv";
     $row = $db->query($sql);
     $db2 = new db;
     $db3 = new db;
@@ -100,10 +103,15 @@ if ($catmay == "no") {
         }
         $url = $PHP_SELF . '?do=cat&project=' . $row['Project'] . '&category=' . $result['alt_name'];
         $harhiv = '';
-        if ($row['arhiv']==1)
+        if ($row['arhiv'] == 1)
           $harhiv = $starhiv;
-          
-        echo "<ol sid='{$result['id']}' cat='2' idcat='{$result['id']}' project='{$row['Project']}' project_id='{$row['id']}'>$editbtn<a href='$url'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
+
+        if (check_dostup(2, $row['id'], 1) || (isset($_SESSION['super_admin']) && $_SESSION['super_admin']))
+          $tempedit = $editbtn;
+        else
+          $tempedit = '';
+
+        echo "<ol sid='{$result['id']}' cat='2' idcat='{$result['id']}' project='{$row['Project']}' project_id='{$row['id']}'>$tempedit<a href='$url'><div class='circlenews'><div class='circleimg' style='background: url($icon);'></div>
 			  </div><div class='shottitle'>$harhiv {$result['name']}</div></a></ol>";
       }
     }

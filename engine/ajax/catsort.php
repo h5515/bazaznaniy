@@ -94,7 +94,15 @@ if (isset($_REQUEST['idcategory']))
 	$glcat = $_REQUEST['idcategory'];
 else
 	$glcat = $_REQUEST['id'];
-$glcat = get_idcategories($glcat);
+
+$glcat = get_idcategories($glcat, get_vars("category"));
+
+if (isset($_GET['project'])) {
+	$bz_cat = 2;
+  } else {
+	$bz_cat = 1;
+  }
+  $member_id['user_group'] = $member_id['dostup'][$bz_cat][$glcat]['roly'];
 
 $glcat = (int)$glcat;
 

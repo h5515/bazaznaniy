@@ -285,7 +285,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 
 	if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && $_COOKIE['site_bz'] != $_COOKIE['dbname']) {
 
-		$db3 = new db;
+	/*	$db3 = new db;
 		$db3->connect(DBUSER, DBPASS, $gl_bd, DBHOST);
 		$proh = false;
 		$all_bz = $db3->super_query("SELECT allow_bz FROM dle_usergroups WHERE ID = (SELECT user_group FROM dle_users WHERE name='{$nam}')");
@@ -310,8 +310,8 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 				}
 			}
 		}
-		$db3->free();
-		if ($dostup_bz) {
+		$db3->free();*/
+		/*if ($dostup_bz) {
 			$row = $db->super_query("SELECT count(name) as count FROM dle_users WHERE name = '{$nam}'");
 			if ($row['count'] < 1) {
 				$db2 = new db;
@@ -362,14 +362,14 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 				}
 				$db2->free();
 			}
-		}
+		}*/
 		//$_SESSION['dle_user_id'] = $row['user_id'];
 	} else {
 		$dostup_bz = true;
 	}
 	// include(ENGINE_DIR ."/data/supconfig.php");
 	$db2 = new db;
-//	$db2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
+	$db2->connect(DBUSER, DBPASS, $gl_bd, DBHOST);
 	$member_id = $db2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_SESSION['dle_user_id']) . "'");
 	$db2->free();
 	//and md5($member_id['password']) == $_SESSION['dle_password']

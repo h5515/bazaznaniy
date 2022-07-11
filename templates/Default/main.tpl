@@ -100,32 +100,7 @@
                     <button type="button" data-role="button" categor="1" id="idvnut">Внутренние инструкции</button>
                     <button type="button" data-role="button" categor="2" id="idzac">Инструкции заказчика</button>
                   </div>
-                  <script>
-                 
-                    kendo.init(".clmacategory");
-                    $('.clmacategory button').on('click', function() {
-                      cat = $(this).attr('categor');
-                      $('.clmacategory button').removeClass('k-button-solid-warning');
-
-                      but = localStorage.getItem('catbut');
-                      if (but == cat) {
-                        $(this).removeClass('k-button-solid-warning');
-                        $('.container [cat="1"]').css('display', '');
-                        $('.container [cat="2"]').css('display', '');
-                        localStorage.removeItem('catbut');
-                        return;
-                      }
-                      $(this).addClass('k-button-solid-warning');
-                      if (cat == '1') {
-                        $('.container [cat="2"]').css('display', 'none');
-                        $('.container [cat="1"]').css('display', '');
-                      } else {
-                        $('.container [cat="1"]').css('display', 'none');
-                        $('.container [cat="2"]').css('display', '');
-                      }
-                      localStorage.setItem('catbut', cat);
-                    })
-                  </script>
+                  <script src="{THEME}/js/new/bz_main.js"></script>
                 </div>
                 [/not-group]
                 [/available]
@@ -302,7 +277,7 @@
       });
       });
       $('.container').css('opacity','1');
-      $('body').css('overflow','auto');
+      
     </script>
     <script src="{THEME}/js/Srcfooter.js"></script>
     [available=cat]
@@ -384,7 +359,7 @@ updateData({sectionId, questionId, questionList});
         jQuery('html, body').animate({ scrollTop: destination }, 1100);
         return false;
       })
-      
+      $('body').css('overflow','auto'); 
     </script>
 
     <script src="{THEME}/js/rascras.js"></script>

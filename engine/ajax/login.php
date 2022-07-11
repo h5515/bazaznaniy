@@ -276,10 +276,10 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 			$is_logged = false;
 			$attempt_login = true;
 
-			if ($member_id['user_id'] and $user_group[$member_id['user_group']]['allow_admin']) {
+			// if ($member_id['user_id'] and $user_group[$member_id['user_group']]['allow_admin']) {
 
-				$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '91', '')");
-			}
+			// 	$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '91', '')");
+			// }
 
 			$member_id = array();
 		}
