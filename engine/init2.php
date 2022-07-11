@@ -27,7 +27,7 @@ if (!defined('DATALIFEENGINE')) {
 
 date_default_timezone_set($config['date_adjust']);
 
-require_once( ENGINE_DIR . '/modules/functions.php' );
+require_once(ENGINE_DIR . '/modules/functions.php');
 
 dle_session();
 check_xss();
@@ -42,7 +42,7 @@ if (isset($_GET['project'])) {
 	unset($_COOKIE['dbname']);
 }
 
-require_once (ENGINE_DIR . '/classes/plugins.class.php');
+require_once(ENGINE_DIR . '/classes/plugins.class.php');
 
 $Timer = new microTimer();
 $cron = false;
@@ -711,32 +711,35 @@ HTML;
 
 if (isset($_GET['project'])) {
 	$bz_cat = 2;
-  } else {
+	$bz_category = get_bz($_GET['project']);
+} else {
 	$bz_cat = 1;
 	if ((empty($category_id) || !$category_id) and (isset($newsid))) {
-		if ($newsid==0){
-			if ($do=="addnews")
-			$bz_id = $category;
+		if ($newsid == 0) {
+			if ($do == "addnews")
+				$bz_id = $category;
 			else
-			$bz_id = $_GET['id'];
-		}else 
+				$bz_id = $_GET['id'];
+		} else
 			$bz_id = $newsid;
-	  $row = $db->super_query("SELECT category FROM dle_post WHERE id = {$bz_id}");
-	  if (isset($row['category'])) {
-		$dcat = explode(',', $row['category']);	
-		$category_id = $dcat[0];
-	  }
+		if ($do != "addnews") {
+			$row = $db->super_query("SELECT category FROM dle_post WHERE id = {$bz_id}");
+			if (isset($row['category'])) {
+				$dcat = explode(',', $row['category']);
+				$category_id = $dcat[0];
+			}
+		} else $category_id = $bz_id;
 	}
 	$bz_category = get_idcategories($category_id, get_vars("category"));
-  }
+}
 
-  $member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
+$member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
 
-  //if (empty($member_id[ 'user_group'])) $member_id[ 'user_group' ] = 5;
-  
-  if (!$is_logged) $member_id['user_group'] = 5;
-  
- // if (empty($member_id['user_group'])) $member_id['user_group'] = 5;
+//if (empty($member_id[ 'user_group'])) $member_id[ 'user_group' ] = 5;
+
+if (!$is_logged) $member_id['user_group'] = 5;
+
+// if (empty($member_id['user_group'])) $member_id['user_group'] = 5;
 
 
 if (isset($banned_info['ip'])) $blockip = check_ip($banned_info['ip']);
@@ -773,12 +776,12 @@ if ($is_logged) {
 	$tpl->set('{new-pm}', $member_id['pm_unread']);
 	$tpl->set('{all-pm}', $member_id['pm_all']);
 
-	if (!$dostup_bz){
-		$tpl->set_block( "'\\[not-dostup\\](.*?)\\[/not-dostup\\]'si", "" );
-		}else{
-		  $tpl->set( '[not-dostup]', "" );
-		  $tpl->set( '[/not-dostup]', "" );
-		}
+	if (!$dostup_bz) {
+		$tpl->set_block("'\\[not-dostup\\](.*?)\\[/not-dostup\\]'si", "");
+	} else {
+		$tpl->set('[not-dostup]', "");
+		$tpl->set('[/not-dostup]', "");
+	}
 
 	if ($member_id['favorites']) {
 		$tpl->set('{favorite-count}', count(explode(",", $member_id['favorites'])));

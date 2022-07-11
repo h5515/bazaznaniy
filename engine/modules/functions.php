@@ -605,6 +605,16 @@ function CategoryNewsSelection($categoryid = 0, $parentid = 0, $nocat = TRUE, $s
 	return $returnstring;
 }
 
+function get_bz($name_bz){
+	global $db_gl;
+	$row = $db_gl->super_query("SELECT id FROM dle_project WHERE project = '{$name_bz}'");
+	if (isset($row['id']))
+		$rez = $row['id'];
+	else	
+		$rez = 0;
+	return $rez;
+}
+
 function get_ID($cat_info, $category)
 {
 	foreach ($cat_info as $cats) {
@@ -807,6 +817,69 @@ function clear_cache($cache_areas = false)
 	return true;
 }
 
+function listdir($dir)
+{
+
+	$current_dir = @opendir($dir);
+
+	if ($current_dir !== false) {
+		while ($entryname = readdir($current_dir)) {
+			if (is_dir($dir . "/" . $entryname) and ($entryname != "." and $entryname != "..")) {
+				listdir($dir . "/" . $entryname);
+			} elseif ($entryname != "." and $entryname != "..") {
+				@unlink($dir . "/" . $entryname);
+			}
+		}
+		@closedir($current_dir);
+		@rmdir($dir);
+	}
+}
+
+function clear_all_caches()
+{
+	global $config;
+
+	listdir(ENGINE_DIR . '/cache/system/CSS');
+	listdir(ENGINE_DIR . '/cache/system/HTML');
+	listdir(ENGINE_DIR . '/cache/system/URI');
+	listdir(ENGINE_DIR . '/cache/system/plugins');
+
+	$catalog = '';
+	$catl = '';
+	if (isset($_COOKIE['dbname'])) {
+		$catalog = ENGINE_DIR . '/cache/' . $_COOKIE['dbname'].'/';
+		if (!file_exists($catalog)){
+			if (!mkdir($catalog, 0777, true)) {
+				die('Не удалось создать директорию - '.$catalog);
+			}
+		}
+		$catalog = $_COOKIE['dbname'];
+		$catl = $_COOKIE['dbname'].'/';
+	}
+
+	$fdir = opendir(ENGINE_DIR . '/cache/system/'.$catl);
+	while ($file = readdir($fdir)) {
+		if ($file != '.' and $file != '..' and $file != '.htaccess' and $file != 'cron.php') {
+			@unlink(ENGINE_DIR . '/cache/system/'.$catl . $file);
+		}
+	}
+
+	if ($config['cache_type']) {
+		$fdir = opendir(ENGINE_DIR . '/cache'.$catalog);
+		while ($file = readdir($fdir)) {
+			if ($file != '.htaccess' and !is_dir($file)) {
+				@unlink(ENGINE_DIR . '/cache/'. $catl . $file);
+			}
+		}
+	}
+
+	clear_cache();
+
+	if (function_exists('opcache_reset')) {
+		opcache_reset();
+	}
+}
+
 function ChangeSkin($dir, $skin)
 {
 
@@ -856,7 +929,7 @@ function get_mass_cats($id)
 
 function custom_comments($matches = array())
 {
-	global $db,$db_gl, $is_logged, $member_id, $cat_info, $config, $user_group, $category_id, $_TIME, $lang, $smartphone_detected, $dle_module, $allow_comments_ajax, $PHP_SELF, $dle_login_hash, $replace_links;
+	global $db, $db_gl, $is_logged, $member_id, $cat_info, $config, $user_group, $category_id, $_TIME, $lang, $smartphone_detected, $dle_module, $allow_comments_ajax, $PHP_SELF, $dle_login_hash, $replace_links;
 
 	if (!count($matches)) return "";
 
@@ -1129,7 +1202,7 @@ function custom_comments($matches = array())
 
 		$tpl = new dle_template();
 		$tpl->dir = TEMPLATE_DIR;
-		
+
 		$comments = new DLE_Comments($db_gl, $custom_limit, $custom_limit);
 		$comments->query = $sql_select;
 		$content = $comments->build_customcomments($tpl, $custom_template . '.tpl');
@@ -2323,7 +2396,7 @@ function get_idcategories($id, $cat = null)
 	if (!$id) return;
 
 	if (empty($cat))
-		$cat = $cat_info; 
+		$cat = $cat_info;
 
 	$parent_id = $cat[$id]['parentid'];
 
@@ -3826,14 +3899,16 @@ function check_dostup($cat, $projcet, $roly)
 {
 	global $member_id;
 	$dostup = true;
-	if (isset($member_id['dostup'])) {
-		if ($cat == 1)
-			if ($member_id['dostup'][$cat][$projcet]['roly'] != $roly)
-				$dostup = false;
-		if ($cat == 2)
-			if ($member_id['dostup'][$cat][$projcet]['roly'] != $roly)
-				$dostup = false;
-	} else $dostup = false;
 	if (isset($_SESSION['super_admin']) && $_SESSION['super_admin']) $dostup = true;
+	else {
+		if (isset($member_id['dostup'])) {
+			if ($cat == 1)
+				if ($member_id['dostup'][$cat][$projcet]['roly'] != $roly)
+					$dostup = false;
+			if ($cat == 2)
+				if ($member_id['dostup'][$cat][$projcet]['roly'] != $roly)
+					$dostup = false;
+		} else $dostup = false;
+	}
 	return $dostup;
 }

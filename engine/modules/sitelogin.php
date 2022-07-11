@@ -512,6 +512,7 @@ if ($is_logged) {
 
 	$dle_login_hash = sha1(SECURE_AUTH_KEY . $member_id['user_id'] . sha1($member_id['password']) . $member_id['hash']);
 	check_adgrup();
+	$dostup_bz = true;
 	/*if ($user_group[$member_id['user_group']]['time_limit']) {
 		if ($member_id['time_limit'] != "" and (intval($member_id['time_limit']) < $_TIME)) {
 

@@ -668,6 +668,7 @@ if ($config['allow_registration']) {
 
 if (isset($_GET['project'])) {
   $bz_cat = 2;
+  $bz_category = get_bz($_GET['project']);
 } else {
   $bz_cat = 1;
   if ((empty($category_id) || !$category_id) and (isset($newsid))) {
@@ -680,7 +681,10 @@ if (isset($_GET['project'])) {
   $bz_category = get_idcategories($category_id);
 }
 
-$member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
+if ($_SESSION['super_admin'])
+  $member_id['user_group'] = 1;
+else
+  $member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
 
 //if (empty($member_id[ 'user_group'])) $member_id[ 'user_group' ] = 5;
 

@@ -138,12 +138,15 @@ if ($_POST['category'] == 1) {
         }
         $sql = "UPDATE dle_category SET name = '$p_name', alt_name = '$p_baze' WHERE id = {$_POST['idcategory']}";
         $db->query($sql);
+        clear_all_caches();
         $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.shottitle').text('$p_name');";
+        $scr .= "$('[cat=1][idcat={$_POST['idcategory']}]').find('.menuurl').attr('href','?do=cat&category={$p_baze}');";
         die($scr);
     } else {
         $catimg = saveimg();
         $sql = "INSERT INTO " . USERPREFIX . "_category (Name, alt_name, posi, icon) value ('{$p_name}','{$p_baze}',1 ,'{$catimg}')";
         $db->query($sql);
+        clear_all_caches();
     }
 }
 

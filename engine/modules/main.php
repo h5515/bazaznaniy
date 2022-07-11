@@ -113,10 +113,7 @@ if ($member_id['user_id']) {
 
 
 
-if (
-  $dle_module == "showfull"
-  and $news_found
-) {
+if ($dle_module == "showfull" and $news_found) {
 
   if (strpos($tpl->copy_template, "related-news") !== false) {
     $tpl->set('[related-news]', "");

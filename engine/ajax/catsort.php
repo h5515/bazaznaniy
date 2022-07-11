@@ -19,63 +19,6 @@ require_once ENGINE_DIR . '/modules/sitelogin.php';
 require_once ROOT_DIR . '/language/' . $config['langs'] . '/website.lng';
 require_once(DLEPlugins::Check(ENGINE_DIR . '/modules/functions.php'));
 
-function listdir($dir)
-{
-
-	$current_dir = @opendir($dir);
-
-	if ($current_dir !== false) {
-		while ($entryname = readdir($current_dir)) {
-			if (is_dir($dir . "/" . $entryname) and ($entryname != "." and $entryname != "..")) {
-				listdir($dir . "/" . $entryname);
-			} elseif ($entryname != "." and $entryname != "..") {
-				@unlink($dir . "/" . $entryname);
-			}
-		}
-		@closedir($current_dir);
-		@rmdir($dir);
-	}
-}
-
-function clear_all_caches()
-{
-	global $config;
-
-	listdir(ENGINE_DIR . '/cache/system/CSS');
-	listdir(ENGINE_DIR . '/cache/system/HTML');
-	listdir(ENGINE_DIR . '/cache/system/URI');
-	listdir(ENGINE_DIR . '/cache/system/plugins');
-
-	$catalog = '';
-	$catl = '';
-	if (isset($_COOKIE['dbname'])) {
-		$catalog = $_COOKIE['dbname'];
-		$catl = $_COOKIE['dbname'] . '/';
-	}
-
-	$fdir = opendir(ENGINE_DIR . '/cache/system/' . $catalog);
-	while ($file = readdir($fdir)) {
-		if ($file != '.' and $file != '..' and $file != '.htaccess' and $file != 'cron.php') {
-			@unlink(ENGINE_DIR . '/cache/system/' . $catl . $file);
-		}
-	}
-
-	if ($config['cache_type']) {
-		$fdir = opendir(ENGINE_DIR . '/cache' . $catl);
-		while ($file = readdir($fdir)) {
-			if ($file != '.htaccess' and !is_dir($file)) {
-				@unlink(ENGINE_DIR . '/cache/' . $catl . $file);
-			}
-		}
-	}
-
-	clear_cache();
-
-	if (function_exists('opcache_reset')) {
-		opcache_reset();
-	}
-}
-
 function parseJsonArray($jsonArray, $parentID = 0)
 {
 	$return = array();

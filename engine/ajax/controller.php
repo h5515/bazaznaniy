@@ -161,6 +161,7 @@ require_once(DLEPlugins::Check(ENGINE_DIR . '/modules/sitelogin.php'));
 
 if (isset($_GET['project'])) {
 	$bz_cat = 2;
+	$glcat = get_bz($_GET['project']);
 } else {
 	$bz_cat = 1;
 	if (isset($_POST['category']) && $_POST['category'] <> '')
