@@ -302,7 +302,7 @@
                         var litext = " ";
                         if (kls != "") kls = ' class = "' + kls + '"';
                         ShowLoading('');
-                        $.post(dle_root + "engine/ajax/controller.php?mod=catsort", {
+                        $.post(dle_root + "engine/ajax/controller.php?mod=catsort" + project_url, {
                             user_hash: dle_login_hash,
                             action: 'update',
                             id: parentid,
@@ -373,7 +373,7 @@
                         //alert (parentid+' - '+deystv);
                         ShowLoading('');
                         $('#modaladel').iziModal('close');
-                        $.post(dle_root + "engine/ajax/controller.php?mod=catsort", {
+                        $.post(dle_root + "engine/ajax/controller.php?mod=catsort" + project_url, {
                             user_hash: dle_login_hash,
                             action: deystv,
                             id: parentid,

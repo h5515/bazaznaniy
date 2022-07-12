@@ -27,23 +27,18 @@ if (isset($_GET['save'])) {
     $dproject = '';
     if ($project != "") $dproject = "AND project = '{$project}'";
 
-    if ($id_cat != '' && $project == "")
+
         $db_gl->query("DELETE FROM dle_cat_dostup WHERE id_category = {$id_cat} AND category = $category $dproject");
-    else
-        $db_gl->query("DELETE FROM dle_cat_dostup WHERE category = $category $dproject");
+
 
     foreach ($rol as $key => $value) {
         if ($value['user'] == '') $value['user'] = null;
         if ($value['adgrup'] == '') $value['adgrup'] = null;
         if ($value['usergrup'] == '') $value['usergrup'] = null;
-        if ($id_cat != '')
             $db_gl->query("INSERT INTO dle_cat_dostup (id_category, roly, user, ad_grup, user_grup, category, project) VALUE (
         '{$id_cat}', '{$value['roly']}', '{$value['user']}', '{$value['adgrup']}', '{$value['usergrup']}', '$category', '$project'
         )");
-        else
-            $db_gl->query("INSERT INTO dle_cat_dostup (roly, user, ad_grup, user_grup, category, project) VALUE (
-           '{$value['roly']}', '{$value['user']}', '{$value['adgrup']}', '{$value['usergrup']}', '$category', '$project'
-            )");
+
     }
     die();
 }

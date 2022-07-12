@@ -84,6 +84,7 @@ $html = "<li><a href='\'><span class='cover titavatar' style='background-image: 
 $name_category = $_GET['category'];
 $name_project = $_GET['project'];
 $id_news = $_GET['id_news'];
+$scat_id = $_GET['cat_id'];
 
 if ($name_project != 'false') {
     $cat = 2;
@@ -92,7 +93,7 @@ if ($name_project != 'false') {
         $prj = $cat_id['id'];
 } else {
     $cat = 1;
-    if (!is_array($cat_info)) {
+    /*if (!is_array($cat_info)) {
         $cat_info = array();
         $db->query("SELECT * FROM " . PREFIX . "_category ORDER BY posi ASC");
         while ($row = $db->get_row()) {
@@ -115,14 +116,14 @@ if ($name_project != 'false') {
     }
     if ($name_category != 'false' && empty($category_id)) $category_id = get_ID($cat_info, $name_category);
     if (isset($category_id))
-        $cat_id = get_idcategories($category_id);
-    if (isset($cat_id))
+        $cat_id = get_idcategories($category_id);*/
+    if (isset($scat_id))
         $prj = $cat_id;
 }
 
 if ((isset($prj) && check_dostup($cat, $prj, 1))){
     if ($cat == 2)
-        $sr = "'','{$prj}'";
+        $sr = "'{$scat_id}','{$prj}'";
     else    
         $sr = "'{$prj}',''";
     

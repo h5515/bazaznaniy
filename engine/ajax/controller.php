@@ -168,6 +168,8 @@ if (isset($_GET['project'])) {
 		$glcat = $_POST['category'];
 	if (isset($_POST['categoris']) && $_POST['categoris'] <> '')
 		$glcat = $_POST['categoris'];
+	if (isset($_POST['action']))
+		$glcat = $_POST['id'];
 	$glcat = explode(',', $glcat);
 	$glcat = get_idcategories($glcat[0]);
 }

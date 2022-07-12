@@ -186,7 +186,7 @@ function selectmenu(e) {
                     idcategory: idcategory,
                     project: project
                 }
-                getajax(dle_root + 'engine/ajax/controller.php?mod=catsort', dt)
+                getajax(dle_root + 'engine/ajax/controller.php?mod=catsort' + project_url, dt)
             })
         })
         $('.k-window-title').text('Удалить?')

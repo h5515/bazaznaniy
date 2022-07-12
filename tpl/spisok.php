@@ -9,12 +9,12 @@ require_once ENGINE_DIR . '/modules/functions.php';
 
 function compile_user($us = '')
 {
-    global $db, $config;
+    global $db_gl, $config;
     if ($us != '')
         $dop = "AND fullname LIKE '%{$us}%'";
     else
         $dop = "";
-    $rows = $db->query("SELECT fullname, foto, name FROM dle_users WHERE activity = 1 $dop ORDER BY fullname LIMIT 30");
+    $rows = $db_gl->query("SELECT fullname, foto, name FROM dle_users WHERE activity = 1 $dop ORDER BY fullname LIMIT 30");
     $shablon = shablon_load("spisok_user.html");
     $html = '';
     foreach ($rows as $key => $value) {
@@ -35,7 +35,7 @@ function compile_user($us = '')
 
 function compile_grup($us = '')
 {
-    global $db;
+    global $db_gl;
     $html = '';
     /*$db2 = new db;
     $db2->connect('root','33Hdinjr','fto_online');
@@ -50,7 +50,7 @@ function compile_grup($us = '')
     else
         $dop = "";
     $shablon = shablon_load("spisok_user.html");
-    $rows = $db->query("SELECT DISTINCT(a.manager), b.fullname FROM dle_users as a 
+    $rows = $db_gl->query("SELECT DISTINCT(a.manager), b.fullname FROM dle_users as a 
     LEFT JOIN dle_users as b ON a.manager = b.name
     WHERE a.manager<>'' and a.manager is not null  and b.name is not null $dop LIMIT 15");
     foreach ($rows as $key => $value) {
@@ -65,7 +65,7 @@ function compile_grup($us = '')
         $dop = "WHERE name LIKE '%{$us}%'";
     else
         $dop = "";
-    $rows = $db->query("SELECT name as fullname, guid as adgrup FROM hv_s_adgrup $dop LIMIT 15");
+    $rows = $db_gl->query("SELECT name as fullname, guid as adgrup FROM hv_s_adgrup $dop LIMIT 15");
     foreach ($rows as $key => $value) {
         $value['imagmen'] = true;
         $value['name'] = '';
@@ -102,6 +102,9 @@ if (isset($_GET['searc'])) {
 </div>
 
 <script>
+    setTimeout(() => {
+        $('#inpspis').focus();
+    }, 400);
     kendo.init(".footerspis");
     var rez;
     var tim;

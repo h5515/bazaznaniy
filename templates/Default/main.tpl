@@ -311,7 +311,7 @@ updateData({sectionId, questionId, questionList});
           //	alert(pos+'<br>'+window.JSON.stringify($('.dd').nestable('serialize')));
           if (pos == -1) {
             ShowLoading('');
-            $.post(dle_root + "engine/ajax/controller.php?mod=catsort", {
+            $.post(dle_root + "engine/ajax/controller.php?mod=catsort"+ project_url, {
               user_hash: dle_login_hash,
               action: 'catsort',
               id: {category-id},

@@ -1,5 +1,5 @@
 <?php
-@session_start();
+/*@session_start();
 @error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
 @ini_set('display_errors', true);
 @ini_set('html_errors', false);
@@ -17,7 +17,7 @@ require_once ENGINE_DIR . '/data/dbconfig.php';
 require_once ENGINE_DIR . '/modules/functions.php';
 require_once ENGINE_DIR . '/modules/sitelogin.php';
 require_once ROOT_DIR . '/language/' . $config['langs'] . '/website.lng';
-require_once(DLEPlugins::Check(ENGINE_DIR . '/modules/functions.php'));
+require_once(DLEPlugins::Check(ENGINE_DIR . '/modules/functions.php'));*/
 
 function parseJsonArray($jsonArray, $parentID = 0)
 {
@@ -39,13 +39,6 @@ else
 	$glcat = $_REQUEST['id'];
 
 $glcat = get_idcategories($glcat, get_vars("category"));
-
-if (isset($_GET['project'])) {
-	$bz_cat = 2;
-  } else {
-	$bz_cat = 1;
-  }
-  $member_id['user_group'] = $member_id['dostup'][$bz_cat][$glcat]['roly'];
 
 $glcat = (int)$glcat;
 

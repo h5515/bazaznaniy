@@ -1,5 +1,6 @@
 $el = $('#categorid').find('ol li').eq(0);
 
+cat_id = $el.attr('data-id');
 // $el.find('a').eq(0).css('transition', 'none').css('opacity', 0);
 // $el.find('span').eq(0).css('opacity', 0);
 tex = $el.find('span').eq(0).text();
@@ -27,7 +28,7 @@ id_news = getUrlParameter('newsid');
 dt = {
     user_hash: "dle_login_hash",
 }
-getajaxhtml('/php/menu_bz.php?category=' + category + '&project=' + project + "&id_news=" + id_news + '&name_bz=' + tex, dt, '#samomenu');
+getajaxhtml('/php/menu_bz.php?category=' + category + '&project=' + project + "&id_news=" + id_news + '&name_bz=' + tex + '&cat_id=' + cat_id, dt, '#samomenu');
 
 // setTimeout(() => {
 //     $('.menubz ul').append('<li><span class="k-icon k-i-user"></span>Мой профиль</li>');
