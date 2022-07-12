@@ -90,9 +90,9 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 
 	if ($allow_login and $allow_user) {
 	//	include(ENGINE_DIR ."/data/supconfig.php");
-		$bd2 = new db;
+	//	$bd2 = new db;
 //		$bd2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
-		$member_id = $bd2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
+		$member_id = $db_gl->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
 
 
 		// if (empty($member_id)) {
@@ -111,9 +111,9 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 		// 	$db3->free();
 		// }
 
-		$bd2->free();
+	//	$bd2->free();
 
-		if ((!is_null($member_id['avtoriz_ad'])) && ($member_id['avtoriz_ad'] == 0)) {
+		if ((isset($member_id['avtoriz_ad'])) && ($member_id['avtoriz_ad'] == 0)) {
 			if ($member_id['user_id'] and $member_id['password']) {
 
 				if (is_md5hash($member_id['password'])) {
@@ -210,7 +210,7 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 				$_COOKIE['dle_hash'] = $hash;
 			}
 
-			$db->query("UPDATE LOW_PRIORITY " . USERPREFIX . "_users SET {$new_pass_hash}lastdate='{$_TIME}', hash='{$hash}', logged_ip='{$_IP}' WHERE user_id='{$member_id['user_id']}'");
+			$db_gl->query("UPDATE LOW_PRIORITY " . USERPREFIX . "_users SET {$new_pass_hash}lastdate='{$_TIME}', hash='{$hash}', logged_ip='{$_IP}' WHERE user_id='{$member_id['user_id']}'");
 
 			// if ($user_group[$member_id['user_group']]['allow_admin']) {
 

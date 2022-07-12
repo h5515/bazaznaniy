@@ -882,7 +882,7 @@ body {
 .logotype .logo_title {
     margin: 0 0 0 18px;
     font-size: 20px;
-    line-height: 34px;
+    /* line-height: 34px; */
     font-weight: normal;
     font-family: cursive;
 }
@@ -6047,7 +6047,7 @@ a.button21:active {
 }
 
 .chone {
-    margin-top: 19px;
+    margin-top: 36px;
 }
 
 .chone img {

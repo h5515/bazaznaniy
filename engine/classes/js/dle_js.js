@@ -257,7 +257,7 @@ function MarkSpam(a, b) {
 
 function doFavorites(a, b, c) {
     ShowLoading("");
-    $.get(dle_root + "engine/ajax/controller.php?mod=favorites"+project_url, {
+    $.get(dle_root + "engine/ajax/controller.php?mod=favorites" + project_url, {
         fav_id: a,
         action: b,
         skin: dle_skin,
@@ -565,8 +565,8 @@ function dle_reply(a, b, c) {
             at: "center",
             of: window
         }))
-        $('.ui-dialog').css('max-height','');
-        $('#dlereplypopup').css('height','250px');
+        $('.ui-dialog').css('max-height', '');
+        $('#dlereplypopup').css('height', '250px');
     }, "html");
     return !1
 }
@@ -1166,7 +1166,7 @@ function dle_do_search(a, cat, sor, dir, tagon, slovch, comand) {
     }
     $(".storykorotk").attr('class', 'storykorotk2');
     $("#searchsuggestions3").fadeOut(400);
-    $.post(dle_root + "engine/ajax/controller.php?mod=search", {
+    $.post(dle_root + "engine/ajax/controller.php?mod=search" + project_url, {
         query: "" + a,
         user_hash: dle_login_hash,
         categoris: cat,

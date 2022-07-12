@@ -175,3 +175,47 @@ img.bzarhive {
 body {
     /* overflow: hidden; */
 }
+
+#categorid {
+    margin-top: -22px;
+}
+
+.menubz .logo_title {
+    color: white;
+    margin: 0;
+}
+
+.menubz .k-menu-expand-arrow-icon {
+    color: white;
+}
+
+.menubz .k-menu-link {
+    padding: 0;
+}
+
+.menuicons {
+    width: 28px;
+    height: 28px;
+}
+
+#samomenu,
+#samomenu .k-menu-group {
+    background-color: #3174e6;
+    color: white;
+}
+
+#samomenu .k-menu-group .k-item>.k-link.k-hover,
+#samomenu .k-menu-group .k-item>.k-link:hover,
+#samomenu .k-menu.k-context-menu .k-item>.k-link.k-hover,
+#samomenu .k-menu.k-context-menu .k-item>.k-link:hover {
+    color: white;
+    background-color: #0049c3;
+}
+
+#samomenu .k-link.k-hover,
+#samomenu .k-link:hover,
+#samomenu .k-item>.k-link.k-hover,
+#samomenu .k-item>.k-link:hover {
+    color: white;
+    background-color: #0049c3;
+}

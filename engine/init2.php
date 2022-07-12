@@ -733,7 +733,10 @@ if (isset($_GET['project'])) {
 	$bz_category = get_idcategories($category_id, get_vars("category"));
 }
 
-$member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
+if ($_SESSION['super_admin'])
+	$member_id['user_group'] = 1;
+else
+	$member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
 
 //if (empty($member_id[ 'user_group'])) $member_id[ 'user_group' ] = 5;
 

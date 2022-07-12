@@ -44,11 +44,11 @@ if (isset($_REQUEST['action']) and $_REQUEST['action'] == "logout") {
 	@session_destroy();
 	@session_unset();
 	$is_logged = false;
-	
-	if ((isset( $_REQUEST['rezim'])) and ($_REQUEST['rezim']=="tui")){
-		header( "Location: ".str_replace("index.php","index.php",$_SERVER['PHP_SELF']) );
-	}else{
-		header( "Location: ".str_replace("index.php","",$_SERVER['PHP_SELF']) );
+
+	if ((isset($_REQUEST['rezim'])) and ($_REQUEST['rezim'] == "tui")) {
+		header("Location: " . str_replace("index.php", "index.php", $_SERVER['PHP_SELF']));
+	} else {
+		header("Location: " . str_replace("index.php", "", $_SERVER['PHP_SELF']));
 	}
 
 	die();
@@ -84,7 +84,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 	}
 
 	if ($allow_login and $allow_user) {
-		include(ENGINE_DIR ."/data/supconfig.php");
+		include(ENGINE_DIR . "/data/supconfig.php");
 		$bd2 = new db;
 		$bd2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
 		$member_id = $bd2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
@@ -124,7 +124,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 				}
 			}
 		} else {
-			include(ENGINE_DIR ."/modules/ldapconnect.php");
+			include(ENGINE_DIR . "/modules/ldapconnect.php");
 			$is_logged = ldap_auth($_POST['login_name'], $_POST['login_password']);
 			if ($is_logged && is_null($member_id['avtoriz_ad'])) {
 				//$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
@@ -262,8 +262,8 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 				header("Pragma: no-cache");
 			} else {*/
 
-				$attempt_login = true;
-				$dostup_bz = true;
+			$attempt_login = true;
+			$dostup_bz = true;
 			//}
 		} else {
 
@@ -283,9 +283,9 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 	$attempt_login = true;
 	$nam = $_COOKIE['user_name'];
 
-	if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && $_COOKIE['site_bz'] != $_COOKIE['dbname']) {
+//	if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && $_COOKIE['site_bz'] != $_COOKIE['dbname']) {
 
-	/*	$db3 = new db;
+		/*	$db3 = new db;
 		$db3->connect(DBUSER, DBPASS, $gl_bd, DBHOST);
 		$proh = false;
 		$all_bz = $db3->super_query("SELECT allow_bz FROM dle_usergroups WHERE ID = (SELECT user_group FROM dle_users WHERE name='{$nam}')");
@@ -364,9 +364,10 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 			}
 		}*/
 		//$_SESSION['dle_user_id'] = $row['user_id'];
-	} else {
-		$dostup_bz = true;
-	}
+	// } else {
+		
+	// }
+	$dostup_bz = true;
 	// include(ENGINE_DIR ."/data/supconfig.php");
 	$db2 = new db;
 	$db2->connect(DBUSER, DBPASS, $gl_bd, DBHOST);
@@ -512,6 +513,19 @@ if ($is_logged) {
 
 	$dle_login_hash = sha1(SECURE_AUTH_KEY . $member_id['user_id'] . sha1($member_id['password']) . $member_id['hash']);
 	check_adgrup();
+	if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && isset($_COOKIE['site_bz']) && $_COOKIE['site_bz'] != $_COOKIE['dbname']) {
+
+		$row = $db->super_query("SELECT count(name) as count, favorites FROM dle_users WHERE name = '{$member_id['name']}'");
+		if ($row['count'] < 1) {
+			$db->query("INSERT INTO dle_users (user_id, name) VALUE ('{$member_id['user_id']}','{$member_id['name']}')");
+		}else{
+			if (isset($row['favorites']))
+			$member_id['favorites'] = $row['favorites'];
+			else 
+			$member_id['favorites'] = '';
+		}
+	}
+
 	$dostup_bz = true;
 	/*if ($user_group[$member_id['user_group']]['time_limit']) {
 		if ($member_id['time_limit'] != "" and (intval($member_id['time_limit']) < $_TIME)) {

@@ -168,11 +168,14 @@ if (isset($_GET['project'])) {
 		$glcat = $_POST['category'];
 	if (isset($_POST['categoris']) && $_POST['categoris'] <> '')
 		$glcat = $_POST['categoris'];
-	$glcat = explode(',',$glcat);
+	$glcat = explode(',', $glcat);
 	$glcat = get_idcategories($glcat[0]);
 }
 
-$member_id['user_group'] = $member_id['dostup'][$bz_cat][$glcat]['roly'];
+if ($_SESSION['super_admin'])
+	$member_id['user_group'] = 1;
+else
+	$member_id['user_group'] = $member_id['dostup'][$bz_cat][$glcat]['roly'];
 
 if (!$is_logged) $member_id['user_group'] = 5;
 

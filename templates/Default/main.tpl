@@ -105,12 +105,12 @@
                 [/not-group]
                 [/available]
 
-                [available=cat]
+                [not-available=main]
+                <script src="{THEME}/js/new/bz_title.js"></script>
                 [group=1,2]
                 <script src="{THEME}/js/Catmenu.js"></script>
-
                 [/group]
-                [/available]
+                [/not-available]
 
               </div>
               [/not-dostup]

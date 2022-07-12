@@ -11,8 +11,8 @@ require_once ENGINE_DIR . '/modules/sitelogin.php';
 
 function compile_menu()
 {
-    global $db;
-    $rows = $db->query("SELECT * FROM dle_cat_roly_right ORDER BY id");
+    global $db_gl;
+    $rows = $db_gl->query("SELECT * FROM dle_cat_roly_right ORDER BY id");
     $html = "";
     foreach ($rows as $key => $value) {
         $html .= "<li class='option-item' data-value='{$value['id']}'>{$value['name']}</li>";
@@ -20,16 +20,16 @@ function compile_menu()
     echo $html;
 }
 
-if ($_GET['category'] == 1)
+
+
+if ($_GET['category'] == '1')
     $prj = $_GET['idcat'];
-if ($_GET['category'] == 2)
+if ($_GET['category'] == '2')
     $prj = $_GET['project'];
 
 if (!check_dostup($_GET['category'], $prj, 1)) {
     die("<h1>Доступ запрещён.</h1>");
 }
-
-
 ?>
 
 <div id="buttonadduser">

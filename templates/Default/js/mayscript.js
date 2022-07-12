@@ -42,6 +42,7 @@ function opentegform(categor) {
     }
 
 }
+
 function openhistory(categor) {
     if ($("#idtags").css('display') == 'none' || $("#idtags").css("visibility") == "hidden") {
 
@@ -70,6 +71,7 @@ function openhistory(categor) {
     }
 
 }
+
 function openhistoryedit() {
     if ($("#idtags2").css('display') == 'none' || $("#idtags2").css("visibility") == "hidden") {
 
@@ -850,4 +852,197 @@ function proverimag() {
         $(".tagshides").removeClass('hide');
         $(".tagshides").show();
     }
+}
+
+function rus_to_latin(str) {
+    var ru = {
+            'а': 'a',
+            'б': 'b',
+            'в': 'v',
+            'г': 'g',
+            'д': 'd',
+            'е': 'e',
+            'ё': 'e',
+            'ж': 'j',
+            'з': 'z',
+            'и': 'i',
+            'к': 'k',
+            'л': 'l',
+            'м': 'm',
+            'н': 'n',
+            'о': 'o',
+            'п': 'p',
+            'р': 'r',
+            'с': 's',
+            'т': 't',
+            'у': 'u',
+            'ф': 'f',
+            'х': 'h',
+            'ц': 'c',
+            'ч': 'ch',
+            'ш': 'sh',
+            'щ': 'shch',
+            'ы': 'y',
+            'э': 'e',
+            'ю': 'u',
+            'я': 'ya',
+            ' ': '_',
+            '-': '_'
+        },
+        n_str = []
+
+    str = str.replace(/[ъь]+/g, '').replace(/й/g, 'i')
+
+    for (var i = 0; i < str.length; ++i) {
+        n_str.push(
+            ru[str[i]] ||
+            ru[str[i].toLowerCase()] == undefined && str[i] ||
+            ru[str[i].toLowerCase()].toUpperCase()
+        )
+    }
+    return n_str.join('')
+}
+
+function IsJsonString(str) {
+    try {
+        JSON.parse(str)
+    } catch (e) {
+        return false
+    }
+    return true
+}
+
+function merge_options(obj1, obj2) {
+    var obj3 = {}
+    for (var attrname in obj1) {
+        obj3[attrname] = obj1[attrname]
+    }
+    for (var attrname in obj2) {
+        obj3[attrname] = obj2[attrname]
+    }
+    return obj3
+}
+
+function getajax(get, data) {
+    ShowLoading('')
+    dt = {
+        ajax: true,
+        user_hash: dle_login_hash
+    }
+    data = merge_options(dt, data)
+    $.ajax({
+        type: 'POST',
+        url: get,
+        data: data,
+        // dataType: "json",
+        timeout: 300000,
+        success: function(b) {
+            if (b.toLowerCase().indexOf('error') > -1) {
+                $('.midside #content').prepend(`<div class="box berrors fix_grid" id="idblockerror"><b>Ошибка!</b><br>  ` + b + `</div>`)
+                $('html, body').scrollTop(0)
+                setTimeout(() => {
+                    $('#idblockerror').remove()
+                }, 20000)
+            } else {
+                if (b != '')
+                    eval(b)
+            }
+            HideLoading('')
+        },
+        error: function(request, status, err) {
+            alert('Ошибка: Полное описание ошибки в консоле браузера.')
+            if (status == 'timeout') {
+                console.log('Время ожидания сервера истекло. ' + err)
+            } else {
+                console.log(status + ' - ' + err)
+            }
+            HideLoading('')
+        }
+    })
+}
+
+function getajaxhtml(get, data, loadelem) {
+    kendo.ui.progress($(loadelem), true)
+    dt = {
+        ajax_json: true,
+        // user_hash: dle_login_hash
+    }
+    data = merge_options(dt, data)
+    $.ajax({
+        type: 'POST',
+        url: get,
+        data: data,
+        timeout: 300000,
+        success: function(b) {
+            if (IsJsonString(b)) {
+                var bArray = JSON.parse(b)
+                if (bArray['script_after'])
+                    eval(bArray['script'])
+                if (bArray['html'])
+                    $(loadelem).html(bArray['html']);
+                if (bArray['script'])
+                    eval(bArray['script'])
+            }
+            kendo.ui.progress($(loadelem), false)
+        },
+        error: function(request, status, err) {
+            alert('Ошибка: Полное описание ошибки в консоле браузера.')
+            if (status == 'timeout') {
+                console.log('Время ожидания сервера истекло. ' + err)
+            } else {
+                console.log(status + ' - ' + err)
+            }
+
+            kendo.ui.progress($(loadelem), false)
+        }
+    })
+}
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+    return false;
+};
+
+function ondostup(namebz, idcategory, project_id, catid) {
+    if (!$('#iddostup')[0]) {
+        $('body').after('<div id="iddostup" style="display:none"></div>')
+    }
+    windostup = $('#iddostup').kendoWindow({
+        width: '600px',
+        title: 'Настройки доступа для ' + namebz,
+        content: '/tpl/dostup_bz.php?idcat=' + idcategory + '&project=' + project_id + '&category=' + catid,
+        visible: false,
+        modal: true,
+        pinned: false,
+        resizable: false,
+        autoFocus: true,
+        open: function(e) {
+            $('html, body').css('overflow', 'hidden')
+            this.center()
+        },
+        close: function(e) {
+            $(document).off('click', '.dostupitems .remove');
+            $(document).off('click', '.clspis');
+            setTimeout(() => {
+                $('#iddostup').remove();
+                $('.k-window').remove();
+                $('.combobox-options').remove();
+                $('html, body').css('overflow', '');
+            }, 400);
+        }
+    }).data('kendoWindow')
+    setTimeout(() => {
+        windostup.open()
+    }, 50);
 }

@@ -298,7 +298,7 @@ if ($catmay == "no") {
         $zaden = Newszaden($cots, $db);
 
         /*   echo "<li>" . $bul . '<a href="' . $url . '"><img src="' . $icon . '" width="16" height="16" alt="" /> ' . $row[ 'name' ] . '<span style="float: right;">' . $count[ 'c' ]. $zaden . '</span></a>' . $bul2 . "</li>";*/
-        echo "<li  data-id='{$row['id']}'>" . '<a href="' . $url . '" ' . $bul . '><img src="' . $icon . '" width="16" height="16" alt="" / class="imagt leftimg"> <span class="catname">' . $row['name'] . '</span><span style="float: right;" class="CatRig">' . $count['c'] . $zaden . '</span></a><div class="dd3-handle dd-handle dd3-hid" name = "catgl"></div><div class="dd" id="nestable" style="width: 100%;">'; // . "</li>";
+        echo "<li  data-id='{$row['id']}'>" . '<a href="' . $url . '" ' . $bul . ' style="opacity:0;"><img src="' . $icon . '" width="16" height="16" alt="" / class="imagt leftimg"> <span class="catname">' . $row['name'] . '</span><span style="float: right;" class="CatRig">' . $count['c'] . $zaden . '</span></a><div class="dd3-handle dd-handle dd3-hid" name = "catgl"></div><div class="dd" id="nestable" style="width: 100%;">'; // . "</li>";
 
         foreach ($row as $key => $value) {
           $cat_info[$row['id']][$key] = stripslashes($value);

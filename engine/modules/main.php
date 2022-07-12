@@ -60,7 +60,7 @@ if ($member_id['favorites'] && $category_id == '') {
   if ($member_id['user_id']) {
     $sql_fav = "SELECT favorites FROM dle_users WHERE user_id = '{$member_id['user_id']}'";
     $db2 = new db;
-    $db2->connect(DBUSER, DBPASS, DBGNAME, DBHOST);
+   // $db2->connect(DBUSER, DBPASS, DBGNAME, DBHOST);
     $row2 = $db2->super_query($sql_fav);
     if ($row2['favorites'] != '') {
       $fav = array();
