@@ -27,20 +27,18 @@ category = getUrlParameter('category');
 project = getUrlParameter('project');
 id_news = getUrlParameter('newsid');
 
-function isScrolledIntoView(elem) {
-    var docViewTop = $(window).scrollTop();
-    var docViewBottom = docViewTop + $(window).height();
 
-    var elemTop = $(elem).offset().top;
-    var elemBottom = elemTop + $(elem).height();
-
-    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-}
 
 if (!isScrolledIntoView("#cat_menu .activ"))
     $('#cat_menu').animate({
         scrollTop: $("#cat_menu .activ").offset().top - 40
     }, 400);
+
+$('.headeruz').append('<span class="aflogo"></span>');
+
+$('.aflogo').click(function() {
+    window.location.href = '/';
+})
 
 dt = {
     user_hash: "dle_login_hash",

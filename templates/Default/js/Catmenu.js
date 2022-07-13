@@ -38,20 +38,26 @@ $('.menueditcat').on('click', function() {
 
 $('.dd3-handle').css('display', 'none');
 
-$('.Catparam').on('click', function() {
-    if ($('.dd3-handle').css('display') == 'none') {
-        $('.dd3-handle').css('display', '');
+// $('.Catparam').on('click', function() {
+//     if ($('.dd3-handle').css('display') == 'none') {
+//         $('.dd3-handle').css('display', '');
 
-        $('.Catparam IMG').attr('src', 'images/Edit-80.png');
-    } else {
-        $('.dd3-handle').css('display', 'none');
-        $('.Catparam IMG').attr('src', 'images/setting_2.png');
-    }
-})
+//         $('.Catparam IMG').attr('src', 'images/Edit-80.png');
+//     } else {
+//         $('.dd3-handle').css('display', 'none');
+//         $('.Catparam IMG').attr('src', 'images/setting_2.png');
+//     }
+// })
 
 $("#idaddcat").on('click', function() {
-    if (!$(this).hasClass('menueditcatpn'))
+    if (!$(this).closest('.logotype').find('.menueditcat').hasClass('menueditcatpn'))
         $('.menueditcat').click();
     $(".addcat2").click();
+
+    if (!isScrolledIntoView("#cat_menu .inputcat"))
+        $('#cat_menu').animate({
+            scrollTop: $("#cat_menu .inputcat").offset().top - 40
+        }, 400);
+    $("#cat_menu .inputcat").focus();
     return false;
 })

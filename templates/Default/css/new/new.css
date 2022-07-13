@@ -196,7 +196,7 @@ body {
 
 #samomenu,
 #samomenu .k-menu-group {
-    background-color: #3174e6;
+    background-color: #0053df;
     color: white;
 }
 
@@ -205,7 +205,7 @@ body {
 #samomenu .k-menu.k-context-menu .k-item>.k-link.k-hover,
 #samomenu .k-menu.k-context-menu .k-item>.k-link:hover {
     color: white;
-    background-color: #0049c3;
+    background-color: #013ea7;
 }
 
 #samomenu .k-link.k-hover,
@@ -213,7 +213,7 @@ body {
 #samomenu .k-item>.k-link.k-hover,
 #samomenu .k-item>.k-link:hover {
     color: white;
-    background-color: #0049c3;
+    background-color: #013ea7;
 }
 
 .titlecat {
@@ -260,7 +260,7 @@ body {
 
 #editcategor,
 #editcategor .k-menu-group {
-    background-color: #3174e6;
+    background-color: #0053df;
     color: white;
 }
 
@@ -269,7 +269,7 @@ body {
 #editcategor .k-menu.k-context-menu .k-item>.k-link.k-hover,
 #editcategor .k-menu.k-context-menu .k-item>.k-link:hover {
     color: white;
-    background-color: #0049c3;
+    background-color: #013ea7;
 }
 
 #editcategor .k-link.k-hover,
@@ -277,7 +277,7 @@ body {
 #editcategor .k-item>.k-link.k-hover,
 #editcategor .k-item>.k-link:hover {
     color: white;
-    background-color: #3174e6;
+    background-color: #0053df;
 }
 
 #editcategor .k-menu-link {

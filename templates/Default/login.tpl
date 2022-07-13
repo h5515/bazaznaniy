@@ -56,7 +56,7 @@
 
 	.headeruz .k-menu-group,
 	.headeruz .k-menu.k-context-menu {
-		background-color: #3074e6;
+		background-color: #0053df;
 		color: white;
 		/* width: 100%; */
 	}
@@ -72,7 +72,7 @@
 	.headeruz .k-menu.k-context-menu .k-item>.k-link.k-hover,
 	.headeruz .k-menu.k-context-menu .k-item>.k-link:hover {
 		color: white;
-		background-color: #0049c3;
+		background-color: #013ea7;
 	}
 
 	@media (max-width: 980px) {

@@ -283,6 +283,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 	$attempt_login = true;
 	$nam = $_COOKIE['user_name'];
 
+
 //	if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && $_COOKIE['site_bz'] != $_COOKIE['dbname']) {
 
 		/*	$db3 = new db;
@@ -394,6 +395,9 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 		$member_id = array();
 		$is_logged = false;
 	}
+	if ($member_id['admin'] == 1) {
+		$_SESSION['super_admin'] = true;
+	}
 } elseif (isset($_COOKIE['dle_user_id']) and intval($_COOKIE['dle_user_id']) > 0 and $_COOKIE['dle_password']) {
 
 	$attempt_login = true;
@@ -467,6 +471,9 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 			$member_id = array();
 			$is_logged = false;
 		}
+	}
+	if ($member_id['admin'] == 1) {
+		$_SESSION['super_admin'] = true;
 	}
 }
 

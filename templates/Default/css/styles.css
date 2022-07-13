@@ -785,7 +785,9 @@ body {
     height: 30px;
     z-index: 15;
     padding: 0 25px;
-    background-color: #0053dfc9;
+    background-color: #0053df;
+    /* #3074e6;*/
+    /*#0053dfc9;*/
     /* border-radius: 0 0 15px 15px; */
     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
     -webkit-box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
@@ -4304,6 +4306,18 @@ td.search {
     }
 }
 
+.aflogo {
+    background-image: url(/images/logo-fto.svg);
+    background-repeat: no-repeat;
+    background-size: 65px;
+    background-position: center;
+    width: 71px;
+    height: 20px;
+    margin-left: -13px;
+    margin-right: -15px;
+    cursor: pointer;
+}
+
 @media (max-width: 980px) {
     .midside {
         padding-right: 25px;
@@ -4336,6 +4350,11 @@ td.search {
     }
     .hedfullname {
         display: none;
+    }
+    .aflogo {
+        margin-left: -12px;
+        background-position-x: -45px;
+        width: 24px;
     }
     #search_btn>span {
         display: block;
@@ -5228,6 +5247,8 @@ fieldset .soc_links>a {
     display: inline-flex;
     flex-wrap: wrap;
     width: 100%;
+    min-height: 114px;
+    align-content: center;
 }
 
 .container {

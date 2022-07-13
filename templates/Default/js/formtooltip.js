@@ -173,6 +173,9 @@
                 else elg = '.addcat';
                 $(elg).on('click', function() {
 
+                    if (!$('#nestable .dd-list')[0])
+                        $("#nestable").append("<ol class='dd-list'></ol>");
+
                     $('.dd3-handle').css('display', 'none');
                     if (trun)
                         $(trun).hide();
@@ -221,7 +224,7 @@
                                 //$(elem).attr('data-id', result[0]);
                                 $(elem).remove();
                                 //  alert(project_url);
-                                $(lielem).append("<li data-id='" + result[0] + "' class='dd-item dd3-item'><a href='?do=cat&category=" + result[1] + project_url + "'><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt leftimg'><span class='catname'>" + catname + "</span><span style='float: right;'>0</span></a><div class='dd3-handle dd-handle' name='cat' style='display: none;'></div></li>");
+                                $(lielem).append("<li data-id='" + result[0] + "' class='dd-item dd3-item'><a href='?do=cat&category=" + result[1] + project_url + "'><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt leftimg'><span class='catname'>" + catname + "</span><span style='float: right;' class='CatRig'>0</span></a><div class='dd3-handle dd-handle' name='cat' style='display: none;'></div></li>");
 
                                 /*$(elem).html("<a href='?do=cat&category=" + result[1] + "' style='white-space: nowrap;'><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt'>&nbsp;" + catname + "<span style='float: right;'>0</span></a><div class='dd3-handle dd-handle' name='cat' style='display: none;'></div>");*/
                             } else {
@@ -333,6 +336,54 @@
                     });
 
 
+                });
+                var editobloz;
+                $('.imagcat').on('click', function() {
+                    if (!$('#ideditobloz')[0]) {
+                        $('body').after('<div id = "ideditobloz" style="display:none"> < /div>')
+                    }
+                    $el = $(this).closest('li');
+                    idcategory = $el.attr('data-id');
+
+                    editobloz = $('#ideditobloz').kendoWindow({
+                        width: '500px',
+                        title: 'Редактировать обложку',
+                        content: '/tpl/edit_bz_obloz.html',
+                        visible: false,
+                        modal: true,
+                        pinned: false,
+                        resizable: false,
+                        autoFocus: true,
+                        // position: {
+                        //     top: 120,
+                        //     left: "35%",
+                        // },
+                        open: function(e) {
+                            $('.dd3-handle').css('display', 'none');
+                            $('html, body').css('overflow', 'hidden');
+
+                            $els = $('[data-id=' + idcategory + '] a').eq(0).clone().appendTo('#id_edit_obloz .dle-center');
+                            //$els.find('img').css('transform', 'scale(1.5)').css('margin-right', '7px');
+                            $els.attr('id', 'ideditcategor').attr('data-cat', idcategory);
+                            $els.find('.CatRig').remove();
+                            $els.find('img').width(28).height(28);
+                            $('#id_edit_obloz .dle-center .edit_btn').remove();
+                            $('#id_edit_obloz .dle-center a').attr('href', '#').attr('onclick', 'return false;');
+                            this.center()
+                        },
+                        close: function(e) {
+                            $('.dd3-handle').css('display', '');
+                            $('.dd3-handle').eq(0).css('display', 'none');
+                            $('html, body').css('overflow', '')
+                            setTimeout(() => {
+                                $('#id_edit_obloz .dle-center').html('');
+                                $('#ideditobloz').remove();
+                            }, 400)
+                        }
+                    }).data('kendoWindow')
+                    setTimeout(() => {
+                        editobloz.open()
+                    }, 50)
                 });
 
 

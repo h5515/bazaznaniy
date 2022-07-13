@@ -21,36 +21,58 @@
 <div id="buttonContainer">
     <p>
         <button type="button" data-role="button" data-icon="save" class="k-button-solid-primary" onclick="saveobloz();">Сохранить</button>
-        <button type="button" data-role="button" data-icon="close" onclick="editobloz.close();">Отмена</button>
+        <button type="button" data-role="button" data-icon="close" onclick="$('#ideditobloz').data('kendoWindow').close();">Отмена</button>
     </p>
 </div>
 
 
 <script>
     function downloadobl() {
-        var bg = $('#id_edit_obloz').find('.circleimg').css('background-image');
-        bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
+        el = $('#ideditcategor')[0];
+        if (!el) {
+            var bg = $('#id_edit_obloz').find('.circleimg').css('background-image');
+            bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
+            names = '.shottitle';
+        } else {
+            bg = $(el).find('img').attr('src');
+            names = '.catname';
+        }
         var a = document.createElement('a');
         a.href = bg;
-        a.download = $('#id_edit_obloz').find('.shottitle').text();
+        a.download = $('#id_edit_obloz').find(names).text();
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
     }
 
     function removeobloz() {
-        $('#id_edit_obloz').find('.circleimg').css('background', 'url(/templates/Default/dleimages/bz.png)');
+        el = $('#ideditcategor')[0];
+        if (!el) {
+            $('#id_edit_obloz').find('.circleimg').css('background', 'url(/templates/Default/dleimages/bz.png)');
+        } else
+            $(el).find('img').attr('src', '/templates/Default/dleimages/no_icon.png');
         $("[name=baseimg]").val('del');
+
     }
 
     function saveobloz() {
-        editobloz.close();
+        $('#ideditobloz').data('kendoWindow').close();
         if ($("[name=baseimg]").val() == "") {
             return;
         }
-        catid = $("#id_edit_obloz ol").attr('cat');
-        idcategory = $("#id_edit_obloz ol").attr('idcat');
-        project = $("#id_edit_obloz ol").attr('project');
+        el = $('#ideditcategor')[0];
+        if (!el) {
+            catid = $("#id_edit_obloz ol").attr('cat');
+            idcategory = $("#id_edit_obloz ol").attr('idcat');
+            project = $("#id_edit_obloz ol").attr('project');
+        } else {
+            project = getUrlParameter('project');
+            if (project = 'false')
+                catid = 1
+            else
+                catid = 2;
+            idcategory = $("#ideditcategor").attr('data-cat');
+        }
         dt = {
             rezim: 'izmenobloz',
             category: catid,
@@ -70,7 +92,12 @@
         }
         reader.readAsDataURL(file64);
         var preview = window.URL.createObjectURL(file.files[0]);
-        $(el).closest('#id_edit_obloz').find('.circleimg').css('background', 'url(' + preview + ')');
+        els = $('#ideditcategor')[0];
+        if (!els) {
+            $(el).closest('#id_edit_obloz').find('.circleimg').css('background', 'url(' + preview + ')');
+        } else {
+            $(els).find('img').attr('src', preview);
+        }
     }
     kendo.init("#buttonContainer");
     kendo.init(".delobloz");

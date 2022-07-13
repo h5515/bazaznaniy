@@ -57,12 +57,13 @@ if (empty($member_id['name'])) {
     die("Hacking attempt!");
 }
 
-function stop($txt){
+function stop($txt)
+{
     $str = "";
     if (isset($_POST['ajax']))
         $str = "Error: $txt";
     else
-    header("Location: ../../index.php?error=$txt");
+        header("Location: ../../index.php?error=$txt");
     die($str);
 }
 
@@ -71,7 +72,7 @@ function stop($txt){
 
 $ajax = false;
 
-    $ajax = true;
+$ajax = true;
 
 $p_name = $db->safesql(trim(clear_html($_REQUEST['namebaza'])));
 $p_baze = strtolower($db->safesql(trim(clear_html($_REQUEST['namebd']))));
@@ -125,6 +126,9 @@ if ($_POST['category'] == 1) {
         if ($catimg == '')
             $catimg = '/templates/Default/dleimages/bz.png';
         $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.circleimg').css('background','url($catimg)');";
+        if ($catimg == '/templates/Default/dleimages/bz.png')
+            $catimg = '/templates/Default/dleimages/no_icon.png';
+        $scr .= "$('#nestable [data-id={$_POST['idcategory']}]').find('img.imagt').attr('src','$catimg');";
         die($scr);
     }
 
@@ -197,6 +201,9 @@ if ($_POST['category'] == 2) {
         if ($catimg == '')
             $catimg = '/templates/Default/dleimages/bz.png';
         $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.circleimg').css('background','url($catimg)');";
+        if ($catimg == '/templates/Default/dleimages/bz.png')
+            $catimg = '/templates/Default/dleimages/no_icon.png';
+        $scr .= "$('#nestable [data-id={$_POST['idcategory']}]').find('img.imagt').attr('src','$catimg');";
         die($scr);
     }
 
@@ -215,7 +222,7 @@ if ($_POST['category'] == 2) {
         }
         $db2 = new db;
         $dbname = 'bz_' . $_POST['project'];
-        $nextDbname = 'bz_' .$p_baze;
+        $nextDbname = 'bz_' . $p_baze;
         $db2->connect(DBUSER, DBPASS, $dbname, DBHOST);
         $sql = "SHOW tables";
         $rows = $db2->query($sql);
