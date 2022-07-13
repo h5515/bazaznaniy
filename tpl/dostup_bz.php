@@ -1,5 +1,6 @@
 <?php
-session_start();
+// session_start();
+
 define('DATALIFEENGINE', true);
 define('ROOT_DIR', dirname(__FILE__) . '../../');
 define('ENGINE_DIR', ROOT_DIR . 'engine');
@@ -7,6 +8,7 @@ include ENGINE_DIR . '/data/config.php';
 require_once ENGINE_DIR . '/classes/mysql.php';
 require_once ENGINE_DIR . '/data/dbconfig.php';
 require_once ENGINE_DIR . '/modules/functions.php';
+dle_session();
 require_once ENGINE_DIR . '/modules/sitelogin.php';
 
 function compile_menu()

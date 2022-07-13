@@ -404,7 +404,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 
 		$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_COOKIE['dle_user_id']) . "'");
 
-		if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && empty($member_id)) {
+	/*	if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && empty($member_id)) {
 			$db2 = new db;
 			$db2->connect(DBUSER, DBPASS, $gl_bd, DBHOST);
 			$us = $db2->super_query("SELECT * FROM dle_users WHERE name = '{$_COOKIE['user_name']}'");
@@ -433,7 +433,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 			$db2->free();
 			$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_COOKIE['dle_user_id']) . "'");
 			//$_SESSION['dle_user_id'] = $row['user_id'];
-		}
+		}*/
 
 		if ($member_id['user_id'] and $member_id['password'] and md5($member_id['password']) == $_COOKIE['dle_password']) {
 
@@ -470,15 +470,15 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 	}
 }
 
-if (isset($_POST['login']) and !$is_logged and $allow_login and !$_SESSION['twofactor_auth']) {
+// if (isset($_POST['login']) and !$is_logged and $allow_login and !$_SESSION['twofactor_auth']) {
 
-	if ($config['login_log']) $db->query("INSERT INTO " . PREFIX . "_login_log (ip, count, date) VALUES('{$_IP}', '1', '" . time() . "') ON DUPLICATE KEY UPDATE count=count+1, date='" . time() . "'");
+// 	if ($config['login_log']) $db->query("INSERT INTO " . PREFIX . "_login_log (ip, count, date) VALUES('{$_IP}', '1', '" . time() . "') ON DUPLICATE KEY UPDATE count=count+1, date='" . time() . "'");
 
-	if (function_exists('msgbox')) {
-		if ($config['auth_metod']) msgbox($lang['login_err'], $lang['login_err_3']);
-		else msgbox($lang['login_err'], $lang['login_err_1']);
-	}
-}
+// 	if (function_exists('msgbox')) {
+// 		if ($config['auth_metod']) msgbox($lang['login_err'], $lang['login_err_3']);
+// 		else msgbox($lang['login_err'], $lang['login_err_1']);
+// 	}
+// }
 
 if (!$allow_login) {
 	if (function_exists('msgbox')) {

@@ -1257,6 +1257,7 @@ body {
         top: 0;
         bottom: 0;
         margin-top: 30px;
+        /* margin-bottom: 20px; */
     }
     #cat_menu::-webkit-scrollbar {
         width: 3px;
@@ -1289,11 +1290,17 @@ body {
         transition: all ease 0.22s;
     }
     .cat_menu a {
-        display: block;
+        display: flex;
         padding: 2px 10px 3px;
         color: #5a5a5a;
         text-decoration: none !important;
         position: relative;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #nestable {
+        padding-bottom: 25px;
     }
     .cat_menu .leftimg {
         margin-bottom: 2px;
@@ -1311,13 +1318,6 @@ body {
         /*left: -5px;*/
         /*top: -1px;*/
         left: -2px;
-    }
-    .cat_menu .activ {
-        background-color: gold;
-        border: solid;
-        border-radius: 10px;
-        border: 1px solid #050403;
-        font-weight: 600;
     }
     .cat_menu .catname {
         padding: 0 0 0 12px;
@@ -4139,7 +4139,7 @@ td.search {
 
 @media only screen and (max-width: 1279px) {
     .midside {
-        padding-right: 290px;
+        padding-right: 255px;
     }
     .rightside {
         width: 240px;
@@ -4672,7 +4672,7 @@ td.search {
         font-size: 1.1em;
         padding: 3% 0;
         display: block;
-        color: #fff;
+        /* color: #fff; */
         border-top-color: #3d99e7;
         border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
@@ -5672,28 +5672,28 @@ a.button21:active {
 }
 
 .catedit:hover {
-    -webkit-transform: rotate(20deg);
-    transform: rotate(20deg);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .inputcat {
-    width: 70% !important;
-    margin-left: 5px !important;
-    border-radius: 10px !important;
+    width: 100% !important;
+    margin-left: 13px !important;
+    border-radius: 5px !important;
     display: inline !important;
     height: 27px !important;
 }
 
 .imgcat {
     margin-left: 5px;
-    -webkit-transition: transform ease 1s, opacity 1s;
-    transition: transform ease 1s, opacity 1s;
+    -webkit-transition: transform ease .2s;
+    transition: transform ease 0.2s;
     opacity: 0.5;
 }
 
 .imgcat:hover {
-    -webkit-transform: rotate(-40deg);
-    transform: rotate(-40deg);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
     opacity: 1;
 }
 
@@ -6398,4 +6398,16 @@ input[type="submit"] {
     margin-top: -38px;
     margin-left: 31px;
     color: #fb8d24;
+}
+
+#cat_menu {
+    background-color: #e5f0fe;
+}
+
+.cat_menu .activ {
+    background-color: gold;
+    border: solid;
+    border-radius: 10px;
+    border: 1px solid #050403;
+    font-weight: 600;
 }

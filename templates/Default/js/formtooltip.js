@@ -1,9 +1,9 @@
 (function($) {
-
+    var trun;
     var _calloutCss;
     var _padding = 8;
     var _color = "#FFFFFF";
-    var _bgColor = "#000000";
+    var _bgColor = "#e5f0fe";
     var _tooltipOffset = 5;
     var _tooltipOffsetAnimate = 5;
     var _animteSpeed = 100;
@@ -174,13 +174,14 @@
                 $(elg).on('click', function() {
 
                     $('.dd3-handle').css('display', 'none');
-                    $(trun).hide();
+                    if (trun)
+                        $(trun).hide();
                     var elem = $(this).parent().parent();
 
                     //alert($(elem).text());
                     elol = $(elem).find('ol:first');
 
-                    var litext = "<li data-id='0' class='dd-item dd3-item'><a href='#' style='white-space: nowrap;'><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt'><input type='text' class='inputcat'></input><img src='/images/ok-cat.png' width='16' height='16' class='imagt imgcat catok' title='Применить'><img src='/images/no-cat.png' width='16' height='16' class='imagt imgcat catno' title='Отменить'></a></li>";
+                    var litext = "<li data-id='0' class='dd-item dd3-item'><a href='#' style='white-space: nowrap;'><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt leftimg'><input type='text' class='inputcat'></input><img src='/images/ok-cat.png' width='16' height='16' class='imagt imgcat catok' title='Применить'><img src='/images/no-cat.png' width='16' height='16' class='imagt imgcat catno' title='Отменить'></a></li>";
                     //console.log($(elol).html());
                     if ($(elol).html() != null) {
                         //alert('1');
@@ -195,6 +196,7 @@
                         var elem = $(this).parent().parent();
                         $(elem).remove();
                         $('.dd3-handle').css('display', '');
+                        $('.dd3-handle').eq(0).css('display', 'none');
                     });
 
                     $('.catok').on('click', function() {
@@ -219,16 +221,17 @@
                                 //$(elem).attr('data-id', result[0]);
                                 $(elem).remove();
                                 //  alert(project_url);
-                                $(lielem).append("<li data-id='" + result[0] + "' class='dd-item dd3-item'><a href='?do=cat&category=" + result[1] + project_url + "' style='white-space: nowrap;'><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt'> " + catname + "<span style='float: right;'>0</span></a><div class='dd3-handle dd-handle' name='cat' style='display: none;'></div></li>");
+                                $(lielem).append("<li data-id='" + result[0] + "' class='dd-item dd3-item'><a href='?do=cat&category=" + result[1] + project_url + "'><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt leftimg'><span class='catname'>" + catname + "</span><span style='float: right;'>0</span></a><div class='dd3-handle dd-handle' name='cat' style='display: none;'></div></li>");
 
                                 /*$(elem).html("<a href='?do=cat&category=" + result[1] + "' style='white-space: nowrap;'><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt'>&nbsp;" + catname + "<span style='float: right;'>0</span></a><div class='dd3-handle dd-handle' name='cat' style='display: none;'></div>");*/
                             } else {
                                 alert('Ошибка: ' + b);
                             }
                             $('.dd3-handle').css('display', '');
+                            $('.dd3-handle').eq(0).css('display', 'none');
                             fields = {
                                 cat: {
-                                    tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
+                                    tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/imag_cat.png' class='catedit imagcat' title ='Загрузить иконку' /><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
                                     position: 'bottom',
                                 }
                             };
@@ -281,9 +284,10 @@
                         if (kls != "") kls = ' class = "' + kls + '"';
                         $(elem).html(buttex + "<a href='" + url + "' style='white-space: nowrap;' " + kls + "><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt leftimg'> <span class='catname'>" + koltext + "</span><span style='float: right;' class='CatRig'>" + kolices + "</span></a><div class='dd3-handle dd-handle' name='cat' style='display: none;'></div>" + olelem);
                         $('.dd3-handle').css('display', '');
+                        $('.dd3-handle').eq(0).css('display', 'none');
                         fields = {
                             cat: {
-                                tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
+                                tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/imag_cat.png' class='catedit imagcat' title ='Загрузить иконку' /><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
                                 position: 'bottom',
                             }
                         };
@@ -312,9 +316,10 @@
                             // if (b != 'ok') alert('Ошибка: '+b);
                             $(elem).html(buttex + "<a href='?do=cat&category=" + b + project_url + "' style='white-space: nowrap;' " + kls + "><img src='/templates/Default/dleimages/no_icon.png' width='16' height='16' class='imagt leftimg'> <span class='catname'>" + catnames + "</span><span style='float: right;' class='CatRig'>" + kolices + "</span></a><div class='dd3-handle dd-handle' name='cat' style='display: none;'></div>" + olelem);
                             $('.dd3-handle').css('display', '');
+                            $('.dd3-handle').eq(0).css('display', 'none');
                             fields = {
                                 cat: {
-                                    tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
+                                    tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/imag_cat.png' class='catedit imagcat' title ='Загрузить иконку' /><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
                                     position: 'bottom',
                                 }
                             };
@@ -349,6 +354,7 @@
                         onClosing: function() {
                             // window.location.reload();
                             $('.dd3-handle').css('display', '');
+                            $('.dd3-handle').eq(0).css('display', 'none');
                         }
                     });
                     var arcimg = $(elem).find('img').attr('src');

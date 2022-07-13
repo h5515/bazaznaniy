@@ -12,7 +12,7 @@ include ENGINE_DIR . '/data/config.php';
 require_once ENGINE_DIR . '/classes/mysql.php';
 require_once ENGINE_DIR . '/data/dbconfig.php';
 require_once ENGINE_DIR . '/modules/functions.php';
-
+dle_session();
 require_once ENGINE_DIR . '/modules/sitelogin.php';
 require_once ROOT_DIR . '/language/' . $config['langs'] . '/website.lng';
 require_once(ENGINE_DIR . '/classes/plugins.class.php');

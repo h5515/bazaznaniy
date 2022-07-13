@@ -65,10 +65,6 @@ img.bzarhive {
     overflow: auto;
 }
 
-.k-menu-link .k-icon {
-    margin-right: 3px;
-}
-
 .cldostup img {
     max-height: 18px;
     margin: 0 5px -4px 0px;
@@ -218,4 +214,85 @@ body {
 #samomenu .k-item>.k-link:hover {
     color: white;
     background-color: #0049c3;
+}
+
+.titlecat {
+    cursor: default;
+    margin-left: 7px;
+    padding: 0 6px 0 6px;
+    box-shadow: rgb(50 50 93 / 25%) 0px 30px 60px -12px inset, rgb(0 0 0 / 7%) 0px 18px 36px -18px inset;
+    border-radius: 5px;
+}
+
+.catname {
+    line-height: 17px;
+}
+
+.menueditcat {
+    margin-left: 6px;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: rgb(0 0 0 / 22%) 0px -50px 36px -28px inset;
+    color: white;
+    cursor: pointer;
+}
+
+.menueditcatpn {
+    box-shadow: rgb(255 0 0 / 25%) 0px 30px 60px -12px inset, rgb(255 0 0) 0px 18px 36px -18px inset;
+    transform: rotate(180deg);
+}
+
+#editcategor .k-menu-group-md .k-menu-link {
+    padding-inline-end: 3px;
+}
+
+#editcategor {
+    cursor: default;
+}
+
+#editcategor .k-menu-link {
+    cursor: default;
+}
+
+#editcategor .k-menu-group .k-menu-link {
+    cursor: pointer;
+}
+
+#editcategor,
+#editcategor .k-menu-group {
+    background-color: #3174e6;
+    color: white;
+}
+
+#editcategor .k-menu-group .k-item>.k-link.k-hover,
+#editcategor .k-menu-group .k-item>.k-link:hover,
+#editcategor .k-menu.k-context-menu .k-item>.k-link.k-hover,
+#editcategor .k-menu.k-context-menu .k-item>.k-link:hover {
+    color: white;
+    background-color: #0049c3;
+}
+
+#editcategor .k-link.k-hover,
+#editcategor .k-link:hover,
+#editcategor .k-item>.k-link.k-hover,
+#editcategor .k-item>.k-link:hover {
+    color: white;
+    background-color: #3174e6;
+}
+
+#editcategor .k-menu-link {
+    padding: 0;
+}
+
+.k-menu,
+.k-menu-bar {
+    line-height: inherit;
+}
+
+[data-dir=bottom] {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+    background-color: rgb(211 221 234) !important;
+    top: 22.7621px !important;
+    left: -3px !important;
+    height: 26px !important;
 }

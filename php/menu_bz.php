@@ -127,14 +127,14 @@ if ((isset($prj) && check_dostup($cat, $prj, 1))){
     else    
         $sr = "'{$prj}',''";
     
-    $html .= "<li><a href='#' onclick=\"ondostup('$namebz',{$sr},'$cat');return false;\"><span class='k-icon k-i-lock'></span><span>Доступ</span></li>";
+    $html .= "<li><a href='#' onclick=\"ondostup('$namebz',{$sr},'$cat');return false;\" class='deldostup'><span class='k-icon k-i-lock'></span><span>Доступ</span></a></li>";
 }
 
 if ($obs != '' && $zak != '') {
     $html .= "
-    <li>Внутренние инструкции
+    <li><a href='#' onclick='return false;' style='justify-content: space-between;'>Внутренние инструкции</a>
     <ul>$obs</ul></li>
-    <li>Инструкции заказчика
+    <li><a href='#' onclick='return false;' style='justify-content: space-between;'>Инструкции заказчика</a>
     <ul>$zak</ul></li>
     ";
 } else {

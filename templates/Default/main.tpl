@@ -329,14 +329,14 @@ updateData({sectionId, questionId, questionList});
             position: 'top',
           },
           cat: {
-            tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
+            tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/imag_cat.png' class='catedit imagcat' title ='Загрузить иконку' /><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
             position: 'bottom',
           }
         };
 
         var fields = {
           cat: {
-            tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
+            tooltip: "<img src='images/plus_cat.png' class='catedit addcat' title ='Добавить' /><img src='images/edit_cat.png' class='catedit editcat' title ='Редактировать'/><img src='images/imag_cat.png' class='catedit imagcat' title ='Загрузить иконку' /><img src='images/trash_cat.png' class='catedit delcat' title ='Удалить или архивировать'/> ",
             position: 'bottom',
           }
         };
