@@ -391,8 +391,8 @@
                     $('.dd3-handle').css('display', 'none');
                     var elem = $(this).parent().parent();
                     var glelem = $(elem).parent().parent();
-                    var catnam = $(elem).children('a').children('span').parent().html();
-                    catnam = catnam.match(/\>(.*?)\<span/)[1];
+                    var catnam = $(elem).find('.catname').eq(0).text();
+                    //catnam = catnam.match(/\>(.*?)\<span/)[1];
 
                     var parentid = $(elem).attr('data-id');
 

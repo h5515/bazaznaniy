@@ -15,10 +15,10 @@ function reload() {
 }
 
 function proversvitch() {
-    if (kSwitch.checked()) {
+    if (kSwitch.check()) {
         //$("#svitcer").trigger('on.switch');
         // $(".storykorotk").show(); 
-        kSwitch.check(true);
+        // kSwitch.check(true);
 
         $(".storykorotk").slideDown(300);
 
@@ -28,7 +28,7 @@ function proversvitch() {
         });
         $.cookie('switch', '1', { expires: 366 });
     } else {
-        $("#svitcer").trigger('off.switch');
+        // kSwitch.check(false);
         $(".storykorotk").slideUp(300);
     }
 }

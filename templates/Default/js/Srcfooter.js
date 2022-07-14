@@ -22,7 +22,7 @@ $(function() {
     $nav.css('margin-left', $w - 200);
 });
 
-var tour = '1';
+
 
 $('.switch-btn').click(function() {
     $(this).toggleClass('switch-on');
@@ -57,14 +57,15 @@ $('.switch-btn').click(function() {
 
 $(function() {
     if (!$.cookie('switch')) {
-        $(".storykorotk").show();
+        // $(".storykorotk").show();
     } else {
 
         if ($.cookie('switch') == '0') {
             //$(".storykorotk").hide(); 
             //$(".imagc1").attr('src', 'images/arrow_down.png');
             //$(".imagc").css({'-webkit-transform':'rotateX(0deg)'});
-            $('.switch-btn').triggerHandler('click', false);
+            //$('.switch-btn').triggerHandler('click', false);
+
         } else {
             $(".storykorotk").slideToggle(300);
             //$(".imagc1").attr('src', 'images/arrow_up.png');

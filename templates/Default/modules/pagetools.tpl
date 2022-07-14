@@ -1,5 +1,5 @@
 [available=cat|lastnews|date|allnews]
-<div id="combo-tools" class="pagetools">
+<div id="combo-tools" class="pagetools" style="display: none">
 	<div class="pagetools_in">
 		<div class="sortbar">
 			<div class="sortbar_in">

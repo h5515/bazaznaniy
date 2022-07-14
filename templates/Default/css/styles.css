@@ -1447,7 +1447,7 @@ body {
 
 .q_search {
     position: relative;
-    margin-top: -15px;
+    margin-top: -42px;
     padding-bottom: 10px;
 }
 
@@ -1501,12 +1501,76 @@ body {
 }
 
 .q_search .icon-search {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: -8px 0 0 -8px;
     width: 16px;
     height: 16px;
+}
+
+span.clinputm {
+    display: flex;
+    align-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.q_search_btn {
+    padding: 1px 5px;
+    border-right-style: groove;
+    border-radius: 10px 0px 0px 10px;
+    height: 26px;
+    position: relative;
+    left: 3px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.clinputm>input {
+    width: 100%;
+    height: 26px;
+    line-height: 22px;
+    padding: 7px 21px 7px 8px;
+    /* border-radius: 0 10px 10px 0px; */
+    display: block;
+    border: 1px solid #3394e6;
+    box-shadow: inset 0 1px 1px 0 rgb(0 0 0 / 10%);
+    -webkit-box-shadow: inset 0 1px 1px 0 rgb(0 0 0 / 10%);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #e7f2ff;
+}
+
+.clinputm>input:focus {
+    box-shadow: rgb(0 0 0 / 16%) 0px 10px 36px 0px, rgb(0 0 0 / 6%) 0px 0px 0px 1px;
+    background-color: white;
+}
+
+.zadsear {
+    margin-left: 0px;
+    margin-right: 3px;
+    padding-right: 19px;
+    border-radius: 0px 10px 10px 0px;
+    cursor: default;
+    position: relative;
+    left: -29px;
+}
+
+.searlod {
+    border-radius: 0;
+    border: none;
+    left: -26px;
+    opacity: 0;
+}
+
+.zadsear span.k-icon.k-i-x-circle {
+    position: absolute;
+    top: 5.5px;
+    left: 3px;
+    cursor: pointer;
+}
+
+.q_search_btn svg.icon.icon-search {
+    margin-top: -3px;
 }
 
 .q_search .q_search_adv {
@@ -5561,7 +5625,7 @@ a.button21:active {
     left: 100%;
     top: 50%;
     margin: -29px 0 0 -112px;
-    background-color: #b3b4b5;
+    /* background-color: #b3b4b5; */
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -6450,4 +6514,8 @@ input[type="submit"] {
     border-radius: 10px;
     border: 1px solid #050403;
     font-weight: 600;
+}
+
+#content {
+    /* margin-top: -43px; */
 }

@@ -165,25 +165,44 @@
                   </div>
                 </div>
                 <!-- <input id="story" name="story" placeholder="Поиск в БЗ {category-title}..." type="search" onFocus="Setboxon()" onBlur="Setboxout()" onDblClick="Showsetting()">-->
-                <input id="story" name="story" placeholder="Поиск в БЗ {category-title}..." type="search">
-                <button class="btn q_search_btn" type="submit" title="Найти"
-                  onClick="document.location.href = '/index.php?do=search&amp;mode=advanced'">
-                  <svg class="icon icon-search">
-                    <use xlink:href="#icon-search"></use>
-                  </svg>
-                  <span class="title_hide">Найти</span></button>
+                <span class="clinputm">
+                <button class="btn q_search_btn" title="Найти" onclick="$('.clinputm #story').focus();">
+                <svg class="icon icon-search">
+                  <use xlink:href="#icon-search"></use>
+                </svg>
+                <span class="title_hide">Найти</span>
+              </button>
+                <input id="story" name="story" placeholder="Поиск по {category-title}..." type="search">
+                <button class="zadsear btn q_search_btn searlod"></button>
+                <button class="zadsear btn q_search_btn"><span class="k-icon k-i-x-circle" onclick="Clearsearch();"></span></button>
+                </span>
                 <!--&catlist[]={category-id}-->
+                <script>
+                  $('.clinputm input').focusin(function(){
+                    // $('.q_search_btn').css('box-shadow','rgb(0 0 0 / 16%) 0px 10px 36px 0px, rgb(0 0 0 / 6%) 0px 0px 0px 1px');
+                  }).focusout(function(){ 
+                    // $('.q_search_btn').css('box-shadow','');
+                  })
+                </script>
 
-                <div style="left: 20px;position: inherit;z-index: 1;">
+                <div style="left: 32px;position: inherit;z-index: 1;top: -4px;">
                   <div id="idkolich" class="kolich">10</div>
                   <!--Индикатор загрзуки-->
                   <div id="indload" class="indload"><img src="images/Loading.gif" width="24" height="24" /></div>
+                  <script>
+                  $('#idkolich').on('show', function(){
+                    $('.searlod').css('opacity','1');
+                  })
+                  $('#idkolich').on('hide', function(){
+                    $('.searlod').css('opacity','0');
+                  });
+                  </script>
                   <!--/////Индикатор загрзуки-->
-                  <a class="q_search_adv2" href="#" onClick="Clearsearch(); return false;" title="Очистить">
+                  {* <a class="q_search_adv2" href="#" onClick="Clearsearch(); return false;" title="Очистить">
                     <div class="icon-set2"></div>
                 </div>
                 <!--<img class="icon-set2" src="/images/Delete-80.png" />-->
-                </a>
+                </a> *}
                 <!--	<a class="q_search_adv4" href="#" onClick="Showsetting(); return false;" title="Параметры">
 			<div class="icon-set3"></div>
 			</a>-->
