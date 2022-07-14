@@ -899,11 +899,14 @@ body {
 /* Меню в Шапке */
 
 #top_menu {
-    margin: 0 25px;
+    margin: 0 0px;
+    display: flex;
     flex: 1 auto;
     white-space: nowrap;
-    text-align: center;
     cursor: default;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #top_menu>a {
@@ -4178,12 +4181,22 @@ td.search {
     }
 }
 
+.cat_menu__tm {
+    display: none;
+}
+
+@media only screen and (max-width: 601px) {
+    #top_menu {
+        display: none;
+    }
+    .cat_menu__tm {
+        display: block;
+    }
+}
+
 @media only screen and (max-width: 1235px) {
     .midside {
         padding-left: 25px;
-    }
-    #top_menu {
-        display: none;
     }
     #header_menu {
         padding-left: 65px;
@@ -4351,10 +4364,16 @@ td.search {
     .hedfullname {
         display: none;
     }
+    #addidname {
+        display: none;
+    }
     .aflogo {
         margin-left: -12px;
         background-position-x: -45px;
         width: 24px;
+    }
+    #idaddnew {
+        /* margin-left: -20px; */
     }
     #search_btn>span {
         display: block;

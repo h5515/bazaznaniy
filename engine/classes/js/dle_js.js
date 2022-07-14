@@ -15,10 +15,10 @@ function reload() {
 }
 
 function proversvitch() {
-
-    if ($("#svitcer").hasClass('switch-on')) {
-        $("#svitcer").trigger('on.switch');
+    if (kSwitch.checked()) {
+        //$("#svitcer").trigger('on.switch');
         // $(".storykorotk").show(); 
+        kSwitch.check(true);
 
         $(".storykorotk").slideDown(300);
 
@@ -26,7 +26,7 @@ function proversvitch() {
         $(".imagc").css({
             '-webkit-transform': 'rotateX(180deg)'
         });
-        $.cookie('switch', '1', { expires: 14 });
+        $.cookie('switch', '1', { expires: 366 });
     } else {
         $("#svitcer").trigger('off.switch');
         $(".storykorotk").slideUp(300);

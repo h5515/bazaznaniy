@@ -34,7 +34,7 @@ $('.switch-btn').click(function() {
         $(".imagc").css({
             '-webkit-transform': 'rotateX(180deg)'
         });
-        $.cookie('switch', '1', { expires: 14 });
+        $.cookie('switch', '1', { expires: 365 });
     } else {
         $(this).trigger('off.switch');
 
@@ -50,7 +50,7 @@ $('.switch-btn').click(function() {
         $(".imagc").css({
             '-webkit-transform': 'rotateX(0deg)'
         });
-        $.cookie('switch', '0', { expires: 14 });
+        $.cookie('switch', '0', { expires: 365 });
     }
 });
 
