@@ -2,6 +2,9 @@
 <div id='categorid'>
 {include file="engine/modules/childs.php?id={category-id}&all=1&order=DESC&catmay=ok"}
 </div>
+[not-available=main]
+<script src="{THEME}/js/new/bz_title.js"></script>
+[/not-available]
 <script>
 
 

@@ -118,10 +118,10 @@ if ($name_project != 'false') {
     if (isset($category_id))
         $cat_id = get_idcategories($category_id);*/
     if (isset($scat_id))
-        $prj = $cat_id;
+        $prj = $scat_id;
 }
 
-if ((isset($prj) && check_dostup($cat, $prj, 1))){
+if ((isset($prj) && check_dostup($cat, $prj, 1))||$_SESSION['super_admin']){
     if ($cat == 2)
         $sr = "'{$scat_id}','{$prj}'";
     else    

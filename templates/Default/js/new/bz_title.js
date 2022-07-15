@@ -11,17 +11,21 @@ img = $el.find('img').eq(0).attr('src');
 $('.logo_icon').remove();
 $('.logo_title').remove();
 $('.logotype').append(`
+<button class="tlbutton k-button k-button-md k-rounded-md k-button-solid k-button-solid-info" title="На главную" onclick="window.location.href = '/'" style="margin-right: 3px;"><span class="k-menu-expand-arrow"><span class="k-icon k-i-undo"></span></button>
+<button class="tlbutton rigs k-button k-button-md k-rounded-md k-button-solid k-button-solid-info"><a href="` + href + `"><span class="cover titavatar menuicons" style="background-image: url(` + img + `);background-size: contain;"></span><span
+    class="logo_title">` + tex + `</span></a></button>
 <ul class="menubz">
-<li><a href="` + href + `"><span class="cover titavatar menuicons" style="background-image: url(` + img + `);background-size: contain;"></span><span
-    class="logo_title">` + tex + `</span></a>
+    <li><button class="tlbutton ligs k-button k-button-md k-rounded-md k-button-solid k-button-solid-info"><span class="k-menu-expand-arrow"><span class="k-menu-expand-arrow-icon k-icon k-i-arrow-s"></span></span></button>
   <ul id="samomenu">
 
   </ul>
 </li>
 </ul>
 <span class="titlecat" onclick='return false;'>` + cols + `</span>
-`).css('margin-left', '-11px').attr('href', '#');
-$(".menubz").kendoMenu();
+`).css('margin-left', '-11px').attr('href', '#').css('cursor', 'default');
+$(".menubz").kendoMenu({
+    openOnClick: true,
+});
 
 category = getUrlParameter('category');
 project = getUrlParameter('project');
@@ -44,8 +48,3 @@ dt = {
     user_hash: "dle_login_hash",
 }
 getajaxhtml('/php/menu_bz.php?category=' + category + '&project=' + project + "&id_news=" + id_news + '&name_bz=' + tex + '&cat_id=' + cat_id, dt, '#samomenu');
-
-// setTimeout(() => {
-//     $('.menubz ul').append('<li><span class="k-icon k-i-user"></span>Мой профиль</li>');
-//     $(".menubz").kendoMenu();
-// }, 2000);

@@ -173,7 +173,7 @@ body {
 }
 
 #categorid {
-    margin-top: -22px;
+    margin-top: -15px;
 }
 
 .menubz .logo_title {
@@ -191,7 +191,7 @@ body {
 
 .menuicons {
     width: 28px;
-    height: 28px;
+    height: 21px;
 }
 
 #samomenu,
@@ -229,16 +229,22 @@ body {
 }
 
 .menueditcat {
-    margin-left: 6px;
+    /* margin-left: 6px;
     padding: 10px;
     border-radius: 3px;
     box-shadow: rgb(0 0 0 / 22%) 0px -50px 36px -28px inset;
     color: white;
-    cursor: pointer;
+    cursor: pointer; */
+    padding: 0 4px !important;
+}
+
+.catcledits {
+    margin-left: -20px;
+    margin-right: 14px;
 }
 
 .menueditcatpn {
-    box-shadow: rgb(255 0 0 / 25%) 0px 30px 60px -12px inset, rgb(255 0 0) 0px 18px 36px -18px inset;
+    box-shadow: rgb(255 0 0 / 25%) 0px 30px 60px -12px inset, rgb(255 0 0) 0px 18px 36px -18px inset !important;
     transform: rotate(180deg);
 }
 

@@ -64,8 +64,8 @@
               <div class="midside">
                 <div id="header_menu">
                   <!-- Логотип -->
-                  <a class="logotype" href="/"> <span class="logo_icon"><img src="images/logo.ico" width="22"
-                        height="22" alt="" style="margin-top: 6px; margin-right: -10px;" /></span> <span
+                  <a class="logotype" href="/" > <span class="logo_icon"><img src="images/logo.ico" width="22"
+                        height="22" alt="" style="margin-top: 6px; margin-right: 6px;" /></span> <span
                       class="logo_title">База знаний ФТО</span> </a>
                   <!-- / Логотип -->
                   <!-- Основное Меню -->
@@ -73,8 +73,7 @@
                   <nav id="top_menu"> {include file="modules/topmenu.tpl"} </nav>
 
                   <!-- / Основное Меню -->
-                  <!-- Кнопка вызова параметров -->
-                  {include file="modules/paramset.tpl"}
+                  
                   [/not-dostup]
                   <!-- / Кнопка вызова параметров -->
                   <!-- Кнопка вызова меню -->
@@ -106,7 +105,6 @@
                 [/available]
 
                 [not-available=main]
-                <script src="{THEME}/js/new/bz_title.js"></script>
                 [group=1,2]
                 <script src="{THEME}/js/Catmenu.js"></script>
                 [/group]
@@ -121,14 +119,6 @@
 
         <div class="conteiner">
           <div class="midside">
-            <div class="content_top">
-              [not-dostup]
-              [not-group=5]
-              <!-- {include file="modules/carousel1.tpl"}-->
-              {include file="modules/pagetools.tpl"}
-            </div>
-            [/not-group]
-            [/not-dostup]
             <section id="content"> {info}
               [page-title]
               <div class="box box_in story">
@@ -166,36 +156,72 @@
                 </div>
                 <!-- <input id="story" name="story" placeholder="Поиск в БЗ {category-title}..." type="search" onFocus="Setboxon()" onBlur="Setboxout()" onDblClick="Showsetting()">-->
                 <span class="clinputm">
-                <button class="btn q_search_btn" title="Найти" onclick="$('.clinputm #story').focus();">
-                <svg class="icon icon-search">
-                  <use xlink:href="#icon-search"></use>
-                </svg>
-                <span class="title_hide">Найти</span>
-              </button>
-                <input id="story" name="story" placeholder="Поиск по {category-title}..." type="search">
-                <button class="zadsear btn q_search_btn searlod"></button>
-                <button class="zadsear btn q_search_btn"><span class="k-icon k-i-x-circle" onclick="Clearsearch();"></span></button>
+                  <button class="btn q_search_btn" title="Найти" onclick="$('.clinputm #story').focus();">
+                    <svg class="icon icon-search">
+                      <use xlink:href="#icon-search"></use>
+                    </svg>
+                    <span class="title_hide">Найти</span>
+                  </button>
+                  <input id="story" name="story" placeholder="Поиск по {category-title}..." type="search">
+                  <button class="zadsear btn q_search_btn searlod"></button>
+                  <button class="zadsear btn q_search_btn"><span class="k-icon k-i-x-circle"
+                      onclick="Clearsearch();"></span></button>
+                   <ul id="parsermenu">
+                   <li><button id="paramsearch"><span class="k-icon k-i-gear"></span></button>
+                    <ul>
+                      <li><!-- Кнопка вызова параметров -->
+                      {include file="modules/paramset.tpl"}
+                      </li>
+                    </ul>
+                   </li></ul>
+                   <button id="opensort" dat="0" title="Показать панель сортировки"><span class="k-icon k-i-sort-asc"></span></button>
                 </span>
                 <!--&catlist[]={category-id}-->
                 <script>
-                  $('.clinputm input').focusin(function(){
+                  $("#opensort").kendoButton({
+                    themeColor: "primary",
+                    click: function(e){
+                      $el = $(e.event.target).closest(".k-button");
+                      $icon = $el.find('.k-icon');
+                      dat = $el.attr('dat');
+                      if (dat=="0"){
+                        $el.attr('dat','1').attr('title','Скрыть панель сортировки');
+                        $icon.removeClass('k-i-sort-asc');
+                        $icon.addClass('k-i-x-outline');
+                        $('#combo-tools').css('display','');
+                      }else{
+                        $el.attr('dat','0').attr('title','Показать панель сортировки');;
+                        $icon.removeClass('k-i-x-outline');
+                        $icon.addClass('k-i-sort-asc');
+                        $('#combo-tools').css('display','none');
+                      }
+                    }
+                  });
+                  $("#paramsearch").kendoButton({
+                    themeColor: "primary"
+                  });
+                  $("#parsermenu").kendoMenu({
+                    openOnClick: true
+                  });
+                  $("#parsermenu .k-menu-expand-arrow-icon").remove();
+                  $('.clinputm input').focusin(function() {
                     // $('.q_search_btn').css('box-shadow','rgb(0 0 0 / 16%) 0px 10px 36px 0px, rgb(0 0 0 / 6%) 0px 0px 0px 1px');
-                  }).focusout(function(){ 
+                  }).focusout(function() {
                     // $('.q_search_btn').css('box-shadow','');
                   })
                 </script>
 
-                <div style="left: 32px;position: inherit;z-index: 1;top: -4px;">
+                <div style="left: 8px;position: inherit;z-index: 1;top: -4px;">
                   <div id="idkolich" class="kolich">10</div>
                   <!--Индикатор загрзуки-->
                   <div id="indload" class="indload"><img src="images/Loading.gif" width="24" height="24" /></div>
                   <script>
-                  $('#idkolich').on('show', function(){
-                    $('.searlod').css('opacity','1');
-                  })
-                  $('#idkolich').on('hide', function(){
-                    $('.searlod').css('opacity','0');
-                  });
+                    $('#idkolich').on('show', function() {
+                      $('.searlod').css('opacity', '1');
+                    })
+                    $('#idkolich').on('hide', function() {
+                      $('.searlod').css('opacity', '0');
+                    });
                   </script>
                   <!--/////Индикатор загрзуки-->
                   {* <a class="q_search_adv2" href="#" onClick="Clearsearch(); return false;" title="Очистить">
@@ -203,46 +229,55 @@
                 </div>
                 <!--<img class="icon-set2" src="/images/Delete-80.png" />-->
                 </a> *}
-                <!--	<a class="q_search_adv4" href="#" onClick="Showsetting(); return false;" title="Параметры">
+                  <!--	<a class="q_search_adv4" href="#" onClick="Showsetting(); return false;" title="Параметры">
 			<div class="icon-set3"></div>
 			</a>-->
 
-                <!--<a class="q_search_adv" href="/index.php?do=search&amp;mode=advanced" title="Расширенный поиск">
+                  <!--<a class="q_search_adv" href="/index.php?do=search&amp;mode=advanced" title="Расширенный поиск">
               <svg class="icon icon-set">
                 <use xlink:href="#icon-set"></use>
               </svg>
               <span class="title_hide">Расширенный поиск</span></a>-->
-              </div>
-              <input type="hidden" name="do" value="search">
-              <input type="hidden" name="subaction" value="search">
+                </div>
+                <input type="hidden" name="do" value="search">
+                <input type="hidden" name="subaction" value="search">
 
-              <!--Поиск по тегам -->
-              <div id="tagser" class="tagifyoff hide">
-                <input name='tags-outside' class='tagify--outside' placeholder='' width=100%>
-              </div>
-              <!-- -------------- -->
-
-              <!--Результаты быстрого поиска style='display:none'-->
-              <div id='searchsuggestions2' style='display:none'></div>
-              <!-- / Поиск -->
-              [/available]
-
-
-              [not-available=lastcomments|main]
-              <div id='searchsuggestions3'> {content} </div>
-              [/not-available]
-
-              [available=main]
-              {include file="engine/modules/childs.php?id={category-id}&all=1&order=DESC&catmay=no"}
-              <script src="{THEME}/js/new/bz_menu.js"></script>
-              [/available]
-
-              [/not-group]
+                <!--Поиск по тегам -->
+                <div id="tagser" class="tagifyoff hide">
+                  <input name='tags-outside' class='tagify--outside' placeholder='' width=100%>
+                </div>
+                <!-- -------------- -->
+                <div class="content_top">
+                [not-dostup]
+                [not-group=5]
+                <!-- {include file="modules/carousel1.tpl"}-->
+                {include file="modules/pagetools.tpl"}
+              
+                [/not-group]
+                [/not-dostup]
+                </div>
+                <!--Результаты быстрого поиска style='display:none'-->
+                <div id='searchsuggestions2' style='display:none'></div>
+                <!-- / Поиск -->
+                [/available]
 
 
-              <!--    <a href=""  data-izimodal-open="#modal" >Быстрый просмотр</a>
+
+                [not-available=lastcomments|main]
+                <div id='searchsuggestions3'> {content} </div>
+                [/not-available]
+
+                [available=main]
+                {include file="engine/modules/childs.php?id={category-id}&all=1&order=DESC&catmay=no"}
+                <script src="{THEME}/js/new/bz_menu.js"></script>
+                [/available]
+
+                [/not-group]
+
+
+                <!--    <a href=""  data-izimodal-open="#modal" >Быстрый просмотр</a>
           <div id="modal" class="modais" data-izimodal-group="group1" data-iziModal-title="{title}" data-iziModal-icon="/images/logo.ico" data-izimodal-iframeURL="/index.php?newsid=1&stroka=ok"></div>-->
-              [/not-dostup]
+                [/not-dostup]
             </section>
             <!--{include file="modules/footside1.tpl"}-->
           </div>
@@ -295,8 +330,7 @@
       document.body.insertBefore(div, document.body.childNodes[0]);
       });
       });
-      $('.container').css('opacity','1');
-      
+      $('.container').css('opacity', '1');
     </script>
     <script src="{THEME}/js/Srcfooter.js"></script>
     [available=cat]
@@ -330,7 +364,7 @@ updateData({sectionId, questionId, questionList});
           //	alert(pos+'<br>'+window.JSON.stringify($('.dd').nestable('serialize')));
           if (pos == -1) {
             ShowLoading('');
-            $.post(dle_root + "engine/ajax/controller.php?mod=catsort"+ project_url, {
+            $.post(dle_root + "engine/ajax/controller.php?mod=catsort" + project_url, {
               user_hash: dle_login_hash,
               action: 'catsort',
               id: {category-id},
@@ -378,8 +412,8 @@ updateData({sectionId, questionId, questionList});
         jQuery('html, body').animate({ scrollTop: destination }, 1100);
         return false;
       })
-      $('body').css('overflow','auto'); 
-
+      $('body').css('overflow', 'auto');
+      
     </script>
 
     <script src="{THEME}/js/rascras.js"></script>

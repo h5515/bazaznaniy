@@ -2,17 +2,20 @@
 //     <div class="Catparam"><img src="images/setting_2.png"</div>
 // `;
 // $('.cat_menu').append(Htm);
+{
+    /* <ul id="editcategor">
+    <li>
+    <span class="menueditcat k-icon k-i-gears" title="Редактировать категории"></span>
+    <ul>
+    <li><a href="#" id="idaddcat"><span class="k-icon k-i-plus-outline"></span>Добавить категорию</a></li>
+    </ul>
+    </li>
+    </ul> */
+}
 
+$('.logotype').before(`
+<button class="tlbutton menueditcat catcledits k-button k-button-md k-rounded-md k-button-solid k-button-solid-info"><span class=" k-icon k-i-gears" title="Редактировать категории"></span></button>
 
-$('.logotype').append(`
-<ul id="editcategor">
-<li>
-<span class="menueditcat k-icon k-i-gears" title="Редактировать категории"></span>
-<ul>
-<li><a href="#" id="idaddcat"><span class="k-icon k-i-plus-outline"></span>Добавить категорию</a></li>
-</ul>
-</li>
-</ul>
 `);
 
 $("#editcategor").kendoMenu();

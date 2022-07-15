@@ -150,6 +150,10 @@ if ($_POST['category'] == 1) {
         $catimg = saveimg();
         $sql = "INSERT INTO " . USERPREFIX . "_category (Name, alt_name, posi, icon) value ('{$p_name}','{$p_baze}',1 ,'{$catimg}')";
         $db->query($sql);
+        $id = $db->insert_id();
+        $sql = "INSERT INTO dle_cat_dostup (id_category, roly, user, ad_grup, user_grup, category, project) 
+                VALUE ($id, 1, '{$member_id['name']}', '','',1,0)";
+        $db->query($sql);
         clear_all_caches();
     }
 }
@@ -276,7 +280,12 @@ if ($_POST['category'] == 2) {
         $db2->free();
 
         $db->query("INSERT INTO " . USERPREFIX . "_project (Name, Project,id_cat,avtor) 
-    values ('{$p_name}','{$p_baze}', {$row['id']}, '{$member_id['name']}')");
+                    values ('{$p_name}','{$p_baze}', {$row['id']}, '{$member_id['name']}')");
+
+        $id = $db->insert_id();
+        $sql = "INSERT INTO dle_cat_dostup (id_category, roly, user, ad_grup, user_grup, category, project) 
+                VALUE ({$row['id']}, 1, '{$member_id['name']}', '','',2,$id)";
+        $db->query($sql);
     }
 }
 
