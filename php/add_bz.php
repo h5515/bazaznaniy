@@ -86,6 +86,15 @@ if (preg_match("/[^a-zA-Z0-9\-_]+/", $p_baze)) {
 
 $catimg = "";
 
+if ($_POST['category'] == 1)
+    $prj = $_POST['idcategory'];
+if ($_POST['category'] == '2')
+    $prj = $_POST['project'];
+
+if (!check_dostup($_POST['category'], $prj, 1)) {
+    die("<h1>Доступ запрещён.</h1>");
+}
+
 
 if ($_POST['category'] == 1) {
     if ($_REQUEST['rezim'] == 'arhive') {
@@ -93,8 +102,21 @@ if ($_POST['category'] == 1) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
         }
-        $db->query("UPDATE dle_category SET arhiv = 1 WHERE  id = {$_POST['idcategory']}");
-        $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.shottitle').prepend(`<img src='/images/archive.png' class='bzarhive' title='База знаний в архиве'>`)";
+        $id = (int)$_POST['idcategory'];
+	    if ($id == 0) die("error");
+        load_catinfo();
+        $cots = getSubCatList($id);
+        $aviable = array();
+        $aviable = explode(',', $cots);
+
+        $sql = "UPDATE dle_post set arhiv = 1 WHERE category regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $db->query($sql);
+    
+        $sql = "UPDATE dle_category set arhiv = 1 WHERE id regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $db->query($sql);
+
+        clear_all_caches();
+        $scr = "window.location.href = '/';";
         die($scr);
     }
     if ($_REQUEST['rezim'] == 'noarhive') {
@@ -102,8 +124,21 @@ if ($_POST['category'] == 1) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
         }
-        $db->query("UPDATE dle_category SET arhiv = 0 WHERE  id = {$_POST['idcategory']}");
-        $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.bzarhive').remove()";
+        $id = (int)$_POST['idcategory'];
+	    if ($id == 0) die("error");
+        load_catinfo();
+        $cots = getSubCatList($id);
+        $aviable = array();
+        $aviable = explode(',', $cots);
+
+        $sql = "UPDATE dle_post set arhiv = 0 WHERE category regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $db->query($sql);
+    
+        $sql = "UPDATE dle_category set arhiv = 0 WHERE id regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $db->query($sql);
+
+        clear_all_caches();
+        $scr = "location.reload();";
         die($scr);
     }
     if ($_REQUEST['rezim'] == 'izmenobloz') {
@@ -126,9 +161,34 @@ if ($_POST['category'] == 1) {
         if ($catimg == '')
             $catimg = '/templates/Default/dleimages/bz.png';
         $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.circleimg').css('background','url($catimg)');";
+
+        if ($_POST['globloz']==1)
+        $scr = "$('#titlebzgl').find('.titavatar').css('background-image','url($catimg)');";
+
         if ($catimg == '/templates/Default/dleimages/bz.png')
             $catimg = '/templates/Default/dleimages/no_icon.png';
         $scr .= "$('#nestable [data-id={$_POST['idcategory']}]').find('img.imagt').attr('src','$catimg');";
+        die($scr);
+    }
+
+    if ($_REQUEST['rezim'] == "delete") {
+        $id = (int)$_POST['idcategory'];
+        if ($id == 0) die("Error: Что-то пошло не так. Отсутствует ID базы.");
+        $cots = getSubCatList($id);
+        $aviable = array();
+        $aviable = explode(',', $cots);
+    
+        $sql = "DELETE FROM dle_category WHERE id regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $db->query($sql);
+    
+        $sql = "SELECT id FROM dle_post Where category regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $result = $db->query($sql);
+    
+        while ($row = $db->get_row($sql_result)) {
+            deletenewsbyid($row['id'], false);
+        }
+        clear_all_caches();
+        $scr = "window.location.href = '/';";
         die($scr);
     }
 
@@ -164,8 +224,30 @@ if ($_POST['category'] == 2) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
         }
-        $db->query("UPDATE dle_project SET arhiv = 1 WHERE  project = '{$_POST['project']}'");
-        $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.shottitle').prepend(`<img src='/images/archive.png' class='bzarhive' title='База знаний в архиве'>`)";
+        $db_gl->query("UPDATE dle_project SET arhiv = 1 WHERE  project = '{$_POST['project']}'");
+
+        $db2 = new db;
+        $dbname = 'bz_' . $_POST['project'];
+        $db2->connect(DBUSER, DBPASS, $dbname, DBHOST);
+        $id = (int)$_POST['idcategory'];
+	    if ($id == 0) die("error");
+        load_catinfo();
+        $cots = getSubCatList($id);
+        $aviable = array();
+        $aviable = explode(',', $cots);
+
+        $sql = "UPDATE dle_post set arhiv = 1 WHERE category regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $db2->query($sql);
+    
+        $sql = "UPDATE dle_category set arhiv = 1 WHERE id regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $db2->query($sql);
+
+        clear_all_caches();
+
+        $db2->close();
+        $db2->free();
+
+        $scr = "window.location.href = '/';";
         die($scr);
     }
     if ($_REQUEST['rezim'] == 'noarhive') {
@@ -173,8 +255,30 @@ if ($_POST['category'] == 2) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
         }
-        $db->query("UPDATE dle_project SET arhiv = 0 WHERE  project = '{$_POST['project']}'");
-        $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.bzarhive').remove()";
+        $db_gl->query("UPDATE dle_project SET arhiv = 0 WHERE  project = '{$_POST['project']}'");
+
+        $db2 = new db;
+        $dbname = 'bz_' . $_POST['project'];
+        $db2->connect(DBUSER, DBPASS, $dbname, DBHOST);
+        $id = (int)$_POST['idcategory'];
+	    if ($id == 0) die("error");
+        load_catinfo();
+        $cots = getSubCatList($id);
+        $aviable = array();
+        $aviable = explode(',', $cots);
+
+        $sql = "UPDATE dle_post set arhiv = 0 WHERE category regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $db2->query($sql);
+    
+        $sql = "UPDATE dle_category set arhiv = 0 WHERE id regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $db2->query($sql);
+
+        clear_all_caches();
+
+        $db2->close();
+        $db2->free();
+
+        $scr = "location.reload();";
         die($scr);
     }
     if ($_REQUEST['rezim'] == 'izmenobloz') {
@@ -205,9 +309,30 @@ if ($_POST['category'] == 2) {
         if ($catimg == '')
             $catimg = '/templates/Default/dleimages/bz.png';
         $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.circleimg').css('background','url($catimg)');";
+
+        if ($_POST['globloz']==1)
+        $scr = "$('#titlebzgl').find('.titavatar').css('background-image','url($catimg)');";
+
         if ($catimg == '/templates/Default/dleimages/bz.png')
             $catimg = '/templates/Default/dleimages/no_icon.png';
         $scr .= "$('#nestable [data-id={$_POST['idcategory']}]').find('img.imagt').attr('src','$catimg');";
+
+        die($scr);
+    }
+
+    if ($_REQUEST['rezim'] == "delete") {
+        $dbname = 'bz_' . $_POST['project'];
+        if (empty($_POST['project'])) {
+            $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
+            die($err);
+        }
+        $db2->connect(DBUSER, DBPASS, '', DBHOST);
+        $db2->query("DROP DATABASE $dbname");
+        $db2->close();
+        $db2->free();
+        $db_gl->query("DELETE FROM dle_project WHERE  project = '{$_POST['project']}'");
+        clear_all_caches();
+        $scr = "window.location.href = '/';";
         die($scr);
     }
 
@@ -247,13 +372,14 @@ if ($_POST['category'] == 2) {
         $db2->close();
         $db2->free();
 
-        $db->query("UPDATE dle_project SET name = '$p_name', project = '$p_baze' WHERE project = '{$_POST['project']}'");
+        $db_gl->query("UPDATE dle_project SET name = '$p_name', project = '$p_baze' WHERE project = '{$_POST['project']}'");
         $db2 = new db;
         $db2->connect(DBUSER, DBPASS, $nextDbname, DBHOST);
         $db2->query("UPDATE dle_category SET name='$p_name', alt_name='$p_baze' WHERE id = {$_POST['idcategory']}");
         $db2->close();
         $db2->free();
-        $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.shottitle').text('$p_name');$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').attr('project','$p_baze');";
+      // $scr = "$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').find('.shottitle').text('$p_name');$('[cat=2][idcat={$_POST['idcategory']}][project={$_POST['project']}]').attr('project','$p_baze');";
+       $scr = "window.location.href = '/';";
         die($scr);
     } else {
         $sql = 'CREATE DATABASE bz_' . $p_baze;

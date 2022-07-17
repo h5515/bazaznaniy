@@ -122,12 +122,26 @@ if ($name_project != 'false') {
 }
 
 if ((isset($prj) && check_dostup($cat, $prj, 1))||$_SESSION['super_admin']){
-    if ($cat == 2)
+    if ($cat == 2){
         $sr = "'{$scat_id}','{$prj}'";
-    else    
+        $prog = "project='$name_project' project_id='$prj'";
+    }else{    
         $sr = "'{$prj}',''";
+        $prog = '';
+    }
     
-    $html .= "<li><a href='#' onclick=\"ondostup('$namebz',{$sr},'$cat');return false;\" class='deldostup'><span class='k-icon k-i-lock'></span><span>Доступ</span></a></li>";
+    $html .= "
+    <li>Параметры
+    <ul id='idparambz' sid='$scat_id' cat='$cat' idcat='$scat_id' $prog>
+    <li><a href='#' onclick=\"ondostup('$namebz',{$sr},'$cat');return false;\" class='deldostup'><span class='k-icon k-i-lock'></span><span>Доступ</span></a></li>
+    <li><span class='k-icon k-i-edit-tools'></span><span class='popmenu' elem='edit_name'> Редактировать имя </span></li>
+    <li><span class='k-icon k-i-image-edit'></span><span class='popmenu' elem='edit_obl'> Изменить обложку </span></li>
+    <li><span class='k-icon k-i-file-zip'></span><span class='popmenu' elem='arhive' id='idmenarch'> Архивировать </span></li>
+    <li><span class='k-icon k-i-delete'></span><span class='popmenu' elem='delete'> Удалить </span></li>
+    </ul>
+    </li>
+    <script src='/templates/Default/js/new/bz_param.js'></script>
+    ";
 }
 
 if ($obs != '' && $zak != '') {
@@ -144,7 +158,10 @@ if ($obs != '' && $zak != '') {
 
 $data = array(
     "html" => $html,
-    "script" => '$(".menubz").kendoMenu();'
+    "script" => "$('.menubz').kendoMenu();
+    if ($('[gbar=true]')[0])
+        $('#idmenarch').text(' Восстановить ').attr('elem', 'noarhive');
+    "
 );
 
 sentajax($data);

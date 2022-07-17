@@ -22,7 +22,7 @@ if ($catmay == "no") {
 
   // $not_allow_cats = explode(',', $user_group[$member_id['user_group']]['not_allow_cats']); ' AND NOT id regexp '[[:<:]](" . implode('|', $not_allow_cats) . ")[[:>:]]'
   $barhiv = '';
-  if ($_GET['bzarhiv'] != 'true')
+  if ($_GET['catarhiv'] != 'ok')
     $barhiv = "AND arhiv = 0";
   else $barhiv = "AND arhiv = 1";
   $sql = '';
@@ -49,10 +49,17 @@ if ($catmay == "no") {
         $prjlink = '&project=' . $_COOKIE['dbname'] . '&';
       else
         $prjlink = '';
+        
+        if ($_GET['catarhiv'] != "ok") {
+          $dopurl = '';
+        } else {
+          $dopurl = "&catarhiv=ok";
+        }
+
       if ($config['allow_alt_url']) {
         $url = $config['http_home_url'] . get_url($row['id']) . "/";
       } else {
-        $url = $PHP_SELF . '?do=cat&' . $prjlink . 'category=' . $row['alt_name'] . $prjlink;
+        $url = $PHP_SELF . '?do=cat&' . $prjlink . 'category=' . $row['alt_name'] . $prjlink .$dopurl;
       }
       $harhiv = '';
       if ($row['arhiv'] == 1)
@@ -101,7 +108,13 @@ if ($catmay == "no") {
         } else {
           $icon = "{THEME}/dleimages/bz.png";
         }
-        $url = $PHP_SELF . '?do=cat&project=' . $row['Project'] . '&category=' . $result['alt_name'];
+        if ($_GET['catarhiv'] != "ok") {
+          $dopurl = '';
+        } else {
+          $dopurl = "&catarhiv=ok";
+        }
+
+        $url = $PHP_SELF . '?do=cat&project=' . $row['Project'] . '&category=' . $result['alt_name'].$dopurl;
         $harhiv = '';
         if ($row['arhiv'] == 1)
           $harhiv = $starhiv;
@@ -249,7 +262,7 @@ if ($catmay == "no") {
 
 
       //id, icon, name, alt_name
-      $sql = 'SELECT id, name, icon, alt_name FROM dle_category WHERE id = "' . $id . '"' . $arhivpost . '  ORDER BY posi';
+      $sql = 'SELECT id, name, icon, alt_name, arhiv FROM dle_category WHERE id = "' . $id . '"' . $arhivpost . '  ORDER BY posi';
       $result = $db->super_query($sql);
       $row = $result;
 
@@ -266,6 +279,13 @@ if ($catmay == "no") {
           $icon = "{THEME}/dleimages/bz.png";
         }
         // $url = $config[ 'http_home_url' ] . get_url( $row[ 'id' ] ) . "/";
+
+        if ($_GET['catarhiv'] != "ok") {
+          $dopurl = '';
+        } else {
+          $dopurl = "&catarhiv=ok";
+        }
+
         if (isset($_COOKIE['dbname']))
           $prjlink = '&project=' . $_COOKIE['dbname'] . '&';
         else
@@ -273,7 +293,7 @@ if ($catmay == "no") {
         if ($config['allow_alt_url']) {
           $url = $config['http_home_url'] . get_url($row['id']) . "/";
         } else {
-          $url = $PHP_SELF . '?do=cat&' . $prjlink . 'category=' . $row['alt_name'] . $prjlink;
+          $url = $PHP_SELF . '?do=cat&' . $prjlink . 'category=' . $row['alt_name'] . $prjlink . $dopurl;
         }
 
         $bul = "";
@@ -297,8 +317,15 @@ if ($catmay == "no") {
 
         $zaden = Newszaden($cots, $db);
 
+        if ($row['arhiv']) {
+          $icon = "images/archive.png";
+          $darc = "gbar = 'true'";
+          //$clasarc = ' style="display:none" ';
+        }else 
+        $darc = '';
+
         /*   echo "<li>" . $bul . '<a href="' . $url . '"><img src="' . $icon . '" width="16" height="16" alt="" /> ' . $row[ 'name' ] . '<span style="float: right;">' . $count[ 'c' ]. $zaden . '</span></a>' . $bul2 . "</li>";*/
-        echo "<li  data-id='{$row['id']}'>" . '<a href="' . $url . '" ' . $bul . ' style="opacity:0;"><img src="' . $icon . '" width="16" height="16" alt="" / class="imagt leftimg"> <span class="catname">' . $row['name'] . '</span><span style="float: right;" class="CatRig">' . $count['c'] . $zaden . '</span></a><div class="dd3-handle dd-handle dd3-hid" name = "catgl"></div><div class="dd" id="nestable" style="width: 100%;">'; // . "</li>";
+        echo "<li  data-id='{$row['id']}'>" . '<a href="' . $url . '" ' . $bul . ' style="opacity:0;" '.$darc.'><img src="' . $icon . '" width="16" height="16" alt="" / class="imagt leftimg"> <span class="catname">' . $row['name'] . '</span><span style="float: right;" class="CatRig">' . $count['c'] . $zaden . '</span></a><div class="dd3-handle dd-handle dd3-hid" name = "catgl"></div><div class="dd" id="nestable" style="width: 100%;">'; // . "</li>";
 
         foreach ($row as $key => $value) {
           $cat_info[$row['id']][$key] = stripslashes($value);

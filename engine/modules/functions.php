@@ -3912,3 +3912,26 @@ function check_dostup($cat, $projcet, $roly)
 	}
 	return $dostup;
 }
+
+function load_catinfo(){
+global $cat_info, $db;
+$cat_info = get_vars("category");
+
+if (!is_array($cat_info)) {
+	$cat_info = array();
+
+	$db->query("SELECT * FROM " . PREFIX . "_category ORDER BY posi ASC");
+	while ($row = $db->get_row()) {
+
+		if (!$row['active']) continue;
+
+		$cat_info[$row['id']] = array();
+
+		foreach ($row as $key => $value) {
+			$cat_info[$row['id']][$key] = stripslashes($value);
+		}
+	}
+	set_vars("category", $cat_info);
+	$db->free();
+}
+}

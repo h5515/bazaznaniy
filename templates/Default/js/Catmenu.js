@@ -30,10 +30,27 @@ $('.menueditcat').on('click', function() {
     if ($(this).hasClass('menueditcatpn')) {
         $(this).removeClass('menueditcatpn');
         $('.dd3-handle').css('display', 'none');
+        $("#idaddcats").remove();
     } else {
         $(this).addClass('menueditcatpn');
         $('.dd3-handle').css('display', '');
         $('.dd3-handle').eq(0).css('display', 'none');
+        $('#nestable').prepend('<button id="idaddcats"><span class="k-icon k-i-plus"></span>Добавить категорию</button>');
+        $("#idaddcats").kendoButton({
+            themeColor: "info",
+            click: function() {
+                // if (!$(this).closest('.logotype').find('.menueditcat').hasClass('menueditcatpn'))
+                //     $('.menueditcat').click();
+                $(".addcat2").click();
+
+                if (!isScrolledIntoView("#cat_menu .inputcat"))
+                    $('#cat_menu').animate({
+                        scrollTop: $("#cat_menu .inputcat").offset().top - 40
+                    }, 400);
+                $("#cat_menu .inputcat").focus();
+            }
+        });
+
     }
     return false;
 })
@@ -51,16 +68,3 @@ $('.dd3-handle').css('display', 'none');
 //         $('.Catparam IMG').attr('src', 'images/setting_2.png');
 //     }
 // })
-
-$("#idaddcat").on('click', function() {
-    if (!$(this).closest('.logotype').find('.menueditcat').hasClass('menueditcatpn'))
-        $('.menueditcat').click();
-    $(".addcat2").click();
-
-    if (!isScrolledIntoView("#cat_menu .inputcat"))
-        $('#cat_menu').animate({
-            scrollTop: $("#cat_menu .inputcat").offset().top - 40
-        }, 400);
-    $("#cat_menu .inputcat").focus();
-    return false;
-})

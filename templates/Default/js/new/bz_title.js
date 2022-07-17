@@ -8,11 +8,13 @@ cols = $el.find('.CatRig').eq(0).text();
 //$('.logo_title').text(tex).closest('a').attr('href', $el.find('a').eq(0).attr('href'));
 href = $el.find('a').eq(0).attr('href');
 img = $el.find('img').eq(0).attr('src');
+
+$el.find('a').eq(0).attr('href', '#').attr('onClick', 'return false;').attr('style', 'opacity:0; cursor:default');
 $('.logo_icon').remove();
 $('.logo_title').remove();
 $('.logotype').append(`
-<button class="tlbutton k-button k-button-md k-rounded-md k-button-solid k-button-solid-info" title="На главную" onclick="window.location.href = '/'" style="margin-right: 3px;"><span class="k-menu-expand-arrow"><span class="k-icon k-i-undo"></span></button>
-<button class="tlbutton rigs k-button k-button-md k-rounded-md k-button-solid k-button-solid-info"><a href="` + href + `"><span class="cover titavatar menuicons" style="background-image: url(` + img + `);background-size: contain;"></span><span
+<button class="tlbutton k-button k-button-md k-rounded-md k-button-solid k-button-solid-info" title="На главную" onclick="window.location.href = '/'" style="margin-right: 3px;"><span class="k-icon k-i-undo"></span></button>
+<button class="tlbutton rigs k-button k-button-md k-rounded-md k-button-solid k-button-solid-info"><a href="` + href + `" id="titlebzgl"><span class="cover titavatar menuicons" style="background-image: url(` + img + `);background-size: contain;"></span><span
     class="logo_title">` + tex + `</span></a></button>
 <ul class="menubz">
     <li><button class="tlbutton ligs k-button k-button-md k-rounded-md k-button-solid k-button-solid-info"><span class="k-menu-expand-arrow"><span class="k-menu-expand-arrow-icon k-icon k-i-arrow-s"></span></span></button>

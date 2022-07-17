@@ -222,6 +222,7 @@ body {
     padding: 0 6px 0 6px;
     box-shadow: rgb(50 50 93 / 25%) 0px 30px 60px -12px inset, rgb(0 0 0 / 7%) 0px 18px 36px -18px inset;
     border-radius: 5px;
+    border: 1px solid #afacac;
 }
 
 .catname {
@@ -301,4 +302,8 @@ body {
     top: 22.7621px !important;
     left: -3px !important;
     height: 26px !important;
+}
+
+#addidname {
+    margin-left: 5px;
 }

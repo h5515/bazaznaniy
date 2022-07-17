@@ -140,11 +140,7 @@
 
 
               [available=cat]
-              <!--Навигация -->
-              <div id="tagser" class="tagifyoff2 hide">
-                <input name='tags-outside2' class='tagify--outside2' placeholder='' width=100%>
-              </div>
-              <!-- -------------- -->
+
               <!-- Поиск -->
 
               <div class="q_search">
@@ -242,17 +238,23 @@
                 <input type="hidden" name="do" value="search">
                 <input type="hidden" name="subaction" value="search">
 
-                <!--Поиск по тегам -->
-                <div id="tagser" class="tagifyoff hide">
-                  <input name='tags-outside' class='tagify--outside' placeholder='' width=100%>
-                </div>
-                <!-- -------------- -->
+
                 <div class="content_top">
                 [not-dostup]
                 [not-group=5]
                 <!-- {include file="modules/carousel1.tpl"}-->
                 {include file="modules/pagetools.tpl"}
-              
+              <!--Навигация -->
+              <div id="tagser" class="tagifyoff2 hide">
+                <input name='tags-outside2' class='tagify--outside2' placeholder='' width=100%>
+              </div>
+              <!-- -------------- -->
+                <!--Поиск по тегам -->
+                <div id="tagser" class="tagifyoff hide">
+                  <input name='tags-outside' class='tagify--outside' placeholder='' width=100%>
+                </div>
+                <!-- -------------- -->
+
                 [/not-group]
                 [/not-dostup]
                 </div>
@@ -416,7 +418,7 @@ updateData({sectionId, questionId, questionList});
       
     </script>
 
-    <script src="{THEME}/js/rascras.js"></script>
+    {* <script src="{THEME}/js/rascras.js"></script> *}
 
   </body>
 

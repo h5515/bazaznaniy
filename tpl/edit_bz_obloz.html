@@ -30,7 +30,12 @@
     function downloadobl() {
         el = $('#ideditcategor')[0];
         if (!el) {
-            var bg = $('#id_edit_obloz').find('.circleimg').css('background-image');
+            if (!$('#gbobloz')[0])
+                fin = '.circleimg'
+            else
+                fin = '.titavatar';
+
+            var bg = $('#id_edit_obloz').find(fin).css('background-image');
             bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
             names = '.shottitle';
         } else {
@@ -48,7 +53,11 @@
     function removeobloz() {
         el = $('#ideditcategor')[0];
         if (!el) {
-            $('#id_edit_obloz').find('.circleimg').css('background', 'url(/templates/Default/dleimages/bz.png)');
+            if (!$('#gbobloz')[0])
+                fin = '.circleimg'
+            else
+                fin = '.titavatar';
+            $('#id_edit_obloz').find(fin).css('background-image', 'url(/templates/Default/dleimages/bz.png)');
         } else
             $(el).find('img').attr('src', '/templates/Default/dleimages/no_icon.png');
         $("[name=baseimg]").val('del');
@@ -61,10 +70,14 @@
             return;
         }
         el = $('#ideditcategor')[0];
+        globloz = 0;
         if (!el) {
             catid = $("#id_edit_obloz ol").attr('cat');
             idcategory = $("#id_edit_obloz ol").attr('idcat');
             project = $("#id_edit_obloz ol").attr('project');
+            if ($('#gbobloz')[0])
+                globloz = 1;
+
         } else {
             project = getUrlParameter('project');
             if (project = 'false')
@@ -79,6 +92,7 @@
             idcategory: idcategory,
             project: project,
             imgbz: $("[name=baseimg]").val(),
+            globloz: globloz,
         }
         getajax('/php/add_bz.php', dt);
     }
@@ -94,7 +108,11 @@
         var preview = window.URL.createObjectURL(file.files[0]);
         els = $('#ideditcategor')[0];
         if (!els) {
-            $(el).closest('#id_edit_obloz').find('.circleimg').css('background', 'url(' + preview + ')');
+            if (!$('#gbobloz')[0])
+                fin = '.circleimg'
+            else
+                fin = '.titavatar';
+            $(el).closest('#id_edit_obloz').find(fin).css('background-image', 'url(' + preview + ')');
         } else {
             $(els).find('img').attr('src', preview);
         }

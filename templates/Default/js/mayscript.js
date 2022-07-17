@@ -25,8 +25,7 @@ function opentegform(categor) {
 
         $.cookie('idtags', 'true', { expires: 14 });
         $("#idimgtags").css({
-            '-webkit-transform': 'rotateX(180deg)',
-            '-webkit-transition': 'transform ease .4s'
+            '-webkit-transform': 'rotateX(180deg)'
         });
     } else {
         AllTag(categor, 'clear');
@@ -35,8 +34,7 @@ function opentegform(categor) {
         });
         $("#idtags").slideUp(300);
         $("#idimgtags").css({
-            '-webkit-transform': 'rotateX(0deg)',
-            '-webkit-transition': 'transform ease .4s'
+            '-webkit-transform': 'rotateX(0deg)'
         });
         $.cookie('idtags', 'false', { expires: 14 });
     }

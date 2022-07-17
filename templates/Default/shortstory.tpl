@@ -6,16 +6,7 @@
         [not-group=5]
         
             <div class="poverh">
-                <h2 class="title">[no-redact] <a href="{full-link}">[/no-redact]<ui-link-preview
-                            _ngcontent-my-app-c76="" class="link-preview_table link-preview_master" size="48px"
-                            _nghost-my-app-c61="">
-                            <div _ngcontent-my-app-c61="" class="link-preview__wrapper"
-                                style="width: 38px; height: 38px;">
-                                <!----><span _ngcontent-my-app-c61="" class="link-preview__text"
-                                    style="font-size: 22px;"> 
-                                </span>
-                            </div>
-                        </ui-link-preview>
+                <h2 class="title">[no-redact] <a href="{full-link}">[/no-redact]
 						<span class="newtitle">{title}</span>[no-redact]</a>[/no-redact]</h2>
             </div>
         

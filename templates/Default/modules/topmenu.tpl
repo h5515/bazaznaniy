@@ -4,14 +4,15 @@
 <!--<a href="#" onClick="ShowModal('Статистика','/index.php?do=stats&stroka=ok',77569, 'static');return false;">Статистика</a>-->
 
 
-[not-group=5]
+[group=1,2,3]
 [available=cat|showfull]
-<a href="#"
+{* <a href="#"
     onClick="ShowModal('Добавить статью','/index.php?do=addnews&category={category-id}{link-project}&stroka=ok',55798,'add','','true');return false;"
     id="idaddnew"><span class='k-icon k-i-plus-outline' style="margin-right: 6px;font-size: 19px;"
-        title="Добавить статью"></span><span id="addidname">Добавить статью</span></a>
+        title="Добавить статью"></span><span id="addidname">Добавить статью</span></a> *}
+<button id="addidname" class="tlbutton k-button k-button-md k-rounded-md k-button-solid k-button-solid-info" title="Добавить статью" onclick="ShowModal('Добавить статью','/index.php?do=addnews&category={category-id}{link-project}&stroka=ok',55798,'add','','true');" style="margin-right: 3px;"><span class="k-icon k-i-plus-outline"></span>Добавить статью</button>
 [/available]
-[/not-group]
+[/group]
 [not-group=5]
 [available=cat]
 {* <div id="svitcer" class="switch-btn switch-on"></div> *}

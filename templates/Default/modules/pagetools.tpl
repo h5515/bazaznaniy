@@ -7,7 +7,7 @@
 			</div>
             
 		</div>
-		<div class="breadcrumb">
+		{* <div class="breadcrumb">
 			<div class="breadcrumb_in">
 				{speedbar}
 			</div>
@@ -17,7 +17,7 @@
 			</a>
             
             
-		</div>
+		</div> *}
         
 	</div>
     

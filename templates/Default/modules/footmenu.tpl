@@ -36,9 +36,16 @@
 						<!--<a href="/index.php?do=search&amp;mode=advanced">Расширенный поиск</a>-->
 						<a href="/index.php?do=lastnews{link-project}">Последние статьи</a>
 						<a href="/index.php?do=lastcomments{link-project}">Последние комментарии</a>
-						<script>var url = document.location.href.replace('#','');</script>
-						<a href="#" onClick="document.location.href = url+'&catarhiv=ok{link-project}';return false;" id='pokazarhiv'>Показать категории в архиве</a>
-						<script>if (getUrlVars()["catarhiv"] && getUrlVars()["catarhiv"]!="") {url=document.location.href.replace('&catarhiv=ok','');$('#pokazarhiv').attr('onClick','document.location.href = url'); $('#pokazarhiv').text('Скрыть категории в архиве')}</script>
+						<script>
+							var str = document.location.href;
+							if (str.includes('?'))
+								str = str+'&catarhiv=ok';
+							else
+								str = str+'?catarhiv=ok';
+							var url = str.replace('#','');
+						</script>
+						<a href="#" onClick="document.location.href = url+'{link-project}';return false;" id='pokazarhiv'>Показать категории в архиве</a>
+						<script>if (getUrlVars()["catarhiv"] && getUrlVars()["catarhiv"]!="") {url=document.location.href.replace('catarhiv=ok','');$('#pokazarhiv').attr('onClick','document.location.href = url'); $('#pokazarhiv').text('Скрыть категории в архиве')}</script>
 						<!--<a href="/index.php?action=mobile" target="_blank" rel="nofollow">Мобильная версия сайта</a>&catarhiv=ok-->
 					</nav>
 				</div>

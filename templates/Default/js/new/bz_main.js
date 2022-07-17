@@ -34,7 +34,10 @@ $(function() {
 
     if (!$('.container [cat="1"]')[0] && !$('.container [cat="2"]')[0]) {
 
-        $('.container .dle-center').append('<span class="clacces" style="font-size: 24px;">Отсутствует доступ к базам.</span>');
+        if (getUrlVars()["catarhiv"] && getUrlVars()["catarhiv"] != "") {
+            $('.container .dle-center').append('<span class="clacces" style="font-size: 24px;">Список архивированных баз отсутствует.</span>');
+        } else
+            $('.container .dle-center').append('<span class="clacces" style="font-size: 24px;">Отсутствует доступ к базам.</span>');
 
     }
 })
