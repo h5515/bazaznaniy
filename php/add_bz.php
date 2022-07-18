@@ -70,6 +70,12 @@ function stop($txt)
 // if (empty($_REQUEST['namebaza']))
 //     die();
 
+if ($_REQUEST['rezim'] == 'clearcash') {
+    clear_all_caches();
+    $scr = "notification('Кэш очищен.', 'success');";
+    die($scr);
+}
+
 $ajax = false;
 
 $ajax = true;
@@ -174,6 +180,7 @@ if ($_POST['category'] == 1) {
     if ($_REQUEST['rezim'] == "delete") {
         $id = (int)$_POST['idcategory'];
         if ($id == 0) die("Error: Что-то пошло не так. Отсутствует ID базы.");
+        load_catinfo();
         $cots = getSubCatList($id);
         $aviable = array();
         $aviable = explode(',', $cots);
@@ -231,7 +238,7 @@ if ($_POST['category'] == 2) {
         $db2->connect(DBUSER, DBPASS, $dbname, DBHOST);
         $id = (int)$_POST['idcategory'];
 	    if ($id == 0) die("error");
-        load_catinfo();
+        load_catinfo($_POST['project']);
         $cots = getSubCatList($id);
         $aviable = array();
         $aviable = explode(',', $cots);
@@ -262,7 +269,7 @@ if ($_POST['category'] == 2) {
         $db2->connect(DBUSER, DBPASS, $dbname, DBHOST);
         $id = (int)$_POST['idcategory'];
 	    if ($id == 0) die("error");
-        load_catinfo();
+        load_catinfo($_POST['project']);
         $cots = getSubCatList($id);
         $aviable = array();
         $aviable = explode(',', $cots);
@@ -321,11 +328,34 @@ if ($_POST['category'] == 2) {
     }
 
     if ($_REQUEST['rezim'] == "delete") {
-        $dbname = 'bz_' . $_POST['project'];
+
         if (empty($_POST['project'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
         }
+        $dbname = 'bz_' . $_POST['project'];
+        $db2->connect(DBUSER, DBPASS, $dbname, DBHOST);
+
+        $id = (int)$_POST['idcategory'];
+        if ($id == 0) die("Error: Что-то пошло не так. Отсутствует ID базы.");
+        load_catinfo($_POST['project']);
+        $cots = getSubCatList($id);
+        $aviable = array();
+        $aviable = explode(',', $cots);
+    
+        $sql = "SELECT id FROM dle_post Where category regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
+        $result = $db2->query($sql);
+        $db->close();
+        $db->free();
+        $db = new db;
+        $db->connect(DBUSER, DBPASS, $dbname, DBHOST);
+        while ($row = $db2->get_row($sql_result)) {
+            deletenewsbyid($row['id'], false);
+        }
+        $db2->close();
+        $db2->free();
+        
+
         $db2->connect(DBUSER, DBPASS, '', DBHOST);
         $db2->query("DROP DATABASE $dbname");
         $db2->close();

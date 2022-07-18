@@ -590,9 +590,11 @@ if (!$afs) {
 			$tpl->set('[/profile]', "</a>");
 
 			$tpl->set('{login}', $row['autor']);
+			
+			$use = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$row['autor']}'");
 
-			$tpl->set('{author}', "<a onclick=\"ShowProfile('" . urlencode($row['autor']) . "', '" . $go_page . "', '" . $user_group[$member_id['user_group']]['admin_editusers'] . "'); return false;\" href=\"" . $go_page . "\">" . $row['autor'] . "</a>");
-
+			$tpl->set('{author}', "<a onclick=\"ShowProfile('" . urlencode($row['autor']) . "', '" . $go_page . "', '" . $user_group[$member_id['user_group']]['admin_editusers'] . "'); return false;\" href=\"" . $go_page . "\">" . $use['fullname'] . "</a>");
+			
 			if ($row['allow_comm']) {
 
 				$tpl->set('[com-link]', "<a id=\"dle-comm-link\" href=\"" . $full_link . "#comment\">");

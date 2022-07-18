@@ -1,110 +1,66 @@
-<article class="box story[fixed] fixed_story[/fixed] shortstory kolichestvo">
-    <div class="imagc" id="imagid2{news-id}"><a href="#" onClick="ShowNews('{news-id}'); return false;"><img
-                src="images/arrow_down.png" class='imagc1' id="imagid{news-id}"></a></div>
-	<img src="images/glaz.png" class="glaz" onclick="ShowModal('{title}','{full-link}&stroka=ok{vived}&cluck={news-id}',{news-id}, 'Grup');" title="Быстрый просмотр">
+<div class="box story[fixed] fixed_story[/fixed] shortstory kolichestvo">
     <div class="box_in">
-        [not-group=5]
-        
-            <div class="poverh">
-                <h2 class="title">[no-redact] <a href="{full-link}">[/no-redact]
-						<span class="newtitle">{title}</span>[no-redact]</a>[/no-redact]</h2>
-            </div>
-        
-        <ul class="story_icons">
-            <li class="fav_btn">
-                [add-favorites]<span title="Добавить в закладки" id="favid{news-id}"><svg class="icon icon-fav">
-                        <use xlink:href="#icon-fav"></use>
-                    </svg></span>[/add-favorites]
-                [del-favorites]<span title="Убрать из закладок" id="favid{news-id}"><svg class="icon icon-star">
-                        <use xlink:href="#icon-star"></use>
-                    </svg></span>[/del-favorites]
-            </li>
-            [not-group=6]
-            <li class="edit_btn">
-                [edit]<i title="Редактировать"></i>[/edit]
-            </li>
-            [/not-group]
-			
-        </ul>
-        [/not-group]
+        <div class="poverh">
+            [fixed]<span class="fixed_label" title="Важная новость"></span>[/fixed]
+            <ul class="story_icons">
+                <li class="fav_btn">
+                    [add-favorites]<span title="Добавить в закладки" id="favid{news-id}"><svg class="icon icon-fav">
+                            <use xlink:href="#icon-fav"></use>
+                        </svg></span>[/add-favorites]
+                    [del-favorites]<span title="Убрать из закладок" id="favid{news-id}"><svg class="icon icon-star">
+                            <use xlink:href="#icon-star"></use>
+                        </svg></span>[/del-favorites]
+                </li>
+                <li class="edit_btn">
+                    [edit]<i title="Редактировать"></i>[/edit]
+                </li>
+            </ul>
 
-        <div class="text" itemprop="articleBody">
-            <div class="ramka">
-                <!--short-story limit="x"-->
-                <div class="storykorotk" id="storyid{news-id}">
-                    <hr>
-                    <div class="contenttext" itemprop="articleBody">{short-story}</div>
-                </div>
-                [edit-date]<p class="editdate grey">Статью отредактировал: <b>{editor}</b> - {edit-date}<br>
-                    [edit-reason]Причина: {edit-reason}[/edit-reason]</p>[/edit-date]
+
+            <h2 class="title">
+            <div class="titglaz" onclick="ShowModal('{title}','{full-link}&stroka=ok{vived}&cluck={news-id}',{news-id}, 'Grup');" title="Быстрый просмотр"><span class="k-icon k-i-eye"></span></div>
+            <div class="tittarget" onclick="window.open('{full-link}', '_blank');" title="Открыть в новой вкладке"><span class="k-icon k-i-hyperlink-open-sm"></span></div>
+            [no-redact]
+            <a href="{full-link}">[/no-redact]
+                    <span class="newtitle">{title}</span>[no-redact]</a>[/no-redact]</h2>
+            <div class="imagc" ><div class="absimac" onClick="ShowNews('{news-id}');" title="Развернуть, свернуть статью"></div><a href="#" onClick="ShowNews('{news-id}'); return false;"><span class='imagc1 k-icon k-i-caret-alt-down' id="imagid2{news-id}"></span></a>
+            <span class="aricocl k-icon k-i-caret-alt-expand"></span>
             </div>
         </div>
-        <div class="story_tools">
-			<!--
-            <a href="#"
-                onClick="ShowModal('{title}','{full-link}&stroka=ok{vived}&cluck={news-id}',{news-id}, 'Grup');return false;">Быстрый
-                просмотр</a>
-
-            [rating]
-            <div class="rate">
-                [rating-type-1]<div class="rate_stars">{rating}</div>[/rating-type-1]
-                [rating-type-2]
-                <div class="rate_like">
-                    [rating-plus]
-                    <svg class="icon icon-love">
-                        <use xlink:href="#icon-love"></use>
-                    </svg>
-                    {rating}
-                    [/rating-plus]
-                </div>
-                [/rating-type-2]
-                [rating-type-3]
-                <div class="rate_like-dislike">
-                    [rating-plus]<span title="Нравится"><svg class="icon icon-like">
-                            <use xlink:href="#icon-like"></use>
-                        </svg></span>[/rating-plus]
-                    {rating}
-                    [rating-minus]<span title="Не нравится"><svg class="icon icon-dislike">
-                            <use xlink:href="#icon-dislike"></use>
-                        </svg></span>[/rating-minus]
-                </div>
-                [/rating-type-3]
-                [rating-type-4]
-                <div class="rate_like-dislike">
-                    <span class="ratingtypeplusminus ignore-select ratingplus">{likes}</span>
-                    [rating-plus]<span title="Нравится"><svg class="icon icon-like">
-                            <use xlink:href="#icon-like"></use>
-                        </svg></span>[/rating-plus]
-                    <span class="ratingtypeplusminus ratingminus ignore-select">{dislikes}</span>
-                    [rating-minus]<span title="Не нравится"><svg class="icon icon-dislike">
-                            <use xlink:href="#icon-dislike"></use>
-                        </svg></span>[/rating-minus]
-                </div>
-                [/rating-type-4]
-            </div>
-            [/rating]-->
-            <div class="category">
-                <svg class="icon icon-cat">
-                    <use xlink:href="#icon-cat"></use>
-                </svg>
-                {link-category}
-
-            </div>
-
-
-            [tags]
-            <div id="tagsscot" class="tagshides hide">
-                <fieldset class="paramteg">
-                    <legend class="param2"> Теги </legend>
-                    <div class="tag_list2">
-                        {tags}
-                    </div>
-                </fieldset>
-            </div>
-            [/tags]
-
+    </div>
+    <div class="text" itemprop="articleBody">
+    <div class="ramka">
+        <!--short-story limit="x"-->
+        <div class="storykorotk" id="storyid{news-id}">
+            <hr>
+            <div class="contenttext" itemprop="articleBody">{short-story}</div>
         </div>
-        [fixed]<span class="fixed_label" title="Важная новость"></span>[/fixed]
+        [edit-date]<p class="editdate grey">Статью отредактировал: <b>{editor}</b> - {edit-date}<br>
+            [edit-reason]Причина: {edit-reason}[/edit-reason]</p>[/edit-date]
+    </div>
+    </div>
+    <div class="box_out">
+        <div class="category">
+            <svg class="icon icon-cat">
+                <use xlink:href="#icon-cat"></use>
+            </svg>
+            {link-category}
+        </div>
+        [rating]
+        <div class="rate">
+            [rating-type-4]
+            <div class="rate_like-dislike">
+                [rating-plus]<span title="Нравится"><svg class="icon icon-like">
+                        <use xlink:href="#icon-like"></use>
+                    </svg></span>[/rating-plus]
+                {rating}
+                [rating-minus]<span title="Не нравится"><svg class="icon icon-dislike">
+                        <use xlink:href="#icon-dislike"></use>
+                    </svg></span>[/rating-minus]
+            </div>
+            [/rating-type-4]
+        </div>
+        [/rating]
     </div>
     <div class="meta">
         <ul class="right">
@@ -139,5 +95,11 @@
             </li>
         </ul>
     </div>
-
-</article>
+    [tags]
+    <div id="tagsscot" class="tagshides hide">
+            <div class="tag_list2">
+                {tags}
+            </div>
+    </div>
+    [/tags]
+</div>

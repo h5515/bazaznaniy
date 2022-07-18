@@ -96,9 +96,9 @@
 	[/available]
 
 	<!-- / Навигация -->	
-    [not-available=addnews]
+    {* [not-available=addnews]
     {vote}
-[/not-available]
+	[/not-available] *}
     
 	[available=main|cat]
 	<!-- Популярное -->

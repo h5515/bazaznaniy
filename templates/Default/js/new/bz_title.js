@@ -13,7 +13,7 @@ $el.find('a').eq(0).attr('href', '#').attr('onClick', 'return false;').attr('sty
 $('.logo_icon').remove();
 $('.logo_title').remove();
 $('.logotype').append(`
-<button class="tlbutton k-button k-button-md k-rounded-md k-button-solid k-button-solid-info" title="На главную" onclick="window.location.href = '/'" style="margin-right: 3px;"><span class="k-icon k-i-undo"></span></button>
+<button class="tlbutton k-button k-button-md k-rounded-md k-button-solid k-button-solid-info" title="На главную" onclick="window.location.href = '/'" style="margin-right: 3px;"><span class="k-icon k-i-home"></span></button>
 <button class="tlbutton rigs k-button k-button-md k-rounded-md k-button-solid k-button-solid-info"><a href="` + href + `" id="titlebzgl"><span class="cover titavatar menuicons" style="background-image: url(` + img + `);background-size: contain;"></span><span
     class="logo_title">` + tex + `</span></a></button>
 <ul class="menubz">

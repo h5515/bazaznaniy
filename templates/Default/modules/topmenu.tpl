@@ -29,7 +29,7 @@
             if (e.checked) {
                 $(".storykorotk").slideToggle(300);
                 //	$(".imagc1").attr('src', 'images/arrow_up.png');
-                $(".imagc").css({
+                $(".imagc1").css({
                     '-webkit-transform': 'rotateX(180deg)'
                 });
                 $.cookie('switch', '1', { expires: 365 });
@@ -40,7 +40,7 @@
                     $(".storykorotk").hide();
                     tour = '2';
                 }
-                $(".imagc").css({
+                $(".imagc1").css({
                     '-webkit-transform': 'rotateX(0deg)'
                 });
                 $.cookie('switch', '0', { expires: 365 });

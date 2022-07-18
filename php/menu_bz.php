@@ -63,7 +63,7 @@ if ((isset($bzid)) || ($_SESSION['super_admin'])) {
                 if ($result['icon']) {
                     $icon = $result['icon'];
                 } else {
-                    $icon = "{THEME}/dleimages/bz.png";
+                    $icon = "/templates/default/dleimages/bz.png";
                 }
                 $url = $_SERVER['HTTP_ORIGIN'] . '?do=cat&project=' . $row['Project'] . '&category=' . $result['alt_name'];
 
@@ -138,6 +138,7 @@ if ((isset($prj) && check_dostup($cat, $prj, 1))||$_SESSION['super_admin']){
     <li><span class='k-icon k-i-image-edit'></span><span class='popmenu' elem='edit_obl'> Изменить обложку </span></li>
     <li><span class='k-icon k-i-file-zip'></span><span class='popmenu' elem='arhive' id='idmenarch'> Архивировать </span></li>
     <li><span class='k-icon k-i-delete'></span><span class='popmenu' elem='delete'> Удалить </span></li>
+    <li><span class='k-icon k-i-apply-format'></span><span class='popmenu' elem='clearcash'> Очистить кэш </span></li>
     </ul>
     </li>
     <script src='/templates/Default/js/new/bz_param.js'></script>

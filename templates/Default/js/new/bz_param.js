@@ -13,6 +13,12 @@ $("#idparambz li").on('click', function() {
         project = $els.attr('project');
         project_id = $els.attr('project_id');
     }
+    if (poper == 'clearcash') {
+        dt = {
+            rezim: 'clearcash',
+        }
+        getajax('/php/add_bz.php', dt)
+    }
     if (poper == 'edit_name') {
         kendo.prompt('Новое имя:', namebz).then(function(data) {
             dt = {

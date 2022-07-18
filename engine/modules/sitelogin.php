@@ -89,7 +89,6 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 		$bd2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
 		$member_id = $bd2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
 
-
 		// if (empty($member_id)) {
 		// 	$rows = $bd2->query("SELECT Project FROM " . USERPREFIX . "_project");
 		// 	$db3 = new db;
@@ -520,7 +519,7 @@ if ($is_logged) {
 
 	$dle_login_hash = sha1(SECURE_AUTH_KEY . $member_id['user_id'] . sha1($member_id['password']) . $member_id['hash']);
 	check_adgrup();
-	if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && isset($_COOKIE['site_bz']) && $_COOKIE['site_bz'] != $_COOKIE['dbname']) {
+	//if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && isset($_COOKIE['site_bz']) && $_COOKIE['site_bz'] != $_COOKIE['dbname']) {
 
 		$row = $db->super_query("SELECT count(name) as count, favorites FROM dle_users WHERE name = '{$member_id['name']}'");
 		if ($row['count'] < 1) {
@@ -531,7 +530,7 @@ if ($is_logged) {
 			else 
 			$member_id['favorites'] = '';
 		}
-	}
+	//}
 
 	$dostup_bz = true;
 	/*if ($user_group[$member_id['user_group']]['time_limit']) {

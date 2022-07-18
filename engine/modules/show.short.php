@@ -496,7 +496,9 @@ if ($allow_active_news) {
 
 		$tpl->set('{login}', $row['autor']);
 
-		$tpl->set('{author}', "<a onclick=\"ShowProfile('" . urlencode($row['autor']) . "', '" . $go_page . "', '" . $user_group[$member_id['user_group']]['admin_editusers'] . "'); return false;\" href=\"" . $go_page . "\">" . $row['autor'] . "</a>");
+		$use = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$row['autor']}'");
+
+		$tpl->set('{author}', "<a onclick=\"ShowProfile('" . urlencode($row['autor']) . "', '" . $go_page . "', '" . $user_group[$member_id['user_group']]['admin_editusers'] . "'); return false;\" href=\"" . $go_page . "\">" . $use['fullname'] . "</a>");
 		///and ($member_id['name'] == $row['autor'] and ! $user_group[$member_id['user_group']]['allow_all_edit'])
 		$allow_userinfo = true;
 

@@ -605,12 +605,13 @@ function CategoryNewsSelection($categoryid = 0, $parentid = 0, $nocat = TRUE, $s
 	return $returnstring;
 }
 
-function get_bz($name_bz){
+function get_bz($name_bz)
+{
 	global $db_gl;
 	$row = $db_gl->super_query("SELECT id FROM dle_project WHERE project = '{$name_bz}'");
 	if (isset($row['id']))
 		$rez = $row['id'];
-	else	
+	else
 		$rez = 0;
 	return $rez;
 }
@@ -847,28 +848,28 @@ function clear_all_caches()
 	$catalog = '';
 	$catl = '';
 	if (isset($_COOKIE['dbname'])) {
-		$catalog = ENGINE_DIR . '/cache/' . $_COOKIE['dbname'].'/';
-		if (!file_exists($catalog)){
+		$catalog = ENGINE_DIR . '/cache/' . $_COOKIE['dbname'] . '/';
+		if (!file_exists($catalog)) {
 			if (!mkdir($catalog, 0777, true)) {
-				die('Не удалось создать директорию - '.$catalog);
+				die('Не удалось создать директорию - ' . $catalog);
 			}
 		}
 		$catalog = $_COOKIE['dbname'];
-		$catl = $_COOKIE['dbname'].'/';
+		$catl = $_COOKIE['dbname'] . '/';
 	}
 
-	$fdir = opendir(ENGINE_DIR . '/cache/system/'.$catl);
+	$fdir = opendir(ENGINE_DIR . '/cache/system/' . $catl);
 	while ($file = readdir($fdir)) {
 		if ($file != '.' and $file != '..' and $file != '.htaccess' and $file != 'cron.php') {
-			@unlink(ENGINE_DIR . '/cache/system/'.$catl . $file);
+			@unlink(ENGINE_DIR . '/cache/system/' . $catl . $file);
 		}
 	}
 
 	if ($config['cache_type']) {
-		$fdir = opendir(ENGINE_DIR . '/cache'.$catalog);
+		$fdir = opendir(ENGINE_DIR . '/cache' . $catalog);
 		while ($file = readdir($fdir)) {
 			if ($file != '.htaccess' and !is_dir($file)) {
-				@unlink(ENGINE_DIR . '/cache/'. $catl . $file);
+				@unlink(ENGINE_DIR . '/cache/' . $catl . $file);
 			}
 		}
 	}
@@ -2449,10 +2450,14 @@ function get_categories($id, $separator = " &raquo;")
 				$prjlink = '&project=' . $_COOKIE['dbname'] . '&';
 			else
 				$prjlink = '';
-			if ($_GET['stroka'] == "ok")
-				$list = $cat_info[$parent_id]['name'] . $separator . $list;
-			else
-				$list = "<a href=\"$PHP_SELF?do=cat&amp;{$prjlink}category={$cat_info[$parent_id]['alt_name']}\">{$cat_info[$parent_id]['name']}</a>" . $separator . $list;
+
+			$par = $cat_info[$parent_id]['parentid'];
+
+			if ($par > 0)
+				if ($_GET['stroka'] == "ok")
+					$list = $cat_info[$parent_id]['name'] . $separator . $list;
+				else
+					$list = "<a href=\"$PHP_SELF?do=cat&amp;{$prjlink}category={$cat_info[$parent_id]['alt_name']}\">{$cat_info[$parent_id]['name']}</a>" . $separator . $list;
 		}
 
 		$parent_id = $cat_info[$parent_id]['parentid'];
@@ -3913,25 +3918,33 @@ function check_dostup($cat, $projcet, $roly)
 	return $dostup;
 }
 
-function load_catinfo(){
-global $cat_info, $db;
-$cat_info = get_vars("category");
+function load_catinfo($db_name = '')
+{
+	global $cat_info;
 
-if (!is_array($cat_info)) {
-	$cat_info = array();
+	if ($db_name == '')
+		$cat_info = get_vars("category");
 
-	$db->query("SELECT * FROM " . PREFIX . "_category ORDER BY posi ASC");
-	while ($row = $db->get_row()) {
-
-		if (!$row['active']) continue;
-
-		$cat_info[$row['id']] = array();
-
-		foreach ($row as $key => $value) {
-			$cat_info[$row['id']][$key] = stripslashes($value);
+	if (!is_array($cat_info)) {
+		$cat_info = array();
+		$db2 = new db;
+		if ($db_name != '') {
+			$dbname = 'bz_' . $_POST['project'];
+			$db2->connect(DBUSER, DBPASS, $dbname, DBHOST);
 		}
+
+		$db2->query("SELECT * FROM " . PREFIX . "_category ORDER BY posi ASC");
+		while ($row = $db2->get_row()) {
+
+			if (!$row['active']) continue;
+
+			$cat_info[$row['id']] = array();
+
+			foreach ($row as $key => $value) {
+				$cat_info[$row['id']][$key] = stripslashes($value);
+			}
+		}
+		set_vars("category", $cat_info);
+		$db2->free();
 	}
-	set_vars("category", $cat_info);
-	$db->free();
-}
 }

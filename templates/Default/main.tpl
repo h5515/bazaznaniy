@@ -24,6 +24,7 @@
     <link href="{THEME}/css/mycss.css" rel="stylesheet" type="text/css">
     <link href="{THEME}/css/new/new.css" rel="stylesheet" type="text/css">
     <link href="{THEME}/css/iosCheckbox-theme.scss" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
 
     {* <link href="/kendo/styles/kendo.fiori.min.css?v=4" rel="stylesheet"> *}
     {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet">  *}
@@ -42,6 +43,7 @@
     <!--<script src="{THEME}/js/jquery-ui.min.js"></script> -->
     <script src="{THEME}/js/jquery.nestable.js"></script>
     <script src="{THEME}/js/formtooltip.js"></script>
+    <script src="{THEME}/js/function.js"></script>
 
   </head>
 

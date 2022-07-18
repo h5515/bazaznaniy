@@ -23,7 +23,7 @@ function proversvitch() {
         $(".storykorotk").slideDown(300);
 
         //	$(".imagc1").attr('src', 'images/arrow_up.png');
-        $(".imagc").css({
+        $(".imagc1").css({
             '-webkit-transform': 'rotateX(180deg)'
         });
         $.cookie('switch', '1', { expires: 366 });
@@ -798,7 +798,7 @@ function MenuNewsBuild(a, b, arch, approve, vivid) {
         trun = ",'1'";
 
     c[0] = "<a onclick=\"ShowEdit('" + a + "'" + trun + "); return false;\" href=\"#\">Редактировать</a>"; //sendNotice (
-    "" != dle_admin && !vivid && (c[1] = '<a href="' + dle_root + dle_admin + "?mod=editnews&action=editnews&id=" + a + '" target="_blank">' + menu_full + "</a>");
+    // "" != dle_admin && !vivid && (c[1] = '<a href="' + dle_root + dle_admin + "?mod=editnews&action=editnews&id=" + a + '" target="_blank">' + menu_full + "</a>");
     allow_dle_delete_news && arch == '0' && approve == '1' && (c[2] = "<a onclick=\"Perenosarhiv ('" + a + '\',\'1\'); return false;" href="#">Перенести в Архив' + "</a>", c[3] = "<a onclick=\"dle_news_delete ('" + a + '\'); return false;" href="#">' + dle_del_news + "</a>");
     allow_dle_delete_news && arch == "1" && approve == '1' && (c[2] = "<a onclick=\"Perenosarhiv ('" + a + '\',\'0\'); return false;" href="#">Восстановить из Архив' + "</a>", c[3] = "<a onclick=\"dle_news_delete ('" + a + '\'); return false;" href="#">' + dle_del_news + "</a>");
     approve == 0 && (c[2] = "<a onclick=\"dle_news_delete ('" + a + '\'' + trun + ' ); return false;" href="#">' + dle_del_news + "</a>");
