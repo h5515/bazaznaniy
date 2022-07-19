@@ -98,4 +98,8 @@
 	{navigation}
 	{addcomments}
 </div>
+<script>
+if ($.trim($('.comments .com_list').text())=='')
+	$('.comments .box').eq(0).remove();
+</script>
 [/no-histor]

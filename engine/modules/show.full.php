@@ -2729,14 +2729,15 @@ HTML;
 	
 	} elseif( $config['allow_comments'] ) {
 		
-		$lang['news_info_1'] = str_replace('{group}', $user_group[$member_id['user_group']]['group_name'], $lang['news_info_1'] );
+		// $lang['news_info_1'] = str_replace('{group}', $user_group[$member_id['user_group']]['group_name'], $lang['news_info_1'] );
 		
-		$tpl->load_template( 'info.tpl' );
-		$tpl->set( '{error}', $lang['news_info_1'] );
-		$tpl->set( '{group}', $user_group[$member_id['user_group']]['group_name'] );
-		$tpl->set( '{title}', $lang['all_info'] );
-		$tpl->compile( 'comments_not_allowed' );
-		$tpl->clear();
+		// $tpl->load_template( 'info.tpl' );
+		// $tpl->set( '{error}', $lang['news_info_1'] );
+		// $tpl->set( '{group}', $user_group[$member_id['user_group']]['group_name'] );
+		// $tpl->set( '{title}', $lang['all_info'] );
+		// $tpl->compile( 'comments_not_allowed' );
+		// $tpl->clear();
+		$tpl->result['comments_not_allowed'] = '';
 		
 		if ( strpos ( $tpl->result['content'], "<!--dleaddcomments-->" ) !== false ) {
 

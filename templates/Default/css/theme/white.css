@@ -101,6 +101,7 @@ input[type="color"]:focus,
 .top_block {
     background-color: #ffffff;
     border: 1px solid #bcbcbc;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
 }
 
 .navigat>span>a {
@@ -208,6 +209,10 @@ input[type="color"]:focus,
 
 #cat_menu::-webkit-scrollbar-thumb {
     background-color: #85858591;
+}
+
+#cat_menu {
+    background-color: #ffffff;
 }
 
 .trhisactive {

@@ -25,6 +25,16 @@
     <link href="{THEME}/css/iziModal.min.css" type="text/css" rel="stylesheet">
 
     <link href="{THEME}/css/popModal.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
+
+    {* <link href="/kendo/styles/kendo.fiori.min.css?v=4" rel="stylesheet"> *}
+    {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet">  *}
+    <link href="/kendo/styles/kendo.default-main.min.css?v=4" rel="stylesheet">
+    <link href="{THEME}/css/mykendo.css" rel="stylesheet" type="text/css">
+
+    {themecss}
+
+    <script src="/kendo/js/kendo.all.min.js?v=11"></script>
 
     <link href="{THEME}/css/tagify.css" rel="stylesheet" type="text/css">
     <link href="{THEME}/css/mycss.css" rel="stylesheet" type="text/css">

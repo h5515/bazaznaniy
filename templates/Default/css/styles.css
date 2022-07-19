@@ -3388,7 +3388,7 @@ ol.topnews>li>a:hover>b {
 /* Форма добавления */
 
 .addcomment {
-    background-color: #f7f7f7;
+    /* background-color: #f7f7f7; */
     border-radius: 15px;
 }
 
@@ -3404,7 +3404,7 @@ ol.topnews>li>a:hover>b {
     width: 8%;
     padding: 10px 0;
     float: left;
-    margin-top: 4%;
+    /* margin-top: 4%; */
 }
 
 .plus_icon>span,
@@ -3520,6 +3520,7 @@ ul.ui-form>li:last-child {
 
 .form_submit {
     margin-top: 20px;
+    margin-bottom: 8px;
 }
 
 .form-sep {
@@ -3550,14 +3551,15 @@ ul.ui-form>li:last-child {
 .com_list {}
 
 .comment {
-    padding: 4% 4%;
+    padding: 2% 4%;
     position: relative;
     -webkit-transition: box-shadow ease .4s;
     transition: box-shadow ease 0.4s;
 }
 
 .com_list .comment {
-    border-top: 1px solid #efefef;
+    border: none;
+    border-top: 1px solid #c3c3c3;
     background-color: transparent;
     margin: 0;
     border-radius: 0;
@@ -3566,9 +3568,9 @@ ul.ui-form>li:last-child {
 }
 
 .comment:hover {
-    position: relative;
+    /* position: relative;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2); */
 }
 
 .avatar {
@@ -3586,7 +3588,7 @@ ul.ui-form>li:last-child {
 
 .comment .avatar {
     float: left;
-    margin-right: 15px;
+    margin-right: 5px;
     position: relative;
 }
 
@@ -3730,7 +3732,8 @@ ul.ui-form>li:last-child {
 
 #dle-comments-list>.comments-tree-list>li>.comments-tree-list {
     padding: 0 8%;
-    border-top: 1px solid #efefef;
+    /* border-top: 1px solid #efefef; */
+    background-color: #00000007;
 }
 
 #dle-comments-list>.comments-tree-list>li .comments-tree-list>li {
@@ -3744,7 +3747,7 @@ ul.ui-form>li:last-child {
 }
 
 .comments-tree-list>li>ol>li .comment {
-    padding: 30px 0;
+    padding: 2% 0;
     position: relative;
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -3766,7 +3769,7 @@ ul.ui-form>li:last-child {
     margin-left: -500px;
     left: 0;
     top: 0;
-    background-color: #efefef;
+    /* background-color: #efefef; */
 }
 
 .comments-tree-list>li>ol>li .comment:before {
@@ -6594,7 +6597,7 @@ input[type="submit"] {
 }
 
 #cat_menu {
-    /* background-color: #e5f0fe; */
+    background-color: #e5f0fe;
     padding-right: 3px;
 }
 

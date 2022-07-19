@@ -446,6 +446,21 @@ if( $yandex_url ) {
 	$tpl->set( '{yandex_url}', '' );
 }
 
+$mytheme = 'Blue'; //Тема по умолчанию
+if ((stripos($tpl->copy_template, "{mytheme}") !== false) || (stripos($tpl->copy_template, "{themecss}") !== false)) {
+  if (isset($member_id['name'])) {
+    $theme = $db_gl->super_query("SELECT theme FROM dle_users WHERE name = '{$member_id['name']}'")['theme'];
+    if (isset($theme)) {
+      $mytheme = $theme;
+      $tpl->set('{themecss}', '<link href="/templates/Default/css/theme/' . $theme . '.css" rel="stylesheet" type="text/css">');
+    } else {
+      $tpl->set('{themecss}', '');
+    }
+  }else{
+      $tpl->set('{themecss}', '');
+  }
+}
+
 $config['http_home_url'] = explode ( "index.php", strtolower ( $_SERVER['PHP_SELF'] ) );
 $config['http_home_url'] = reset ( $config['http_home_url'] );
 
@@ -457,6 +472,7 @@ $ajax .= <<<HTML
 var dle_root       = '{$config['http_home_url']}';
 var dle_admin      = '{$config['admin_path']}';
 var dle_login_hash = '{$dle_login_hash}';
+var mytheme        =  '{$mytheme}';
 var dle_group      = {$member_id['user_group']};
 var dle_skin       = '{$config['skin']}';
 var dle_wysiwyg    = '{$config['allow_comments_wysiwyg']}';

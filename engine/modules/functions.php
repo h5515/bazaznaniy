@@ -2389,6 +2389,12 @@ function get_url($id)
 	return $url;
 }
 
+function get_idcategocomment($id){
+	global $db;
+	$row = $db->super_query("SELECT post_id FROM dle_comments WHERE id = $id");
+	return $row['post_id'];
+}
+
 function get_idcategories($id, $cat = null)
 {
 

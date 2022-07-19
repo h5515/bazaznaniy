@@ -132,7 +132,7 @@ if( $_REQUEST['action'] == "edit" ) {
 <script>
 
 	  var text_upload = "{$lang['bb_t_up']}";
-	  toolbarofset = 50;
+	  toolbarofset = 35;
 	p_name = '{$p_name}';
 	id = '{$id}';
 	maxsize = {$config['max_up_size']};
@@ -140,7 +140,7 @@ if( $_REQUEST['action'] == "edit" ) {
 	platetext = 'Напишите комментарий...';
 	histor = '';
 	buts = 2;
-	Activeeditor('.ajaxwysiwygeditor','comments',0,platetext);
+	Activeeditor('.ajaxwysiwygeditor','comments',0);
 
 	
 	  

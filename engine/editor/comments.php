@@ -70,7 +70,7 @@ if( $config['allow_comments_wysiwyg'] == 1 ) {
 
 	$onload_scripts[] = <<<HTML
 
-    toolbarofset =50;
+    toolbarofset =35;
 	p_name = '{$p_name}';
 	id = '{$id}';
 	maxsize = {$config['max_up_size']};
