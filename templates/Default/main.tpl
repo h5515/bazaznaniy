@@ -31,6 +31,8 @@
     <link href="/kendo/styles/kendo.default-main.min.css?v=4" rel="stylesheet">
     <link href="{THEME}/css/mykendo.css" rel="stylesheet" type="text/css">
 
+    {themecss}
+
     <script src="/kendo/js/kendo.all.min.js?v=11"></script>
     <script src="{THEME}/js/iziModal.js"></script>
     <script src="{THEME}/js/mayscript.js?v=4"></script>
@@ -44,7 +46,7 @@
     <script src="{THEME}/js/jquery.nestable.js"></script>
     <script src="{THEME}/js/formtooltip.js"></script>
     <script src="{THEME}/js/function.js"></script>
-
+    {AJAX}
   </head>
 
   <body>
@@ -119,7 +121,7 @@
         </header>
         <!-- / Header -->
 
-        <div class="conteiner">
+        <div class="conteiner" [available=main] style="margin-top: 52px;" [/available]>
           <div class="midside">
             <section id="content"> {info}
               [page-title]
@@ -323,7 +325,7 @@
     </div>
     [/available]
 
-    {AJAX}
+    
     <script src="{THEME}/js/lib.js"></script>
     <script src="{THEME}/js/new/new.js"></script>
     <script>
@@ -409,7 +411,7 @@ updateData({sectionId, questionId, questionList});
     <div id="layer"></div>
 
     <script>
-      $('.histortop').attr('style', 'margin-top:-70px;');
+      //$('.histortop').attr('style', 'margin-top:-70px;');
       $('.urlmetka').on('click', function() {
         //alert('per'+$(this).attr('data-url'));
         var destination = $(this).closest('.text').find('#per' + $(this).attr('data-url')).offset().top - 60;
