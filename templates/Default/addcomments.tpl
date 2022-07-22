@@ -48,7 +48,7 @@
 			$("#addcomment .box_in").slideDown(100);
 			$("#otmencomment").show();
 			$("#btaddcomment").hide();
-				$("html, body").animate({ scrollTop: $(document).height() }, 100);
+				//$("html, body").animate({ scrollTop: $(document).height() }, 100);
 		}
 	});
 	$("#otmencomment").kendoButton({

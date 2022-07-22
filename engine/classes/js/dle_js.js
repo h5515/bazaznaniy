@@ -587,6 +587,9 @@ function doAddComments() {
     a.allow_subscribe && 1 == a.allow_subscribe.checked && (f = "1");
     a.mail && (g = a.mail.value);
     ShowLoading("");
+    $("#addcomment .box_in").slideUp(100);
+    $("#otmencomment").hide();
+    $("#btaddcomment").show();
     $.post(dle_root + "engine/ajax/controller.php?mod=addcomments", {
         post_id: a.post_id.value,
         comments: a.comments.value,
@@ -600,6 +603,7 @@ function doAddComments() {
         allow_subscribe: f,
         user_hash: dle_login_hash
     }, function(h) {
+        $('.comments .box:last').css('display', '');
         HideLoading("");
         $("#dle-ajax-comments").html(h);
         "error" != h && document.getElementById("blind-animation") && ($("html,body").stop().animate({

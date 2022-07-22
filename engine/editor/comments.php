@@ -72,13 +72,13 @@ if( $config['allow_comments_wysiwyg'] == 1 ) {
 
     toolbarofset =35;
 	p_name = '{$p_name}';
-	id = '{$id}';
+	id = '{$id_bz}';
 	maxsize = {$config['max_up_size']};
 	logincache= '{$dle_login_hash}';
 	platetext = 'Напишите комментарий...';
 	histor = '';
 	buts = 2;
-	Activeeditor('#comments','short_story',0);
+	Activeeditor('#comments','comments',0);
 
 	
 HTML;

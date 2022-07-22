@@ -89,6 +89,8 @@
 
 [no-histor]
 <div class="comments ignore-select">
+	{navigation}
+	{addcomments}
 	<div class="box">
 		[comments]<h4 class="heading">Комментарии <span class="grey hnum">{comments-num}</span></h4>[/comments]
 		<div class="com_list">
@@ -96,10 +98,9 @@
 		</div>
 	</div>
 	{navigation}
-	{addcomments}
 </div>
 <script>
 if ($.trim($('.comments .com_list').text())=='')
-	$('.comments .box').eq(0).remove();
+	$('.comments .box:last').css('display','none');
 </script>
 [/no-histor]

@@ -80,10 +80,11 @@
 
         } else {
             project = getUrlParameter('project');
-            if (project = 'false')
+            if (project == false) {
                 catid = 1
-            else
+            } else {
                 catid = 2;
+            }
             idcategory = $("#ideditcategor").attr('data-cat');
         }
         dt = {

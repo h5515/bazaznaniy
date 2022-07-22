@@ -1990,6 +1990,14 @@ function check_adgrup()
 	$db2->free();
 }
 
+function get_idcat_post($id)
+{
+	global $db;
+	$row = $db->super_query("SELECT category FROM dle_post WHERE id = $id");
+	$cat = explode(',',$row['category']);
+	return $cat[0];
+}
+
 function get_idcategories($id, $cat = null)
 {
 

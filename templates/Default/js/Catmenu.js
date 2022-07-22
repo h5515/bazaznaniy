@@ -30,12 +30,12 @@ $('.menueditcat').on('click', function() {
     if ($(this).hasClass('menueditcatpn')) {
         $(this).removeClass('menueditcatpn');
         $('.dd3-handle').css('display', 'none');
-        $("#idaddcats").remove();
+        $(".topmenuedit").remove();
     } else {
         $(this).addClass('menueditcatpn');
         $('.dd3-handle').css('display', '');
         $('.dd3-handle').eq(0).css('display', 'none');
-        $('#nestable').prepend('<button id="idaddcats"><span class="k-icon k-i-plus"></span>Добавить категорию</button>');
+        $('#nestable').prepend('<div class="topmenuedit"><button id="idaddcats" class="menubutcats" title="Добавить категорию"><span class="k-icon k-i-plus"></span></button><button id="exitmenuedit" class="menubutcats" title="Закончить редактирование"><span class="k-icon k-i-check"></span></button></div>');
         $("#idaddcats").kendoButton({
             themeColor: "info",
             click: function() {
@@ -48,6 +48,12 @@ $('.menueditcat').on('click', function() {
                         scrollTop: $("#cat_menu .inputcat").offset().top - 40
                     }, 400);
                 $("#cat_menu .inputcat").focus();
+            }
+        });
+        $("#exitmenuedit").kendoButton({
+            themeColor: "info",
+            click: function() {
+                $('.menueditcat').click();
             }
         });
 

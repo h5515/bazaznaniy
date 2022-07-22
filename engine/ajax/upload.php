@@ -107,26 +107,28 @@ if ( $news_id AND $area != "template" AND $area != "comments" ) {
 	}*/
 }
 //echo "---".$user_group[$member_id['user_group']]['edit_limit'];
-if ( $news_id AND $area == "comments" ) {
 
-	$row = $db->super_query( "SELECT id, user_id, date, is_register FROM " . PREFIX . "_comments WHERE id = '{$news_id}'" );
 
-	if ( !$row['id'] ) die( "Hacking attempt6!" );
+// if ( $news_id AND $area == "comments" ) {
 
-	$have_perm = 0;
-	$row['date'] = strtotime( $row['date'] );
+// 	$row = $db->super_query( "SELECT id, user_id, date, is_register FROM " . PREFIX . "_comments WHERE id = '{$news_id}'" );
+
+// 	if ( !$row['id'] ) die( "Hacking attempt6!" );
+
+// 	$have_perm = 0;
+// 	$row['date'] = strtotime( $row['date'] );
 	
-	if( ($member_id['user_id'] == $row['user_id'] AND $row['is_register'] AND $user_group[$member_id['user_group']]['allow_editc']) OR $user_group[$member_id['user_group']]['edit_allc'] ) {
-		$have_perm = 1;
-	}
+// 	if( ($member_id['user_id'] == $row['user_id'] AND $row['is_register'] AND $user_group[$member_id['user_group']]['allow_editc']) OR $user_group[$member_id['user_group']]['edit_allc'] ) {
+// 		$have_perm = 1;
+// 	}
 	
-	if ( $user_group[$member_id['user_group']]['edit_limit'] AND (($row['date'] + ($user_group[$member_id['user_group']]['edit_limit'] * 60)) < $_TIME) ) {
-		$have_perm = 0;
-	}
+// 	if ( $user_group[$member_id['user_group']]['edit_limit'] AND (($row['date'] + ($user_group[$member_id['user_group']]['edit_limit'] * 60)) < $_TIME) ) {
+// 		$have_perm = 0;
+// 	}
 	
-	if ( !$have_perm ) die( "Hacking attempt7!" );
+// 	if ( !$have_perm ) die( "Hacking attempt7!" );
 	
-}
+// }
 
 if( $area == "comments" ) {
 	$user_group[$member_id['user_group']]['allow_image_size'] = false;
