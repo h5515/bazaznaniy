@@ -38,6 +38,7 @@
 
     <link href="{THEME}/css/tagify.css" rel="stylesheet" type="text/css">
     <link href="{THEME}/css/mycss.css" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/new/new.css" rel="stylesheet" type="text/css">
     <script src="{THEME}/js/mayscript.js?v=4"></script>
     <script src="{THEME}/js/jquery.cookie.js"></script>
     <script src="{THEME}/js/easySelect.js"></script>

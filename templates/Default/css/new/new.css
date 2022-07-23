@@ -307,3 +307,31 @@ body {
 #addidname {
     margin-left: 5px;
 }
+
+.modbutclose {
+    position: fixed !important;
+    font-size: 35px !important;
+    top: 8px;
+    right: 22px;
+    transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+    cursor: pointer;
+    color: #3a65df;
+}
+
+.modbutclose:hover {
+    transform: rotate(90deg) scale(1.1);
+    color: #0c00c1;
+}
+
+.addtags .tagify {
+    --tag-bg: #bcdaff;
+    --tag-remove-btn-color: #131313;
+    --tag-text-color: #131313;
+    --tag-remove-btn-bg--hover: #c74a4a;
+    --tag-remove-bg: rgb(121 87 87 / 61%);
+}
+
+.addtags .tagify__tag {
+    /* border: 1px solid #3394e6; */
+    /* border-radius: 2px; */
+}
