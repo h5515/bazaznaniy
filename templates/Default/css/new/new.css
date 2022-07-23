@@ -236,7 +236,8 @@ body {
     box-shadow: rgb(0 0 0 / 22%) 0px -50px 36px -28px inset;
     color: white;
     cursor: pointer; */
-    padding: 0 4px !important;
+    display: none !important;
+    /* padding: 0 4px !important; */
 }
 
 .catcledits {

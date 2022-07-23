@@ -70,6 +70,16 @@ function stop($txt)
 // if (empty($_REQUEST['namebaza']))
 //     die();
 
+if ($_POST['category'] == 1)
+    $prj = $_POST['idcategory'];
+if ($_POST['category'] == '2')
+    $prj = $_POST['project'];
+
+if (!check_dostup($_POST['category'], $prj, [1,2])) {
+    die("Error: Доступ запрещён.");
+}
+
+
 if ($_REQUEST['rezim'] == 'clearcash') {
     clear_all_caches();
     $scr = "notification('Кэш очищен.', 'success');";
@@ -92,14 +102,6 @@ if (preg_match("/[^a-zA-Z0-9\-_]+/", $p_baze)) {
 
 $catimg = "";
 
-if ($_POST['category'] == 1)
-    $prj = $_POST['idcategory'];
-if ($_POST['category'] == '2')
-    $prj = $_POST['project'];
-
-if (!check_dostup($_POST['category'], $prj, 1)) {
-    die("<h1>Доступ запрещён.</h1>");
-}
 
 
 if ($_POST['category'] == 1) {

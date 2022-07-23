@@ -512,7 +512,7 @@ class DLE_Comments {
 
 			$tpl->set( '{lastdate}', langdate( "j.m.Y", $row['lastdate'] ) );
 
-			if ( ($row['lastdate'] + 1200) > $_TIME OR ($row['user_id'] AND $row['user_id'] == $member_id['user_id'])) {
+			if ( ($row['lastdate'] + 7000) > $_TIME ) {
 
 				$tpl->set( '[online]', "" );
 				$tpl->set( '[/online]', "" );

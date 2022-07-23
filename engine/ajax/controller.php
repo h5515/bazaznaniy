@@ -171,11 +171,14 @@ if (isset($_GET['project'])) {
 	if (isset($_POST['action']))
 		$glcat = $_POST['id'];
 	if (isset($_POST['post_id']))
-		$glcat = $_POST['post_id'];
+		$glcat = get_idcat_post($_POST['post_id']);
 	if (isset($_GET['mod'])&&($_GET['mod']=='editcomments'||$_GET['mod']=='deletecomments')&&isset($_GET['id']))
 		$glcat = get_idcategocomment($_GET['id']);
 	if (isset($_POST['comm_txt'])&&$_POST['action']=='save'&&isset($_POST['id']))
 		$glcat = get_idcategocomment($_POST['id']);
+
+	if (isset($_POST['subaction'])&&$_POST['subaction']=='upload')
+		$glcat = get_idcat_post($_POST['news_id']);
 	$glcat = explode(',', $glcat);
 	$glcat = get_idcategories($glcat[0]);
 }

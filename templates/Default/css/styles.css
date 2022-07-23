@@ -1332,19 +1332,22 @@ body {
     .cat_menu .catname {
         padding: 0 0 0 12px;
     }
-    .cat_menu a {
+    .cat_menu a,
+    .cat_menu a span {
         transition: all ease 0.20s;
     }
     .cat_menu a:hover {
         color: #105894;
+        box-shadow: rgb(33 35 38 / 37%) 0px 10px 10px -10px;
     }
     .cat_menu a:hover img,
     .cat_menu a:hover span {
         transform: scale(1.03);
-        font-weight: 600;
+        /* font-weight: 600; */
     }
     .CatRig {
         /* position: relative; */
+        white-space: nowrap;
         transition: all ease 0.20s;
     }
     .cat_menu a:hover .CatRig {
@@ -6651,18 +6654,24 @@ button.tlbutton {
     border-bottom-left-radius: 0;
 }
 
-#idaddcats {
-    margin: 3px 15%;
+.menubutcats {
+    margin: 0px 5px;
     padding: 0 6px;
     margin-top: -2px;
-    position: sticky;
-    top: 5px;
-    z-index: 1;
     background-color: #0053df;
     border-color: #afacac;
 }
 
-#idaddcats:hover {
+.topmenuedit {
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.menubutcats:hover {
     border-color: #ffffff !important;
     background-color: #013ea7 !important;
 }
