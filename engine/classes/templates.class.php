@@ -1232,6 +1232,57 @@ class dle_template
     $this->template = null;
   }
 
+  function str_replace_once($search, $replace, $text)
+  {
+    $pos = strpos($text, $search);
+    return $pos !== false ? substr_replace($text, $replace, $pos, strlen($search)) : $text;
+  }
+
+  function admindostup()
+  {
+    global $member_id;
+    if (isset($_SESSION['super_admin'])&&$_SESSION['super_admin']) {
+      return true;
+    }
+  }
+
+  function check_dostup($matches)
+  {
+    global $member_id, $mas_roly_name;
+
+    preg_match('~dostup(.*?)]~', $matches, $output);
+
+    $output[1] = trim(str_replace('=', "", $output[1]));
+    $elem = $output[1];
+    $user = $member_id['name'];
+
+    $mat = explode('|', $output[1]);
+    $uml = '';
+    if (is_array($mat)) {
+      $elem = $mat[0];
+      $uml = $mat[1];
+    }
+
+    if (empty($_SESSION["roly"])) {
+      include_once ENGINE_DIR . '/modules/rolys.php';
+      compile_report_rolys($member_id['name']);
+      $_SESSION["roly"] = $mas_roly_name;
+    }
+    if ($elem != '') {
+      if ($this->admindostup() or in_array($output[1], $_SESSION["roly"])) {
+        $matches = preg_replace("#\[not-" . str_replace("]", "\]", $output[0]) . "(.+?)\[/not-" . str_replace("]", "\]", $output[0]) . "#is", "", $matches);
+      } else {
+        $matches = preg_replace("#\[" . str_replace("]", "\]", $output[0]) . "(.+?)\[/" . str_replace("]", "\]", $output[0]) . "#is", "", $matches);
+      }
+      $matches = $this->str_replace_once('[' . $output[0], "", $matches);
+      $matches = $this->str_replace_once('[/' . $output[0], "", $matches);
+      $matches = $this->str_replace_once('[not-' . $output[0], "", $matches);
+      $matches = $this->str_replace_once('[/not-' . $output[0], "", $matches);
+    }
+
+    return  $matches;
+  }
+
   function compile($tpl)
   {
 
@@ -1298,6 +1349,12 @@ class dle_template
     }
 
     $this->copy_template = str_replace(array("_&#123;_", "_&#91;_"), array("{", "["), $this->copy_template);
+
+      if (strpos($this->copy_template, '[dostup') !== false) {
+        while (strpos($this->copy_template, '[dostup')) {
+          $this->copy_template = $this->check_dostup($this->copy_template);
+        }
+      }
 
     if (isset($this->result[$tpl])) $this->result[$tpl] .= $this->copy_template;
     else $this->result[$tpl] = $this->copy_template;

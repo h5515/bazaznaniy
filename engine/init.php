@@ -208,9 +208,9 @@ $user_group = get_vars("usergroup");
 if (!is_array($user_group)) {
   $user_group = array();
 
-  $db->query("SELECT * FROM " . USERPREFIX . "_usergroups ORDER BY id ASC");
+  $db_gl->query("SELECT * FROM " . USERPREFIX . "_usergroups ORDER BY id ASC");
 
-  while ($row = $db->get_row()) {
+  while ($row = $db_gl->get_row()) {
 
     $user_group[$row['id']] = array();
 
@@ -488,46 +488,6 @@ if ($config['category_newscount']) {
 //####################################################################################################################
 //    The definition of banned users and IP
 //####################################################################################################################
-$banned_info = get_vars("banned");
-
-if (!is_array($banned_info)) {
-
-  $banned_info = array();
-
-  $db->query("SELECT * FROM " . USERPREFIX . "_banned");
-  while ($row = $db->get_row()) {
-
-    if ($row['users_id']) {
-
-      $banned_info['users_id'][$row['users_id']] = array(
-        'users_id' => $row['users_id'],
-        'descr' => stripslashes($row['descr']),
-        'date' => $row['date']
-      );
-    } else {
-
-      if (count(explode(".", $row['ip'])) == 4 or filter_var($row['ip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) or strpos($row['ip'], ":") !== false)
-        $banned_info['ip'][$row['ip']] = array(
-          'ip' => $row['ip'],
-          'descr' => stripslashes($row['descr']),
-          'date' => $row['date']
-        );
-      elseif (strpos($row['ip'], "@") !== false)
-        $banned_info['email'][$row['ip']] = array(
-          'email' => $row['ip'],
-          'descr' => stripslashes($row['descr']),
-          'date' => $row['date']
-        );
-      else $banned_info['name'][$row['ip']] = array(
-        'name' => $row['ip'],
-        'descr' => stripslashes($row['descr']),
-        'date' => $row['date']
-      );
-    }
-  }
-  set_vars("banned", $banned_info);
-  $db->free();
-}
 
 $category_skin = "";
 
@@ -683,8 +643,15 @@ if (isset($_GET['project'])) {
 
 if ($_SESSION['super_admin'])
   $member_id['user_group'] = 1;
-else
+else{
   $member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
+  if (empty($member_id['user_group'])&&isset($_GET['subaction'])&&$_GET['subaction']=='allnews'){
+    $member_id['user_group'] = 4;
+  }
+}
+
+
+$_SESSION['user_group'] = $member_id['user_group'];
 
 //if (empty($member_id[ 'user_group'])) $member_id[ 'user_group' ] = 5;
 
@@ -723,6 +690,10 @@ $tpl->set('{pm-link}', $PHP_SELF . "?do=pm");
 $tpl->set('{group}', $user_group[$member_id['user_group']]['group_prefix'] . $user_group[$member_id['user_group']]['group_name'] . $user_group[$member_id['user_group']]['group_suffix']);
 
 if ($is_logged) {
+
+  include_once ENGINE_DIR . '/modules/rolys.php';
+  compile_report_rolys($member_id['name']);
+  $_SESSION["roly"] = $mas_roly_name;
 
   $tpl->set('{login}', $member_id['name']);
   $tpl->set('{first_name}', $member_id['first_name']);

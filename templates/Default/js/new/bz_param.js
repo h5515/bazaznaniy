@@ -148,4 +148,10 @@ $("#idparambz li").on('click', function() {
         })
         $('.k-window-title').text('Удалить?')
     }
+    if (poper == 'edit_cat') {
+        if ($('#mobile_menu_btn').is(":visible") && ($('#cat_menu').css('visibility') === 'hidden')) {
+            $('#mobile_menu_btn').click();
+        }
+        $('.menueditcat').click();
+    }
 })

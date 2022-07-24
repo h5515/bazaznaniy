@@ -271,7 +271,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 
 			if ($member_id['user_id'] and $user_group[$member_id['user_group']]['allow_admin']) {
 
-				$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '91', '')");
+				//$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '91', '')");
 			}
 
 			$member_id = array();
@@ -456,7 +456,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 
 			if ($member_id['user_id'] and $user_group[$member_id['user_group']]['allow_admin']) {
 
-				$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '92', '')");
+				//$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '92', '')");
 			}
 
 			$member_id = array();
@@ -523,7 +523,7 @@ if ($is_logged) {
 
 		$row = $db->super_query("SELECT count(name) as count, favorites FROM dle_users WHERE name = '{$member_id['name']}'");
 		if ($row['count'] < 1) {
-			$db->query("INSERT INTO dle_users (user_id, name) VALUE ('{$member_id['user_id']}','{$member_id['name']}')");
+			$db->query("INSERT INTO dle_users (name) VALUE ('{$member_id['name']}')");
 		}else{
 			if (isset($row['favorites']))
 			$member_id['favorites'] = $row['favorites'];

@@ -107,26 +107,28 @@ if ( $news_id AND $area != "template" AND $area != "comments" ) {
 	}*/
 }
 //echo "---".$user_group[$member_id['user_group']]['edit_limit'];
-if ( $news_id AND $area == "comments" ) {
 
-	$row = $db->super_query( "SELECT id, user_id, date, is_register FROM " . PREFIX . "_comments WHERE id = '{$news_id}'" );
 
-	if ( !$row['id'] ) die( "Hacking attempt6!" );
+// if ( $news_id AND $area == "comments" ) {
 
-	$have_perm = 0;
-	$row['date'] = strtotime( $row['date'] );
+// 	$row = $db->super_query( "SELECT id, user_id, date, is_register FROM " . PREFIX . "_comments WHERE id = '{$news_id}'" );
+
+// 	if ( !$row['id'] ) die( "Hacking attempt6!" );
+
+// 	$have_perm = 0;
+// 	$row['date'] = strtotime( $row['date'] );
 	
-	if( ($member_id['user_id'] == $row['user_id'] AND $row['is_register'] AND $user_group[$member_id['user_group']]['allow_editc']) OR $user_group[$member_id['user_group']]['edit_allc'] ) {
-		$have_perm = 1;
-	}
+// 	if( ($member_id['user_id'] == $row['user_id'] AND $row['is_register'] AND $user_group[$member_id['user_group']]['allow_editc']) OR $user_group[$member_id['user_group']]['edit_allc'] ) {
+// 		$have_perm = 1;
+// 	}
 	
-	if ( $user_group[$member_id['user_group']]['edit_limit'] AND (($row['date'] + ($user_group[$member_id['user_group']]['edit_limit'] * 60)) < $_TIME) ) {
-		$have_perm = 0;
-	}
+// 	if ( $user_group[$member_id['user_group']]['edit_limit'] AND (($row['date'] + ($user_group[$member_id['user_group']]['edit_limit'] * 60)) < $_TIME) ) {
+// 		$have_perm = 0;
+// 	}
 	
-	if ( !$have_perm ) die( "Hacking attempt7!" );
+// 	if ( !$have_perm ) die( "Hacking attempt7!" );
 	
-}
+// }
 
 if( $area == "comments" ) {
 	$user_group[$member_id['user_group']]['allow_image_size'] = false;
@@ -352,7 +354,7 @@ if( $_POST['subaction'] == "deluploads" ) {
 		if( $row['images'] ) $db->query( "UPDATE " . PREFIX . "_images set images='{$row['images']}' WHERE author = '{$author}' AND news_id = '{$news_id}'" );
 		else $db->query( "DELETE FROM " . PREFIX . "_images WHERE news_id = '{$news_id}'" );
 
-		if ($user_group[$member_id['user_group']]['allow_admin']) $db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '32', '{$news_id}')" );
+		//if ($user_group[$member_id['user_group']]['allow_admin']) $db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '32', '{$news_id}')" );
 	
 	}
 
@@ -397,7 +399,7 @@ if( $_POST['subaction'] == "deluploads" ) {
 
 	if( $user_group[$member_id['user_group']]['admin_static'] AND is_array($_POST['static_files']) AND count( $_POST['static_files'] ) ) {
 
-		$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '33', '{$news_id}')" );
+		//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '33', '{$news_id}')" );
 		
 		foreach ( $_POST['static_files'] as $file ) {
 			

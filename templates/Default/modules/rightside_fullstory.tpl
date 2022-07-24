@@ -7,39 +7,22 @@
 		</div>
 	</div>-->
     <!-- История изменений -->
-    <div class="blockmy block top_block histortop">
-
-
-
-        <table width="100%" onClick="openhistory({category-id});return false;" class="teghover">
-            <tr class="tegtr">
-                <td width="100%" class="nowraps tegtr">
-                    <h6 class="tegiformcl">История изменений</h6>
-                    <h6 class="tegiformcl4" style="border-top: 1px none #D1D1D1;background:none;"></h6>
-                </td>
-                <td align="right" valign="bottom" class="tegtr"><img src="images/triangledown.png" width="12"
-                        height="12" class="tegimg" / id="idimgtags"></td>
-            </tr>
-        </table>
-
-        <!--<a href="#" onClick="opentegform();return false;" class="tegiformcl"><b>Теги</b></h6><div class="tgimg"></div>
-            </a>-->
-
-        <div id="idtags" class="csstags">
-            <div class="tag_list">
-                {history}
+    <div class="blockmy block top_block">
+        <div class="tegiformcl2">
+            <div class="fixnavig navclick">
+                <h6 class="tegiformcl">История изменений</h6>
+                <h6 class="tegiformcl4"></h6>
+                <img src="images/triangledown.png" width="12" height="12" class="tegimg" id="idimgtags">
             </div>
         </div>
+        <div class="navigat" lbs="history" style="display: none;">
+            {history}
+        </div>
     </div>
-    <script>
-      var first = getUrlVars()["vivid"];
-        if (first =='ok') {
-            openhistory(1);
-        }
-    </script>
+
     [/histor]
 
-    [related-news]
+    {* [related-news]
     <!-- Похожее -->
     <div class="block rel_block">
         <h4 class="title"><b>Похожее</b></h4>
@@ -48,10 +31,10 @@
         </ul>
     </div>
     <!-- / Похожее -->
-    [/related-news]
-    [poll]
+    [/related-news] *}
+    {* [poll]
     {poll}
-    [/poll]
+    [/poll] *}
     <!-- Баннер 300X250 -->
     <!--<div class="banner banner_300">
 	<img src="{THEME}/images/tmp/banner_300x250.png" alt="">
@@ -64,11 +47,81 @@
     <!-- / Баннер 240X400 -->
     [tags]
     <!-- Теги -->
-    <div class="block tags_block">
-        <h4 class="title"><b>Теги</b></h4>
-        <div class="tag_list">
-            {tags}
+    <div class="blockmy block top_block">
+        <div class="tegiformcl2">
+            <div class="fixnavig navclick">
+                <h6 class="tegiformcl">Теги</h6>
+                <h6 class="tegiformcl4"></h6>
+                <img src="images/triangledown.png" width="12" height="12" class="tegimg" id="idimgtags">
+            </div>
+        </div>
+        <div class="navigat" lbs="fulltags" style="display: none; margin-top:16px">
+            <div class="tag_list">
+                {tags}
+            </div>
         </div>
     </div>
     <!-- / Теги -->
-[/tags]
+    [/tags]
+
+    [poll]
+    <div class="blockmy block top_block">
+        <div class="tegiformcl2">
+            <div class="fixnavig navclick">
+                <h6 class="tegiformcl">Опрос</h6>
+                <h6 class="tegiformcl4"></h6>
+                <img src="images/triangledown.png" width="12" height="12" class="tegimg" id="idimgtags" style="transform:rotateX(180deg)">
+            </div>
+        </div>
+        <div class="navigat" lbs="opros" style="margin-top:16px">
+            <div class="tag_list">
+                {poll}
+            </div>
+        </div>
+    </div>
+    [/poll]
+
+    <script>
+        function loadblocktab(clelem) {
+            if (!$('[lbs=' + clelem + ']')[0])
+                return;
+            $el = $('[lbs=' + clelem + ']');
+            if ($.cookie(clelem) == 1) {
+                $el.css('display', 'block');
+                $el.closest('.blockmy').find('.fixnavig').find('#idimgtags').css('transform', 'rotateX(180deg)');
+            }
+            if ($.cookie(clelem) == 0){
+                $el.css('display', 'none');
+                $el.closest('.blockmy').find('.fixnavig').find('#idimgtags').css('transform', '');
+            }
+
+        }
+        loadblocktab('fulltags');
+        loadblocktab('opros');
+        $('.navclick').on('click', function() {
+            $el = $(this).closest('.blockmy').find('.navigat').eq(0);
+
+            if (!$el.is(":visible")) {
+                $(this).find("#idimgtags").css({
+                    '-webkit-transform': 'rotateX(180deg)'
+                });
+                $.cookie($el.attr('lbs'), '1', { expires: 365 });
+            } else {
+                $(this).find("#idimgtags").css({
+                    '-webkit-transform': 'rotateX(0deg)'
+                });
+                $.cookie($el.attr('lbs'), '0', { expires: 365 });
+            }
+
+            $el.slideToggle("fast", function() {
+                // Animation complete.
+            });
+
+        })[histor]
+        var first = getUrlVars()["vivid"];
+        if (first == 'ok') {
+            // openhistory(1);
+            $('.navclick').eq(0).click();
+        }
+        [/histor]
+</script>

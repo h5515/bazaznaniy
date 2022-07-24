@@ -1,0 +1,242 @@
+body {
+    background: #ffffff;
+}
+
+#header_menu {
+    background-color: #3c3c3c;
+}
+
+button.tlbutton {
+    background-color: #4c4c4c;
+}
+
+.tlbutton:hover {
+    border-color: #ffffff !important;
+    background-color: #00000038 !important;
+}
+
+#samomenu,
+#samomenu .k-menu-group {
+    background-color: #3c3c3c;
+    color: white;
+}
+
+#samomenu .k-link.k-hover,
+#samomenu .k-link:hover,
+#samomenu .k-item>.k-link.k-hover,
+#samomenu .k-item>.k-link:hover {
+    color: white;
+    background-color: #00000038;
+}
+
+#samomenu .k-menu-group .k-item>.k-link.k-hover,
+#samomenu .k-menu-group .k-item>.k-link:hover,
+#samomenu .k-menu.k-context-menu .k-item>.k-link.k-hover,
+#samomenu .k-menu.k-context-menu .k-item>.k-link:hover {
+    color: white;
+    background-color: #00000038;
+}
+
+.headeruz .k-menu-group,
+.headeruz .k-menu.k-context-menu {
+    background-color: #3c3c3c;
+    color: white;
+}
+
+.headeruz .k-menu-group .k-item>.k-link.k-hover,
+.headeruz .k-menu-group .k-item>.k-link:hover,
+.headeruz .k-menu.k-context-menu .k-item>.k-link.k-hover,
+.headeruz .k-menu.k-context-menu .k-item>.k-link:hover {
+    color: white;
+    background-color: #00000038;
+}
+
+.box,
+.comment {
+    border: 1px solid #bcbcbc;
+}
+
+.story>.meta {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgb(231 231 231 / 82%) 100%);
+}
+
+.clinputm>input {
+    background-color: #e7e7e7d1;
+    border: 1px solid #a7a7a7;
+}
+
+.btn,
+.bbcodes,
+.btn-border {
+    background-color: #6a6969;
+}
+
+.btn:hover,
+.bbcodes:hover,
+.ui-button:hover {
+    background-color: #494949;
+}
+
+textarea:focus,
+select:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: #7d7d7d;
+}
+
+.top_block {
+    background-color: #ffffff;
+    border: 1px solid #bcbcbc;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+
+.navigat>span>a {
+    border: 1px solid #bcbcbc;
+    box-shadow: none;
+}
+
+.navigat>span>a:hover {
+    background-color: #e0e0e0;
+    border-color: #7b7b7b;
+    box-shadow: none;
+    color: black;
+}
+
+.navigat>span>a:hover img {
+    filter: none;
+}
+
+.menu_on {
+    background-color: #ffffff;
+    box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 18%) 0px 0px 0px 1px;
+}
+
+.tegiformcl4 {
+    background: #c4c4c4;
+}
+
+#paramsearch,
+#opensort {
+    background-image: linear-gradient(rgb(106 105 105), rgb(91 91 91));
+    border-color: #7d7d7d;
+}
+
+#paramsearch:hover,
+#opensort:hover {
+    background-image: linear-gradient(rgb(96 96 96), rgb(43 43 43));
+}
+
+#idsvitr .k-switch-off .k-switch-track {
+    border-color: #a5a5a5 !important;
+    background-color: #f0ffff63 !important;
+}
+
+#idsvitr .k-switch-sm .k-switch-label-off {
+    color: #000000 !important;
+}
+
+.tag_list>span>a {
+    border: 1px solid #b7b7b7;
+    background-color: #efefef;
+}
+
+.tag_list>span>a:hover {
+    background-color: #d4d3d3;
+    color: black;
+    border-color: #6e6e6e;
+    box-shadow: none;
+}
+
+.tag_list>span {
+    box-shadow: none;
+}
+
+.tag_list2>span>a {
+    border: 1px solid #b7b7b7;
+    background-color: #efefef;
+}
+
+.tag_list2>span>a:hover {
+    background-color: #d4d3d3;
+    color: black;
+    border-color: #6e6e6e;
+    box-shadow: none;
+}
+
+.tag_list2>span {
+    box-shadow: none;
+}
+
+.tagshides {
+    background-color: #ecebeb;
+}
+
+.circlenews {
+    border: 1px solid #b8b8b8;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 30%, rgba(231, 231, 231, 1) 100%);
+}
+
+.shottitle {
+    color: #000000;
+}
+
+.clparsertu {
+    background-color: #ffffff !important;
+}
+
+.ios-ui-select.checked {
+    box-shadow: inset 0 0 0 14px #747474 !important;
+}
+
+.cat_menu .activ {
+    background-color: #dfdfdf;
+}
+
+#cat_menu::-webkit-scrollbar-thumb {
+    background-color: #85858591;
+}
+
+#cat_menu {
+    background-color: #ffffff;
+}
+
+.trhisactive {
+    background-color: #e4e4e4;
+}
+
+.trhis:hover {
+    color: #2047d9;
+    background-color: #e6e6e6;
+}
+
+.divhis {
+    border: 1px solid #6e6e6e;
+}
+
+.pages a:hover {
+    color: #000;
+    background-color: #d2d2d2;
+}
+
+.modbutclose {
+    color: #626262;
+}
+
+.modbutclose:hover {
+    color: #000000;
+}

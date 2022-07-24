@@ -28,8 +28,12 @@
 
     {* <link href="/kendo/styles/kendo.fiori.min.css?v=4" rel="stylesheet"> *}
     {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet">  *}
+    
     <link href="/kendo/styles/kendo.default-main.min.css?v=4" rel="stylesheet">
+    
     <link href="{THEME}/css/mykendo.css" rel="stylesheet" type="text/css">
+
+    {themecss}
 
     <script src="/kendo/js/kendo.all.min.js?v=11"></script>
     <script src="{THEME}/js/iziModal.js"></script>
@@ -44,7 +48,7 @@
     <script src="{THEME}/js/jquery.nestable.js"></script>
     <script src="{THEME}/js/formtooltip.js"></script>
     <script src="{THEME}/js/function.js"></script>
-
+    {AJAX}
   </head>
 
   <body>
@@ -96,7 +100,9 @@
                 [not-group=5]
                 <div class="chone center">
                   {* <a href="#"> <img src="images/ctonovogo.png"><span>Создать базу знаний</span></a> *}
+                  [dostup=Создать базу знаний]
                   <button type="button" id="addbz">Создать базу знаний</button>
+                  [/dostup=Создать базу знаний]
                   <div class="clmacategory">
                     <button type="button" data-role="button" categor="1" id="idvnut">Внутренние инструкции</button>
                     <button type="button" data-role="button" categor="2" id="idzac">Инструкции заказчика</button>
@@ -119,7 +125,7 @@
         </header>
         <!-- / Header -->
 
-        <div class="conteiner">
+        <div class="conteiner" [available=main] style="margin-top: 52px;" [/available]>
           <div class="midside">
             <section id="content"> {info}
               [page-title]
@@ -128,7 +134,7 @@
                 {page-description}
               </div>
               [/page-title]
-              [not-dostup]
+              
               [not-group=5]
               [available=lastcomments]
               <div class="box">
@@ -144,7 +150,7 @@
               [available=cat]
 
               <!-- Поиск -->
-
+              [not-dostup]
               <div class="q_search">
                 <div class="setting" onClick="onFoc()">
                   <div class="params">
@@ -239,7 +245,7 @@
                 </div>
                 <input type="hidden" name="do" value="search">
                 <input type="hidden" name="subaction" value="search">
-
+                [/not-dostup]
 
                 <div class="content_top">
                 [not-dostup]
@@ -281,7 +287,7 @@
 
                 <!--    <a href=""  data-izimodal-open="#modal" >Быстрый просмотр</a>
           <div id="modal" class="modais" data-izimodal-group="group1" data-iziModal-title="{title}" data-iziModal-icon="/images/logo.ico" data-izimodal-iframeURL="/index.php?newsid=1&stroka=ok"></div>-->
-                [/not-dostup]
+               
             </section>
             <!--{include file="modules/footside1.tpl"}-->
           </div>
@@ -323,7 +329,7 @@
     </div>
     [/available]
 
-    {AJAX}
+    
     <script src="{THEME}/js/lib.js"></script>
     <script src="{THEME}/js/new/new.js"></script>
     <script>
@@ -409,7 +415,7 @@ updateData({sectionId, questionId, questionList});
     <div id="layer"></div>
 
     <script>
-      $('.histortop').attr('style', 'margin-top:-70px;');
+      //$('.histortop').attr('style', 'margin-top:-70px;');
       $('.urlmetka').on('click', function() {
         //alert('per'+$(this).attr('data-url'));
         var destination = $(this).closest('.text').find('#per' + $(this).attr('data-url')).offset().top - 60;

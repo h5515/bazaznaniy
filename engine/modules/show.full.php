@@ -1073,7 +1073,9 @@ if( !defined('DATALIFEENGINE') ) {
 
 		$tpl->set( '{login}', $row['autor'] );
 
-		$tpl->set( '{author}', "<a onclick=\"ShowProfile('" . urlencode( $row['autor'] ) . "', '" . $go_page . "', '" . $user_group[$member_id['user_group']]['admin_editusers'] . "'); return false;\" href=\"" . $go_page . "\">" . $row['autor'] . "</a>" );
+		$use = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$row['autor']}'");
+
+		$tpl->set( '{author}', "<a onclick=\"ShowProfile('" . urlencode( $row['autor'] ) . "', '" . $go_page . "', '" . $user_group[$member_id['user_group']]['admin_editusers'] . "'); return false;\" href=\"" . $go_page . "\">" . $use['fullname'] . "</a>" );
 		
 		$_SESSION['referrer'] = htmlspecialchars($_SERVER['REQUEST_URI'], ENT_QUOTES, $config['charset'] );;
 		
@@ -2393,8 +2395,8 @@ HTML;
 		
 	} elseif( !$news_found AND !$perm ) {
 		@header( "HTTP/1.1 403 Forbidden" );
-		msgbox( $lang['all_err_1'], "<b>{$user_group[$member_id['user_group']]['group_name']}</b> " . $lang['news_err_28'] );
-		
+		//msgbox( $lang['all_err_1'], "<b>{$user_group[$member_id['user_group']]['group_name']}</b> " . $lang['news_err_28'] );
+		$dostup_bz = false;
 	} elseif( !$news_found ) {
 		
 		@header( "HTTP/1.1 404 Not Found" );
@@ -2727,14 +2729,15 @@ HTML;
 	
 	} elseif( $config['allow_comments'] ) {
 		
-		$lang['news_info_1'] = str_replace('{group}', $user_group[$member_id['user_group']]['group_name'], $lang['news_info_1'] );
+		// $lang['news_info_1'] = str_replace('{group}', $user_group[$member_id['user_group']]['group_name'], $lang['news_info_1'] );
 		
-		$tpl->load_template( 'info.tpl' );
-		$tpl->set( '{error}', $lang['news_info_1'] );
-		$tpl->set( '{group}', $user_group[$member_id['user_group']]['group_name'] );
-		$tpl->set( '{title}', $lang['all_info'] );
-		$tpl->compile( 'comments_not_allowed' );
-		$tpl->clear();
+		// $tpl->load_template( 'info.tpl' );
+		// $tpl->set( '{error}', $lang['news_info_1'] );
+		// $tpl->set( '{group}', $user_group[$member_id['user_group']]['group_name'] );
+		// $tpl->set( '{title}', $lang['all_info'] );
+		// $tpl->compile( 'comments_not_allowed' );
+		// $tpl->clear();
+		$tpl->result['comments_not_allowed'] = '';
 		
 		if ( strpos ( $tpl->result['content'], "<!--dleaddcomments-->" ) !== false ) {
 

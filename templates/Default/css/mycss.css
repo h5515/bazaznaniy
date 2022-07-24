@@ -2,8 +2,8 @@
     display: inline-block;
     border-radius: 3px;
     padding: .3em .5em;
-    border: 1px solid #CCC;
-    background: #F3F3F3;
+    border: 1px solid #3394e6;
+    background: #deedff;
     margin: .2em;
     font-size: .85em;
     color: black;
@@ -15,8 +15,9 @@
 }
 
 .tags-look .tagify__dropdown__item:hover {
-    background: lightyellow;
-    border-color: gold;
+    background: #0053df;
+    border-color: #3292e3;
+    color: white;
 }
 
 .tagify--outside {

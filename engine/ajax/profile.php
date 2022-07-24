@@ -40,7 +40,7 @@ if (!$name ) die("Hacking attempt!");
 
 if( preg_match( "/[\||\'|\<|\>|\"|\!|\?|\$|\@|\/|\\\|\&\~\*\+]/", $name ) ) die("Not allowed user name!");
 
-$row = $db->super_query( "SELECT * FROM " . USERPREFIX . "_users WHERE name = '{$name}'" );
+$row = $db_gl->super_query( "SELECT * FROM " . USERPREFIX . "_users WHERE name = '{$name}'" );
 
 if (!$row['user_id']) {
 

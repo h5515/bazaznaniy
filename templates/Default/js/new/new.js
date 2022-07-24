@@ -17,7 +17,7 @@ $('#addbz').click(function() {
     addbz = $('#addbzwindow').kendoWindow({
         width: '500px',
         title: 'Создать базу знаний',
-        content: '/tpl/add_bz.html',
+        content: '/tpl/add_bz.php',
         visible: false,
         modal: true,
         pinned: false,

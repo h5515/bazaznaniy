@@ -2389,12 +2389,49 @@ function get_url($id)
 	return $url;
 }
 
+function get_idcategocomment($id)
+{
+	global $db;
+	$row = $db->super_query("SELECT post_id FROM dle_comments WHERE id = $id");
+	return get_idcat_post($row['post_id']);
+}
+
+function get_idcat_post($id)
+{
+	global $db;
+	$row = $db->super_query("SELECT category FROM dle_post WHERE id = $id");
+	$cat = explode(',',$row['category']);
+	return $cat[0];
+}
+
 function get_idcategories($id, $cat = null)
 {
 
-	global $cat_info;
+	global $cat_info, $db;
 
 	if (!$id) return;
+
+	$cat_info = get_vars( "category" );
+		
+		if( ! is_array( $cat_info ) ) {
+			$cat_info = array ();
+			
+			$db->query( "SELECT * FROM " . PREFIX . "_category ORDER BY posi ASC" );
+			
+			while ( $row = $db->get_row() ) {
+				
+				if( !$row['active'] ) continue;
+				
+				$cat_info[$row['id']] = array ();
+				
+				foreach ( $row as $key => $value ) {
+					$cat_info[$row['id']][$key] = stripslashes( $value );
+				}
+			
+			}
+			set_vars( "category", $cat_info );
+			$db->free();
+		}
 
 	if (empty($cat))
 		$cat = $cat_info;
@@ -3065,6 +3102,7 @@ function deletenewsbyid($id, $arc)
 	} else {
 		$row = $db->super_query("SELECT user_id FROM " . PREFIX . "_post_extras WHERE news_id = '{$id}'");
 
+		if (empty($_SESSION['dbname']))
 		$db->query("UPDATE " . USERPREFIX . "_users SET news_num=news_num-1 WHERE user_id='{$row['user_id']}'");
 
 		$db->query("DELETE FROM " . PREFIX . "_post WHERE id='{$id}'");
@@ -3131,7 +3169,7 @@ function deletenewsbyid($id, $arc)
 
 		$db->query("DELETE FROM " . PREFIX . "_files WHERE news_id = '{$id}'");
 
-		$sql_result = $db->query("SELECT user_id, favorites FROM " . USERPREFIX . "_users WHERE favorites LIKE '%{$id}%'");
+		$sql_result = $db->query("SELECT name, favorites FROM " . USERPREFIX . "_users WHERE favorites LIKE '%{$id}%'");
 
 		while ($row = $db->get_row($sql_result)) {
 
@@ -3146,7 +3184,7 @@ function deletenewsbyid($id, $arc)
 			if (count($new_fav)) $new_fav = $db->safesql(implode(",", $new_fav));
 			else $new_fav = "";
 
-			$db->query("UPDATE " . USERPREFIX . "_users SET favorites='{$new_fav}' WHERE user_id='{$row['user_id']}'");
+			$db->query("UPDATE " . USERPREFIX . "_users SET favorites='{$new_fav}' WHERE user_id='{$row['name']}'");
 		}
 	}
 }
@@ -3902,17 +3940,30 @@ function check_adgrup()
 
 function check_dostup($cat, $projcet, $roly)
 {
-	global $member_id;
+	global $member_id, $db_gl;
 	$dostup = true;
+	if (!is_array($roly)){
+		$rop = array();
+		$rop[] = $roly;
+		$roly = $rop;
+	}
 	if (isset($_SESSION['super_admin']) && $_SESSION['super_admin']) $dostup = true;
 	else {
 		if (isset($member_id['dostup'])) {
-			if ($cat == 1)
-				if ($member_id['dostup'][$cat][$projcet]['roly'] != $roly)
+			if ($cat == 1){
+				$projcet = get_idcategories($projcet);
+				if (!in_array($member_id['dostup'][$cat][$projcet]['roly'], $roly))
 					$dostup = false;
-			if ($cat == 2)
-				if ($member_id['dostup'][$cat][$projcet]['roly'] != $roly)
+			}
+			if ($cat == 2) {
+				if (!is_numeric($projcet)) {
+					$projcet = $db_gl->super_query("SELECT id FROM dle_project WHERE project = '{$projcet}'")['id'];
+					if (empty($projcet))
+						$projcet = 0;
+				}
+				if (!in_array($member_id['dostup'][$cat][$projcet]['roly'], $roly))
 					$dostup = false;
+			}
 		} else $dostup = false;
 	}
 	return $dostup;

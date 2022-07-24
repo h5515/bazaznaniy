@@ -79,7 +79,7 @@ if ((isset($bzid)) || ($_SESSION['super_admin'])) {
     }
 }
 
-$html = "<li><a href='\'><span class='cover titavatar' style='background-image: url(images/logo.ico);background-size: contain;width:20px;height:20px;'></span>На главную</a></li>";
+//$html = "<li><a href='\'><span class='cover titavatar' style='background-image: url(images/logo.ico);background-size: contain;width:20px;height:20px;'></span>На главную</a></li>";
 
 $name_category = $_GET['category'];
 $name_project = $_GET['project'];
@@ -121,19 +121,20 @@ if ($name_project != 'false') {
         $prj = $scat_id;
 }
 
-if ((isset($prj) && check_dostup($cat, $prj, 1))||$_SESSION['super_admin']){
-    if ($cat == 2){
-        $sr = "'{$scat_id}','{$prj}'";
-        $prog = "project='$name_project' project_id='$prj'";
-    }else{    
-        $sr = "'{$prj}',''";
-        $prog = '';
-    }
-    
-    $html .= "
-    <li>Параметры
+$param = "";
+if ($cat == 2) {
+    $sr = "'{$scat_id}','{$prj}'";
+    $prog = "project='$name_project' project_id='$prj'";
+} else {
+    $sr = "'{$prj}',''";
+    $prog = '';
+}
+if ((isset($prj) && check_dostup($cat, $prj, 1)) || $_SESSION['super_admin']) {
+    $param = "
+    <li><span class='k-icon k-i-gears'></span>Параметры
     <ul id='idparambz' sid='$scat_id' cat='$cat' idcat='$scat_id' $prog>
     <li><a href='#' onclick=\"ondostup('$namebz',{$sr},'$cat');return false;\" class='deldostup'><span class='k-icon k-i-lock'></span><span>Доступ</span></a></li>
+    <li><span class='k-icon k-i-wrench'></span><span class='popmenu' elem='edit_cat'> Редактировать категории </span></li>
     <li><span class='k-icon k-i-edit-tools'></span><span class='popmenu' elem='edit_name'> Редактировать имя </span></li>
     <li><span class='k-icon k-i-image-edit'></span><span class='popmenu' elem='edit_obl'> Изменить обложку </span></li>
     <li><span class='k-icon k-i-file-zip'></span><span class='popmenu' elem='arhive' id='idmenarch'> Архивировать </span></li>
@@ -145,20 +146,37 @@ if ((isset($prj) && check_dostup($cat, $prj, 1))||$_SESSION['super_admin']){
     ";
 }
 
-if ($obs != '' && $zak != '') {
-    $html .= "
-    <li><a href='#' onclick='return false;' style='justify-content: space-between;'>Внутренние инструкции</a>
-    <ul>$obs</ul></li>
-    <li><a href='#' onclick='return false;' style='justify-content: space-between;'>Инструкции заказчика</a>
-    <ul>$zak</ul></li>
-    ";
-} else {
-    $html .= $obs . $zak;
+if (isset($prj) && check_dostup($cat, $prj, 2)&& !$_SESSION['super_admin']) {
+    $param = "
+    <li><span class='k-icon k-i-gears'></span>Параметры
+    <ul id='idparambz' sid='$scat_id' cat='$cat' idcat='$scat_id' $prog>
+    <li><span class='k-icon k-i-wrench'></span><span class='popmenu' elem='edit_cat'> Редактировать категории </span></li>
+    <li><span class='k-icon k-i-apply-format'></span><span class='popmenu' elem='clearcash'> Очистить кэш </span></li>
+    </ul>
+    </li>
+    <script src='/templates/Default/js/new/bz_param.js'></script>";
 }
+
+if ($param == "" && ($obs == '' || $zak == ''))
+    $html .= $obs . $zak;
+else {
+    if ($obs != '') {
+        $html .= "
+    <li><a href='#' onclick='return false;' style='justify-content: space-between;'>Внутренние инструкции</a>
+    <ul>$obs</ul></li>";
+    }
+    if ($zak != '') {
+        $html .= "<li><a href='#' onclick='return false;' style='justify-content: space-between;'>Инструкции заказчика</a>
+    <ul>$zak</ul></li>";
+    }
+}
+// } else {
+//     $html .= $obs . $zak;
+// }
 //<span class='k-icon k-i-user'>
 
 $data = array(
-    "html" => $html,
+    "html" => $html.$param,
     "script" => "$('.menubz').kendoMenu();
     if ($('[gbar=true]')[0])
         $('#idmenarch').text(' Восстановить ').attr('elem', 'noarhive');

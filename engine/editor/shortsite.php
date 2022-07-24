@@ -123,6 +123,10 @@ if ($config['allow_site_wysiwyg'] == "1") {
 	$sql = "SELECT full FROM dle_draft WHERE id = {$id} AND user = '{$p_name}'";
 	$his = $db->super_query($sql);
 
+	$prjlink = '';
+	if (isset($_COOKIE['dbname']))
+	$prjlink = '&project=' . $_COOKIE['dbname'];
+
 	if (isset($his['full'])){
 		$history = 'dlehistory';
 		$buts = 3;
@@ -157,7 +161,7 @@ HTML;
 	histor = '{$history}';
 	buts = {$buts};
 	
-	Activeeditor('.wysiwygeditor','short_story',150,null, 1500);
+	Activeeditor('.wysiwygeditor','short_story',150,null, 1500, '$prjlink');
 	
 HTML;
 	/* $onload_scripts[] = <<<HTML

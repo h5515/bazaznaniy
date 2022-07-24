@@ -60,7 +60,7 @@ if( $action == "dorebuild" AND $id) {
 	$db->query( "UPDATE " . PREFIX . "_post SET comm_num='0' WHERE id ='{$id}'" );
 	
 	clear_cache();
-	$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '20', '$id')" );
+	//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '20', '$id')" );
 	
 	msg( "success", $lang['massusers_head_1'], $lang['mass_delokc'], $_SESSION['admin_referrer'] );
 
@@ -86,7 +86,7 @@ if( $action == "dorebuild" AND $id) {
 	
 	clear_cache( array('news_', 'full_', 'comm_', 'rss') );
 
-	$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '21', '')" );
+	//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '21', '')" );
 	
 	msg( "success", $lang['mass_head'], $lang['mass_delokc'], "?mod=comments&action=edit&id={$id}" );
 

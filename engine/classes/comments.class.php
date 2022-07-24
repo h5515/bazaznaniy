@@ -110,7 +110,7 @@ class DLE_Comments {
 	}	
 	
 	function compile_comment( $tpl, $row, $area, $indent ) {
-		global $config, $is_logged, $member_id, $user_group, $lang, $dle_login_hash, $_TIME, $allow_comments_ajax, $ajax_adds, $news_date, $news_author, $replace_links, $category_id, $banners;
+		global $config, $db_gl, $is_logged, $member_id, $user_group, $lang, $dle_login_hash, $_TIME, $allow_comments_ajax, $ajax_adds, $news_date, $news_author, $replace_links, $category_id, $banners;
 
 		$PHP_SELF = $config['http_home_url'] . "index.php";
 				
@@ -154,8 +154,10 @@ class DLE_Comments {
 
 			$go_page = "onclick=\"ShowProfile('" . urlencode( $row['name'] ) . "', '" . htmlspecialchars( $go_page, ENT_QUOTES, $config['charset'] ) . "', '" . $user_group[$member_id['user_group']]['admin_editusers'] . "'); return false;\"";
 
-			if( $config['allow_alt_url'] ) $tpl->set( '{author}', "<a {$go_page} href=\"" . $config['http_home_url'] . "user/" . urlencode( $row['name'] ) . "/\">" . $row['name'] . "</a>" );
-			else $tpl->set( '{author}', "<a {$go_page} href=\"$PHP_SELF?subaction=userinfo&amp;user=" . urlencode( $row['name'] ) . "\">" . $row['name'] . "</a>" );
+			$use = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$row['name']}'")['fullname'];
+
+			if( $config['allow_alt_url'] ) $tpl->set( '{author}', "<a {$go_page} href=\"" . $config['http_home_url'] . "user/" . urlencode( $row['name'] ) . "/\">" . $use . "</a>" );
+			else $tpl->set( '{author}', "<a {$go_page} href=\"$PHP_SELF?subaction=userinfo&amp;user=" . urlencode( $row['name'] ) . "\">" . $use . "</a>" );
 
 			$tpl->set( '{login}', $row['name'] );
 			$tpl->set( '[/profile]', "</a>" );
@@ -510,7 +512,7 @@ class DLE_Comments {
 
 			$tpl->set( '{lastdate}', langdate( "j.m.Y", $row['lastdate'] ) );
 
-			if ( ($row['lastdate'] + 1200) > $_TIME OR ($row['user_id'] AND $row['user_id'] == $member_id['user_id'])) {
+			if ( ($row['lastdate'] + 7000) > $_TIME ) {
 
 				$tpl->set( '[online]', "" );
 				$tpl->set( '[/online]', "" );

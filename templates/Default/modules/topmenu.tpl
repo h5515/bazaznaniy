@@ -10,7 +10,7 @@
     onClick="ShowModal('Добавить статью','/index.php?do=addnews&category={category-id}{link-project}&stroka=ok',55798,'add','','true');return false;"
     id="idaddnew"><span class='k-icon k-i-plus-outline' style="margin-right: 6px;font-size: 19px;"
         title="Добавить статью"></span><span id="addidname">Добавить статью</span></a> *}
-<button id="addidname" class="tlbutton k-button k-button-md k-rounded-md k-button-solid k-button-solid-info" title="Добавить статью" onclick="ShowModal('Добавить статью','/index.php?do=addnews&category={category-id}{link-project}&stroka=ok',55798,'add','','true');" style="margin-right: 3px;"><span class="k-icon k-i-plus-outline"></span>Добавить статью</button>
+<button id="addidname" class="tlbutton k-button k-button-md k-rounded-md k-button-solid k-button-solid-info" title="Добавить статью" onclick="ShowModal('','/index.php?do=addnews&category={category-id}{link-project}&stroka=ok',55798,'add','','true');" style="margin-right: 3px;"><span class="k-icon k-i-plus-outline"></span>Добавить статью</button>
 [/available]
 [/group]
 [not-group=5]

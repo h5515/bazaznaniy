@@ -45,7 +45,7 @@
 				[treecomments] 
 				<li class="reply grey" title="Ответить">[reply]<svg class="icon icon-reply"><use xlink:href="#icon-reply"></use></svg><span>Ответить</span>[/reply]</li>
 				[/treecomments]
-				<li class="complaint" title="Жалоба">[complaint]<svg class="icon icon-bad"><use xlink:href="#icon-bad"></use></svg><span class="title_hide">Жалоба</span>[/complaint]</li>
+				{* <li class="complaint" title="Жалоба">[complaint]<svg class="icon icon-bad"><use xlink:href="#icon-bad"></use></svg><span class="title_hide">Жалоба</span>[/complaint]</li> *}
 				[not-group=5] 
 				<li class="edit_btn" title="Редактировать">[com-edit]<i title="Редактировать">Редактировать</i>[/com-edit]</li>
 				<li class="del" title="Удалить">[com-del]<svg class="icon icon-cross"><use xlink:href="#icon-cross"></use></svg><span class="title_hide">Удалить</span>[/com-del]</li>

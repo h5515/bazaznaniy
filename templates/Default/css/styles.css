@@ -736,7 +736,7 @@ body {
     /* padding: 0 35px 0 0; */
     margin-left: -350px;
     position: relative;
-    margin-top: -30px;
+    margin-top: 16px;
 }
 
 [_nghost-my-app-c56] .link-preview__text[_ngcontent-my-app-c56] {
@@ -758,12 +758,12 @@ body {
 /* --- Шапка сайта --- */
 
 #header {
-    margin-bottom: 25px;
+    /* margin-bottom: 67px; */
 }
 
 #header,
 #header_menu {
-    height: 55px;
+    height: 35px;
 }
 
 .header {
@@ -1264,7 +1264,7 @@ body {
         left: 0;
         top: 0;
         bottom: 0;
-        margin-top: 30px;
+        margin-top: 35px;
         /* margin-bottom: 20px; */
     }
     #cat_menu::-webkit-scrollbar {
@@ -1285,6 +1285,7 @@ body {
         height: 50px;
         background-color: #3074e691;
         border-radius: 3px;
+        /* border-style: unset; */
     }
     #cat_menu::-webkit-scrollbar-corner {
         background-color: #999;
@@ -1309,6 +1310,7 @@ body {
     }
     #nestable {
         padding-bottom: 25px;
+        /* margin-top: -7px; */
     }
     .cat_menu .leftimg {
         margin-bottom: 2px;
@@ -1330,16 +1332,26 @@ body {
     .cat_menu .catname {
         padding: 0 0 0 12px;
     }
+    .cat_menu a,
+    .cat_menu a span {
+        transition: all ease 0.20s;
+    }
     .cat_menu a:hover {
         color: #105894;
+        box-shadow: rgb(33 35 38 / 37%) 0px 10px 10px -10px;
+    }
+    .cat_menu a:hover img,
+    .cat_menu a:hover span {
         transform: scale(1.03);
+        /* font-weight: 600; */
     }
     .CatRig {
         /* position: relative; */
+        white-space: nowrap;
         transition: all ease 0.20s;
     }
     .cat_menu a:hover .CatRig {
-        margin-right: 3px;
+        /* margin-right: 3px; */
         transform: scale(1);
     }
     .cat_menu a:before,
@@ -1450,8 +1462,12 @@ body {
 
 .q_search {
     position: relative;
-    margin-top: -42px;
+    margin-top: 16px;
     padding-bottom: 10px;
+}
+
+.conteiner {
+    /* margin-top: 20px; */
 }
 
 .q_search>input {
@@ -2109,7 +2125,7 @@ input#story::-webkit-input-placeholder {
 }
 
 .fixed_story .story_icons {
-    /* z-index: 1; */
+    z-index: 1;
 }
 
 .story_icons>li {
@@ -2120,6 +2136,9 @@ input#story::-webkit-input-placeholder {
 .story .box_in>.text {
     font-size: 1.08em;
     overflow-x: auto;
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-bottom: 10px;
 }
 
 .story .box_in>.text:after {
@@ -2203,7 +2222,7 @@ input#story::-webkit-input-placeholder {
     padding-top: 2px;
     width: 16px;
     height: 0;
-    background-color: #919191;
+    background-color: #b9b9b9;
     overflow: hidden;
     display: block;
     margin: 3px 0;
@@ -2778,7 +2797,7 @@ ol.topnews>li>a:hover>b {
     margin-top: -10px;
     margin-bottom: 10px;
     border-radius: 15px;
-    background-color: #e5e5e5;
+    /* background-color: #e5e5e5; */
 }
 
 .block_grey>.title {
@@ -2793,7 +2812,7 @@ ol.topnews>li>a:hover>b {
 }
 
 .vote_list {
-    margin: 2% 0;
+    margin: 4% 0;
 }
 
 .vote_list .vote,
@@ -3139,7 +3158,7 @@ ol.topnews>li>a:hover>b {
 }
 
 .lastcomm>li>span .trun a {
-    color: #027c10;
+    color: #b55800;
 }
 
 .lastcomm>li>a>* {
@@ -3311,7 +3330,7 @@ ol.topnews>li>a:hover>b {
 .showfull .story {
     float: left;
     width: 100%;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 
 .showfull .story2 {
@@ -3327,7 +3346,7 @@ ol.topnews>li>a:hover>b {
 }
 
 .showfull #dle-content .rightside {
-    margin: 0 -350px 0 0;
+    margin: 10px -310px 0 0;
 }
 
 .showfull #dle-content .rightside .banner {
@@ -3372,7 +3391,7 @@ ol.topnews>li>a:hover>b {
 /* Форма добавления */
 
 .addcomment {
-    background-color: #f7f7f7;
+    /* background-color: #f7f7f7; */
     border-radius: 15px;
 }
 
@@ -3388,7 +3407,7 @@ ol.topnews>li>a:hover>b {
     width: 8%;
     padding: 10px 0;
     float: left;
-    margin-top: 4%;
+    /* margin-top: 4%; */
 }
 
 .plus_icon>span,
@@ -3504,6 +3523,7 @@ ul.ui-form>li:last-child {
 
 .form_submit {
     margin-top: 20px;
+    margin-bottom: 8px;
 }
 
 .form-sep {
@@ -3534,14 +3554,15 @@ ul.ui-form>li:last-child {
 .com_list {}
 
 .comment {
-    padding: 4% 4%;
+    padding: 2% 4%;
     position: relative;
     -webkit-transition: box-shadow ease .4s;
     transition: box-shadow ease 0.4s;
 }
 
 .com_list .comment {
-    border-top: 1px solid #efefef;
+    border: none;
+    border-top: 1px solid #c3c3c3;
     background-color: transparent;
     margin: 0;
     border-radius: 0;
@@ -3550,9 +3571,9 @@ ul.ui-form>li:last-child {
 }
 
 .comment:hover {
-    position: relative;
+    /* position: relative;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2); */
 }
 
 .avatar {
@@ -3570,7 +3591,7 @@ ul.ui-form>li:last-child {
 
 .comment .avatar {
     float: left;
-    margin-right: 15px;
+    margin-right: 5px;
     position: relative;
 }
 
@@ -3714,7 +3735,8 @@ ul.ui-form>li:last-child {
 
 #dle-comments-list>.comments-tree-list>li>.comments-tree-list {
     padding: 0 8%;
-    border-top: 1px solid #efefef;
+    /* border-top: 1px solid #efefef; */
+    background-color: #00000007;
 }
 
 #dle-comments-list>.comments-tree-list>li .comments-tree-list>li {
@@ -3728,7 +3750,7 @@ ul.ui-form>li:last-child {
 }
 
 .comments-tree-list>li>ol>li .comment {
-    padding: 30px 0;
+    padding: 2% 0;
     position: relative;
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -3750,7 +3772,7 @@ ul.ui-form>li:last-child {
     margin-left: -500px;
     left: 0;
     top: 0;
-    background-color: #efefef;
+    /* background-color: #efefef; */
 }
 
 .comments-tree-list>li>ol>li .comment:before {
@@ -4260,7 +4282,7 @@ td.search {
     }
     .showfull #dle-content .rightside {
         width: 240px;
-        margin-right: -290px;
+        margin-right: -253px;
     }
     #searchsuggestions {
         width: 100%;
@@ -5820,8 +5842,8 @@ a.button21:active {
 
 .divhis {
     border: 1px solid #005cbb;
-    padding: 2px;
-    border-radius: 10px;
+    padding: 0px 2px;
+    border-radius: 3px;
 }
 
 .divhisur {
@@ -5836,6 +5858,7 @@ a.button21:active {
 
 .tablehis {
     width: 100%;
+    font-size: 12px;
 }
 
 .catedit {
@@ -6578,18 +6601,19 @@ input[type="submit"] {
 
 #cat_menu {
     background-color: #e5f0fe;
+    padding-right: 3px;
 }
 
 .cat_menu .activ {
     background-color: gold;
     border: solid;
-    border-radius: 10px;
+    border-radius: 3px;
     border: 1px solid #050403;
     font-weight: 600;
 }
 
 #content {
-    margin-top: 10px;
+    /* margin-top: 20px; */
 }
 
 .tlbutton {
@@ -6630,18 +6654,24 @@ button.tlbutton {
     border-bottom-left-radius: 0;
 }
 
-#idaddcats {
-    margin: 3px 15%;
+.menubutcats {
+    margin: 0px 5px;
     padding: 0 6px;
     margin-top: -2px;
-    position: sticky;
-    top: 5px;
-    z-index: 1;
     background-color: #0053df;
     border-color: #afacac;
 }
 
-#idaddcats:hover {
+.topmenuedit {
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.menubutcats:hover {
     border-color: #ffffff !important;
     background-color: #013ea7 !important;
 }
@@ -6784,8 +6814,63 @@ span#idsvitr {
 
 .tagshides {
     padding: 0px 5px 5px 5px;
+    background-color: #dcebff;
 }
 
 .tagshides .clouds_xsmall {
     margin-right: 5px;
+}
+
+.headeruz .k-menu:not(.k-context-menu)>.k-item {
+    color: white !important;
+}
+
+.menuavatar:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.headeruz .k-menu-horizontal .k-menu-link {
+    border-style: none;
+    padding-bottom: 3px;
+}
+
+.headeruz .k-menu-group,
+.headeruz .k-menu.k-context-menu {
+    background-color: #0053df;
+    color: white;
+    /* width: 100%; */
+}
+
+.headeruz .k-animation-container {
+    /* width: 170px !important;
+    top: 33px !important;
+    left: 42px !important; */
+}
+
+.headeruz .headeruz .k-menu-group .k-item>.k-link.k-hover,
+.headeruz .k-menu-group .k-item>.k-link:hover,
+.headeruz .k-menu.k-context-menu .k-item>.k-link.k-hover,
+.headeruz .k-menu.k-context-menu .k-item>.k-link:hover {
+    color: white;
+    background-color: #013ea7;
+}
+
+@media (max-width: 980px) {
+    .headeruz .k-animation-container {
+        width: 157px !important;
+        top: 33px !important;
+        left: -81px !important;
+    }
+}
+
+.showfull .tag_list>span {
+    margin-right: 4px;
+}
+
+.meta ul.left {
+    margin-left: -4px;
 }

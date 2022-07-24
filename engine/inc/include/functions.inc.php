@@ -117,13 +117,15 @@ function check_login($username, $md5_password, $post = true, $check_log = false)
 
 			$username = $db->safesql(trim(htmlspecialchars(stripslashes($username), ENT_QUOTES, $config['charset'])));
 
-			if (version_compare($config['version_id'], "9.3", '>')) $db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $username . "', '{$_TIME}', '{$_IP}', '89', '')");
+			//if (version_compare($config['version_id'], "9.3", '>')) $db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $username . "', '{$_TIME}', '{$_IP}', '89', '')");
 		}
 	} else {
 
 		$username = intval($username);
+		$db_gl = new db;
 
-		$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='{$username}'");
+		$db_gl->connect(DBUSER, DBPASS, DBGNAME, DBHOST);
+		$member_id = $db_gl->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='{$username}'");
 
 		if ($member_id['user_id'] and $member_id['password'] and md5($member_id['password']) == $md5_password and $user_group[$member_id['user_group']]['allow_admin'] and $member_id['banned'] != 'yes') {
 
@@ -134,7 +136,7 @@ function check_login($username, $md5_password, $post = true, $check_log = false)
 
 			$member_id = array();
 
-			if (version_compare($config['version_id'], "9.3", '>')) $db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $username . "', '{$_TIME}', '{$_IP}', '90', '')");
+			//if (version_compare($config['version_id'], "9.3", '>')) $db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $username . "', '{$_TIME}', '{$_IP}', '90', '')");
 		}
 	}
 
@@ -1896,4 +1898,148 @@ if (!function_exists('password_hash')) {
 		}
 		return substr($binary_string, $start, $length);
 	}
+}
+
+function check_adgrup()
+{
+	global $member_id;
+	$db2 = new db;
+	$db2->connect(DBUSER, DBPASS, DBGNAME, DBHOST);
+	if (isset($member_id['grups']) && $member_id['grups'] != '') {
+		$rows = $db2->query("SELECT guid FROM hv_s_adgrup WHERE id in({$member_id['grups']}) AND guid<>'' AND guid is not null");
+		foreach ($rows as $key => $value) {
+			if (isset($member_id['ad_grup']))
+				$member_id['ad_grup'] .= ', ';
+			if (empty($member_id['ad_grup'])) $member_id['ad_grup'] = '';
+
+			$member_id['ad_grup'] .= "'" . $value['guid'] . "'";
+		}
+	} else
+		$member_id['ad_grup'] = '';
+
+
+	if ($member_id['ad_grup'] != '')
+		$ad_grup = "OR ad_grup in({$member_id['ad_grup']})";
+	else
+		$ad_grup = '';
+
+	if (isset($member_id['manager']) && $member_id['manager'] != '')
+		$manager = "OR user_grup = '{$member_id['manager']}'";
+	else
+		$manager = '';
+
+	$rows = $db2->query("SELECT * FROM dle_cat_dostup WHERE user = '{$member_id['name']}' OR user_grup = '{$member_id['name']}' $manager $ad_grup ORDER BY roly");
+	foreach ($rows as $key => $value) {
+		if (empty($rols))
+			$rols = array();
+		$cat = $value['category'];
+		if ($cat == 1)
+			$bz = "{$value['id_category']}";
+		else
+			$bz = "{$value['project']}";
+		if (!isset($rols[$cat][$bz]['roly'])) {
+			if ($value['roly'] != 5) {
+				$rols[$cat][$bz] = array(
+					"id" => $value['id_category'],
+					"roly" => $value['roly'],
+					"category" => $value['category'],
+					"project" => $value['project']
+				);
+				if ($value['user'] != '')
+					$rols[$cat][$bz]['mod'] = 'user';
+				if ($value['user_grup'] != '' || $value['ad_grup'] != '')
+					$rols[$cat][$bz]['mod'] = 'grup';
+			}
+		} else {
+			if ($rols[$cat][$bz]['roly'] > $value['roly'] || ($value['user'] != '' && $value['roly'] != 5)) {
+				if ($rols[$cat][$bz]['mod'] != 'user') {
+					$rols[$cat][$bz] = array(
+						"id" => $value['id_category'],
+						"roly" => $value['roly'],
+						"category" => $value['category'],
+						"project" => $value['project']
+					);
+					if ($value['user'] != '')
+						$rols[$cat][$bz]['mod'] = 'user';
+					if ($value['user_grup'] != '' || $value['ad_grup'] != '')
+						$rols[$cat][$bz]['mod'] = 'grup';
+				}
+			}
+			if ($value['roly'] = '5') {
+				if ($rols[$cat][$bz]['mod'] != 'user')
+					unset($rols[$cat][$bz]);
+			}
+		}
+	}
+	if (isset($rols))
+		$member_id['dostup'] = $rols;
+
+	if (isset($rols['1']))
+		foreach ($rols['1'] as $key => $value) {
+			if (isset($member_id['spis_category']))
+				$member_id['spis_category'] .= ', ';
+			if (empty($member_id['spis_category'])) $member_id['spis_category'] = '';
+			$member_id['spis_category'] .= "'" . $value['id'] . "'";
+		}
+	if (isset($rols['2']))
+		foreach ($rols['2'] as $key => $value) {
+			if (isset($member_id['spis_project']))
+				$member_id['spis_project'] .= ', ';
+			if (empty($member_id['spis_project'])) $member_id['spis_project'] = '';
+			$member_id['spis_project'] .= "'" . $value['project'] . "'";
+		}
+	$db2->close();
+	$db2->free();
+}
+
+function get_bz($name_bz)
+{
+	global $db_gl;
+	$row = $db_gl->super_query("SELECT id FROM dle_project WHERE project = '{$name_bz}'");
+	if (isset($row['id']))
+		$rez = $row['id'];
+	else
+		$rez = 0;
+	return $rez;
+}
+
+function get_idcat_post($id)
+{
+	global $db;
+	$row = $db->super_query("SELECT category FROM dle_post WHERE id = $id");
+	$cat = explode(',',$row['category']);
+	return $cat[0];
+}
+
+function get_idcategories($id, $cat = null)
+{
+
+	global $cat_info;
+
+	if (!$id) return;
+
+	if (empty($cat))
+		$cat = $cat_info;
+
+	$parent_id = $cat[$id]['parentid'];
+
+	$list = $cat[$id]['id'];
+
+
+	while ($parent_id) {
+
+		$list = $cat[$parent_id]['id'];
+
+		$parent_id = $cat[$parent_id]['parentid'];
+
+		if (!$cat[$parent_id]['id']) {
+			break;
+		}
+
+		if ($parent_id) {
+			if ($cat[$parent_id]['parentid'] == $cat[$parent_id]['id']) break;
+		}
+	}
+
+	return $list;
 }

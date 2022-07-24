@@ -70,7 +70,7 @@ if($_POST['action'] == "create") {
 
 	if(file_exists($root.$template."/".$file.".tpl") ) { echo $lang['template_create_err']; die();}
 
-	$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '69', '{$template}/{$file}.tpl')" );
+	//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '69', '{$template}/{$file}.tpl')" );
 
 	$handle = fopen( $root.$template."/".$file.".tpl", "w" );
 	fwrite( $handle, "" );
@@ -111,7 +111,7 @@ if($_POST['action'] == "create") {
 
 	if(!is_writable($root.$file_path."/".$file_name)) { echo $lang['template_edit_fail']; die (); }
 
-	$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '70', '{$file_path}/{$file_name}')" );
+	//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '70', '{$file_path}/{$file_name}')" );
 
 	$handle = fopen( $root.$file_path."/".$file_name, "w" );
 	fwrite( $handle, $_POST['content'] );

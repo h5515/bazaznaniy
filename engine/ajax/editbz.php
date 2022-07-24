@@ -503,7 +503,7 @@ if ( !$allow_addnews ) {
 
         if ( $approve ) {
 
-          $db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql( $member_id[ 'name' ] ) . "', '{$_TIME}', '{$_IP}', '1', '{$title}')" );
+          //$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql( $member_id[ 'name' ] ) . "', '{$_TIME}', '{$_IP}', '1', '{$title}')" );
 
         }
 

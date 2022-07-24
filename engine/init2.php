@@ -203,9 +203,9 @@ $user_group = get_vars("usergroup");
 if (!is_array($user_group)) {
 	$user_group = array();
 
-	$db->query("SELECT * FROM " . USERPREFIX . "_usergroups ORDER BY id ASC");
+	$db_gl->query("SELECT * FROM " . USERPREFIX . "_usergroups ORDER BY id ASC");
 
-	while ($row = $db->get_row()) {
+	while ($row = $db_gl->get_row()) {
 
 		$user_group[$row['id']] = array();
 
@@ -481,46 +481,6 @@ if ($config['category_newscount']) {
 //####################################################################################################################
 //    The definition of banned users and IP
 //####################################################################################################################
-$banned_info = get_vars("banned");
-
-if (!is_array($banned_info)) {
-
-	$banned_info = array();
-
-	$db->query("SELECT * FROM " . USERPREFIX . "_banned");
-	while ($row = $db->get_row()) {
-
-		if ($row['users_id']) {
-
-			$banned_info['users_id'][$row['users_id']] = array(
-				'users_id' => $row['users_id'],
-				'descr' => stripslashes($row['descr']),
-				'date' => $row['date']
-			);
-		} else {
-
-			if (count(explode(".", $row['ip'])) == 4 or filter_var($row['ip'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) or strpos($row['ip'], ":") !== false)
-				$banned_info['ip'][$row['ip']] = array(
-					'ip' => $row['ip'],
-					'descr' => stripslashes($row['descr']),
-					'date' => $row['date']
-				);
-			elseif (strpos($row['ip'], "@") !== false)
-				$banned_info['email'][$row['ip']] = array(
-					'email' => $row['ip'],
-					'descr' => stripslashes($row['descr']),
-					'date' => $row['date']
-				);
-			else $banned_info['name'][$row['ip']] = array(
-				'name' => $row['ip'],
-				'descr' => stripslashes($row['descr']),
-				'date' => $row['date']
-			);
-		}
-	}
-	set_vars("banned", $banned_info);
-	$db->free();
-}
 
 $category_skin = "";
 
@@ -744,14 +704,6 @@ if (!$is_logged) $member_id['user_group'] = 5;
 
 // if (empty($member_id['user_group'])) $member_id['user_group'] = 5;
 
-
-if (isset($banned_info['ip'])) $blockip = check_ip($banned_info['ip']);
-else $blockip = false;
-
-if (($is_logged and $member_id['banned'] == "yes") or $blockip) {
-
-	include_once(DLEPlugins::Check(ENGINE_DIR . '/modules/banned.php'));
-}
 
 if ($do == "preview") {
 

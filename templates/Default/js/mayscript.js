@@ -318,6 +318,7 @@ function AllTag(Category, Comand) {
         category: Category,
         comand: Comand,
         search: "" + Search,
+        sertext: $('.clinputm #story').val(),
         tagson: tagon,
         tagcheck: tagc,
         command: comand,
@@ -387,8 +388,8 @@ function Clearsearch() {
     }
     tempkey = '';
     tagify.removeAllTags();
-    AllTag(tempcat, 'search');
     document.getElementById("story").value = "";
+    AllTag(tempcat, 'search');
     tcomand = tagres(tagify2);
 
     if (tcomand == "") {
@@ -821,6 +822,7 @@ function ShowModal(Title, URL, ID, Group, Comand, Full) {
             if (Comand == 'reload') {
                 window.location.reload();
             }
+            $('.modbutclose').remove();
         },
         onFullscreen: function() {
             $(document).on('fullscreen', '#modalID' + str, function(e, modal) {
@@ -834,8 +836,16 @@ function ShowModal(Title, URL, ID, Group, Comand, Full) {
 
         }
     });
+    if (Title != '') {
+        $("#modalID" + str).iziModal('setTitle', Title);
+    } else {
+        $("#modalID" + str).append("<span class='modbutclose k-icon k-i-x-outline'></span>");
+        $('.modbutclose').unbind();
+        $('.modbutclose').on('click', function() {
+            $("#modalID" + str).iziModal('close');
+        })
+    }
 
-    $("#modalID" + str).iziModal('setTitle', Title);
     /*$("#modal").iziModal('setSubtitle',"SubTitle : " + Title);*/
     $('#modalID' + str).iziModal('open');
 

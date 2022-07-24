@@ -21,49 +21,6 @@ if(!defined('DATALIFEENGINE')) {
 
 require_once (DLEPlugins::Check(ENGINE_DIR . '/classes/templates.class.php'));
 
-$banned_info = get_vars ( "banned" );
-
-if (!is_array ( $banned_info )) {
-	$banned_info = array ();
-	
-	$db->query ( "SELECT * FROM " . USERPREFIX . "_banned" );
-	while ( $row = $db->get_row () ) {
-		
-		if ($row['users_id']) {
-			
-			$banned_info['users_id'][$row['users_id']] = array (
-																'users_id' => $row['users_id'], 
-																'descr' => stripslashes ( $row['descr'] ), 
-																'date' => $row['date'] );
-		
-		} else {
-			
-			if (count ( explode ( ".", $row['ip'] ) ) == 4)
-				$banned_info['ip'][$row['ip']] = array (
-														'ip' => $row['ip'], 
-														'descr' => stripslashes ( $row['descr'] ), 
-														'date' => $row['date']
-														);
-			elseif (strpos ( $row['ip'], "@" ) !== false)
-				$banned_info['email'][$row['ip']] = array (
-															'email' => $row['ip'], 
-															'descr' => stripslashes ( $row['descr'] ), 
-															'date' => $row['date'] );
-			else $banned_info['name'][$row['ip']] = array (
-															'name' => $row['ip'], 
-															'descr' => stripslashes ( $row['descr'] ), 
-															'date' => $row['date'] );
-		
-		}
-	
-	}
-	set_vars ( "banned", $banned_info );
-	$db->free ();
-}
-
-if ( check_ip ( $banned_info['ip'] ) ) die("error");
-if ($is_logged AND $member_id['banned'] == "yes") die("error");
-
 if ( !$config['allow_registration'] ) {
 	$dle_login_hash = sha1( SECURE_AUTH_KEY . $_IP );
 }

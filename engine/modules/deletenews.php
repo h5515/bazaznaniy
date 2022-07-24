@@ -55,7 +55,7 @@ if ($is_logged) {
 
 			$allow_list = explode( ',', $user_group[$member_id['user_group']]['cat_add'] );
 			$category = explode( ',', $row['category'] );
-				$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '26', '".$db->safesql($row['title'])."')" );
+			//	$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '26', '".$db->safesql($row['title'])."')" );
 			/*foreach ( $category as $selected ) {
 	
 				if( $allow_list[0] != "all" AND !in_array( $selected, $allow_list ) AND $member_id['user_group'] != 1 ) {

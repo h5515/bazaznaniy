@@ -61,7 +61,7 @@ if( $action == "save" ) {
 	$db->query( "UPDATE " . PREFIX . "_email SET template='$wait_mail_text', use_html='$wait_mail_html' WHERE name='wait_mail'" );
 	$db->query( "UPDATE " . PREFIX . "_email SET template='$twofactor_text', use_html='$twofactor_html' WHERE name='twofactor'" );
 	
-	$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '31', '')" );
+	//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '31', '')" );
 	
 	msg( "success", $lang['mail_addok'], $lang['mail_addok_1'], "?mod=email" );
 
