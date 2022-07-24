@@ -332,12 +332,6 @@ body {
     --tag-remove-bg: rgb(121 87 87 / 61%);
 }
 
-<<<<<<< HEAD
 .lastcomm span a {
     color: #0053df;
-=======
-.addtags .tagify__tag {
-    /* border: 1px solid #3394e6; */
-    /* border-radius: 2px; */
->>>>>>> 6a126fa5f2a924520200e33189a827e70656c3ca
 }
