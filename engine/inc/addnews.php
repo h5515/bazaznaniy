@@ -502,7 +502,6 @@ HTML;
 	}
 	
 	// XFields Call
-	//фффaaa
 	$xfieldsaction = "list";
 	$xfieldsadd = true;
 	$news_id = 0;

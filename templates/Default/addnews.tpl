@@ -157,9 +157,12 @@
 				</div>
 				[/sec_code]
 				<!--onClick="proverload('start')"-->
-				<button class="btn btn-big" type="submit" name="add"><b>Отправить</b></button>
-				<button class="btn-border btn-big" onclick="preview()" type="submit"
-					name="nview"><b>Предпросмотр</b></button>
+				<div id="idbutinit">
+				<button type="submit" data-role="button" class="k-button-solid-primary" name="add">Отправить</button>
+				<button onclick="preview()" type="submit" data-role="button"
+					name="nview">Предпросмотр</button>
+				</div>
+				<script>kendo.init("#idbutinit");</script>
 			</div>
 		</div>
 	</div>
