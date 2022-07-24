@@ -2222,7 +2222,7 @@ input#story::-webkit-input-placeholder {
     padding-top: 2px;
     width: 16px;
     height: 0;
-    background-color: #919191;
+    background-color: #b9b9b9;
     overflow: hidden;
     display: block;
     margin: 3px 0;
@@ -2797,7 +2797,7 @@ ol.topnews>li>a:hover>b {
     margin-top: -10px;
     margin-bottom: 10px;
     border-radius: 15px;
-    background-color: #e5e5e5;
+    /* background-color: #e5e5e5; */
 }
 
 .block_grey>.title {
@@ -2812,7 +2812,7 @@ ol.topnews>li>a:hover>b {
 }
 
 .vote_list {
-    margin: 2% 0;
+    margin: 4% 0;
 }
 
 .vote_list .vote,
@@ -3158,7 +3158,7 @@ ol.topnews>li>a:hover>b {
 }
 
 .lastcomm>li>span .trun a {
-    color: #027c10;
+    color: #b55800;
 }
 
 .lastcomm>li>a>* {
@@ -6872,5 +6872,5 @@ span#idsvitr {
 }
 
 .meta ul.left {
-    margin-left: -26px;
+    margin-left: -4px;
 }

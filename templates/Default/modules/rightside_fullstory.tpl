@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="navigat" lbs="history" style="display: none;">
-                {history}
+            {history}
         </div>
     </div>
 
@@ -48,57 +48,80 @@
     [tags]
     <!-- Теги -->
     <div class="blockmy block top_block">
-    <div class="tegiformcl2">
-        <div class="fixnavig navclick">
-            <h6 class="tegiformcl">Теги</h6>
-            <h6 class="tegiformcl4"></h6>
-            <img src="images/triangledown.png" width="12" height="12" class="tegimg" id="idimgtags">
+        <div class="tegiformcl2">
+            <div class="fixnavig navclick">
+                <h6 class="tegiformcl">Теги</h6>
+                <h6 class="tegiformcl4"></h6>
+                <img src="images/triangledown.png" width="12" height="12" class="tegimg" id="idimgtags">
+            </div>
+        </div>
+        <div class="navigat" lbs="fulltags" style="display: none; margin-top:16px">
+            <div class="tag_list">
+                {tags}
+            </div>
         </div>
     </div>
-    <div class="navigat" lbs="fulltags" style="display: none; margin-top:16px">
-    <div class="tag_list">
-        {tags}
-        </div>
-    </div>
-</div>
     <!-- / Теги -->
-[/tags]
+    [/tags]
 
-<script>
-	function loadblocktab(clelem){
-		if ($.cookie(clelem)==1){
-			$el = $('[lbs='+clelem+']');
-			$el.css('display','block');
-			$el.closest('.blockmy').find('.fixnavig').find('#idimgtags').css('transform', 'rotateX(180deg)');
-		}
+    [poll]
+    <div class="blockmy block top_block">
+        <div class="tegiformcl2">
+            <div class="fixnavig navclick">
+                <h6 class="tegiformcl">Опрос</h6>
+                <h6 class="tegiformcl4"></h6>
+                <img src="images/triangledown.png" width="12" height="12" class="tegimg" id="idimgtags" style="transform:rotateX(180deg)">
+            </div>
+        </div>
+        <div class="navigat" lbs="opros" style="margin-top:16px">
+            <div class="tag_list">
+                {poll}
+            </div>
+        </div>
+    </div>
+    [/poll]
 
-	}
-    loadblocktab('fulltags');
-$('.navclick').on('click', function() {
-    $el = $(this).closest('.blockmy').find('.navigat').eq(0);
+    <script>
+        function loadblocktab(clelem) {
+            if (!$('[lbs=' + clelem + ']')[0])
+                return;
+            $el = $('[lbs=' + clelem + ']');
+            if ($.cookie(clelem) == 1) {
+                $el.css('display', 'block');
+                $el.closest('.blockmy').find('.fixnavig').find('#idimgtags').css('transform', 'rotateX(180deg)');
+            }
+            if ($.cookie(clelem) == 0){
+                $el.css('display', 'none');
+                $el.closest('.blockmy').find('.fixnavig').find('#idimgtags').css('transform', '');
+            }
 
-    if (!$el.is(":visible")) {
-        $(this).find("#idimgtags").css({
-            '-webkit-transform': 'rotateX(180deg)'
-        });
-        $.cookie($el.attr('lbs'), '1', { expires: 365 });
-    } else {
-        $(this).find("#idimgtags").css({
-            '-webkit-transform': 'rotateX(0deg)'
-        });
-        $.cookie($el.attr('lbs'), '0', { expires: 365 });
-    }
+        }
+        loadblocktab('fulltags');
+        loadblocktab('opros');
+        $('.navclick').on('click', function() {
+            $el = $(this).closest('.blockmy').find('.navigat').eq(0);
 
-    $el.slideToggle("fast", function() {
-        // Animation complete.
-    });
+            if (!$el.is(":visible")) {
+                $(this).find("#idimgtags").css({
+                    '-webkit-transform': 'rotateX(180deg)'
+                });
+                $.cookie($el.attr('lbs'), '1', { expires: 365 });
+            } else {
+                $(this).find("#idimgtags").css({
+                    '-webkit-transform': 'rotateX(0deg)'
+                });
+                $.cookie($el.attr('lbs'), '0', { expires: 365 });
+            }
 
-})
-[histor]
-var first = getUrlVars()["vivid"];
-if (first == 'ok') {
-    // openhistory(1);
-    $('.navclick').eq(0).click();
-}
-[/histor]
+            $el.slideToggle("fast", function() {
+                // Animation complete.
+            });
+
+        })[histor]
+        var first = getUrlVars()["vivid"];
+        if (first == 'ok') {
+            // openhistory(1);
+            $('.navclick').eq(0).click();
+        }
+        [/histor]
 </script>

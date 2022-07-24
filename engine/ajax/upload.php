@@ -354,7 +354,7 @@ if( $_POST['subaction'] == "deluploads" ) {
 		if( $row['images'] ) $db->query( "UPDATE " . PREFIX . "_images set images='{$row['images']}' WHERE author = '{$author}' AND news_id = '{$news_id}'" );
 		else $db->query( "DELETE FROM " . PREFIX . "_images WHERE news_id = '{$news_id}'" );
 
-		if ($user_group[$member_id['user_group']]['allow_admin']) $db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '32', '{$news_id}')" );
+		//if ($user_group[$member_id['user_group']]['allow_admin']) $db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '32', '{$news_id}')" );
 	
 	}
 
@@ -399,7 +399,7 @@ if( $_POST['subaction'] == "deluploads" ) {
 
 	if( $user_group[$member_id['user_group']]['admin_static'] AND is_array($_POST['static_files']) AND count( $_POST['static_files'] ) ) {
 
-		$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '33', '{$news_id}')" );
+		//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '33', '{$news_id}')" );
 		
 		foreach ( $_POST['static_files'] as $file ) {
 			

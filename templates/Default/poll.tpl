@@ -8,10 +8,12 @@
 		<div class="vote_votes grey">Проголосовало: {votes}</div>
 	[/voted]
 	[not-voted]
-		<button title="Голосовать" class="btn btn-white" type="submit" onclick="doPoll('vote', '{news-id}'); return false;" ><b>Голосовать</b></button>
-		<button title="Результаты опроса" class="btn-border" type="button" onclick="doPoll('results', '{news-id}'); return false;">
-			<svg class="icon icon-votes"><use xlink:href="#icon-votes"></use></svg>
-			<span class="title_hide">Результаты опроса</span>
+		<div id="butgrupopros">
+		<button title="Голосовать" data-role="button" class="k-button-solid-primary" type="submit" onclick="doPoll('vote', '{news-id}'); return false;" ><b>Голосовать</b></button>
+		<button title="Результаты опроса" data-role="button" type="button" onclick="doPoll('results', '{news-id}'); return false;">
+		<span class="k-icon k-i-align-left" style="font-size: 21px;"></span>
 		</button>
+		</div>
+		<script>kendo.init("#butgrupopros");</script>
 	[/not-voted]
 </div>

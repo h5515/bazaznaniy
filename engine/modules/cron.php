@@ -23,7 +23,7 @@ if( !defined('DATALIFEENGINE') ) {
 set_vars( "cron", $_TIME );
 
 if( $cron == 1 ) {
-	$db->query( "DELETE FROM " . PREFIX . "_spam_log WHERE is_spammer = '0'" );
+	//$db->query( "DELETE FROM " . PREFIX . "_spam_log WHERE is_spammer = '0'" );
 }
 
 if( $config['cache_count'] ) {
@@ -45,11 +45,11 @@ if( $config['cache_count'] ) {
 if( $cron == 2 ) {
 	
 	$db->query( "TRUNCATE TABLE " . PREFIX . "_login_log" );
-	$db->query( "TRUNCATE TABLE " . PREFIX . "_flood" );
+//	$db->query( "TRUNCATE TABLE " . PREFIX . "_flood" );
 	$db->query( "TRUNCATE TABLE " . PREFIX . "_mail_log" );
 	$db->query( "TRUNCATE TABLE " . PREFIX . "_read_log" );
-	$db->query( "TRUNCATE TABLE " . PREFIX . "_spam_log" );
-	$db->query( "TRUNCATE TABLE " . PREFIX . "_banners_logs" );
+//	$db->query( "TRUNCATE TABLE " . PREFIX . "_spam_log" );
+//	$db->query( "TRUNCATE TABLE " . PREFIX . "_banners_logs" );
 
 	$row = $db->super_query( "SELECT COUNT(*) as count FROM " . PREFIX . "_lostdb" );
 	
@@ -63,7 +63,7 @@ if( $cron == 2 ) {
 		$catalog = $_COOKIE['dbname'];
 		$catl = $_COOKIE['dbname'].'/';
 	}
-	$db->query( "DELETE FROM " . USERPREFIX . "_banned WHERE days != '0' AND date < '$_TIME' AND users_id = '0'" );
+	//$db->query( "DELETE FROM " . USERPREFIX . "_banned WHERE days != '0' AND date < '$_TIME' AND users_id = '0'" );
 	@unlink( ENGINE_DIR . '/cache/system/'.$catl.'banned.php' );
 	
 	$sql_cron = $db->query( "SELECT * FROM " . PREFIX . "_post_log WHERE expires <= '" . $_TIME . "'" );
@@ -109,7 +109,7 @@ if( $cron == 2 ) {
 			$row_title = $db->super_query( "SELECT title  FROM " . PREFIX . "_post WHERE id='{$row['news_id']}'" );
 			$row_title = $db->safesql( $row_title['title'] );
 
-			$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('dle_cron_auto', '{$_TIME}', 'localhost', '96', '{$row_title}')" );
+			//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('dle_cron_auto', '{$_TIME}', 'localhost', '96', '{$row_title}')" );
 
 			deletenewsbyid( $row['news_id'] );
 
@@ -130,10 +130,10 @@ if( $cron == 2 ) {
 
 			$db->query( "DELETE FROM " . USERPREFIX . "_pm WHERE user_from = '{$row['name']}' AND folder = 'outbox'" );
 			$db->query( "DELETE FROM " . USERPREFIX . "_pm WHERE user='{$row['user_id']}'" );
-			$db->query( "DELETE FROM " . USERPREFIX . "_banned WHERE users_id='{$row['user_id']}'" );
+			//$db->query( "DELETE FROM " . USERPREFIX . "_banned WHERE users_id='{$row['user_id']}'" );
 			$db->query( "DELETE FROM " . USERPREFIX . "_users WHERE user_id = '{$row['user_id']}'" );
-			$db->query( "DELETE FROM " . USERPREFIX . "_social_login WHERE uid='{$row['user_id']}'" );
-			$db->query( "DELETE FROM " . USERPREFIX . "_ignore_list WHERE user='{$row['user_id']}' OR user_from='{$row['name']}'" );
+			//$db->query( "DELETE FROM " . USERPREFIX . "_social_login WHERE uid='{$row['user_id']}'" );
+			//$db->query( "DELETE FROM " . USERPREFIX . "_ignore_list WHERE user='{$row['user_id']}' OR user_from='{$row['name']}'" );
 			$db->query( "DELETE FROM " . PREFIX . "_logs WHERE `member` = '{$row['name']}'" );
 			$db->query( "DELETE FROM " . PREFIX . "_comment_rating_log WHERE `member` = '{$row['name']}'" );
 			$db->query( "DELETE FROM " . PREFIX . "_vote_result WHERE name = '{$row['name']}'" );

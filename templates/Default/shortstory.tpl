@@ -17,12 +17,12 @@
             </ul>
 
 
-            <h2 class="title">
+            <h2 class="title" style="width: 100%">
             <div class="titglaz" onclick="ShowModal('{title}','{full-link}&stroka=ok{vived}&cluck={news-id}',{news-id}, 'Grup');" title="Быстрый просмотр"><span class="k-icon k-i-eye"></span></div>
             <div class="tittarget" onclick="window.open('{full-link}', '_blank');" title="Открыть в новой вкладке"><span class="k-icon k-i-hyperlink-open-sm"></span></div>
             [no-redact]
-            <a href="{full-link}">[/no-redact]
-                    <span class="newtitle">{title}</span>[no-redact]</a>[/no-redact]</h2>
+            <a href="{full-link}" >[/no-redact]
+                    <div class="newtitle" style="width: 100%">{title}</div>[no-redact]</a>[/no-redact]</h2>
             <div class="imagc" ><div class="absimac" onClick="ShowNews('{news-id}');" title="Развернуть, свернуть статью"></div><a href="#" onClick="ShowNews('{news-id}'); return false;"><span class='imagc1 k-icon k-i-caret-alt-down' id="imagid2{news-id}"></span></a>
             <span class="aricocl k-icon k-i-caret-alt-expand"></span>
             </div>

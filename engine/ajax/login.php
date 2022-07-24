@@ -458,7 +458,7 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 
 			if ($member_id['user_id'] and $user_group[$member_id['user_group']]['allow_admin']) {
 
-				$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '92', '')");
+				//$db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $db->safesql($member_id['name']) . "', '{$_TIME}', '{$_IP}', '92', '')");
 			}
 
 			$member_id = array();

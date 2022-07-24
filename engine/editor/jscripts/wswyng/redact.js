@@ -1,5 +1,5 @@
-function Activeeditor(elem, upload_area, height_min, sheight = null, autosaves = 0) {
-
+function Activeeditor(elem, upload_area, height_min, sheight = null, autosaves = 0, linc = '') {
+    console.log(111)
     comment = new FroalaEditor(elem, {
         key: "1C%kZV[IX)_SL}UJHAEFZMUJOYGYQE[\\ZJ]RAe(+%$==",
         attribution: false,
@@ -68,7 +68,7 @@ function Activeeditor(elem, upload_area, height_min, sheight = null, autosaves =
         imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif', 'webp'],
         imageDefaultWidth: 0,
         imageInsertButtons: ['imageBack', '|', 'imageByURL', 'imageUpload'],
-        imageUploadURL: 'engine/ajax/controller.php?mod=upload',
+        imageUploadURL: 'engine/ajax/controller.php?mod=upload' + linc,
         imageUploadParam: 'qqfile',
         imageUploadParams: { "subaction": "upload", "news_id": id, "area": upload_area, "author": p_name, "mode": "quickload", "user_hash": logincache },
         imageMaxSize: maxsize * 1024,

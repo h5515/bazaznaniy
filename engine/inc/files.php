@@ -73,7 +73,7 @@ if( $action == "doimagedelete" ) {
 			@unlink( $config_path_image_upload . "/thumbs/" . $image );
 			@unlink( $config_path_image_upload . "/medium/" . $image );
 	
-			$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '37', '{$image}')" );
+			//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '37', '{$image}')" );
 	
 		}
 	}

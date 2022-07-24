@@ -3102,6 +3102,7 @@ function deletenewsbyid($id, $arc)
 	} else {
 		$row = $db->super_query("SELECT user_id FROM " . PREFIX . "_post_extras WHERE news_id = '{$id}'");
 
+		if (empty($_SESSION['dbname']))
 		$db->query("UPDATE " . USERPREFIX . "_users SET news_num=news_num-1 WHERE user_id='{$row['user_id']}'");
 
 		$db->query("DELETE FROM " . PREFIX . "_post WHERE id='{$id}'");
@@ -3168,7 +3169,7 @@ function deletenewsbyid($id, $arc)
 
 		$db->query("DELETE FROM " . PREFIX . "_files WHERE news_id = '{$id}'");
 
-		$sql_result = $db->query("SELECT user_id, favorites FROM " . USERPREFIX . "_users WHERE favorites LIKE '%{$id}%'");
+		$sql_result = $db->query("SELECT name, favorites FROM " . USERPREFIX . "_users WHERE favorites LIKE '%{$id}%'");
 
 		while ($row = $db->get_row($sql_result)) {
 
@@ -3183,7 +3184,7 @@ function deletenewsbyid($id, $arc)
 			if (count($new_fav)) $new_fav = $db->safesql(implode(",", $new_fav));
 			else $new_fav = "";
 
-			$db->query("UPDATE " . USERPREFIX . "_users SET favorites='{$new_fav}' WHERE user_id='{$row['user_id']}'");
+			$db->query("UPDATE " . USERPREFIX . "_users SET favorites='{$new_fav}' WHERE user_id='{$row['name']}'");
 		}
 	}
 }

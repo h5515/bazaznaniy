@@ -2395,8 +2395,8 @@ HTML;
 		
 	} elseif( !$news_found AND !$perm ) {
 		@header( "HTTP/1.1 403 Forbidden" );
-		msgbox( $lang['all_err_1'], "<b>{$user_group[$member_id['user_group']]['group_name']}</b> " . $lang['news_err_28'] );
-		
+		//msgbox( $lang['all_err_1'], "<b>{$user_group[$member_id['user_group']]['group_name']}</b> " . $lang['news_err_28'] );
+		$dostup_bz = false;
 	} elseif( !$news_found ) {
 		
 		@header( "HTTP/1.1 404 Not Found" );

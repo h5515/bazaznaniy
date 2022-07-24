@@ -65,39 +65,7 @@ if( $is_logged ) {
 	$mail = $db->safesql($member_id['email']);
 } else {
 	
-	if( is_array($banned_info['name']) AND count( $banned_info['name'] ) ) foreach ( $banned_info['name'] as $banned ) {
 
-		$banned['name'] = str_replace( '\*', '.*', preg_quote( $banned['name'], "#" ) );
-
-		if( $banned['name'] and preg_match( "#^{$banned['name']}$#i", $name ) ) {
-
-			if( $banned['descr'] ) {
-				$lang['reg_err_21'] = str_replace( "{descr}", $lang['reg_err_22'], $lang['reg_err_21'] );
-				$lang['reg_err_21'] = str_replace( "{descr}", $banned['descr'], $lang['reg_err_21'] );
-			} else
-				$lang['reg_err_21'] = str_replace( "{descr}", "", $lang['reg_err_21'] );
-
-			$stop[] = $lang['reg_err_21'];
-			$CN_HALT = TRUE;
-		}
-	}
-	
-	if( is_array($banned_info['email']) AND count( $banned_info['email'] ) ) foreach ( $banned_info['email'] as $banned ) {
-
-		$banned['email'] = str_replace( '\*', '.*', preg_quote( $banned['email'], "#" ) );
-
-		if( $banned['email'] AND preg_match( "#^{$banned['email']}$#i", $mail ) ) {
-
-			if( $banned['descr'] ) {
-				$lang['reg_err_23'] = str_replace( "{descr}", $lang['reg_err_22'], $lang['reg_err_23'] );
-				$lang['reg_err_23'] = str_replace( "{descr}", $banned['descr'], $lang['reg_err_23'] );
-			} else
-				$lang['reg_err_23'] = str_replace( "{descr}", "", $lang['reg_err_23'] );
-
-			$stop[] = $lang['reg_err_23'];
-			$CN_HALT = TRUE;
-		}
-	}
 	
 }
 

@@ -28,7 +28,9 @@
 
     {* <link href="/kendo/styles/kendo.fiori.min.css?v=4" rel="stylesheet"> *}
     {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet">  *}
+    
     <link href="/kendo/styles/kendo.default-main.min.css?v=4" rel="stylesheet">
+    
     <link href="{THEME}/css/mykendo.css" rel="stylesheet" type="text/css">
 
     {themecss}
@@ -98,7 +100,9 @@
                 [not-group=5]
                 <div class="chone center">
                   {* <a href="#"> <img src="images/ctonovogo.png"><span>Создать базу знаний</span></a> *}
+                  [dostup=Создать базу знаний]
                   <button type="button" id="addbz">Создать базу знаний</button>
+                  [/dostup=Создать базу знаний]
                   <div class="clmacategory">
                     <button type="button" data-role="button" categor="1" id="idvnut">Внутренние инструкции</button>
                     <button type="button" data-role="button" categor="2" id="idzac">Инструкции заказчика</button>
@@ -130,7 +134,7 @@
                 {page-description}
               </div>
               [/page-title]
-              [not-dostup]
+              
               [not-group=5]
               [available=lastcomments]
               <div class="box">
@@ -146,7 +150,7 @@
               [available=cat]
 
               <!-- Поиск -->
-
+              [not-dostup]
               <div class="q_search">
                 <div class="setting" onClick="onFoc()">
                   <div class="params">
@@ -241,7 +245,7 @@
                 </div>
                 <input type="hidden" name="do" value="search">
                 <input type="hidden" name="subaction" value="search">
-
+                [/not-dostup]
 
                 <div class="content_top">
                 [not-dostup]
@@ -283,7 +287,7 @@
 
                 <!--    <a href=""  data-izimodal-open="#modal" >Быстрый просмотр</a>
           <div id="modal" class="modais" data-izimodal-group="group1" data-iziModal-title="{title}" data-iziModal-icon="/images/logo.ico" data-izimodal-iframeURL="/index.php?newsid=1&stroka=ok"></div>-->
-                [/not-dostup]
+               
             </section>
             <!--{include file="modules/footside1.tpl"}-->
           </div>

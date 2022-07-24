@@ -57,8 +57,8 @@ $aviable = explode(',', $cots);
 if ($member_id['favorites'] && $category_id == '') {
   $tpl->set('{favorite-count}', count(explode(",", $member_id['favorites'])));
 } else {
-  if ($member_id['user_id']) {
-    $sql_fav = "SELECT favorites FROM dle_users WHERE user_id = '{$member_id['user_id']}'";
+  if ($member_id['name']) {
+    $sql_fav = "SELECT favorites FROM dle_users WHERE name = '{$member_id['name']}'";
     $db2 = new db;
     // $db2->connect(DBUSER, DBPASS, DBGNAME, DBHOST);
     $row2 = $db2->super_query($sql_fav);
@@ -485,7 +485,7 @@ $mytheme = 'Blue'; //Тема по умолчанию
 if ((stripos($tpl->copy_template, "{mytheme}") !== false) || (stripos($tpl->copy_template, "{themecss}") !== false)) {
   if (isset($member_id['name'])) {
     $theme = $db_gl->super_query("SELECT theme FROM dle_users WHERE name = '{$member_id['name']}'")['theme'];
-    if (isset($theme)) {
+    if (isset($theme)&&$theme!=$mytheme) {
       $mytheme = $theme;
       $tpl->set('{themecss}', '<link href="/templates/Default/css/theme/' . $theme . '.css" rel="stylesheet" type="text/css">');
     } else {
@@ -501,13 +501,15 @@ $config['http_home_url'] = reset($config['http_home_url']);
 
 if (!$user_group[$member_id['user_group']]['allow_admin']) $config['admin_path'] = "";
 
+if (empty($member_id['user_group'])) $member_id['user_group'] = 5;
+
 $ajax .= <<<HTML
 {$pm_alert}{$twofactor_alert}<script>
 <!--
 var dle_root       = '{$config['http_home_url']}';
 var dle_admin      = '{$config['admin_path']}';
 var dle_login_hash = '{$dle_login_hash}';
-//var dle_group      = {$member_id['user_group']};
+var dle_group      = {$member_id['user_group']};
 var mytheme        =  '{$mytheme}';
 var dle_skin       = '{$config['skin']}';
 var dle_wysiwyg    = '{$config['allow_comments_wysiwyg']}';

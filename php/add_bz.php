@@ -75,11 +75,6 @@ if ($_POST['category'] == 1)
 if ($_POST['category'] == '2')
     $prj = $_POST['project'];
 
-if (!check_dostup($_POST['category'], $prj, [1,2])) {
-    die("Error: Доступ запрещён.");
-}
-
-
 if ($_REQUEST['rezim'] == 'clearcash') {
     clear_all_caches();
     $scr = "notification('Кэш очищен.', 'success');";
@@ -106,6 +101,9 @@ $catimg = "";
 
 if ($_POST['category'] == 1) {
     if ($_REQUEST['rezim'] == 'arhive') {
+        if (!check_dostup($_POST['category'], $prj, 1)) {
+            die("Error: Доступ запрещён.");
+        }
         if (empty($_POST['idcategory'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
@@ -128,6 +126,9 @@ if ($_POST['category'] == 1) {
         die($scr);
     }
     if ($_REQUEST['rezim'] == 'noarhive') {
+        if (!check_dostup($_POST['category'], $prj, 1)) {
+            die("Error: Доступ запрещён.");
+        }
         if (empty($_POST['idcategory'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
@@ -150,6 +151,9 @@ if ($_POST['category'] == 1) {
         die($scr);
     }
     if ($_REQUEST['rezim'] == 'izmenobloz') {
+        if (!check_dostup($_POST['category'], $prj, [1,2])) {
+            die("Error: Доступ запрещён.");
+        }
         if (empty($_POST['idcategory'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
@@ -180,6 +184,9 @@ if ($_POST['category'] == 1) {
     }
 
     if ($_REQUEST['rezim'] == "delete") {
+        if (!check_dostup($_POST['category'], $prj, 1)) {
+            die("Error: Доступ запрещён.");
+        }
         $id = (int)$_POST['idcategory'];
         if ($id == 0) die("Error: Что-то пошло не так. Отсутствует ID базы.");
         load_catinfo();
@@ -206,6 +213,9 @@ if ($_POST['category'] == 1) {
         stop('Латинское имя базы знаний - <b>' . $p_baze . '</b> уже существует.');
     }
     if ($_REQUEST['rezim'] == 'izmenname') {
+        if (!check_dostup($_POST['category'], $prj, 1)) {
+            die("Error: Доступ запрещён.");
+        }
         if (empty($_POST['idcategory'])) {
             stop('Что-то пошло не так. Отсутствует ID базы.');
         }
@@ -214,6 +224,7 @@ if ($_POST['category'] == 1) {
         clear_all_caches();
         $scr = "$('[cat=1][idcat={$_POST['idcategory']}]').find('.shottitle').text('$p_name');";
         $scr .= "$('[cat=1][idcat={$_POST['idcategory']}]').find('.menuurl').attr('href','?do=cat&category={$p_baze}');";
+        $scr .= "if ($('#titlebzgl')[0]){ $('#titlebzgl').attr('href','?do=cat&category={$p_baze}'); $('#titlebzgl').find('.logo_title').text('{$p_name}') }";
         die($scr);
     } else {
         $catimg = saveimg();
@@ -229,6 +240,9 @@ if ($_POST['category'] == 1) {
 
 if ($_POST['category'] == 2) {
     if ($_REQUEST['rezim'] == 'arhive') {
+        if (!check_dostup($_POST['category'], $prj, 1)) {
+            die("Error: Доступ запрещён.");
+        }
         if (empty($_POST['idcategory'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
@@ -260,6 +274,9 @@ if ($_POST['category'] == 2) {
         die($scr);
     }
     if ($_REQUEST['rezim'] == 'noarhive') {
+        if (!check_dostup($_POST['category'], $prj, 1)) {
+            die("Error: Доступ запрещён.");
+        }
         if (empty($_POST['idcategory'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
@@ -291,6 +308,9 @@ if ($_POST['category'] == 2) {
         die($scr);
     }
     if ($_REQUEST['rezim'] == 'izmenobloz') {
+        if (!check_dostup($_POST['category'], $prj, [1,2])) {
+            die("Error: Доступ запрещён.");
+        }
         if (empty($_POST['idcategory'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
@@ -330,7 +350,9 @@ if ($_POST['category'] == 2) {
     }
 
     if ($_REQUEST['rezim'] == "delete") {
-
+        if (!check_dostup($_POST['category'], $prj, 1)) {
+            die("Error: Доступ запрещён.");
+        }
         if (empty($_POST['project'])) {
             $err = 'Error: Что-то пошло не так. Отсутствует ID базы.';
             die($err);
@@ -378,6 +400,9 @@ if ($_POST['category'] == 2) {
     }
 
     if ($_REQUEST['rezim'] == 'izmenname') {
+        if (!check_dostup($_POST['category'], $prj, 1)) {
+            die("Error: Доступ запрещён.");
+        }
         if (empty($_POST['project'])) {
             stop('Что-то пошло не так. Отсутствует имя проекта.');
         }

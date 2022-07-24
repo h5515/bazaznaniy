@@ -17,12 +17,12 @@
             </ul>
 
 
-            <h2 class="title">
+            <h2 class="title" style="width: 100%">
             <div class="titglaz" onclick="ShowModal('{titles}','{full-link}&stroka=ok&cluck={news-id}',{news-id});;" title="Быстрый просмотр"><span class="k-icon k-i-eye"></span></div>
             <div class="tittarget" onclick="window.open('{full-link}', '_blank');" title="Открыть в новой вкладке"><span class="k-icon k-i-hyperlink-open-sm"></span></div>
             [no-redact]
             <a href="{full-link}">[/no-redact]
-                    <span class="newtitle">{title}</span>[no-redact]</a>[/no-redact]</h2>
+                    <div class="newtitle" style="width: 100%">{title}</div>[no-redact]</a>[/no-redact]</h2>
             
         </div>
     </div>

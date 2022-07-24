@@ -184,6 +184,10 @@ if ($query != "") {
 
 $buffer = "";
 
+$tagshtml = '';
+$mastag = [];
+$posttag = explode(',', $_POST['tagson']);
+
 if ($_POST['command'] == 'favorit') {
   //  echo ('---------');
   $list = explode(",", $member_id['favorites']);
@@ -351,7 +355,7 @@ $array_words = preg_replace('/(ё|е)/ui', 'е', $array_words);
 
 $db->query($sql);
 
-
+$news_id = [];
 while ($row = $db->get_row()) {
 
   //$row['date'] = strtotime($row['date']);
@@ -362,7 +366,7 @@ while ($row = $db->get_row()) {
   //        $result2 = $db2->super_query( $sql2 );
   //        $cat = $result2['name'];
 
-
+  $news_id[] = $row['id'];
   if (!$row['category']) {
     $my_cat = "---";
     $my_cat_link = "---";
@@ -733,6 +737,7 @@ while ($row = $db->get_row()) {
 
     $tags = array();
 
+    
     $row['tags'] = explode(",", $row['tags']);
 
     foreach ($row['tags'] as $value) {
@@ -742,9 +747,15 @@ while ($row = $db->get_row()) {
 
       if ($config['allow_alt_url']) $tags[] = "<a href=\"" . $config['http_home_url'] . "tags/" . rawurlencode($url_tag) . "/\">" . $value . "</a>";
       else $tags[] = "<span class=\"clouds_xsmall\"><a href=\"#\" onClick=\"tagsclick('" . $value . "',this,$categorys)\">" . $value . "</a></span>";
+     
+      if (!in_array($value, $posttag)&&!in_array($value, $mastag)){
+        $tagshtml .= "<span class=\"clouds_xsmall\"><a href=\"#\" onClick=\"tagsclick('" . $value . "',this,$categorys)\">" . $value . "</a></span>";
+        $mastag[] = $value;
+      }
     }
 
     $tpl->set('{tags}', implode($config['tags_separator'], $tags));
+
   } else {
 
     $tpl->set_block("'\\[tags\\](.*?)\\[/tags\\]'si", "");
@@ -867,8 +878,8 @@ while ($row = $db->get_row()) {
 
   $use = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$row['autor']}'");
 
-	$tpl->set('{author}', "<a onclick=\"ShowProfile('" . urlencode($row['autor']) . "', '" . $go_page . "', '" . $user_group[$member_id['user_group']]['admin_editusers'] . "'); return false;\" href=\"" . $go_page . "\">" . $use['fullname'] . "</a>");
-		
+  $tpl->set('{author}', "<a onclick=\"ShowProfile('" . urlencode($row['autor']) . "', '" . $go_page . "', '" . $user_group[$member_id['user_group']]['admin_editusers'] . "'); return false;\" href=\"" . $go_page . "\">" . $use['fullname'] . "</a>");
+
   $allow_userinfo = true;     // and( $member_id[ 'name' ] == $row[ 'autor' ]and!$user_group[ $member_id[ 'user_group' ] ][ 'allow_all_edit' ] )
 
   if ($proxod) {
@@ -1232,8 +1243,8 @@ while ($row = $db->get_row()) {
     $tpl->copy_template = preg_replace("#\[not-image-(.+?)\]#i", "", $tpl->copy_template);
     $tpl->copy_template = preg_replace("#\[/not-image-(.+?)\]#i", "", $tpl->copy_template);
   }
-  $row['full_story'] = preg_replace( "'\[metka=(.*?)\]'si", "<span id='per\\1'></span>", $row['full_story'] );
-  $row['full_story'] = preg_replace( "'\[url_metka=(.*?)\](.*?)\[/url_metka\]'si", "<a href='#' class='urlmetka' data-url='\\1'>\\2</a>", $row['full_story'] );
+  $row['full_story'] = preg_replace("'\[metka=(.*?)\]'si", "<span id='per\\1'></span>", $row['full_story']);
+  $row['full_story'] = preg_replace("'\[url_metka=(.*?)\](.*?)\[/url_metka\]'si", "<a href='#' class='urlmetka' data-url='\\1'>\\2</a>", $row['full_story']);
 
 
   $row['title'] = stripslashes($row['title']);
@@ -1435,8 +1446,13 @@ while ($row = $db->get_row()) {
     $til = str_replace('Ё', 'Е', $til);
     $til = str_replace('ё', 'е', $til);
 
+    $codec = mb_detect_encoding($til, "auto");
+
     if ($slovcheck == 'true') {
+      if ($codec == 'UTF-8')
       $pos = mb_stripos($til, $array_words, 0, 'UTF-8');
+      else
+      $pos = stripos($til, $array_words, 0);
     } else {
       $searavi = array();
       $searavi = explode(' ', $array_words);
@@ -1448,17 +1464,24 @@ while ($row = $db->get_row()) {
 
       // $til = $row[ 'full_story' ];
 
-      if ($pos - 300 <= 0) {
+      if ($pos - 200 <= 0) {
         $pos = 0;
       } else {
-        $pos = $pos - 300;
+        $pos = $pos - 200;
       }
 
-      $til = iconv('UTF-8', 'windows-1251', $til);
-      $til = substr($til, $pos, 600);
+      if ($codec != 'UTF-8'){
+      $til = iconv('UTF-8', 'windows-1251', $til);      
+      $til = substr($til, $pos, 400);
+      }else{
+        $til = mb_substr($til, $pos, 400);
+      }
 
+
+      if ($codec != 'UTF-8')
       $til = iconv('windows-1251', 'UTF-8', $til);
 
+      
 
       //  echo $til;
 
@@ -1519,7 +1542,16 @@ if ($config['files_allow']) if (strpos($tpl->result['main'], "[attachment=") !==
   $tpl->result['main'] = show_attach($tpl->result['main'], $attachments);
 }
 
+//$tags = $db
+
+$_SESSION['sernews_id'] = $news_id;
+
 echo $tpl->result['main'];
+
+// if ($_POST['tagcheck']=='true')
+// $scriptag = "$('.tag_list').html(`$tagshtml`);";
+// else
+// $scriptag = '';
 
 echo "
 <script>
@@ -1531,5 +1563,5 @@ $('.urlmetka').unbind();
     return false;
   })
 </script>
-<script src='templates/Default/js/rascras.js'></script> 
 ";
+//<script src='templates/Default/js/rascras.js'></script> 

@@ -1129,6 +1129,7 @@ function FastSearch(cat, sor, dir) {
                 $("#searchsuggestions2").html('');
                 $(".storykorotk2").attr('class', 'storykorotk');
                 $("#idkolich").hide();
+                AllTag(tempcat, 'search');
                 proversvitch();
             } else {
                 dle_do_search('', cat, tempsort, tempdir, tagon, '', tempcomand);
@@ -1191,6 +1192,7 @@ function dle_do_search(a, cat, sor, dir, tagon, slovch, comand) {
             of: "#story",
             collision: "fit flip"*/
         });
+        AllTag(tempcat, 'search');
         $("#idkolich").text($(".kolichestvo").length);
         $("#idkolich").show();
         $("#indload").hide();
@@ -1350,7 +1352,7 @@ function media_upload(a, b, c, d) {
         resizable: !1,
         dialogClass: "modalfixed dle-popup-upload",
         open: function(g, h) {
-            $("#mediaupload").html("<iframe name='mediauploadframe' id='mediauploadframe' width='100%' height='580' src='" + dle_root + "engine/ajax/controller.php?mod=upload&area=" + a + "&author=" + b + "&news_id=" + c + "&wysiwyg=" + d + "&skin=" + dle_skin + "&rndval=" + e + "' frameborder='0' marginwidth='0' marginheight='0' allowtransparency='true'></iframe>");
+            $("#mediaupload").html("<iframe name='mediauploadframe' id='mediauploadframe' width='100%' height='580' src='" + dle_root + "engine/ajax/controller.php?mod=upload&area=" + a + "&author=" + b + "&news_id=" + c + "&wysiwyg=" + d + "&skin=" + dle_skin + "&rndval=" + e + project_url + "' frameborder='0' marginwidth='0' marginheight='0' allowtransparency='true'></iframe>");
             $(".ui-dialog").draggable("option", "containment", "")
         },
         dragStart: function(g, h) {

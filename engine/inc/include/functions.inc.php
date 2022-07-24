@@ -117,13 +117,15 @@ function check_login($username, $md5_password, $post = true, $check_log = false)
 
 			$username = $db->safesql(trim(htmlspecialchars(stripslashes($username), ENT_QUOTES, $config['charset'])));
 
-			if (version_compare($config['version_id'], "9.3", '>')) $db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $username . "', '{$_TIME}', '{$_IP}', '89', '')");
+			//if (version_compare($config['version_id'], "9.3", '>')) $db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $username . "', '{$_TIME}', '{$_IP}', '89', '')");
 		}
 	} else {
 
 		$username = intval($username);
+		$db_gl = new db;
 
-		$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='{$username}'");
+		$db_gl->connect(DBUSER, DBPASS, DBGNAME, DBHOST);
+		$member_id = $db_gl->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='{$username}'");
 
 		if ($member_id['user_id'] and $member_id['password'] and md5($member_id['password']) == $md5_password and $user_group[$member_id['user_group']]['allow_admin'] and $member_id['banned'] != 'yes') {
 
@@ -134,7 +136,7 @@ function check_login($username, $md5_password, $post = true, $check_log = false)
 
 			$member_id = array();
 
-			if (version_compare($config['version_id'], "9.3", '>')) $db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $username . "', '{$_TIME}', '{$_IP}', '90', '')");
+			//if (version_compare($config['version_id'], "9.3", '>')) $db->query("INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('" . $username . "', '{$_TIME}', '{$_IP}', '90', '')");
 		}
 	}
 
@@ -1988,6 +1990,17 @@ function check_adgrup()
 		}
 	$db2->close();
 	$db2->free();
+}
+
+function get_bz($name_bz)
+{
+	global $db_gl;
+	$row = $db_gl->super_query("SELECT id FROM dle_project WHERE project = '{$name_bz}'");
+	if (isset($row['id']))
+		$rez = $row['id'];
+	else
+		$rez = 0;
+	return $rez;
 }
 
 function get_idcat_post($id)

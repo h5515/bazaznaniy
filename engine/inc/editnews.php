@@ -2248,7 +2248,7 @@ HTML;
 				if ($item_db[6]) $db->query( "UPDATE " . PREFIX . "_post_extras SET allow_rate='{$allow_rating}', votes='{$add_vote}', disable_index='{$disable_index}', related_ids='{$related_ids}', access='{$group_regel}', editdate='{$added_time}', editor='{$member_id['name']}', reason='{$editreason}', view_edit='{$view_edit}', disable_search='{$disable_search}', need_pass='{$need_pass}', allow_rss='{$allow_rss}', allow_rss_turbo='{$allow_rss_turbo}', allow_rss_dzen='{$allow_rss_dzen}' WHERE news_id='{$item_db[0]}'" );
 				else $db->query( "INSERT INTO " . PREFIX . "_post_extras (news_id, allow_rate, votes, disable_index, related_ids, access, editdate, editor, reason, view_edit, disable_search, need_pass, allow_rss, allow_rss_turbo, allow_rss_dzen) VALUES('{$item_db[0]}', '{$allow_rating}', '{$add_vote}', '{$disable_index}', '{$related_ids}', '{$group_regel}', '{$added_time}', '{$member_id['name']}', '{$editreason}', '{$view_edit}', '{$disable_search}', '{$need_pass}', '{$allow_rss}', '{$allow_rss_turbo}', '{$allow_rss_dzen}')" );
 
-				$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '25', '{$title}')" );
+				//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '25', '{$title}')" );
 
 
 				if( $add_vote ) {
@@ -2408,7 +2408,7 @@ HTML;
 				deletenewsbyid( $item_db[0] );
 				$okdeleted = TRUE;
 
-				$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '26', '{$item_db[4]}')" );
+				//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '26', '{$item_db[4]}')" );
 
 			}
 		} else

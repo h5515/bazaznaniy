@@ -502,6 +502,7 @@ HTML;
 	}
 	
 	// XFields Call
+	//фффaaa
 	$xfieldsaction = "list";
 	$xfieldsadd = true;
 	$news_id = 0;
@@ -1110,7 +1111,7 @@ elseif( $action == "doaddnews" ) {
 	$db->query( "UPDATE " . PREFIX . "_files SET news_id='{$id}', author = '{$author}' WHERE author = '{$member_id['name']}' AND news_id = '0'" );
 	$db->query( "UPDATE " . USERPREFIX . "_users SET news_num=news_num+1 WHERE user_id='{$userid}'" );
 
-	$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '1', '{$title}')" );
+	//$db->query( "INSERT INTO " . USERPREFIX . "_admin_logs (name, date, ip, action, extras) values ('".$db->safesql($member_id['name'])."', '{$_TIME}', '{$_IP}', '1', '{$title}')" );
 	
 	clear_cache( array('news_', 'tagscloud_', 'archives_', 'calendar_', 'topnews_', 'rss', 'stats') );
 	

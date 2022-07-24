@@ -51,7 +51,7 @@ if( $_REQUEST['action'] == "plus" ) {
 		
 		$member_id['favorites'] = $favorites;
 		
-		$db->query( "UPDATE " . USERPREFIX . "_users SET favorites='{$favorites}' WHERE user_id = '{$member_id['user_id']}'" );
+		$db->query( "UPDATE " . USERPREFIX . "_users SET favorites='{$favorites}' WHERE name = '{$member_id['name']}'" );
 	
 	}
 
@@ -73,7 +73,7 @@ if( $_REQUEST['action'] == "plus" ) {
 	if( count( $list ) ) $member_id['favorites'] = $db->safesql(implode( ",", $list ));
 	else $member_id['favorites'] = "";
 	
-	$db->query( "UPDATE " . USERPREFIX . "_users SET favorites='{$member_id['favorites']}' WHERE user_id = '{$member_id['user_id']}'" );
+	$db->query( "UPDATE " . USERPREFIX . "_users SET favorites='{$member_id['favorites']}' WHERE name = '{$member_id['name']}'" );
 
 	if ( $_REQUEST['alert'] ) $buffer = '<svg class="icon icon-fav"><use xlink:href="#icon-fav"></use></svg>';
 	else $buffer = "<img src=\"" . $config['http_home_url'] . "templates/{$config['skin']}/dleimages/plus_fav.gif\" onclick=\"doFavorites('" . $id . "', 'plus'); return false;\" title=\"" . $lang['news_addfav'] . "\" style=\"vertical-align: middle;border: none;\" />";

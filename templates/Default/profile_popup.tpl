@@ -6,7 +6,7 @@
 		<li>Группа: {status}</li>
 		<li>Был на сайте: <b>{lastdate}</b></li>
 		<li>Зарегистрирован: <b>{registration}</b></li>
-		<li>Статей: <b>{news-num}</b> [ {news} ] [ [rss]RSS[/rss] ]</li>
+		<li>Статей: <b>{news-num}</b> [ {news} ] </li>
 		<li>Комментариев: <b>{comm-num}</b> [ {comments} ]</li>
 	</ul>
 </div>
