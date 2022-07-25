@@ -361,3 +361,9 @@ body {
 .k-tabstrip-items-wrapper .k-item:active {
     color: #424242 !important;
 }
+
+.k-list-item.k-selected,
+.k-selected.k-list-optionlabel {
+    color: #fff;
+    background-color: #0053df !important;
+}

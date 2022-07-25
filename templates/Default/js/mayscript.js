@@ -1054,12 +1054,13 @@ function ondostup(namebz, idcategory, project_id, catid) {
         windostup.open()
     }, 50);
 }
+var winsetup;
 
 function onsetup(namebz, idcategory, project_id, catid) {
     if (!$('#idsetup')[0]) {
         $('body').after('<div id="idsetup" style="display:none"></div>')
     }
-    windostup = $('#idsetup').kendoWindow({
+    winsetup = $('#idsetup').kendoWindow({
         width: '600px',
         title: 'Настройки базы для ' + namebz,
         content: '/tpl/setup_bz.php?idcat=' + idcategory + '&project=' + project_id + '&category=' + catid,
@@ -1086,7 +1087,7 @@ function onsetup(namebz, idcategory, project_id, catid) {
         }
     }).data('kendoWindow')
     setTimeout(() => {
-        windostup.open()
+        winsetup.open()
     }, 50);
 }
 

@@ -34,3 +34,46 @@ $('#addbz').click(function() {
         addbz.center().open()
     }, 50)
 })
+
+function Help(section) {
+
+    if (section == "social") {
+
+        var w = 800;
+
+    } else {
+
+        var w = 570;
+    }
+
+    ShowLoading('');
+
+    $.post("engine/ajax/controller.php?mod=help&section=", {
+        section: section
+    }, function(data) {
+
+        HideLoading('');
+
+        $("#panel-help-section").remove();
+
+        $("body").append(data);
+
+        $('#panel-help-section').dialog({
+            autoOpen: true,
+            width: w,
+            height: 550,
+            resizable: false,
+            buttons: {
+                "OK": function() {
+                    $(this).dialog("close");
+                    $("#panel-help-section").remove();
+                }
+            }
+        });
+
+    });
+
+    return false;
+
+
+}

@@ -76,6 +76,7 @@
 						{xfields}
 					</table>
 				</li>
+				[allow_tags]
 				<li class="form-group addtags">
 					<label for="alt_name">Ключевые слова</label>
 					<input placeholder="Для фиксации нажмите Enter" type="text" name="tags" id="tags" value="{tags}"
@@ -84,6 +85,7 @@
 					<!-- <input name='basic' value='tag1, tag2 autofocus'  class="wide">-->
 
 				</li>
+				[/allow_tags]
 				[editor]
 				<li class="form-group">
 					<label for="opisanie">Указать причину редактирования</label>
@@ -125,7 +127,7 @@
 						}
 					});
 				}
-
+				[allow_tags]
 				var input2 = document.querySelector('input[name=tags]');
 				new Tagify(input2, {
 					whitelist: [{tagsinput}],
@@ -137,6 +139,7 @@
 						closeOnSelect: false
 					}
 				});
+				[/allow_tags]
 				$(function() {
 
 

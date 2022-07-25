@@ -693,44 +693,59 @@ a.highslide-full-expand {
     box-shadow: 0 8px 40px -10px rgba(0, 0, 0, 0.3);
     border: 1px solid #e6e6e6;
     border-color: rgba(0, 0, 0, 0.1);
-    background-color: #f7f7f7;
+    background-color: #ffffff;
     background-clip: padding-box;
     outline: none;
+    z-index: 100000 !important;
 }
 
 .ui-dialog-titlebar {
-    padding: 20px 20px;
     position: relative;
+    padding: 10px 10px 10px 20px;
+    background-color: #2980b9;
+    border-color: #2980b9;
+    color: #fff;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 
 .ui-dialog-title {
     float: left;
-    font-weight: bold;
-    font-size: 1.15em;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px #333;
+}
+
+.ui-dialog-titlebar a {
+    color: #fff;
 }
 
 .ui-dialog-titlebar-close {
     position: absolute;
-    right: 10px;
-    top: 50%;
-    margin-top: -16px !important;
-    height: 23px !important;
-    width: 32px;
-    border: 0 none !important;
-    background-color: inherit !important;
-    box-shadow: none !important;
-    padding: 0px !important;
+    background-color: transparent;
+    opacity: 0.6;
+    border: 0;
+    right: 20px;
+    top: 25%;
+    padding: 0;
+    margin-top: 2px;
 }
 
-.ui-dialog-titlebar-close .ui-icon {
+.ui-dialog-titlebar-close span {
+    display: none;
+}
+
+.ui-dialog-titlebar-close:after {
+    content: '\f00d';
+    font-family: 'FontAwesome';
     display: block;
-    margin: 10px auto 0 auto;
-    width: 12px;
-    height: 12px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAG1BMVEUAAAA1NTU1NTU1NTU1NTU1NTU1NTU1NTU1NTW7eCkWAAAACHRSTlMA8DiyCsELwNb3saQAAABlSURBVBjTY2AxYoACZQcG10YFCJtJooTBokMIwlHsaAZioBRYAigKJoAAJAghoRIQCiYEoSEiUCmIBFQKLAGTAkvApCASCA6GMoQBGEYjLEV1DopDUbyA4jlUb6ciAiSMgQ0pqAB4linXHtbaoQAAAABJRU5ErkJggg==);
-    -webkit-background-size: 12px auto;
-    background-size: 12px auto;
-    opacity: .5;
+    font-size: 15px;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .ui-button {

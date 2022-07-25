@@ -910,6 +910,13 @@ if (!$allow_addnews) {
       $tpl->set('[/not-editor]', '');
       $tpl->set_block("'\\[editor\\].*?\\[/editor\\]'si", "");
 
+    if (!$config['allow_add_tags']){
+      $tpl->set_block("'\\[allow_tags\\].*?\\[/allow_tags\\]'si", "");
+    }else{
+      $tpl->set('[allow_tags]', '');
+      $tpl->set('[/allow_tags]', '');
+    }
+
     if ($found) {
 
       $xfieldsaction = "list";

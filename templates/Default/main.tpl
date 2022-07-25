@@ -48,6 +48,7 @@
     <script src="{THEME}/js/jquery.nestable.js"></script>
     <script src="{THEME}/js/formtooltip.js"></script>
     <script src="{THEME}/js/function.js"></script>
+    <script src="{THEME}/js/new/outerhtml.js"></script>
     {AJAX}
   </head>
 
