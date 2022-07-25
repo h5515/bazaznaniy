@@ -346,6 +346,7 @@ if ($allow_active_news) {
 				$tpl->set('{edit-date}', langdate($config['timestamp_active'], $row['editdate'], $short_news_cache));
 			}
 
+			$row['editor'] = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$row['editor']}'")['fullname'];
 			$tpl->set('{editor}', $row['editor']);
 			$tpl->set('{edit-reason}', $row['reason']);
 

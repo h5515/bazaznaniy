@@ -2,7 +2,7 @@
 <br>
 <article class="box story">
 	<div class="box_in">
-		<h4 class="title h1">Добавить статью</h4>
+		<h4 class="title h1">[not-editor]Добавить статью[/not-editor][editor]Редкатировать статью[/editor]</h4>
 		<div class="addform">
 			<ul class="ui-form">
 				<li class="form-group">
@@ -84,6 +84,14 @@
 					<!-- <input name='basic' value='tag1, tag2 autofocus'  class="wide">-->
 
 				</li>
+				[editor]
+				<li class="form-group">
+					<label for="opisanie">Указать причину редактирования</label>
+					<input type="text" name="reason" id="reason" value="{reason}" class="wide" required>
+
+				</li>
+				[/editor]
+
 				<li class="form-group addtags">
 					{autor}
 					<div class="admin_checkboxs">{admintag}</div>
@@ -102,11 +110,10 @@
 
 
 			<script>
-
 				var input = document.querySelector('input[name=autor12]');
 				if (input) {
 
-					new Tagify(input, {
+					var Tagifyautor = new Tagify(input, {
 						whitelist: [{autorinput}],
 						maxTags: 1,
 						enforceWhitelist: true,
@@ -149,20 +156,16 @@
 			<p style="margin: 20px 0 0 0;" class="grey"><span style="color: #e85319">*</span> — поля отмеченные
 				звездочкой обязательны для заполнения.</p>
 			<div class="form_submit">
-				[sec_code]
-				<div class="c-captcha">
-					{sec_code}
-					<input placeholder="Повторите код" title="Введите код указанный на картинке" type="text"
-						name="sec_code" id="sec_code" required>
-				</div>
-				[/sec_code]
 				<!--onClick="proverload('start')"-->
 				<div id="idbutinit">
-				<button type="submit" data-role="button" class="k-button-solid-primary" name="add">Отправить</button>
-				<button onclick="preview()" type="submit" data-role="button"
-					name="nview">Предпросмотр</button>
+					<button [not-editor]type="submit" [/not-editor]
+						[editor]onClick="send_form('entryform','{ids}'{vivid});return false;" [/editor]
+						data-role="button" class="k-button-solid-primary" name="add">Отправить</button>
+					<button onclick="preview()" type="submit" data-role="button" name="nview">Предпросмотр</button>
 				</div>
-				<script>kendo.init("#idbutinit");</script>
+				<script>
+					kendo.init("#idbutinit");
+				</script>
 			</div>
 		</div>
 	</div>

@@ -6,8 +6,8 @@
 
 .k-button-solid-primary.k-hover,
 .k-button-solid-primary:hover {
-    border-color: #df7007;
-    background-color: #f37e0e;
+    border-color: #002e7b;
+    background-color: #0042b2;
 }
 
 .k-button:focus,
@@ -17,8 +17,18 @@
 }
 
 .k-button-solid-primary {
-    border-color: #fb8d24;
+    border-color: #0040ab;
     color: #fff;
-    background-color: #fb8d24;
+    background-color: #0053df;
     background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .02));
+}
+
+.k-menu-group .k-item>.k-link.k-active,
+.k-menu-group .k-item>.k-link.k-selected,
+.k-menu-group .k-item>.k-link:active,
+.k-menu.k-context-menu .k-item>.k-link.k-active,
+.k-menu.k-context-menu .k-item>.k-link.k-selected,
+.k-menu.k-context-menu .k-item>.k-link:active {
+    color: #fff;
+    background-color: #0053df;
 }

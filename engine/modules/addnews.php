@@ -906,6 +906,10 @@ if (!$allow_addnews) {
     } else
       $tpl->set_block("'\\[urltag\\].*?\\[/urltag\\]'si", "");
 
+      $tpl->set('[not-editor]', '');
+      $tpl->set('[/not-editor]', '');
+      $tpl->set_block("'\\[editor\\].*?\\[/editor\\]'si", "");
+
     if ($found) {
 
       $xfieldsaction = "list";

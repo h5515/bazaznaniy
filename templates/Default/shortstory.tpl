@@ -18,26 +18,34 @@
 
 
             <h2 class="title" style="width: 100%">
-            <div class="titglaz" onclick="ShowModal('{title}','{full-link}&stroka=ok{vived}&cluck={news-id}',{news-id}, 'Grup');" title="Быстрый просмотр"><span class="k-icon k-i-eye"></span></div>
-            <div class="tittarget" onclick="window.open('{full-link}', '_blank');" title="Открыть в новой вкладке"><span class="k-icon k-i-hyperlink-open-sm"></span></div>
-            [no-redact]
-            <a href="{full-link}" >[/no-redact]
-                    <div class="newtitle" style="width: 100%">{title}</div>[no-redact]</a>[/no-redact]</h2>
-            <div class="imagc" ><div class="absimac" onClick="ShowNews('{news-id}');" title="Развернуть, свернуть статью"></div><a href="#" onClick="ShowNews('{news-id}'); return false;"><span class='imagc1 k-icon k-i-caret-alt-down' id="imagid2{news-id}"></span></a>
-            <span class="aricocl k-icon k-i-caret-alt-expand"></span>
+                [no-redact]
+                <div class="titglaz"
+                    onclick="ShowModal('{title}','{full-link}&stroka=ok{vived}&cluck={news-id}',{news-id}, 'Grup');"
+                    title="Быстрый просмотр"><span class="k-icon k-i-eye"></span></div>
+                <div class="tittarget" onclick="window.open('{full-link}', '_blank');" title="Открыть в новой вкладке">
+                    <span class="k-icon k-i-hyperlink-open-sm"></span></div>
+                <a href="{full-link}">[/no-redact]
+                    <div class="newtitle" style="width: 100%">{title}</div>[no-redact]
+                </a>[/no-redact]
+            </h2>
+            <div class="imagc">
+                <div class="absimac" onClick="ShowNews('{news-id}');" title="Развернуть, свернуть статью"></div><a
+                    href="#" onClick="ShowNews('{news-id}'); return false;"><span
+                        class='imagc1 k-icon k-i-caret-alt-down' id="imagid2{news-id}"></span></a>
+                <span class="aricocl k-icon k-i-caret-alt-expand"></span>
             </div>
         </div>
     </div>
     <div class="text" itemprop="articleBody">
-    <div class="ramka">
-        <!--short-story limit="x"-->
-        <div class="storykorotk" id="storyid{news-id}">
-            <hr>
-            <div class="contenttext" itemprop="articleBody">{short-story}</div>
+        <div class="ramka">
+            <!--short-story limit="x"-->
+            <div class="storykorotk" id="storyid{news-id}">
+                <hr>
+                <div class="contenttext" itemprop="articleBody">{short-story}</div>
+            </div>
+            [edit-date]<p class="editdate grey">Статью отредактировал: <b>{editor}</b> - {edit-date}<br>
+                [edit-reason]Причина: {edit-reason}[/edit-reason]</p>[/edit-date]
         </div>
-        [edit-date]<p class="editdate grey">Статью отредактировал: <b>{editor}</b> - {edit-date}<br>
-            [edit-reason]Причина: {edit-reason}[/edit-reason]</p>[/edit-date]
-    </div>
     </div>
     <div class="box_out">
         <div class="category">
@@ -48,12 +56,35 @@
         </div>
         [rating]
         <div class="rate">
-            [rating-type-4]
+            [rating-type-1]<div class="rate_stars">{rating}</div>[/rating-type-1]
+            [rating-type-2]
+            <div class="rate_like">
+                [rating-plus]
+                <svg class="icon icon-love">
+                    <use xlink:href="#icon-love"></use>
+                </svg>
+                {rating}
+                [/rating-plus]
+            </div>
+            [/rating-type-2]
+            [rating-type-3]
             <div class="rate_like-dislike">
                 [rating-plus]<span title="Нравится"><svg class="icon icon-like">
                         <use xlink:href="#icon-like"></use>
                     </svg></span>[/rating-plus]
                 {rating}
+                [rating-minus]<span title="Не нравится"><svg class="icon icon-dislike">
+                        <use xlink:href="#icon-dislike"></use>
+                    </svg></span>[/rating-minus]
+            </div>
+            [/rating-type-3]
+            [rating-type-4]
+            <div class="rate_like-dislike">
+                <span class="ratingtypeplusminus ignore-select ratingplus">{likes}</span>
+                [rating-plus]<span title="Нравится"><svg class="icon icon-like">
+                        <use xlink:href="#icon-like"></use>
+                    </svg></span>[/rating-plus]
+                <span class="ratingtypeplusminus ratingminus ignore-select">{dislikes}</span>
                 [rating-minus]<span title="Не нравится"><svg class="icon icon-dislike">
                         <use xlink:href="#icon-dislike"></use>
                     </svg></span>[/rating-minus]
@@ -97,9 +128,9 @@
     </div>
     [tags]
     <div id="tagsscot" class="tagshides hide">
-            <div class="tag_list2">
-                {tags}
-            </div>
+        <div class="tag_list2">
+            {tags}
+        </div>
     </div>
     [/tags]
 </div>

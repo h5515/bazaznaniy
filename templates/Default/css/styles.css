@@ -5824,6 +5824,7 @@ a.button21:active {
 .contenttext {
     font-size: 18px;
     font-family: 'Times New Roman', Times, serif, '-webkit-standard';
+    padding-bottom: 15px;
 }
 
 .tdhis {
@@ -6873,4 +6874,8 @@ span#idsvitr {
 
 .meta ul.left {
     margin-left: -4px;
+}
+
+.rate {
+    margin-left: 10px;
 }

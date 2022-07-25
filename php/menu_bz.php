@@ -134,6 +134,7 @@ if ((isset($prj) && check_dostup($cat, $prj, 1)) || $_SESSION['super_admin']) {
     <li><span class='k-icon k-i-gears'></span>Параметры
     <ul id='idparambz' sid='$scat_id' cat='$cat' idcat='$scat_id' $prog>
     <li><a href='#' onclick=\"ondostup('$namebz',{$sr},'$cat');return false;\" class='deldostup'><span class='k-icon k-i-lock'></span><span>Доступ</span></a></li>
+    <li><a href='#' onclick=\"onsetup('$namebz',{$sr},'$cat');return false;\" class='deldostup'><span class='k-icon k-i-gear'></span><span>Настройки базы</span></a></li>
     <li><span class='k-icon k-i-wrench'></span><span class='popmenu' elem='edit_cat'> Редактировать категории </span></li>
     <li><span class='k-icon k-i-edit-tools'></span><span class='popmenu' elem='edit_name'> Редактировать имя </span></li>
     <li><span class='k-icon k-i-image-edit'></span><span class='popmenu' elem='edit_obl'> Изменить обложку </span></li>

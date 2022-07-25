@@ -701,6 +701,8 @@ while ($row = $db->get_row()) {
       $editst = $row['autor'];
     else
       $editst = $row['editor'];
+    
+      $editst = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$editst}'")['fullname'];
 
     $tpl->set('{editor}', $editst);
 

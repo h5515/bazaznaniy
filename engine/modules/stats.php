@@ -50,8 +50,8 @@ if( ! $tpl->result['content'] ) {
 	$row = $db->super_query( "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users" );
 	$stats_users = $row['count'];
 	
-	$row = $db->super_query( "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users WHERE banned='yes'" );
-	$stats_banned = $row['count'];
+	//$row = $db->super_query( "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users WHERE banned='yes'" );
+	$stats_banned = 0;
 	
 	$row = $db->super_query( "SELECT COUNT(*) as count FROM " . PREFIX . "_post WHERE allow_main ='1' AND approve ='1'" );
 	$stats_main = $row['count'];
@@ -78,15 +78,15 @@ if( ! $tpl->result['content'] ) {
 	$comments_month = $row['count'];
 	
 	$temp_date = $_TIME - (3600 * 24);
-	$row = $db->super_query( "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users WHERE reg_date > '$temp_date'" );
+	$row = $db_gl->super_query( "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users WHERE reg_date > '$temp_date'" );
 	$user_day = $row['count'];
 	
 	$temp_date = $_TIME - (3600 * 24 * 7);
-	$row = $db->super_query( "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users WHERE reg_date > '$temp_date'" );
+	$row = $db_gl->super_query( "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users WHERE reg_date > '$temp_date'" );
 	$user_week = $row['count'];
 	
 	$temp_date = $_TIME - (3600 * 24 * 31);
-	$row = $db->super_query( "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users WHERE reg_date > '$temp_date'" );
+	$row = $db_gl->super_query( "SELECT COUNT(*) as count FROM " . USERPREFIX . "_users WHERE reg_date > '$temp_date'" );
 	$user_month = $row['count'];
 	
 	$tpl->load_template( 'stats.tpl' );
@@ -112,7 +112,7 @@ if( ! $tpl->result['content'] ) {
 	$tpl->set( '{user_week}', $user_week );
 	$tpl->set( '{user_month}', $user_month );
 	
-	$db->query( "SELECT user_id, name, user_group, reg_date, lastdate, news_num, comm_num FROM " . USERPREFIX . "_users WHERE news_num > '0' ORDER BY news_num DESC LIMIT 0,10" );
+	$db_gl->query( "SELECT user_id, name, user_group, reg_date, lastdate, news_num, comm_num FROM " . USERPREFIX . "_users WHERE news_num > '0' ORDER BY news_num DESC LIMIT 0,10" );
 	
 	$top_table = "<thead><tr><td>{$lang['top_name']}</td><td align=\"center\">{$lang['top_status']}</td><td align=\"center\">{$lang['top_reg']}</td><td align=\"center\">{$lang['top_last']}</td><td align=\"center\">{$lang['top_nnum']}</td><td align=\"center\">{$lang['top_cnum']}</td><td align=\"center\">{$lang['top_pm']}</td></tr></thead>";
 	

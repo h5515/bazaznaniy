@@ -1,26 +1,56 @@
 [available=editbz]
-<div class="rightside ignore-select">
-<div class="blockmy block top_block histortop" style="margin-top:20px;background-color: #ffffff;">
 
-<table width="100%" onClick="openhistoryedit();return false;" class="teghover">
-	<tr class="tegtr">
-		<td width="100%" class="nowraps tegtr">
-			<h6 class="tegiformcl">История изменений</h6>
-			<h6 class="tegiformcl4" style="border-top: 1px none #D1D1D1;background:none;"></h6>
-		</td>
-		<td align="right" valign="bottom" class="tegtr"><img src="images/triangledown.png" width="12"
-				height="12" class="tegimg" / id="idimgtags2"></td>
-	</tr>
-</table>
-
-<!--<a href="#" onClick="opentegform();return false;" class="tegiformcl"><b>Теги</b></h6><div class="tgimg"></div>
-	</a>-->
-
-<div id="idtags2" class="csstags">
-	<div class="tag_list">
-		{history}
+<div class="rightside ignore-select" style="margin-top: 21px;">
+<div class="blockmy block top_block">
+<div class="tegiformcl2">
+	<div class="fixnavig navclick">
+		<h6 class="tegiformcl">История изменений</h6>
+		<h6 class="tegiformcl4"></h6>
+		<img src="images/triangledown.png" width="12" height="12" class="tegimg" id="idimgtags">
 	</div>
 </div>
+<div class="navigat" lbs="historyedit" style="display: none;">
+	{history}
 </div>
 </div>
+</div>
+
+<script>
+        function loadblocktab(clelem) {
+            if (!$('[lbs=' + clelem + ']')[0])
+                return;
+            $el = $('[lbs=' + clelem + ']');
+            if ($.cookie(clelem) == 1) {
+                $el.css('display', 'block');
+                $el.closest('.blockmy').find('.fixnavig').find('#idimgtags').css('transform', 'rotateX(180deg)');
+            }
+            if ($.cookie(clelem) == 0){
+                $el.css('display', 'none');
+                $el.closest('.blockmy').find('.fixnavig').find('#idimgtags').css('transform', '');
+            }
+
+        }
+		loadblocktab('historyedit');
+		$('.navclick').on('click', function() {
+            $el = $(this).closest('.blockmy').find('.navigat').eq(0);
+
+            if (!$el.is(":visible")) {
+                $(this).find("#idimgtags").css({
+                    '-webkit-transform': 'rotateX(180deg)'
+                });
+                $.cookie($el.attr('lbs'), '1', { expires: 365 });
+            } else {
+                $(this).find("#idimgtags").css({
+                    '-webkit-transform': 'rotateX(0deg)'
+                });
+                $.cookie($el.attr('lbs'), '0', { expires: 365 });
+            }
+
+            $el.slideToggle("fast", function() {
+                // Animation complete.
+            });
+
+        })
+
+</script>
 [/available]

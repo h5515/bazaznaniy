@@ -32,7 +32,9 @@ if ($comand=="autor"){
 $db->query( $sql );
 
 while ( $row = $db->get_row() ) {
-	echo "<span><a href='#' onClick=\"filtered(this,'Автор - {$row['autor']}');return false;\"><table class='navigatr'><tr><td>{$row['autor']}</td><td align='right'>{$row['count']}</td></tr></table></a></span>";	
+	$fullname = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$row['autor']}'")['fullname'];
+	if (empty($fullname)) $fullname = $row['autor'];
+	echo "<span><a href='#' onClick=\"filtered(this,'Автор - {$row['autor']}');return false;\"><table class='navigatr'><tr><td>{$fullname}</td><td align='right'>{$row['count']}</td></tr></table></a></span>";	
   }
 
 $db->free();

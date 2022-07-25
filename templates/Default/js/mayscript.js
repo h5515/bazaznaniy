@@ -1055,6 +1055,41 @@ function ondostup(namebz, idcategory, project_id, catid) {
     }, 50);
 }
 
+function onsetup(namebz, idcategory, project_id, catid) {
+    if (!$('#idsetup')[0]) {
+        $('body').after('<div id="idsetup" style="display:none"></div>')
+    }
+    windostup = $('#idsetup').kendoWindow({
+        width: '600px',
+        title: 'Настройки базы для ' + namebz,
+        content: '/tpl/setup_bz.php?idcat=' + idcategory + '&project=' + project_id + '&category=' + catid,
+        visible: false,
+        modal: true,
+        pinned: false,
+        resizable: false,
+        autoFocus: true,
+        open: function(e) {
+            $('html, body').css('overflow', 'hidden');
+            setTimeout(() => {
+                this.center()
+            }, 50);
+        },
+        close: function(e) {
+            $(document).off('click', '.dostupitems .remove');
+            $(document).off('click', '.clspis');
+            setTimeout(() => {
+                $('#iddostup').remove();
+                $('.k-window').remove();
+                $('.combobox-options').remove();
+                $('html, body').css('overflow', '');
+            }, 400);
+        }
+    }).data('kendoWindow')
+    setTimeout(() => {
+        windostup.open()
+    }, 50);
+}
+
 function isScrolledIntoView(elem) {
     var docViewTop = $(window).scrollTop();
     var docViewBottom = docViewTop + $(window).height();

@@ -669,6 +669,10 @@ HTML;
 	$dle_login_hash = sha1(SECURE_AUTH_KEY . $_IP);
 }
 
+if (isset($_SESSION['user_group'])){
+	$member_id['user_group'] = $_SESSION['user_group'];
+}else{
+
 if (isset($_GET['project'])) {
 	$bz_cat = 2;
 	$bz_category = get_bz($_GET['project']);
@@ -697,6 +701,8 @@ if ($_SESSION['super_admin'])
 	$member_id['user_group'] = 1;
 else
 	$member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
+
+}
 
 //if (empty($member_id[ 'user_group'])) $member_id[ 'user_group' ] = 5;
 

@@ -267,7 +267,7 @@ if ($comand == 'hide') {
 if ($_POST['command'] == 'noapp' || $_POST['command'] == 'arhiv') {
 
   //if ( !strpos($catserch, "AND") ) $catserch = $catserch." AND ";
-  if (!strpos($catserch, "AND")) $nser = $nser . " AND ";
+  if (!strpos($catserch, "AND")) $nser = $nser . "AND";
   else $nser = "";
   if ($search != "") {
     $pois = $search;
@@ -280,8 +280,12 @@ if ($_POST['command'] == 'noapp' || $_POST['command'] == 'arhiv') {
   if ($_POST['command'] == 'arhiv') {
     $stex = " approve =1 and arhiv=1 ";
   }
+  if (empty($catserch)&& $nser == "AND")
+    $posnser = 'WHERE';
+  else 
+    $posnser = "$catserch $nser";
 
-  $sql = "SELECT tags FROM " . PREFIX . "_post $catserch $nser $search $stex AND tags <>'' ";
+  $sql = "SELECT tags FROM " . PREFIX . "_post $posnser $search $stex AND tags <>'' ";
 }
 //echo $sql;
 
