@@ -328,8 +328,6 @@ function AllTag(Category, Comand) {
     }, function(b) {
         $(".tag_list").html(b);
         HigslideActive();
-
-
     })
 
 }

@@ -1148,6 +1148,9 @@ function dle_do_search(a, cat, sor, dir, tagon, slovch, comand) {
     $("#idkolich").hide();
     $("#indload").show();
     clearInterval(dle_search_delay);
+    $("body,html").animate({
+        scrollTop: 0
+    }, 400);
     /* $("#searchsuggestions").remove();
      $("body").append("<div id='searchsuggestions' style='display:none'></div>");*/
     tempcomand = comand;

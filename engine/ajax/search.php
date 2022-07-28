@@ -32,6 +32,8 @@ $news_limit = 50; // Максимальное кол-во новостей в р
 $title_length = 80; // Максимальная длина заголовка новости
 $descr_length = 180; // Максимальная длина описания новости
 
+$fixedbol = false; //Отображать зафиксированные статьи с верху
+
 /* -------------------------- настройки поиска ----------------------------*/
 
 include ENGINE_DIR . '/data/config.php';
@@ -312,18 +314,25 @@ if ($_POST['command'] == 'noread') {
   $noread = " AND id NOT in (SELECT id_news FROM dle_post_read WHERE user = '{$member_id['name']}') ";
 }
 
-$fixed = " ORDER by fixed desc, ";
-
-if ($_POST['command'] == 'esread') {
-  $noread = " AND id in (SELECT post_id FROM dle_post_view WHERE user = '{$member_id['name']}' ORDER BY date_read) ";
+if ($fixedbol)
+  $fixed = " ORDER by fixed desc, ";
+else
   $fixed = " ORDER by ";
-}
+
 
 //"SELECT p.id, p.autor, p.date, p.short_story, CHAR_LENGTH(p.full_story) as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM dle_post p LEFT JOIN dle_post_extras e ON (p.id=e.news_id) WHERE id IN ('24','29','28','31','27','5') AND approve=1 AND date < '2022-07-26 04:31:22' ORDER BY FIND_IN_SET(id, '24,29,28,31,27,5')   LIMIT 0,50"
-
+$join_read = '';
 if ($sear == '') {
   $jprot = ', q.id_news as id_news';
   $join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND q.user='" . $member_id['name'] . "')";
+}
+
+if ($_POST['command'] == 'esread') {
+  $join_read .= " LEFT JOIN dle_post_view v ON p.id = v.post_id ";
+  // $noread = " AND id in (SELECT post_id FROM dle_post_view WHERE user = '{$member_id['name']}' ORDER BY date_read) ";
+  $fixed = " AND v.user ='{$member_id['name']}' ORDER by ";
+  $sorted = " v.date_read ";
+  $directory = " DESC ";
 }
 
 if (!$appr) {
@@ -710,8 +719,8 @@ while ($row = $db->get_row()) {
       $editst = $row['autor'];
     else
       $editst = $row['editor'];
-    
-      $editst = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$editst}'")['fullname'];
+
+    $editst = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$editst}'")['fullname'];
 
     $tpl->set('{editor}', $editst);
 
@@ -748,7 +757,7 @@ while ($row = $db->get_row()) {
 
     $tags = array();
 
-    
+
     $row['tags'] = explode(",", $row['tags']);
 
     foreach ($row['tags'] as $value) {
@@ -758,15 +767,14 @@ while ($row = $db->get_row()) {
 
       if ($config['allow_alt_url']) $tags[] = "<a href=\"" . $config['http_home_url'] . "tags/" . rawurlencode($url_tag) . "/\">" . $value . "</a>";
       else $tags[] = "<span class=\"clouds_xsmall\"><a href=\"#\" onClick=\"tagsclick('" . $value . "',this,$categorys)\">" . $value . "</a></span>";
-     
-      if (!in_array($value, $posttag)&&!in_array($value, $mastag)){
+
+      if (!in_array($value, $posttag) && !in_array($value, $mastag)) {
         $tagshtml .= "<span class=\"clouds_xsmall\"><a href=\"#\" onClick=\"tagsclick('" . $value . "',this,$categorys)\">" . $value . "</a></span>";
         $mastag[] = $value;
       }
     }
 
     $tpl->set('{tags}', implode($config['tags_separator'], $tags));
-
   } else {
 
     $tpl->set_block("'\\[tags\\](.*?)\\[/tags\\]'si", "");
@@ -941,7 +949,7 @@ while ($row = $db->get_row()) {
     $tpl->set('[/com-link]', "</a>");
   } else $tpl->set_block("'\\[com-link\\](.*?)\\[/com-link\\]'si", "");
 
-  if ($is_logged and !$vivid) {
+  if ($_POST['command'] != 'noapp') {
 
     $fav_arr = explode(',', $member_id['favorites']);
     // or $config['allow_cache']
@@ -1461,9 +1469,9 @@ while ($row = $db->get_row()) {
 
     if ($slovcheck == 'true') {
       if ($codec == 'UTF-8')
-      $pos = mb_stripos($til, $array_words, 0, 'UTF-8');
+        $pos = mb_stripos($til, $array_words, 0, 'UTF-8');
       else
-      $pos = stripos($til, $array_words, 0);
+        $pos = stripos($til, $array_words, 0);
     } else {
       $searavi = array();
       $searavi = explode(' ', $array_words);
@@ -1481,18 +1489,18 @@ while ($row = $db->get_row()) {
         $pos = $pos - 200;
       }
 
-      if ($codec != 'UTF-8'){
-      $til = iconv('UTF-8', 'windows-1251', $til);      
-      $til = substr($til, $pos, 400);
-      }else{
+      if ($codec != 'UTF-8') {
+        $til = iconv('UTF-8', 'windows-1251', $til);
+        $til = substr($til, $pos, 400);
+      } else {
         $til = mb_substr($til, $pos, 400);
       }
 
 
       if ($codec != 'UTF-8')
-      $til = iconv('windows-1251', 'UTF-8', $til);
+        $til = iconv('windows-1251', 'UTF-8', $til);
 
-      
+
 
       //  echo $til;
 
