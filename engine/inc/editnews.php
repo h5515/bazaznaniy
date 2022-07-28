@@ -2363,8 +2363,8 @@ HTML;
 						$db->query( "UPDATE " . PREFIX . "_images SET author='{$_POST['new_author']}' WHERE news_id='$item_db[0]'" );
 						$db->query( "UPDATE " . PREFIX . "_files SET author='{$_POST['new_author']}' WHERE news_id='$item_db[0]'" );
 
-						$db->query( "UPDATE " . USERPREFIX . "_users SET news_num=news_num+1 WHERE user_id='{$row['user_id']}'" );
-						$db->query( "UPDATE " . USERPREFIX . "_users SET news_num=news_num-1 WHERE name='$item_db[1]'" );
+						//$db->query( "UPDATE " . USERPREFIX . "_users SET news_num=news_num+1 WHERE user_id='{$row['user_id']}'" );
+						//$db->query( "UPDATE " . USERPREFIX . "_users SET news_num=news_num-1 WHERE name='$item_db[1]'" );
 
 					} else {
 

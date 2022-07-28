@@ -23,7 +23,7 @@
 
 <script>
 	$("#radiogroup").kendoRadioGroup({
-		items: ["White", "Blue"],
+		items: ["White", "Blue", "test"],
 		layout: "vertical",
 		value: mytheme,
 		change: function(e) {

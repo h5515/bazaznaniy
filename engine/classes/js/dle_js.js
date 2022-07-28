@@ -1436,10 +1436,15 @@ function del_local_storage(a, b) {
 function save_last_viewed(a) {
     a = parseInt(a);
     if (isNaN(a)) return null;
-    var b = get_local_storage("viewed_ids");
-    $.isArray(b) ? -1 == $.inArray(a, b) && (19 < b.length && b.pop(), b.unshift(a)) : (b = [], b.push(a));
-    set_local_storage("viewed_ids", b);
-    setcookie("viewed_ids", b.join());
+    $.post(dle_root + "php/save_last_view.php", {
+            news_id: a,
+        }, function(h) {
+            eval(h);
+        })
+        // var b = get_local_storage("viewed_ids");
+        // $.isArray(b) ? -1 == $.inArray(a, b) && (19 < b.length && b.pop(), b.unshift(a)) : (b = [], b.push(a));
+        // set_local_storage("viewed_ids", b);
+        // setcookie("viewed_ids", b.join());
     return !0
 }
 

@@ -20,11 +20,11 @@ require_once ROOT_DIR . '/language/' . $config[ 'langs' ] . '/website.lng';
 
 $id = $_REQUEST['id'];
 $ustl = $_REQUEST['ustl'];
-$user_id = $member_id['user_id'];
+$user = $member_id['name'];
 
-$db->query( "DELETE FROM " . PREFIX . "_post_read WHERE id_user = '{$user_id}' AND id_news = '{$id}'");
+$db->query( "DELETE FROM " . PREFIX . "_post_read WHERE user = '{$user}' AND id_news = '{$id}'");
 if ($ustl=='true'){   
-    $db->query( "INSERT INTO " . PREFIX . "_post_read (id_news, id_user) VALUES ('".$id."','".$user_id."')");
+    $db->query( "INSERT INTO " . PREFIX . "_post_read (id_news, user) VALUES ('".$id."','".$user."')");
 }
 
  clear_cache( array('full_'.$id, 'news_', 'related_', 'tagscloud_', 'archives_', 'calendar_', 'topnews_', 'rss', 'stats' ) );

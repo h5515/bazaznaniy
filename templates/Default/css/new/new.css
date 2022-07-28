@@ -367,3 +367,11 @@ body {
     color: #fff;
     background-color: #0053df !important;
 }
+
+.k-list-item.k-selected.k-hover,
+.k-list-item.k-selected:hover,
+.k-selected.k-hover.k-list-optionlabel,
+.k-selected.k-list-optionlabel:hover {
+    color: #fff;
+    background-color: #0444af !important;
+}

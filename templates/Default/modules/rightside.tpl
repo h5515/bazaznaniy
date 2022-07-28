@@ -46,12 +46,13 @@
 		</div>
 		<div class="navigat" lbs="navigat" style="display: none; margin-top:10px">
 
-			<span><a href="#" onClick="filtered(this,'favorit');return false;"><table class="navigatr"><tr><td>Закладки</td><td id="favorit" align="right">{favorite-count}</td></tr></table></a></span>
+			<span><a href="#" onClick="filtered(this,'favorit');return false;"><table class="navigatr"><tr><td>Избранное</td><td id="favorit" align="right">{favorite-count}</td></tr></table></a></span>
 
 	<!--		[available=main|favorites]
 			<span><a href="index.php?do=favorites"><table class="navigatr"><tr><td>Закладки</td><td id="favorit" align="right">{favorite-count}</td></tr></table></a></span>
 			[/available]-->
-			
+			<span><a href="#" onClick="filtered(this,'esread');return false;"><table class="navigatr"><tr><td>Просмотренные статьи</td><td id="reades" align="right">{prosmotr-count}</td></tr></table></a></span>
+
 			<span><a href="#" onClick="filtered(this,'noread');return false;"><table class="navigatr"><tr><td>Непрочитанные статьи</td><td id="readno" align="right">{read-count}</td></tr></table></a></span>
             
 			<span><a href="#" onClick="filtered(this,'myst');return false;"><table class="navigatr"><tr><td>Мои статьи</td><td align="right">{my-count}</td></tr></table></a></span>

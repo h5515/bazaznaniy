@@ -297,8 +297,11 @@ function AllTag(Category, Comand) {
         comand = tcomand;
     }
 
-    if (tcomand == 'Закладки') {
+    if (tcomand == 'Избранное') {
         comand = 'favorit';
+    }
+    if (tcomand == 'Просмотренные статьи') {
+        comand = 'esread';
     }
     if (tcomand == 'Непрочитанные статьи') {
         comand = 'noread';
@@ -799,7 +802,7 @@ function ShowModal(Title, URL, ID, Group, Comand, Full) {
     }
     //event.preventDefault();
     $("#modalID" + str).iziModal({
-        iframeURL: URL,
+        iframeURL: URL + "&random=" + (new Date()).getTime() + Math.floor(Math.random() * 1000000),
         overlayColor: 'rgba(2,2,2,0.54)',
         radius: 15,
         headerColor: '#006d86c4',

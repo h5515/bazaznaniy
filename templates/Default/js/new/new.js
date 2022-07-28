@@ -26,7 +26,7 @@ $('#addbz').click(function() {
             $('html, body').css('overflow', 'hidden')
         },
         close: function(e) {
-            $('html, body').css('overflow', '')
+            $('html, body').css('overflow', 'auto')
         }
 
     }).data('kendoWindow')

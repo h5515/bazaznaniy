@@ -1,5 +1,5 @@
 function Activeeditor(elem, upload_area, height_min, sheight = null, autosaves = 0, linc = '') {
-    console.log(111)
+    console.log('Activeeditor - ' + upload_area);
     comment = new FroalaEditor(elem, {
         key: "1C%kZV[IX)_SL}UJHAEFZMUJOYGYQE[\\ZJ]RAe(+%$==",
         attribution: false,

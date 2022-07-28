@@ -469,6 +469,7 @@ if ($_POST['category'] == 2) {
         $sql = "INSERT INTO dle_cat_dostup (id_category, roly, user, ad_grup, user_grup, category, project) 
                 VALUE ({$row['id']}, 1, '{$member_id['name']}', '','',2,$id)";
         $db->query($sql);
+        clear_all_caches();
     }
 }
 

@@ -192,7 +192,7 @@ function deletenewsbyid($id)
 
 	$row = $db->super_query("SELECT user_id FROM " . PREFIX . "_post_extras WHERE news_id = '{$id}'");
 
-	$db->query("UPDATE " . USERPREFIX . "_users SET news_num=news_num-1 WHERE user_id='{$row['user_id']}'");
+	//$db->query("UPDATE " . USERPREFIX . "_users SET news_num=news_num-1 WHERE user_id='{$row['user_id']}'");
 
 	$db->query("DELETE FROM " . PREFIX . "_post WHERE id='{$id}'");
 	$db->query("DELETE FROM " . PREFIX . "_post_extras WHERE news_id='{$id}'");

@@ -9,13 +9,13 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
         <link rel="shortcut icon" href="/templates/Default/images/favicon.ico">
-        <link href="/templates/Default/css/styles.css?v=4" type="text/css" rel="stylesheet">
-        <link href="/kendo/styles/kendo.common.min.css?v=4" rel="stylesheet">
-        {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet"> *}
-        <link href="/kendo/styles/kendo.default-ocean-blue.min.css?v=4" rel="stylesheet">
+        <link href="/templates/Default/css/styles.css?v={VERSION}" type="text/css" rel="stylesheet">
+        {* <link href="/kendo/styles/kendo.common.min.css?v=4{VERSION}" rel="stylesheet"> *}
+        {* <link href="/kendo/styles/kendo.classic-main.css?v={VERSION}" rel="stylesheet"> *}
+        <link href="/kendo/styles/kendo.default-main.min.css?v={VERSION}" rel="stylesheet">
         <title>База знаний ФТО</title>
         <script src="/engine/classes/js/jquery3.js"></script>
-        <script src="/kendo/js/kendo.all.min.js?v=11"></script>
+        <script src="/kendo/js/kendo.all.min.js"></script>
         <script src="/templates/Default/js/function.js"></script>
     </head>
 

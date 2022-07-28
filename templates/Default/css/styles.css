@@ -1970,6 +1970,7 @@ input#story::-webkit-input-placeholder {
 #content,
 .content_top {
     position: relative;
+    margin-top: 11px;
 }
 
 
@@ -6878,4 +6879,5 @@ span#idsvitr {
 
 .rate {
     margin-left: 10px;
+    white-space: nowrap;
 }

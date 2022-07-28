@@ -835,6 +835,7 @@ $tpl->compile ( 'main' );
 if ($config['allow_links']) $tpl->result['main'] = replace_links ( $tpl->result['main'], $replace_links['all'] );
 
 $tpl->result['main'] = str_ireplace( '{THEME}', $config['http_home_url'] . 'templates/' . $config['skin'], $tpl->result['main'] );
+$tpl->result['main'] = str_ireplace('{VERSION}', $config['version_id'], $tpl->result['main']);
 
 if ($replace_url) $tpl->result['main'] = str_replace ( $replace_url[0]."/", $replace_url[1]."/", $tpl->result['main'] );
 

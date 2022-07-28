@@ -2,11 +2,12 @@
 <html[available=lostpassword|register] class="page_form_style" [/available] lang="ru">
 
   <head>
+    <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <meta HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     [not-available=editbz]
     {headers}
     [/not-available]
-
     <meta name="HandheldFriendly" content="true">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="user-scalable=0, initial-scale=1.0, maximum-scale=1.0, width=device-width">
@@ -17,32 +18,32 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{THEME}/images/touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="120x120" href="{THEME}/images/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="{THEME}/images/touch-icon-ipad-retina.png">
-    <link href="{THEME}/css/engine.css" type="text/css" rel="stylesheet">
-    <link href="{THEME}/css/styles.css?v=4" type="text/css" rel="stylesheet">
-    <link href="{THEME}/css/common.css" rel="stylesheet" type="text/css" media="all">
-    <link rel="stylesheet" href="{THEME}/css/easySelectStyle.css" type="text/css">
-    <link href="{THEME}/css/iziModal.css" type="text/css" rel="stylesheet">
-    <link href="{THEME}/css/iziModal.min.css" type="text/css" rel="stylesheet">
+    <link href="{THEME}/css/engine.css?v={VERSION}" type="text/css" rel="stylesheet">
+    <link href="{THEME}/css/styles.css?v={VERSION}" type="text/css" rel="stylesheet">
+    <link href="{THEME}/css/common.css?v={VERSION}" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="{THEME}/css/easySelectStyle.css?v={VERSION}" type="text/css">
+    <link href="{THEME}/css/iziModal.css?v={VERSION}" type="text/css" rel="stylesheet">
+    <link href="{THEME}/css/iziModal.min.css?v={VERSION}" type="text/css" rel="stylesheet">
 
-    <link href="{THEME}/css/popModal.css" type="text/css" rel="stylesheet">
+    <link href="{THEME}/css/popModal.css?v={VERSION}" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
 
     {* <link href="/kendo/styles/kendo.fiori.min.css?v=4" rel="stylesheet"> *}
     {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet">  *}
-    <link href="/kendo/styles/kendo.default-main.min.css?v=4" rel="stylesheet">
-    <link href="{THEME}/css/mykendo.css" rel="stylesheet" type="text/css">
+    <link href="/kendo/styles/kendo.default-main.min.css?v={VERSION}" rel="stylesheet">
+    <link href="{THEME}/css/mykendo.css?v={VERSION}" rel="stylesheet" type="text/css">
 
     {themecss}
 
-    <script src="/kendo/js/kendo.all.min.js?v=11"></script>
+    <script src="/kendo/js/kendo.all.min.js?v={VERSION}"></script>
 
-    <link href="{THEME}/css/tagify.css" rel="stylesheet" type="text/css">
-    <link href="{THEME}/css/mycss.css" rel="stylesheet" type="text/css">
-    <link href="{THEME}/css/new/new.css" rel="stylesheet" type="text/css">
-    <script src="{THEME}/js/mayscript.js?v=4"></script>
-    <script src="{THEME}/js/jquery.cookie.js"></script>
-    <script src="{THEME}/js/easySelect.js"></script>
-    <script src="{THEME}/js/popModal.js"></script>
+    <link href="{THEME}/css/tagify.css?v={VERSION}" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/mycss.css?v={VERSION}" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/new/new.css?v={VERSION}" rel="stylesheet" type="text/css">
+    <script src="{THEME}/js/mayscript.js?v=4?v={VERSION}"></script>
+    <script src="{THEME}/js/jquery.cookie.js?v={VERSION}"></script>
+    <script src="{THEME}/js/easySelect.js?v={VERSION}"></script>
+    <script src="{THEME}/js/popModal.js?v={VERSION}"></script>
   </head>
 
   <body>
@@ -67,9 +68,9 @@
 
 
         {AJAX}
-        <script src="{THEME}/js/lib.js"></script>
-        <script src="{THEME}/js/iziModal.js"></script>
-        <script src="{THEME}/js/iziModal.min.js"></script>
+        <script src="{THEME}/js/lib.js?v={VERSION}"></script>
+        <script src="{THEME}/js/iziModal.js?v={VERSION}"></script>
+        <script src="{THEME}/js/iziModal.min.js?v={VERSION}"></script>
         <script>
           jQuery(function($) {
           $.get("{THEME}/images/sprite.svg", function(data) {

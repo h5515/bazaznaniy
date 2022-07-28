@@ -309,12 +309,21 @@ if (!$_POST['categoris'] == "") {
 }
 
 if ($_POST['command'] == 'noread') {
-  $noread = " AND id NOT in (SELECT id_news FROM dle_post_read WHERE id_user = '{$member_id['user_id']}') ";
+  $noread = " AND id NOT in (SELECT id_news FROM dle_post_read WHERE user = '{$member_id['name']}') ";
 }
+
+$fixed = " ORDER by fixed desc, ";
+
+if ($_POST['command'] == 'esread') {
+  $noread = " AND id in (SELECT post_id FROM dle_post_view WHERE user = '{$member_id['name']}' ORDER BY date_read) ";
+  $fixed = " ORDER by ";
+}
+
+//"SELECT p.id, p.autor, p.date, p.short_story, CHAR_LENGTH(p.full_story) as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM dle_post p LEFT JOIN dle_post_extras e ON (p.id=e.news_id) WHERE id IN ('24','29','28','31','27','5') AND approve=1 AND date < '2022-07-26 04:31:22' ORDER BY FIND_IN_SET(id, '24,29,28,31,27,5')   LIMIT 0,50"
 
 if ($sear == '') {
   $jprot = ', q.id_news as id_news';
-  $join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND id_user='" . $member_id['user_id'] . "')";
+  $join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND q.user='" . $member_id['name'] . "')";
 }
 
 if (!$appr) {
@@ -338,7 +347,7 @@ if ($vivid and $proxod) {
   $edat = '';
 }
 //echo $categor;
-$sql = "SELECT $ids p.id, p.autor, p.date $edat, p.short_story, p.full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, p.approve, p.arhiv, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason" . $jprot . " FROM " . PREFIX . "_" . $tabl . " p" . $join_read . " LEFT JOIN dle_post_extras e ON (p.id=e.news_id) WHERE" . $sear . $tcat . $tagson . $favorites . $noread . $myst . $apps . $autor . $arhiv . $arh . " ORDER by fixed desc, " . $sorted . " " . $directory . " LIMIT $news_limit";
+$sql = "SELECT $ids p.id, p.autor, p.date $edat, p.short_story, p.full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, p.approve, p.arhiv, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason" . $jprot . " FROM " . PREFIX . "_" . $tabl . " p" . $join_read . " LEFT JOIN dle_post_extras e ON (p.id=e.news_id) WHERE" . $sear . $tcat . $tagson . $favorites . $noread . $myst . $apps . $autor . $arhiv . $arh . $fixed . $sorted . " " . $directory . " LIMIT $news_limit";
 
 
 $dlin = -1;
@@ -1554,9 +1563,15 @@ echo $tpl->result['main'];
 // $scriptag = "$('.tag_list').html(`$tagshtml`);";
 // else
 // $scriptag = '';
+$dcript = '';
+if ($_POST['command'] == 'esread') {
+  $con = $db->super_query("SELECT COUNT(id) as c FROM " . PREFIX . "_post WHERE category regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]' and id in (SELECT post_id FROM dle_post_view WHERE user = '{$member_id['name']}') AND approve=1 and arhiv=0");
+  $dcript = "$('#reades').text('{$con['c']}')";
+}
 
 echo "
 <script>
+$dcript
 $('.urlmetka').unbind();
   $('.urlmetka').on('click',function(){
     //alert('per'+$(this).attr('data-url'));

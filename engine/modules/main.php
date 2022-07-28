@@ -83,9 +83,13 @@ if ($member_id['favorites'] && $category_id == '') {
 
 if ($member_id['user_id']) {
   $regcategor = "WHERE category regexp '[[:<:]](" . implode('|', $aviable) . ")[[:>:]]'";
-  $sql = "SELECT COUNT(id) as c FROM " . PREFIX . "_post $regcategor and id NOT in (SELECT id_news FROM dle_post_read WHERE id_user = '{$member_id['user_id']}') AND approve=1 and arhiv=0";
+  $sql = "SELECT COUNT(id) as c FROM " . PREFIX . "_post $regcategor and id NOT in (SELECT id_news FROM dle_post_read WHERE user = '{$member_id['name']}') AND approve=1 and arhiv=0";
   $result = $db->super_query($sql);
   $tpl->set('{read-count}', $result['c']);
+
+  $sql = "SELECT COUNT(id) as c FROM " . PREFIX . "_post $regcategor and id in (SELECT post_id FROM dle_post_view WHERE user = '{$member_id['name']}') AND approve=1 and arhiv=0";
+  $result = $db->super_query($sql);
+  $tpl->set('{prosmotr-count}', $result['c']);
 
   $users = $member_id['name'];
   $sql = "SELECT COUNT(id) as count FROM " . PREFIX . "_post $regcategor and autor = '{$users}' and approve=1";
@@ -912,6 +916,8 @@ $tpl->compile('main');
 if ($config['allow_links']) $tpl->result['main'] = replace_links($tpl->result['main'], $replace_links['all']);
 
 $tpl->result['main'] = str_ireplace('{THEME}', $config['http_home_url'] . 'templates/' . $config['skin'], $tpl->result['main']);
+
+$tpl->result['main'] = str_ireplace('{VERSION}', $config['version_id'], $tpl->result['main']);
 
 if ($replace_url) $tpl->result['main'] = str_replace($replace_url[0] . "/", $replace_url[1] . "/", $tpl->result['main']);
 

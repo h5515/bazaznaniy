@@ -1,0 +1,47 @@
+body {
+    background: #eaedf194;
+}
+
+
+#header_menu {
+background: linear-gradient(90deg, rgba(73,65,214,1) 0%, rgba(15,90,175,1) 35%, rgb(160 239 255) 100%);
+}
+
+
+.tegiformcl4 {
+background: #55a2d6;
+}
+
+
+.titlecat {
+box-shadow: none;
+}
+
+
+#header_menu button.tlbutton {
+background-color: transparent;
+}
+
+
+#samomenu, #samomenu .k-menu-group {
+    background: #327ec2;
+    color: white;
+}
+
+.headeruz .k-menu-group, .headeruz .k-menu.k-context-menu {
+    background-color: #78c6e9;
+}
+
+
+.fixed_label:before {
+    background-color: #ff8f00;
+}
+
+
+.fav_btn .icon-star {
+    fill: #ffeb3b;
+}
+
+#cat_menu {
+    box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
+}

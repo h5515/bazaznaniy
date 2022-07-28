@@ -2674,7 +2674,7 @@ function build_js($js, $config)
 	$js_array = array();
 	$i = 0;
 	$defer = "";
-	$v = substr(md5($config['version_id'] . SECURE_AUTH_KEY), 0, 5);
+	$v =$config['version_id'];
 
 	$config['jquery_version'] = intval($config['jquery_version']);
 
@@ -3103,7 +3103,7 @@ function deletenewsbyid($id, $arc)
 		$row = $db->super_query("SELECT user_id FROM " . PREFIX . "_post_extras WHERE news_id = '{$id}'");
 
 		if (empty($_SESSION['dbname']))
-		$db->query("UPDATE " . USERPREFIX . "_users SET news_num=news_num-1 WHERE user_id='{$row['user_id']}'");
+		//$db->query("UPDATE " . USERPREFIX . "_users SET news_num=news_num-1 WHERE user_id='{$row['user_id']}'");
 
 		$db->query("DELETE FROM " . PREFIX . "_post WHERE id='{$id}'");
 		$db->query("DELETE FROM " . PREFIX . "_post_extras WHERE news_id='{$id}'");

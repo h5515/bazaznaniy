@@ -338,7 +338,7 @@ switch ( $do ) {
 				if (isset ( $_SESSION['dle_sort_cat_'.$category_id] )) $news_sort_by = $_SESSION['dle_sort_cat_'.$category_id];
 				if (isset ( $_SESSION['dle_direction_cat_'.$category_id] )) $news_direction_by = $_SESSION['dle_direction_cat_'.$category_id];
                 
-                $join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND id_user='".$member_id['user_id']."') ";
+                $join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND q.user='".$member_id['name']."') ";
 				
 				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story, p.xfields, p.approve,p.arhiv, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason, q.id_news as id_news FROM " . PREFIX . "_post p {$join_category}{$join_read}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$where_category}approve=1 AND arhiv=0" . $where_date . " ORDER BY " . $fixed . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
                 
@@ -561,7 +561,7 @@ switch ( $do ) {
 				if (isset ( $_SESSION['dle_sort_userinfo'] )) $news_sort_by = $_SESSION['dle_sort_userinfo'];
 				if (isset ( $_SESSION['dle_direction_userinfo'] )) $news_direction_by = $_SESSION['dle_direction_userinfo'];
 				
-				$join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND id_user='".$member_id['user_id']."') ";
+				$join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND q.user='".$member_id['name']."') ";
 				
 				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, p.approve, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason, q.id_news as id_news FROM " . PREFIX . "_post p{$join_read} LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE autor = '{$user}' AND approve=0 ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 				$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post WHERE autor = '$user' AND approve=0";
@@ -950,7 +950,7 @@ switch ( $do ) {
 			
 			// ################ Full News #################
 			if ($subaction != '' OR $newsid) {
-                $join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (id=q.id_news AND q.id_user='".$member_id['user_id']."') ";
+                $join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (id=q.id_news AND q.user='".$member_id['name']."') ";
                 
                 if ($_GET['vivid']=="ok"){
                     $tabl = true;

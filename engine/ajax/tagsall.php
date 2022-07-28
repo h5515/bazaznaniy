@@ -202,7 +202,11 @@ if ($_POST['command'] == 'favorit') {
 }
 
 if ($_POST['command'] == 'noread') {
-  $noread = " AND news_id NOT in (SELECT id_news FROM dle_post_read WHERE id_user = '{$member_id['user_id']}') ";
+  $noread = " AND news_id NOT in (SELECT id_news FROM dle_post_read WHERE user = '{$member_id['name']}') ";
+}
+
+if ($_POST['command'] == 'esread') {
+  $noread = " AND news_id in (SELECT post_id FROM dle_post_view WHERE user = '{$member_id['name']}' ORDER BY date_read) ";
 }
 
 

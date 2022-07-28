@@ -14,41 +14,41 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{THEME}/images/touch-icon-ipad.png">
     <link rel="apple-touch-icon" sizes="120x120" href="{THEME}/images/touch-icon-iphone-retina.png">
     <link rel="apple-touch-icon" sizes="152x152" href="{THEME}/images/touch-icon-ipad-retina.png">
-    <link href="{THEME}/css/engine.css" type="text/css" rel="stylesheet">
-    <link href="{THEME}/css/styles.css?v=4" type="text/css" rel="stylesheet">
-    <link href="{THEME}/css/common.css" rel="stylesheet" type="text/css" media="all">
-    <link href="{THEME}/css/iziModal.min.css" type="text/css" rel="stylesheet">
-    <link href="{THEME}/css/popModal.css" type="text/css" rel="stylesheet">
-    <link rel="stylesheet" href="{THEME}/css/easySelectStyle.css" type="text/css">
-    <link href="{THEME}/css/tagify.css" rel="stylesheet" type="text/css">
-    <link href="{THEME}/css/mycss.css" rel="stylesheet" type="text/css">
-    <link href="{THEME}/css/new/new.css" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/engine.css?v={VERSION}" type="text/css" rel="stylesheet">
+    <link href="{THEME}/css/styles.css?v={VERSION}" type="text/css" rel="stylesheet">
+    <link href="{THEME}/css/common.css?v={VERSION}" rel="stylesheet" type="text/css" media="all">
+    <link href="{THEME}/css/iziModal.min.css?v={VERSION}" type="text/css" rel="stylesheet">
+    <link href="{THEME}/css/popModal.css?v={VERSION}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="{THEME}/css/easySelectStyle.css?v={VERSION}" type="text/css">
+    <link href="{THEME}/css/tagify.css?v={VERSION}" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/mycss.css?v={VERSION}" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/new/new.css?v={VERSION}" rel="stylesheet" type="text/css">
     <link href="{THEME}/css/iosCheckbox-theme.scss" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i&display=swap" rel="stylesheet">
 
     {* <link href="/kendo/styles/kendo.fiori.min.css?v=4" rel="stylesheet"> *}
     {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet">  *}
     
-    <link href="/kendo/styles/kendo.default-main.min.css?v=4" rel="stylesheet">
+    <link href="/kendo/styles/kendo.default-main.min.css?v={VERSION}" rel="stylesheet">
     
-    <link href="{THEME}/css/mykendo.css" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/mykendo.css?v={VERSION}" rel="stylesheet" type="text/css">
 
     {themecss}
 
-    <script src="/kendo/js/kendo.all.min.js?v=11"></script>
-    <script src="{THEME}/js/iziModal.js"></script>
-    <script src="{THEME}/js/mayscript.js?v=4"></script>
-    <script src="{THEME}/js/jquery.cookie.js"></script>
-    <script src="{THEME}/js/jquery.tagify.min.js"></script>
-    <script src="{THEME}/js/modalin.js"></script>
-    <script src="{THEME}/js/iosCheckbox.js"></script>
-    <script src="{THEME}/js/easySelect.js"></script>
-    <script src="{THEME}/js/popModal.js"></script>
-    <!--<script src="{THEME}/js/jquery-ui.min.js"></script> -->
-    <script src="{THEME}/js/jquery.nestable.js"></script>
-    <script src="{THEME}/js/formtooltip.js"></script>
-    <script src="{THEME}/js/function.js"></script>
-    <script src="{THEME}/js/new/outerhtml.js"></script>
+    <script src="/kendo/js/kendo.all.min.js?v={VERSION}"></script>
+    <script src="{THEME}/js/iziModal.js?v={VERSION}"></script>
+    <script src="{THEME}/js/mayscript.js?v={VERSION}"></script>
+    <script src="{THEME}/js/jquery.cookie.js?v={VERSION}"></script>
+    <script src="{THEME}/js/jquery.tagify.min.js?v={VERSION}"></script>
+    <script src="{THEME}/js/modalin.js?v={VERSION}"></script>
+    <script src="{THEME}/js/iosCheckbox.js?v={VERSION}"></script>
+    <script src="{THEME}/js/easySelect.js?v={VERSION}"></script>
+    <script src="{THEME}/js/popModal.js?v={VERSION}"></script>
+    <!--<script src="{THEME}/js/jquery-ui.min.js?v={VERSION}"></script> -->
+    <script src="{THEME}/js/jquery.nestable.js?v={VERSION}"></script>
+    <script src="{THEME}/js/formtooltip.js?v={VERSION}"></script>
+    <script src="{THEME}/js/function.js?v={VERSION}"></script>
+    <script src="{THEME}/js/new/outerhtml.js?v={VERSION}"></script>
     {AJAX}
   </head>
 
@@ -108,14 +108,14 @@
                     <button type="button" data-role="button" categor="1" id="idvnut">Внутренние инструкции</button>
                     <button type="button" data-role="button" categor="2" id="idzac">Инструкции заказчика</button>
                   </div>
-                  <script src="{THEME}/js/new/bz_main.js"></script>
+                  <script src="{THEME}/js/new/bz_main.js?v={VERSION}"></script>
                 </div>
                 [/not-group]
                 [/available]
 
                 [not-available=main]
                 [group=1,2]
-                <script src="{THEME}/js/Catmenu.js"></script>
+                <script src="{THEME}/js/Catmenu.js?v={VERSION}"></script>
                 [/group]
                 [/not-available]
 
@@ -152,6 +152,7 @@
 
               <!-- Поиск -->
               [not-dostup]
+              
               <div class="q_search">
                 <div class="setting" onClick="onFoc()">
                   <div class="params">
@@ -280,7 +281,7 @@
 
                 [available=main]
                 {include file="engine/modules/childs.php?id={category-id}&all=1&order=DESC&catmay=no"}
-                <script src="{THEME}/js/new/bz_menu.js"></script>
+                <script src="{THEME}/js/new/bz_menu.js?v={VERSION}"></script>
                 [/available]
 
                 [/not-group]
@@ -331,8 +332,8 @@
     [/available]
 
     
-    <script src="{THEME}/js/lib.js"></script>
-    <script src="{THEME}/js/new/new.js"></script>
+    <script src="{THEME}/js/lib.js?v={VERSION}"></script>
+    <script src="{THEME}/js/new/new.js?v={VERSION}"></script>
     <script>
       jQuery(function($) {
       $.get("{THEME}/images/sprite.svg", function(data) {
@@ -343,7 +344,7 @@
       });
       $('.container').css('opacity', '1');
     </script>
-    <script src="{THEME}/js/Srcfooter.js"></script>
+    <script src="{THEME}/js/Srcfooter.js?v={VERSION}"></script>
     [available=cat]
     <script>
       Loadparam();
@@ -427,7 +428,7 @@ updateData({sectionId, questionId, questionList});
       
     </script>
 
-    {* <script src="{THEME}/js/rascras.js"></script> *}
+    {* <script src="{THEME}/js/rascras.js?v={VERSION}"></script> *}
 
   </body>
 

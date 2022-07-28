@@ -106,7 +106,7 @@ $news_direction_by = ($config['news_msort']) ? $config['news_msort'] : "DESC";
 if (isset ( $_SESSION['dle_sort_favorites'] )) $news_sort_by = $_SESSION['dle_sort_favorites'];
 if (isset ( $_SESSION['dle_direction_favorites'] )) $news_direction_by = $_SESSION['dle_direction_favorites'];
 
-$join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND id_user='".$member_id['user_id']."') ";
+$join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND q.user='".$member_id['name']."') ";
 
 if (isset($_GET['stroka'])){
 	//echo $category_id;

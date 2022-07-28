@@ -402,7 +402,7 @@ $config = array (
 
 'tinypng_resize' => '0',
 
-'version_id' => '14.1',
+'version_id' => '11',
 
 'key' => '',
 
