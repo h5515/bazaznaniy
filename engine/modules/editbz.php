@@ -454,7 +454,7 @@ if (!$allow_addnews) {
             $mtr = str_replace("}", "", $mtr);
             $tags_array = array();
             $temp_array = explode(",", $mtr);
-            $uator = $db_gl->super_query("SELECT name FROM dle_name WHERE fullname = '{$temp_array[0]}'");
+            $uator = $db_gl->super_query("SELECT name FROM dle_users WHERE fullname = '{$temp_array[0]}'");
             if (isset($uator['fullname']))
               $temp_array[0] = $uator;
             $atr = "autor = '{$temp_array[0]}', ";
