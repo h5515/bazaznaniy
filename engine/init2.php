@@ -25,7 +25,7 @@ if (!defined('DATALIFEENGINE')) {
 
 
 
-date_default_timezone_set($config['date_adjust']);
+
 
 require_once(ENGINE_DIR . '/modules/functions.php');
 
@@ -43,6 +43,8 @@ if (isset($_GET['project'])) {
 }
 
 require_once(ENGINE_DIR . '/classes/plugins.class.php');
+
+date_default_timezone_set($config['date_adjust']);
 
 $Timer = new microTimer();
 $cron = false;
@@ -484,8 +486,11 @@ if ($config['category_newscount']) {
 
 $category_skin = "";
 
-if ($category != '') $category_id = get_ID($cat_info, $category);
-else $category_id = false;
+if ($category != '') {
+	$category_id = get_ID($cat_info, $category);
+	if (!$category_id)
+		$category_id = intval($category);
+}else $category_id = false;
 
 if ($category_id) $category_skin = $cat_info[$category_id]['skin'];
 
@@ -669,10 +674,6 @@ HTML;
 	$dle_login_hash = sha1(SECURE_AUTH_KEY . $_IP);
 }
 
-if (isset($_SESSION['user_group'])){
-	$member_id['user_group'] = $_SESSION['user_group'];
-}else{
-
 if (isset($_GET['project'])) {
 	$bz_cat = 2;
 	$bz_category = get_bz($_GET['project']);
@@ -697,10 +698,20 @@ if (isset($_GET['project'])) {
 	$bz_category = get_idcategories($category_id, get_vars("category"));
 }
 
+if ($bz_cat==1)
+$dopconfigFile = "dopconfig$bz_category.php";
+else
+$dopconfigFile = "dopconfig{$_GET['project']}.php";
+
+include ENGINE_DIR . '/data/dopconfig.php';
+
 if ($_SESSION['super_admin'])
 	$member_id['user_group'] = 1;
 else
 	$member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
+
+if (empty($member_id['user_group']) && isset($_SESSION['user_group'])){
+	$member_id['user_group'] = $_SESSION['user_group'];
 
 }
 

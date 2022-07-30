@@ -8,7 +8,123 @@ require_once ENGINE_DIR . '/classes/mysql.php';
 require_once ENGINE_DIR . '/data/dbconfig.php';
 require_once ENGINE_DIR . '/modules/functions.php';
 
+$arrint = array(
+    'news_number', 'search_number', 'search_length_min', 'related_number', 'top_number', 'tags_number', 'news_navigation',
+    'rating_type', 'tree_comments_level',
+    'comments_minlen', 'comments_maxlen', 'comm_nummers',
+    'comments_rating_type', 'max_image', 'medium_image', 'outlinetype'
+);
 
+$Arrstring = array('timestamp_active', 'timestamp_comment', 'comm_msort', 'image_align');
+
+$Arrbol = array(
+    'show_sub_cats', 'allow_add_tags', 'related_only_cats', 'short_rating', 'allow_comments', 'tree_comments', 'simple_reply', 'allow_subscribe',
+    'allow_combine', 'comments_lazyload', 'allow_comments_rating', 'thumb_dimming', 'thumb_gallery'
+);
+
+
+$idcategory = $_GET['idcat'];
+$idproject = $_GET['project'];
+$bzcat = $_GET['category'];
+
+if (isset($idproject)&&$idproject!='') {
+    $projectname = $db_gl->super_query("SELECT project FROM dle_project WHERE id = $idproject")['project'];
+    $bz_category = $projectname;
+}else{
+    $bz_category = $idcategory;
+}
+
+$dopconfigFile = "dopconfig$bz_category.php";
+include ENGINE_DIR . '/data/dopconfig.php';
+
+if (isset($_GET['save'])) {
+
+    $newconf = $_POST;
+    if ($bzcat == 1) {
+        $file = "/dopconfig$idcategory.php";
+    } else {
+        if (isset($idproject))
+            $projectname = $db_gl->super_query("SELECT project FROM dle_project WHERE id = $idproject")['project'];
+        $file = "/dopconfig$projectname.php";
+    }
+
+    $dir = ENGINE_DIR . '/data/dopconfig'; 
+    if (!is_dir($dir)) {
+        mkdir($dir, 0777, true);
+    }
+
+    $handler = fopen($dir.$file, "w");
+
+    foreach ($newconf as $key => $value) {
+        if (in_array($key, $arrint))
+            $newconf[$key] = intval($newconf[$key]);
+        if (in_array($key, $Arrbol))
+            $newconf[$key] = ($newconf[$key] == 'on')? 1: 2;
+
+    }    
+
+    $find = array();
+	$replace = array();
+	
+	$find[] = "'\r'";
+	$replace[] = "";
+	$find[] = "'\n'";
+	$replace[] = "";
+
+    fwrite($handler, "<?PHP \n\n//System Configurations\n\n\$dopconfig = array (\n\n");
+    foreach ($newconf as $name => $value) {
+
+        if ($name == "speedbar_separator" or $name == "category_separator" or $name == "tags_separator") {
+
+            $value = htmlspecialchars($value, ENT_QUOTES, $config['charset']);
+        } elseif ($name != "offline_reason") {
+
+            $value = trim(strip_tags(stripslashes($value)));
+            $value = htmlspecialchars($value, ENT_QUOTES, $config['charset']);
+
+            $name = trim(strip_tags(stripslashes($name)));
+            $name = htmlspecialchars($name, ENT_QUOTES, $config['charset']);
+        }
+
+        $value = preg_replace($find, $replace, $value);
+        $value = str_replace("$", "&#036;", $value);
+        $value = str_replace("{", "&#123;", $value);
+        $value = str_replace("}", "&#125;", $value);
+        $value = str_replace(chr(0), "", $value);
+        $value = str_replace(chr(92), "", $value);
+        $value = str_ireplace("decode", "dec&#111;de", $value);
+
+        $name = preg_replace($find, $replace, $name);
+        $name = str_replace("$", "&#036;", $name);
+        $name = str_replace("{", "&#123;", $name);
+        $name = str_replace("}", "&#125;", $name);
+        $name = str_replace(chr(0), "", $name);
+        $name = str_replace(chr(92), "", $name);
+        $name = str_replace('(', "", $name);
+        $name = str_replace(')', "", $name);
+        $name = str_ireplace("decode", "dec&#111;de", $name);
+
+        fwrite($handler, "'{$name}' => '{$value}',\n\n");
+    }
+    fwrite($handler, ");\n\n?>");
+    fclose($handler);
+
+    $_SESSION['referrer'] = str_replace("&amp;", "&", $_SESSION['referrer']);
+    header("Location: {$_SESSION['referrer']}");
+    die();
+}
+
+$urlget = "idcat=$idcategory&project=$idproject&category=$bzcat";
+
+$formData = '';
+foreach ($config as $key => $value) {
+    if (in_array($key, $arrint))
+        $formData .= $key . ': "' . $value . '",';
+    if (in_array($key, $Arrstring))
+        $formData .= $key . ': "' . $value . '",';
+    if (in_array($key, $Arrbol))
+        $formData .= $key . ': ' . ((bool)$value ? 'true' : 'false') . ',';
+}
 
 
 
@@ -53,7 +169,7 @@ require_once ENGINE_DIR . '/modules/functions.php';
     }
 
     #settabstrip {
-        height: 91%;
+        height: 95%;
     }
 
     #setupbzform {
@@ -62,14 +178,15 @@ require_once ENGINE_DIR . '/modules/functions.php';
 
     .k-form-buttons {
         margin-right: 20%;
+        margin-top: 10px;
     }
 </style>
 <div class="">
     <div id="validation-success"></div>
-    <form id="setupbzform" action="/php/setup_bz.php" method="post">
+    <form id="setupbzform" action="/tpl/setup_bz.php?save=true&<?php echo $urlget; ?>" method="post">
         <div id="settabstrip">
             <ul>
-                <li class="k-state-active"><span class="fa fa-file-text-o"></span> Статьи</li>
+                <li class="k-state-active"><span class="fa fa-file-text-o"></span> Публикации</li>
                 <li class=""><span class="fa fa-commenting-o"></span> Комментарии</li>
                 <li class=""><span class="fa fa-picture-o"></span> Изображения</li>
             </ul>
@@ -88,16 +205,17 @@ require_once ENGINE_DIR . '/modules/functions.php';
         $("#settabstrip").kendoForm({
             orientation: "horizontal",
             formData: {
-                Username: "johny",
-                Email: "john.doe@email.com",
-                Password: "pass123",
-                Birth: new Date(),
-                Agree: false
+                // Username: "johny",
+                // Email: "john.doe@email.com",
+                // Password: "pass123",
+                // Birth: new Date(),
+                // Agree: false
+                <?php echo $formData; ?>
             },
             messages: {
                 submit: "Сохранить"
             },
-            items: [{ //-------------------------Статьи-----------------------------------
+            items: [{ //-------------------------Публикации-----------------------------------
                     type: "group",
                     items: [{
                             field: "news_number",
@@ -225,13 +343,13 @@ require_once ENGINE_DIR . '/modules/functions.php';
                                     }
                                 ]
                             },
-                            hint: "Выберите критерий вывода навигации по страницам публикаций. Вы можете отключить вывод навигации, либо выводить навигацию вверху или внизу статей, либо одновременно и вверху и внизу."
+                            hint: "Выберите критерий вывода навигации по страницам публикаций. Вы можете отключить вывод навигации, либо выводить навигацию вверху или внизу публикаций, либо одновременно и вверху и внизу."
                         },
                         {
                             field: "show_sub_cats",
                             label: "Выводить публикации опубликованные в субкатегориях:",
                             editor: "Switch",
-                            hint: "Eсли 'Включено', то публикации опубликованные в субкатегориях будут показываться также при просмотре основной категории. В противном случае вам необходимо будет указывать несколько категорий при публикации статьи."
+                            hint: "Eсли 'Включено', то публикации опубликованные в субкатегориях будут показываться также при просмотре основной категории. В противном случае вам необходимо будет указывать несколько категорий при публикации."
                         },
                         {
                             field: "allow_add_tags",
@@ -399,11 +517,11 @@ require_once ENGINE_DIR . '/modules/functions.php';
                                 dataValueField: "id",
                                 dataSource: [{
                                         Name: "По убыванию",
-                                        id: 0
+                                        id: "DESC"
                                     },
                                     {
                                         Name: "По возрастанию",
-                                        id: 1
+                                        id: "ASC"
                                     },
                                 ]
                             },
@@ -470,8 +588,7 @@ require_once ENGINE_DIR . '/modules/functions.php';
                 },
                 { //-------------------------Изображения-----------------------------------
                     type: "group",
-                    items: [
-                        {
+                    items: [{
                             field: "max_image",
                             label: "Размер маленькой превью копии загруженного изображения:",
                             validation: {
@@ -519,19 +636,19 @@ require_once ENGINE_DIR . '/modules/functions.php';
                                 dataValueField: "id",
                                 dataSource: [{
                                         Name: "Без выравнивания",
-                                        id: 0
+                                        id: ""
                                     },
                                     {
                                         Name: "По левому краю",
-                                        id: 1
+                                        id: "left"
                                     },
                                     {
                                         Name: "По центру",
-                                        id: 1
+                                        id: "center"
                                     },
                                     {
                                         Name: "По правому краю",
-                                        id: 1
+                                        id: "right"
                                     },
                                 ]
                             },
@@ -547,7 +664,7 @@ require_once ENGINE_DIR . '/modules/functions.php';
                             field: "thumb_gallery",
                             label: "Режим галереи при просмотре уменьшенных изображений:",
                             editor: "Switch",
-                            hint: "Eсли 'Включено', то при просмотре оригинальных изображений из уменьшенных копий, на изображениях будет выводится навигация для показа следующей картинки, запуска слайдшоу и т.д. Данный режим включается для картинок только при просмотре полных статей или статических страниц."
+                            hint: "Eсли 'Включено', то при просмотре оригинальных изображений из уменьшенных копий, на изображениях будет выводится навигация для показа следующей картинки, запуска слайдшоу и т.д. Данный режим включается для картинок только при просмотре полных публикаций или статических страниц."
                         },
                         {
                             field: "outlinetype",
@@ -581,7 +698,7 @@ require_once ENGINE_DIR . '/modules/functions.php';
                             },
                             hint: "Укажите тип вида оригинального изображения, при увеличении его из уменьшенной копии данного изображения."
                         },
-                ]
+                    ]
                 }
 
             ],
@@ -589,11 +706,12 @@ require_once ENGINE_DIR . '/modules/functions.php';
                 return field + ":";
             },
             validateField: function(e) {
-                validationSuccess.html("");
-            },
-            submit: function(e) {
+                alert('0')
                 e.preventDefault();
                 validationSuccess.html("<div class='k-messagebox k-messagebox-success'>Form data is valid!</div>");
+            },
+            submit: function(e) {
+                alert('1')
             },
 
         });
@@ -613,7 +731,7 @@ require_once ENGINE_DIR . '/modules/functions.php';
         $('#setupbzform fieldset').eq(2).appendTo('#fil3');
 
         $('#setupbzform .k-form-buttons').appendTo('#setupbzform');
-        $('#setupbzform .k-form-buttons').append("<button id='setcloseform'><span class='k-icon k-i-x-outline'></span>Отмена</button>");
+        $('#setupbzform .k-form-buttons').append("<button id='setcloseform' onclick='winsetup.close();'><span class='k-icon k-i-x-outline'></span>Отмена</button>");
         $("#setcloseform").kendoButton({
 
         });

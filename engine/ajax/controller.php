@@ -160,10 +160,7 @@ $is_logged = false;
 require_once(DLEPlugins::Check(ENGINE_DIR . '/modules/sitelogin.php'));
 
 
-if (isset($_SESSION['user_group'])){
-	$member_id['user_group'] = $_SESSION['user_group'];
-}else{
-if (isset($_SESSION['dbname'])){
+if (isset($_SESSION['dbname'])) {
 	$_GET['project'] = $_SESSION['dbname'];
 }
 
@@ -180,12 +177,15 @@ if (isset($_GET['project'])) {
 		$glcat = $_POST['id'];
 	if (isset($_POST['post_id']))
 		$glcat = get_idcat_post($_POST['post_id']);
-	if (isset($_GET['mod'])&&($_GET['mod']=='editcomments'||$_GET['mod']=='deletecomments')&&isset($_GET['id']))
+	if (isset($_GET['mod']) && ($_GET['mod'] == 'editcomments' || $_GET['mod'] == 'deletecomments') && isset($_GET['id']))
 		$glcat = get_idcategocomment($_GET['id']);
-	if (isset($_POST['comm_txt'])&&$_POST['action']=='save'&&isset($_POST['id']))
+	if (isset($_POST['comm_txt']) && $_POST['action'] == 'save' && isset($_POST['id']))
 		$glcat = get_idcategocomment($_POST['id']);
 
-	if (isset($_POST['subaction'])&&$_POST['subaction']=='upload')
+	if (isset($_GET['mod']) && $_GET['mod'] == 'rating')
+		$glcat = get_idcat_post($_GET['news_id']);
+
+	if (isset($_POST['subaction']) && $_POST['subaction'] == 'upload')
 		$glcat = get_idcat_post($_POST['news_id']);
 	$glcat = explode(',', $glcat);
 	$glcat = get_idcategories($glcat[0]);
@@ -195,8 +195,17 @@ if ($_SESSION['super_admin'])
 	$member_id['user_group'] = 1;
 else
 	$member_id['user_group'] = $member_id['dostup'][$bz_cat][$glcat]['roly'];
-}
 
+
+if ($bz_cat == 1)
+	$dopconfigFile = "dopconfig$glcat.php";
+else
+	$dopconfigFile = "dopconfig{$_GET['project']}.php";
+
+include ENGINE_DIR . '/data/dopconfig.php';
+
+if (empty($member_id['user_group']) && isset($_SESSION['user_group']))
+	$member_id['user_group'] = $_SESSION['user_group'];
 
 if (!$is_logged) $member_id['user_group'] = 5;
 

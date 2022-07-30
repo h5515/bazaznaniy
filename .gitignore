@@ -1,6 +1,7 @@
 ### Yii template
 engine/data/config.php
 engine/data/dbconfig.php
+engine/data/dopconfig/
 .git/
 .idea/
 .sync/

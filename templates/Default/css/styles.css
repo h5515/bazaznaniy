@@ -2310,8 +2310,8 @@ input#story::-webkit-input-placeholder {
 }
 
 .story_tools>.rate {
-    float: right;
-    margin-right: -2em;
+    top: -14px;
+    position: relative;
 }
 
 .story_tools>.rateleft {
@@ -5764,7 +5764,7 @@ a.button21:active {
 
 .tegiformcl4 {
     content: "";
-    background: #fb8d24bd;
+    background: #55a2d6;
     height: 4px;
     margin-right: 10px;
     margin-top: -3px;

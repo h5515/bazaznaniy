@@ -1029,7 +1029,12 @@ if (!$allow_addnews) {
           $polautor = " главной статьи:<a href='#' onClick = 'smenautor(\"{$glautor}\");return false;'><b> {$polautor} </b></a>изменить на автора отредактировавшего статью: <a href='#' onClick = 'smenautor(\"{$myautr}\");return false;'>{$myautr}</a>";
           $myautr = $glautor;
         } else $polautor = "";
-      } else $polautor = "";
+      } else {
+        $polautor = "";
+        if (isset($myautr))
+          $myautr = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '$myautr'")['fullname'];
+
+      }
 
      
 

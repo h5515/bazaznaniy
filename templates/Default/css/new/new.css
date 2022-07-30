@@ -336,42 +336,6 @@ body {
     color: #0053df;
 }
 
-.k-dialog-titlebar {
-    background-color: #0053df !important;
-}
-
 .fa {
     margin-right: 5px;
-}
-
-.k-tabstrip-items-wrapper .k-item {
-    color: #858585 !important;
-}
-
-.k-tabstrip-items-wrapper .k-item.k-hover,
-.k-tabstrip-items-wrapper .k-item.k-state-hover,
-.k-tabstrip-items-wrapper .k-item:hover {
-    color: #534ad6 !important;
-}
-
-.k-tabstrip-items-wrapper .k-item.k-active,
-.k-tabstrip-items-wrapper .k-item.k-selected,
-.k-tabstrip-items-wrapper .k-item.k-state-active,
-.k-tabstrip-items-wrapper .k-item.k-state-selected,
-.k-tabstrip-items-wrapper .k-item:active {
-    color: #424242 !important;
-}
-
-.k-list-item.k-selected,
-.k-selected.k-list-optionlabel {
-    color: #fff;
-    background-color: #0053df !important;
-}
-
-.k-list-item.k-selected.k-hover,
-.k-list-item.k-selected:hover,
-.k-selected.k-hover.k-list-optionlabel,
-.k-selected.k-list-optionlabel:hover {
-    color: #fff;
-    background-color: #0444af !important;
 }

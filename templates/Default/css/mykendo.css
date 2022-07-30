@@ -32,3 +32,54 @@
     color: #fff;
     background-color: #0053df;
 }
+
+.k-dialog-titlebar {
+    background-color: #0053df;
+}
+
+.k-tabstrip-items-wrapper .k-item {
+    color: #858585;
+}
+
+.k-tabstrip-items-wrapper .k-item.k-hover,
+.k-tabstrip-items-wrapper .k-item.k-state-hover,
+.k-tabstrip-items-wrapper .k-item:hover {
+    color: #534ad6;
+}
+
+.k-tabstrip-items-wrapper .k-item.k-active,
+.k-tabstrip-items-wrapper .k-item.k-selected,
+.k-tabstrip-items-wrapper .k-item.k-state-active,
+.k-tabstrip-items-wrapper .k-item.k-state-selected,
+.k-tabstrip-items-wrapper .k-item:active {
+    color: #424242;
+}
+
+.k-list-item.k-selected,
+.k-selected.k-list-optionlabel {
+    color: #fff;
+    background-color: #0053df;
+}
+
+.k-list-item.k-selected.k-hover,
+.k-list-item.k-selected:hover,
+.k-selected.k-hover.k-list-optionlabel,
+.k-selected.k-list-optionlabel:hover {
+    color: #fff;
+    background-color: #0444af;
+}
+
+.k-switch-on.k-focus .k-switch-track,
+.k-switch-on:focus .k-switch-track {
+    outline: 2px solid rgb(0 66 175);
+}
+
+.k-switch-on .k-switch-track {
+    border-color: #0053df;
+    color: #fff;
+    background-color: #0053df;
+}
+
+#idsvitr .k-switch-on .k-switch-track {
+    background-color: #0a4bbf;
+}

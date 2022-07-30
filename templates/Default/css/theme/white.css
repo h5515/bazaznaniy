@@ -240,3 +240,87 @@ input[type="color"]:focus,
 .modbutclose:hover {
     color: #000000;
 }
+
+#idsvitr .k-switch-on .k-switch-track {
+    background-color: #727272;
+}
+
+.k-window-titlebar {
+    color: #ffffff;
+    background-color: #3c3c3c;
+}
+
+.k-button-solid-primary {
+    border-color: black;
+    color: #fff;
+    background-color: #3c3c3c;
+}
+
+.k-button-solid-primary.k-hover,
+.k-button-solid-primary:hover {
+    border-color: #606060;
+    background-color: #0d0d0d;
+}
+
+.k-button-solid-primary.k-focus,
+.k-button-solid-primary:focus {
+    box-shadow: 0 0 0 2px rgb(60 60 60 / 20%);
+}
+
+.k-list-item.k-selected,
+.k-selected.k-list-optionlabel {
+    color: #fff;
+    background-color: #3c3c3c;
+}
+
+.k-list-item.k-selected.k-hover,
+.k-list-item.k-selected:hover,
+.k-selected.k-hover.k-list-optionlabel,
+.k-selected.k-list-optionlabel:hover {
+    color: #fff;
+    background-color: #000000;
+}
+
+.k-switch-on .k-switch-track {
+    border-color: #3c3c3c;
+    color: #fff;
+    background-color: #787878;
+}
+
+.k-switch-on.k-focus .k-switch-track,
+.k-switch-on:focus .k-switch-track {
+    outline: 2px solid rgb(0 0 0 / 29%);
+}
+
+.k-button-solid-info {
+    border-color: black;
+    background-color: #3c3c3c;
+}
+
+.menubutcats:hover {
+    background-color: #000000 !important;
+}
+
+.k-button-solid-info.k-active,
+.k-button-solid-info:active {
+    border-color: #000000;
+    background-color: #979797;
+}
+
+.dd3-handle {
+    color: transparent;
+    background-color: #d5d5d569;
+}
+
+.dd3-handle:hover {
+    background: rgb(117 117 117 / 60%);
+    color: transparent;
+}
+
+[data-dir=bottom] {
+    background-color: rgb(255 255 255) !important;
+}
+
+.pagetools {
+    border: 1px solid #a7a7a7;
+}

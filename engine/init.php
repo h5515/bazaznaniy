@@ -23,7 +23,7 @@ if (!defined('DATALIFEENGINE')) {
 }
 
 
-date_default_timezone_set($config['date_adjust']);
+
 
 require_once(ENGINE_DIR . '/modules/functions.php');
 
@@ -40,9 +40,9 @@ if (isset($_GET['project'])) {
   unset($_COOKIE['dbname']);
 }
 
-
-
 require_once(ENGINE_DIR . '/classes/plugins.class.php');
+
+date_default_timezone_set($config['date_adjust']);
 
 $Timer = new microTimer();
 $cron = false;
@@ -649,6 +649,13 @@ else{
     $member_id['user_group'] = 4;
   }
 }
+
+if ($bz_cat==1)
+$dopconfigFile = "dopconfig$bz_category.php";
+else
+$dopconfigFile = "dopconfig{$_GET['project']}.php";
+
+include ENGINE_DIR . '/data/dopconfig.php';
 
 
 $_SESSION['user_group'] = $member_id['user_group'];

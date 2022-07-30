@@ -31,20 +31,43 @@
 				
 			</div>
 			[rating]
-			<div class="rateleft">
-			[rating-type-4]
-			<div class="rate_like-dislike">
-				[rating-plus]<span title="Нравится"><svg class="icon icon-like">
-						<use xlink:href="#icon-like"></use>
-					</svg></span>[/rating-plus]
-				{rating}
-				[rating-minus]<span title="Не нравится"><svg class="icon icon-dislike">
-						<use xlink:href="#icon-dislike"></use>
-					</svg></span>[/rating-minus]
+			<div class="rate">
+				[rating-type-1]<div class="rate_stars">{rating}</div>[/rating-type-1]
+				[rating-type-2]
+				<div class="rate_like">
+					[rating-plus]
+					<svg class="icon icon-love">
+						<use xlink:href="#icon-love"></use>
+					</svg>
+					{rating}
+					[/rating-plus]
+				</div>
+				[/rating-type-2]
+				[rating-type-3]
+				<div class="rate_like-dislike">
+					[rating-plus]<span title="Нравится"><svg class="icon icon-like">
+							<use xlink:href="#icon-like"></use>
+						</svg></span>[/rating-plus]
+					{rating}
+					[rating-minus]<span title="Не нравится"><svg class="icon icon-dislike">
+							<use xlink:href="#icon-dislike"></use>
+						</svg></span>[/rating-minus]
+				</div>
+				[/rating-type-3]
+				[rating-type-4]
+				<div class="rate_like-dislike">
+					<span class="ratingtypeplusminus ignore-select ratingplus">{likes}</span>
+					[rating-plus]<span title="Нравится"><svg class="icon icon-like">
+							<use xlink:href="#icon-like"></use>
+						</svg></span>[/rating-plus]
+					<span class="ratingtypeplusminus ratingminus ignore-select">{dislikes}</span>
+					[rating-minus]<span title="Не нравится"><svg class="icon icon-dislike">
+							<use xlink:href="#icon-dislike"></use>
+						</svg></span>[/rating-minus]
+				</div>
+				[/rating-type-4]
 			</div>
-			[/rating-type-4]
-			</div>
-		[/rating]
+			[/rating]
 		</div>
 		[fixed]<span class="fixed_label" title="Важная новость"></span>[/fixed]
 	</div>

@@ -29,7 +29,7 @@
     {* <link href="/kendo/styles/kendo.fiori.min.css?v=4" rel="stylesheet"> *}
     {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet">  *}
     
-    <link href="/kendo/styles/kendo.default-main.min.css?v={VERSION}" rel="stylesheet">
+    <link href="/kendo/styles/kendo.default-main.min.css?v={VERSION}" rel="stylesheet" type="text/css">
     
     <link href="{THEME}/css/mykendo.css?v={VERSION}" rel="stylesheet" type="text/css">
 
