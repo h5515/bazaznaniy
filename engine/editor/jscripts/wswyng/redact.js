@@ -81,6 +81,9 @@ function Activeeditor(elem, upload_area, height_min, sheight = null, autosaves =
 
                     $img.removeAttr("data-returnbox").removeAttr("data-success").removeAttr("data-xfvalue").removeAttr("data-flink");
 
+                    if (classimagealign && classimagealign != '')
+                        $img.addClass(classimagealign);
+
                     if (response.flink) {
                         if ($img.parent().hasClass("highslide")) {
 
@@ -102,6 +105,9 @@ function Activeeditor(elem, upload_area, height_min, sheight = null, autosaves =
                     response = JSON.parse(response);
 
                     $img.removeAttr("data-returnbox").removeAttr("data-success").removeAttr("data-xfvalue").removeAttr("data-flink");
+
+                    if (classimagealign && classimagealign != '')
+                        $img.addClass(classimagealign);
 
                     if (response.flink) {
                         if ($img.parent().hasClass("highslide")) {

@@ -1272,7 +1272,7 @@ if ($allow_active_news) {
 								} else {
 
 									if ($user_query) {
-										$pages .= "<a href=\"$PHP_SELF?cstart=$j&amp;$user_query\">$j</a> ";
+										$pages .= "<a href=\"$PHP_SELF?cstart=$j&amp;{$user_query}{$prjlink}\">$j</a> ";
 									} else $pages .= "<a href=\"$PHP_SELF?cstart=".$j.$prjlink."\">$j</a> ";
 								}
 							}

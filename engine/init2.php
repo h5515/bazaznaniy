@@ -703,6 +703,8 @@ $dopconfigFile = "dopconfig$bz_category.php";
 else
 $dopconfigFile = "dopconfig{$_GET['project']}.php";
 
+$_SESSION['dopconfig'] = $dopconfigFile;
+
 include ENGINE_DIR . '/data/dopconfig.php';
 
 if ($_SESSION['super_admin'])

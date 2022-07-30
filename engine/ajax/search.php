@@ -26,9 +26,16 @@ define('ROOT_DIR', '../..');
 define('ENGINE_DIR', '..');
 //header( "Location: /engine/ajax/search.php" );
 
+$config['search_number'] = intval($config['search_number']);
+
+if ( $config['search_number'] < 1) $config['search_number'] = 50;
+
+if (empty($_POST['query']))
+  $config['search_number'] = 50;
+
 /* -------------------------- настройки поиска ----------------------------*/
 
-$news_limit = 50; // Максимальное кол-во новостей в результатах поиска
+$news_limit = $config['search_number']; // Максимальное кол-во новостей в результатах поиска
 $title_length = 80; // Максимальная длина заголовка новости
 $descr_length = 180; // Максимальная длина описания новости
 
@@ -36,7 +43,9 @@ $fixedbol = false; //Отображать зафиксированные ста�
 
 /* -------------------------- настройки поиска ----------------------------*/
 
-include ENGINE_DIR . '/data/config.php';
+//include ENGINE_DIR . '/data/config.php';
+
+
 
 
 if ($config['http_home_url'] == "") {

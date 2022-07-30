@@ -35,6 +35,8 @@ if (isset($idproject)&&$idproject!='') {
 }
 
 $dopconfigFile = "dopconfig$bz_category.php";
+
+if (empty($_REQUEST['default']))
 include ENGINE_DIR . '/data/dopconfig.php';
 
 if (isset($_GET['save'])) {
@@ -109,6 +111,7 @@ if (isset($_GET['save'])) {
     fwrite($handler, ");\n\n?>");
     fclose($handler);
 
+    clear_all_caches();
     $_SESSION['referrer'] = str_replace("&amp;", "&", $_SESSION['referrer']);
     header("Location: {$_SESSION['referrer']}");
     die();
@@ -198,6 +201,14 @@ foreach ($config as $key => $value) {
 </div>
 
 <script>
+    function default_setting(){
+            $.post(dle_root + "tpl/setup_bz.php?default=true&<?php echo $urlget; ?>", {
+
+            }, function(b) {
+                $("#idsetup").html(b);
+                notification('Настройки базы сброшены по умолчанию<br>Не забудьте сохранить.','info',5000);
+            })
+        }
     $(document).ready(function() {
         var validationSuccess = $("#validation-success");
 
@@ -626,11 +637,6 @@ foreach ($config as $key => $value) {
                             field: "image_align",
                             editor: "DropDownList",
                             label: "Выравнивание картинок по умолчанию:",
-                            validation: {
-                                required: {
-                                    message: "Поле обязательно для заполнения."
-                                },
-                            },
                             editorOptions: {
                                 dataTextField: "Name",
                                 dataValueField: "id",
@@ -706,12 +712,11 @@ foreach ($config as $key => $value) {
                 return field + ":";
             },
             validateField: function(e) {
-                alert('0')
                 e.preventDefault();
-                validationSuccess.html("<div class='k-messagebox k-messagebox-success'>Form data is valid!</div>");
+                validationSuccess.html("<div class='k-messagebox k-messagebox-error'>Form data is valid!</div>");
             },
             submit: function(e) {
-                alert('1')
+
             },
 
         });
@@ -731,6 +736,7 @@ foreach ($config as $key => $value) {
         $('#setupbzform fieldset').eq(2).appendTo('#fil3');
 
         $('#setupbzform .k-form-buttons').appendTo('#setupbzform');
+        $('#setupbzform .k-form-buttons').prepend("<button id='setcloseform' onclick='default_setting();' style='position: absolute; left: 81px;'><span class='k-icon k-i-invert-colors'></span>Сбросить по умолчанию</button>");
         $('#setupbzform .k-form-buttons').append("<button id='setcloseform' onclick='winsetup.close();'><span class='k-icon k-i-x-outline'></span>Отмена</button>");
         $("#setcloseform").kendoButton({
 
@@ -743,6 +749,7 @@ foreach ($config as $key => $value) {
                 }
             }
         });
+
         winsetup.center().maximize();
     });
 </script>

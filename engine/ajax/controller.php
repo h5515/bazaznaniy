@@ -121,7 +121,7 @@ $user_group = get_vars("usergroup");
 if (!$user_group) {
 	$user_group = array();
 
-	$db->query("SELECT * FROM " . USERPREFIX . "_usergroups ORDER BY id ASC");
+	$db_gl->query("SELECT * FROM " . USERPREFIX . "_usergroups ORDER BY id ASC");
 
 	while ($row = $db->get_row()) {
 
@@ -196,11 +196,14 @@ if ($_SESSION['super_admin'])
 else
 	$member_id['user_group'] = $member_id['dostup'][$bz_cat][$glcat]['roly'];
 
-
-if ($bz_cat == 1)
-	$dopconfigFile = "dopconfig$glcat.php";
-else
-	$dopconfigFile = "dopconfig{$_GET['project']}.php";
+if (empty($glcat) || empty($_GET['project'])) {
+	$dopconfigFile = $_SESSION['dopconfig'];
+} else {
+	if ($bz_cat == 1)
+		$dopconfigFile = "dopconfig$glcat.php";
+	else
+		$dopconfigFile = "dopconfig{$_GET['project']}.php";
+}
 
 include ENGINE_DIR . '/data/dopconfig.php';
 

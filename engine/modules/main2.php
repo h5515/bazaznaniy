@@ -466,6 +466,11 @@ $config['http_home_url'] = reset ( $config['http_home_url'] );
 
 if ( !$user_group[$member_id['user_group']]['allow_admin'] ) $config['admin_path'] = "";
 
+$classimagealign = '';
+if ($config['image_align'] == 'left') $classimagealign = 'fr-fil';
+if ($config['image_align'] == 'right') $classimagealign = 'fr-fir';
+
+
 $ajax .= <<<HTML
 {$pm_alert}{$twofactor_alert}<script>
 <!--
@@ -474,6 +479,7 @@ var dle_admin      = '{$config['admin_path']}';
 var dle_login_hash = '{$dle_login_hash}';
 var mytheme        =  '{$mytheme}';
 var dle_group      = {$member_id['user_group']};
+var classimagealign = '{$classimagealign}';
 var dle_skin       = '{$config['skin']}';
 var dle_wysiwyg    = '{$config['allow_comments_wysiwyg']}';
 var quick_wysiwyg  = '{$config['allow_quick_wysiwyg']}';
