@@ -2284,7 +2284,7 @@ input#story::-webkit-input-placeholder {
 /* Нижняя часть новости */
 
 .story_tools {
-    margin-top: 0;
+    margin-top: 20px;
 }
 
 .story_tools>.category {
@@ -2380,7 +2380,7 @@ input#story::-webkit-input-placeholder {
     background-color: #f9fcfd;
     padding: 3px 30px 3px 30px;
     /* border-radius: 0 0 20px 20px; */
-    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgb(210 230 255 / 82%) 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, aliceblue 100%);
 }
 
 .meta:after,
@@ -2697,7 +2697,7 @@ input#story::-webkit-input-placeholder {
 
 .top_block {
     border-radius: 3px;
-    background-color: #e5f0fe;
+    background-color: aliceblue;
     padding: 5px;
     border: 1px solid #0053df5c;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -3375,8 +3375,8 @@ ol.topnews>li>a:hover>b {
 /* --- Информация об ошибках --- */
 
 .berrors {
-    background: #ffe6dd;
-    border: 1px solid #f0c4b5;
+    /* background: #ffe6dd; */
+    /* border: 1px solid #f0c4b5; */
     color: #553c33;
     padding: 20px 25px;
     margin-bottom: 65px;
@@ -5597,12 +5597,14 @@ fieldset .soc_links>a {
 }
 
 .boxmail {
-    border: 1px #77bd7f solid;
-    border-radius: 15px;
+    border: 1px #bfbfbf solid;
+    margin: 20px;
 }
 
 .boxmail2 {
-    border: 1px #3a5b3e solid;
+    border: 1px #bfbfbf solid;
+    padding: 10px;
+    margin-top: 9px;
 }
 
 .poverh {
@@ -5716,7 +5718,7 @@ a.button21:active {
 .menu_on {
     color: #424242;
     padding-top: 12px;
-    background-color: #e5f0fe;
+    /* background-color: #e5f0fe; */
     box-shadow: inset 0px 0px 5px -1px rgb(0 83 223);
     margin-top: -6px;
     padding-bottom: 1px;
@@ -6340,7 +6342,7 @@ a.button21:active {
 }
 
 body {
-    background: #d3e6fe94;
+    background: aliceblue;
 }
 
 .action-login #content,
@@ -6602,7 +6604,7 @@ input[type="submit"] {
 }
 
 #cat_menu {
-    background-color: #e5f0fe;
+    background-color: aliceblue;
     padding-right: 3px;
 }
 
@@ -6816,7 +6818,7 @@ span#idsvitr {
 
 .tagshides {
     padding: 0px 5px 5px 5px;
-    background-color: #dcebff;
+    background-color: aliceblue;
 }
 
 .tagshides .clouds_xsmall {

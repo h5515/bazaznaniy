@@ -161,7 +161,7 @@ HTML;
 	histor = '{$history}';
 	buts = {$buts};
 	
-	Activeeditor('.wysiwygeditor','short_story',150,null, 1500, '$prjlink');
+	ActiveeditorNew('.wysiwygeditor','short_story',150,null, 1500, '$prjlink');
 	
 HTML;
 	/* $onload_scripts[] = <<<HTML

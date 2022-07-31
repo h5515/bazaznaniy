@@ -12,7 +12,7 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Дамп структуры для таблица bz_it.dle_category
+-- Дамп структуры для таблица bz_testovaya.dle_category
 CREATE TABLE IF NOT EXISTS `dle_category` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `parentid` mediumint(8) NOT NULL DEFAULT '0',
@@ -47,11 +47,11 @@ CREATE TABLE IF NOT EXISTS `dle_category` (
   KEY `arhiv` (`arhiv`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_category: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_category: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_category` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_category` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_category_face
+-- Дамп структуры для таблица bz_testovaya.dle_category_face
 CREATE TABLE IF NOT EXISTS `dle_category_face` (
   `category_id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -66,11 +66,11 @@ CREATE TABLE IF NOT EXISTS `dle_category_face` (
   PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
--- Дамп данных таблицы bz_it.dle_category_face: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_category_face: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_category_face` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_category_face` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_comments
+-- Дамп структуры для таблица bz_testovaya.dle_comments
 CREATE TABLE IF NOT EXISTS `dle_comments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `post_id` int(11) NOT NULL DEFAULT '0',
@@ -94,11 +94,11 @@ CREATE TABLE IF NOT EXISTS `dle_comments` (
   FULLTEXT KEY `text` (`text`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_comments: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_comments: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_comments` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_comments` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_comments_files
+-- Дамп структуры для таблица bz_testovaya.dle_comments_files
 CREATE TABLE IF NOT EXISTS `dle_comments_files` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `c_id` int(10) NOT NULL DEFAULT '0',
@@ -110,11 +110,11 @@ CREATE TABLE IF NOT EXISTS `dle_comments_files` (
   KEY `author` (`author`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_comments_files: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_comments_files: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_comments_files` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_comments_files` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_comment_rating_log
+-- Дамп структуры для таблица bz_testovaya.dle_comment_rating_log
 CREATE TABLE IF NOT EXISTS `dle_comment_rating_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `c_id` int(11) NOT NULL DEFAULT '0',
@@ -127,11 +127,11 @@ CREATE TABLE IF NOT EXISTS `dle_comment_rating_log` (
   KEY `ip` (`ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_comment_rating_log: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_comment_rating_log: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_comment_rating_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_comment_rating_log` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_draft
+-- Дамп структуры для таблица bz_testovaya.dle_draft
 CREATE TABLE IF NOT EXISTS `dle_draft` (
   `id` int(11) NOT NULL,
   `user` char(50) DEFAULT NULL,
@@ -140,11 +140,11 @@ CREATE TABLE IF NOT EXISTS `dle_draft` (
   FULLTEXT KEY `full` (`full`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы bz_it.dle_draft: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_draft: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_draft` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_draft` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_files
+-- Дамп структуры для таблица bz_testovaya.dle_files
 CREATE TABLE IF NOT EXISTS `dle_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL DEFAULT '0',
@@ -159,11 +159,11 @@ CREATE TABLE IF NOT EXISTS `dle_files` (
   KEY `news_id` (`news_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_files: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_files: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_files` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_files` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_ignore_list
+-- Дамп структуры для таблица bz_testovaya.dle_ignore_list
 CREATE TABLE IF NOT EXISTS `dle_ignore_list` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user` int(11) NOT NULL DEFAULT '0',
@@ -173,11 +173,11 @@ CREATE TABLE IF NOT EXISTS `dle_ignore_list` (
   KEY `user_from` (`user_from`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_ignore_list: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_ignore_list: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_ignore_list` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_ignore_list` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_images
+-- Дамп структуры для таблица bz_testovaya.dle_images
 CREATE TABLE IF NOT EXISTS `dle_images` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `images` text,
@@ -189,11 +189,11 @@ CREATE TABLE IF NOT EXISTS `dle_images` (
   KEY `news_id` (`news_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_images: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_images: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_images` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_images` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_links
+-- Дамп структуры для таблица bz_testovaya.dle_links
 CREATE TABLE IF NOT EXISTS `dle_links` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `word` varchar(255) NOT NULL DEFAULT '',
@@ -206,11 +206,11 @@ CREATE TABLE IF NOT EXISTS `dle_links` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_links: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_links: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_links` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_links` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_login_log
+-- Дамп структуры для таблица bz_testovaya.dle_login_log
 CREATE TABLE IF NOT EXISTS `dle_login_log` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varchar(46) NOT NULL DEFAULT '',
@@ -221,11 +221,11 @@ CREATE TABLE IF NOT EXISTS `dle_login_log` (
   KEY `date` (`date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_login_log: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_login_log: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_login_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_login_log` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_logs
+-- Дамп структуры для таблица bz_testovaya.dle_logs
 CREATE TABLE IF NOT EXISTS `dle_logs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `news_id` int(10) NOT NULL DEFAULT '0',
@@ -238,11 +238,11 @@ CREATE TABLE IF NOT EXISTS `dle_logs` (
   KEY `ip` (`ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_logs: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_logs: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_logs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_logs` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_lostdb
+-- Дамп структуры для таблица bz_testovaya.dle_lostdb
 CREATE TABLE IF NOT EXISTS `dle_lostdb` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `lostname` mediumint(8) NOT NULL DEFAULT '0',
@@ -251,11 +251,11 @@ CREATE TABLE IF NOT EXISTS `dle_lostdb` (
   KEY `lostid` (`lostid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_lostdb: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_lostdb: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_lostdb` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_lostdb` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_mail_log
+-- Дамп структуры для таблица bz_testovaya.dle_mail_log
 CREATE TABLE IF NOT EXISTS `dle_mail_log` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
@@ -265,11 +265,11 @@ CREATE TABLE IF NOT EXISTS `dle_mail_log` (
   KEY `hash` (`hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_mail_log: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_mail_log: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_mail_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_mail_log` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_metatags
+-- Дамп структуры для таблица bz_testovaya.dle_metatags
 CREATE TABLE IF NOT EXISTS `dle_metatags` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(250) NOT NULL DEFAULT '',
@@ -282,11 +282,11 @@ CREATE TABLE IF NOT EXISTS `dle_metatags` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_metatags: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_metatags: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_metatags` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_metatags` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_notice
+-- Дамп структуры для таблица bz_testovaya.dle_notice
 CREATE TABLE IF NOT EXISTS `dle_notice` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
@@ -295,11 +295,11 @@ CREATE TABLE IF NOT EXISTS `dle_notice` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_notice: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_notice: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_notice` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_notice` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_plugins
+-- Дамп структуры для таблица bz_testovaya.dle_plugins
 CREATE TABLE IF NOT EXISTS `dle_plugins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
@@ -329,11 +329,11 @@ CREATE TABLE IF NOT EXISTS `dle_plugins` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_plugins: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_plugins: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_plugins` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_plugins` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_plugins_files
+-- Дамп структуры для таблица bz_testovaya.dle_plugins_files
 CREATE TABLE IF NOT EXISTS `dle_plugins_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `plugin_id` int(11) NOT NULL DEFAULT '0',
@@ -349,11 +349,11 @@ CREATE TABLE IF NOT EXISTS `dle_plugins_files` (
   KEY `active` (`active`)
 ) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_plugins_files: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_plugins_files: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_plugins_files` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_plugins_files` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_plugins_logs
+-- Дамп структуры для таблица bz_testovaya.dle_plugins_logs
 CREATE TABLE IF NOT EXISTS `dle_plugins_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `plugin_id` int(11) NOT NULL DEFAULT '0',
@@ -364,11 +364,11 @@ CREATE TABLE IF NOT EXISTS `dle_plugins_logs` (
   KEY `plugin_id` (`plugin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_plugins_logs: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_plugins_logs: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_plugins_logs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_plugins_logs` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_poll
+-- Дамп структуры для таблица bz_testovaya.dle_poll
 CREATE TABLE IF NOT EXISTS `dle_poll` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `news_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -382,11 +382,11 @@ CREATE TABLE IF NOT EXISTS `dle_poll` (
   KEY `news_id` (`news_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_poll: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_poll: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_poll` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_poll` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_poll_log
+-- Дамп структуры для таблица bz_testovaya.dle_poll_log
 CREATE TABLE IF NOT EXISTS `dle_poll_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `news_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -396,14 +396,15 @@ CREATE TABLE IF NOT EXISTS `dle_poll_log` (
   KEY `member` (`member`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_poll_log: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_poll_log: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_poll_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_poll_log` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_post
+-- Дамп структуры для таблица bz_testovaya.dle_post
 CREATE TABLE IF NOT EXISTS `dle_post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `autor` varchar(40) NOT NULL DEFAULT '',
+  `edit_autor` varchar(40) DEFAULT NULL,
   `date` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
   `short_story` mediumtext,
   `full_story` mediumtext,
@@ -434,20 +435,22 @@ CREATE TABLE IF NOT EXISTS `dle_post` (
   KEY `comm_num` (`comm_num`),
   KEY `fixed` (`fixed`),
   KEY `arhiv` (`arhiv`) USING BTREE,
+  KEY `edit_autor` (`edit_autor`),
   FULLTEXT KEY `short_story` (`short_story`,`full_story`,`xfields`,`title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_post: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_post: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_post` DISABLE KEYS */;
-INSERT INTO `dle_post` (`id`, `autor`, `date`, `short_story`, `full_story`, `xfields`, `title`, `descr`, `keywords`, `category`, `alt_name`, `comm_num`, `allow_comm`, `allow_main`, `approve`, `fixed`, `allow_br`, `symbol`, `tags`, `metatitle`, `arhiv`) VALUES
-	(1, 'admin', '2021-09-04 15:55:10', '', '<h1>Добро пожаловать в базу знаний ФТО!</h1><p>После добавление статьи. Данную статью следует удалить.</p><p><br></p><p><a class=\\"highslide\\" href=\\"http://localhost:81/uploads/posts/2021-09/1630770970_ttt.jpg\\"><img src=\\"http://localhost:81/uploads/posts/2021-09/thumbs/1630770970_ttt.jpg\\" class=\\"fr-fic fr-dib\\" alt=\\"\\"></a></p>', '', 'Добро пожаловать', '', '', '2', 'dobro-pozhalovat', 0, 1, 1, 1, 0, 0, 'Д', '', '', 0);
+INSERT INTO `dle_post` (`id`, `autor`, `edit_autor`, `date`, `short_story`, `full_story`, `xfields`, `title`, `descr`, `keywords`, `category`, `alt_name`, `comm_num`, `allow_comm`, `allow_main`, `approve`, `fixed`, `allow_br`, `symbol`, `tags`, `metatitle`, `arhiv`) VALUES
+	(1, 'admin', NULL, '2021-09-04 15:55:10', '', '<h1>Добро пожаловать в базу знаний ФТО!</h1><p>После добавление статьи. Данную статью следует удалить.</p><p><br></p><p><a class=\\"highslide\\" href=\\"http://localhost:81/uploads/posts/2021-09/1630770970_ttt.jpg\\"><img src=\\"http://localhost:81/uploads/posts/2021-09/thumbs/1630770970_ttt.jpg\\" class=\\"fr-fic fr-dib\\" alt=\\"\\"></a></p>', '', 'Добро пожаловать', '', '', '2', 'dobro-pozhalovat', 0, 1, 1, 1, 0, 0, 'Д', '', '', 0);
 /*!40000 ALTER TABLE `dle_post` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_post_arhiv
+-- Дамп структуры для таблица bz_testovaya.dle_post_arhiv
 CREATE TABLE IF NOT EXISTS `dle_post_arhiv` (
   `ids` int(11) NOT NULL AUTO_INCREMENT,
   `id` int(11) NOT NULL,
   `autor` varchar(40) NOT NULL DEFAULT '',
+  `edit_autor` varchar(40) DEFAULT NULL,
   `date` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
   `short_story` mediumtext,
   `full_story` mediumtext,
@@ -482,14 +485,15 @@ CREATE TABLE IF NOT EXISTS `dle_post_arhiv` (
   KEY `arhiv` (`arhiv`),
   KEY `istor` (`istor`),
   KEY `id` (`id`) USING BTREE,
+  KEY `edit_autor` (`edit_autor`),
   FULLTEXT KEY `short_story` (`short_story`,`full_story`,`xfields`,`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_post_arhiv: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_post_arhiv: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_post_arhiv` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_post_arhiv` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_post_extras
+-- Дамп структуры для таблица bz_testovaya.dle_post_extras
 CREATE TABLE IF NOT EXISTS `dle_post_extras` (
   `eid` int(11) NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL DEFAULT '0',
@@ -520,13 +524,13 @@ CREATE TABLE IF NOT EXISTS `dle_post_extras` (
   KEY `news_read` (`news_read`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_post_extras: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_post_extras: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_post_extras` DISABLE KEYS */;
 INSERT INTO `dle_post_extras` (`eid`, `news_id`, `news_read`, `allow_rate`, `rating`, `vote_num`, `votes`, `view_edit`, `disable_index`, `related_ids`, `access`, `editdate`, `editor`, `reason`, `user_id`, `disable_search`, `need_pass`, `allow_rss`, `allow_rss_turbo`, `allow_rss_dzen`) VALUES
 	(1, 1, 4, 0, 0, 0, 0, 0, 0, '', '', 0, '', '', 1, 0, 0, 1, 1, 1);
 /*!40000 ALTER TABLE `dle_post_extras` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_post_extras_cats
+-- Дамп структуры для таблица bz_testovaya.dle_post_extras_cats
 CREATE TABLE IF NOT EXISTS `dle_post_extras_cats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL DEFAULT '0',
@@ -536,13 +540,13 @@ CREATE TABLE IF NOT EXISTS `dle_post_extras_cats` (
   KEY `cat_id` (`cat_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_post_extras_cats: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_post_extras_cats: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_post_extras_cats` DISABLE KEYS */;
 INSERT INTO `dle_post_extras_cats` (`id`, `news_id`, `cat_id`) VALUES
 	(1, 1, 2);
 /*!40000 ALTER TABLE `dle_post_extras_cats` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_post_log
+-- Дамп структуры для таблица bz_testovaya.dle_post_log
 CREATE TABLE IF NOT EXISTS `dle_post_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL DEFAULT '0',
@@ -554,11 +558,11 @@ CREATE TABLE IF NOT EXISTS `dle_post_log` (
   KEY `expires` (`expires`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_post_log: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_post_log: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_post_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_post_log` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_post_pass
+-- Дамп структуры для таблица bz_testovaya.dle_post_pass
 CREATE TABLE IF NOT EXISTS `dle_post_pass` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL DEFAULT '0',
@@ -567,22 +571,22 @@ CREATE TABLE IF NOT EXISTS `dle_post_pass` (
   KEY `news_id` (`news_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_post_pass: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_post_pass: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_post_pass` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_post_pass` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_post_read
+-- Дамп структуры для таблица bz_testovaya.dle_post_read
 CREATE TABLE IF NOT EXISTS `dle_post_read` (
   `id_news` int(11) NOT NULL,
   `user` varchar(20) NOT NULL DEFAULT '',
   UNIQUE KEY `id_news` (`id_news`,`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Дамп данных таблицы bz_it.dle_post_read: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_post_read: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_post_read` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_post_read` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_post_view
+-- Дамп структуры для таблица bz_testovaya.dle_post_view
 CREATE TABLE IF NOT EXISTS `dle_post_view` (
   `user` varchar(20) DEFAULT NULL,
   `post_id` int(7) DEFAULT NULL,
@@ -590,11 +594,11 @@ CREATE TABLE IF NOT EXISTS `dle_post_view` (
   UNIQUE KEY `user` (`user`,`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Дамп данных таблицы bz_it.dle_post_view: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_post_view: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_post_view` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_post_view` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_question
+-- Дамп структуры для таблица bz_testovaya.dle_question
 CREATE TABLE IF NOT EXISTS `dle_question` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `question` varchar(255) NOT NULL DEFAULT '',
@@ -602,11 +606,11 @@ CREATE TABLE IF NOT EXISTS `dle_question` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_question: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_question: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_question` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_question` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_read_log
+-- Дамп структуры для таблица bz_testovaya.dle_read_log
 CREATE TABLE IF NOT EXISTS `dle_read_log` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL DEFAULT '0',
@@ -616,11 +620,11 @@ CREATE TABLE IF NOT EXISTS `dle_read_log` (
   KEY `ip` (`ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_read_log: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_read_log: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_read_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_read_log` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_redirects
+-- Дамп структуры для таблица bz_testovaya.dle_redirects
 CREATE TABLE IF NOT EXISTS `dle_redirects` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `from` varchar(250) NOT NULL DEFAULT '',
@@ -628,11 +632,11 @@ CREATE TABLE IF NOT EXISTS `dle_redirects` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_redirects: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_redirects: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_redirects` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_redirects` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_rss
+-- Дамп структуры для таблица bz_testovaya.dle_rss
 CREATE TABLE IF NOT EXISTS `dle_rss` (
   `id` smallint(5) NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL DEFAULT '',
@@ -650,11 +654,11 @@ CREATE TABLE IF NOT EXISTS `dle_rss` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_rss: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_rss: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_rss` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_rss` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_rssinform
+-- Дамп структуры для таблица bz_testovaya.dle_rssinform
 CREATE TABLE IF NOT EXISTS `dle_rssinform` (
   `id` smallint(5) NOT NULL AUTO_INCREMENT,
   `tag` varchar(40) NOT NULL DEFAULT '',
@@ -670,11 +674,11 @@ CREATE TABLE IF NOT EXISTS `dle_rssinform` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_rssinform: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_rssinform: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_rssinform` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_rssinform` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_sendlog
+-- Дамп структуры для таблица bz_testovaya.dle_sendlog
 CREATE TABLE IF NOT EXISTS `dle_sendlog` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user` varchar(40) NOT NULL DEFAULT '',
@@ -686,11 +690,11 @@ CREATE TABLE IF NOT EXISTS `dle_sendlog` (
   KEY `flag` (`flag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_sendlog: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_sendlog: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_sendlog` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_sendlog` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_statmenu
+-- Дамп структуры для таблица bz_testovaya.dle_statmenu
 CREATE TABLE IF NOT EXISTS `dle_statmenu` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `parentid` mediumint(8) NOT NULL DEFAULT '0',
@@ -703,11 +707,11 @@ CREATE TABLE IF NOT EXISTS `dle_statmenu` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_statmenu: 0 rows
+-- Дамп данных таблицы bz_testovaya.dle_statmenu: 0 rows
 /*!40000 ALTER TABLE `dle_statmenu` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_statmenu` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_subscribe
+-- Дамп структуры для таблица bz_testovaya.dle_subscribe
 CREATE TABLE IF NOT EXISTS `dle_subscribe` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0',
@@ -720,11 +724,11 @@ CREATE TABLE IF NOT EXISTS `dle_subscribe` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_subscribe: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_subscribe: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_subscribe` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_subscribe` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_tags
+-- Дамп структуры для таблица bz_testovaya.dle_tags
 CREATE TABLE IF NOT EXISTS `dle_tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL DEFAULT '0',
@@ -735,33 +739,33 @@ CREATE TABLE IF NOT EXISTS `dle_tags` (
   KEY `tag` (`tag`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_tags: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_tags: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_tags` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_tags` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_users
+-- Дамп структуры для таблица bz_testovaya.dle_users
 CREATE TABLE IF NOT EXISTS `dle_users` (
   `name` varchar(40) NOT NULL DEFAULT '',
   `favorites` text,
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_users: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_users: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_users` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_users` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_views
+-- Дамп структуры для таблица bz_testovaya.dle_views
 CREATE TABLE IF NOT EXISTS `dle_views` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_views: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_views: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_views` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_views` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_vote
+-- Дамп структуры для таблица bz_testovaya.dle_vote
 CREATE TABLE IF NOT EXISTS `dle_vote` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `category` text,
@@ -777,11 +781,11 @@ CREATE TABLE IF NOT EXISTS `dle_vote` (
   KEY `approve` (`approve`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_vote: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_vote: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_vote` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_vote` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_vote_result
+-- Дамп структуры для таблица bz_testovaya.dle_vote_result
 CREATE TABLE IF NOT EXISTS `dle_vote_result` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `ip` varchar(46) NOT NULL DEFAULT '',
@@ -795,11 +799,11 @@ CREATE TABLE IF NOT EXISTS `dle_vote_result` (
   KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_vote_result: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_vote_result: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_vote_result` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_vote_result` ENABLE KEYS */;
 
--- Дамп структуры для таблица bz_it.dle_xfsearch
+-- Дамп структуры для таблица bz_testovaya.dle_xfsearch
 CREATE TABLE IF NOT EXISTS `dle_xfsearch` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL DEFAULT '0',
@@ -811,7 +815,7 @@ CREATE TABLE IF NOT EXISTS `dle_xfsearch` (
   KEY `tagvalue` (`tagvalue`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bz_it.dle_xfsearch: ~0 rows (приблизительно)
+-- Дамп данных таблицы bz_testovaya.dle_xfsearch: ~0 rows (приблизительно)
 /*!40000 ALTER TABLE `dle_xfsearch` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dle_xfsearch` ENABLE KEYS */;
 

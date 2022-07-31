@@ -104,11 +104,7 @@
                   [dostup=Создать базу знаний]
                   <button type="button" id="addbz">Создать базу знаний</button>
                   [/dostup=Создать базу знаний]
-                  <div class="clmacategory">
-                    <button type="button" data-role="button" categor="1" id="idvnut">Внутренние инструкции</button>
-                    <button type="button" data-role="button" categor="2" id="idzac">Инструкции заказчика</button>
-                  </div>
-                  <script src="{THEME}/js/new/bz_main.js?v={VERSION}"></script>
+                  
                 </div>
                 [/not-group]
                 [/available]
@@ -126,7 +122,14 @@
         </header>
         <!-- / Header -->
 
-        <div class="conteiner" [available=main] style="margin-top: 52px;" [/available]>
+        <div class="conteiner">
+        [available=main]
+        <div class="clmacategory">
+                    <button type="button" data-role="button" categor="1" id="idvnut"><span class="k-icon k-i-file-mdb"></span>Внутренние инструкции</button>
+                    <button type="button" data-role="button" categor="2" id="idzac"><span class="k-icon k-i-file-ascx"></span>Инструкции заказчика</button>
+                  </div>
+                  <script src="{THEME}/js/new/bz_main.js?v={VERSION}"></script>
+          [/available] 
           <div class="midside">
             <section id="content"> {info}
               [page-title]

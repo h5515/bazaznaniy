@@ -12,14 +12,14 @@ $arrint = array(
     'news_number', 'search_number', 'search_length_min', 'related_number', 'top_number', 'tags_number', 'news_navigation',
     'rating_type', 'tree_comments_level',
     'comments_minlen', 'comments_maxlen', 'comm_nummers',
-    'comments_rating_type', 'max_image', 'medium_image', 'outlinetype'
+    'comments_rating_type', 'outlinetype'
 );
 
-$Arrstring = array('timestamp_active', 'timestamp_comment', 'comm_msort', 'image_align');
+$Arrstring = array('timestamp_active', 'timestamp_comment', 'comm_msort', 'image_align', 'medium_image', 'max_image');
 
 $Arrbol = array(
     'show_sub_cats', 'allow_add_tags', 'related_only_cats', 'short_rating', 'allow_comments', 'tree_comments', 'simple_reply', 'allow_subscribe',
-    'allow_combine', 'comments_lazyload', 'allow_comments_rating', 'thumb_dimming', 'thumb_gallery'
+    'allow_combine', 'comments_lazyload', 'allow_comments_rating', 'thumb_dimming', 'thumb_gallery', 'last_viewed', 'allow_tags',
 );
 
 
@@ -41,7 +41,11 @@ include ENGINE_DIR . '/data/dopconfig.php';
 
 if (isset($_GET['save'])) {
 
-    $newconf = $_POST;
+    foreach ($Arrbol as $key => $value) {
+        $newconf[$value] = 'off';
+    }
+    $newconf = array_merge($newconf, $_POST);
+
     if ($bzcat == 1) {
         $file = "/dopconfig$idcategory.php";
     } else {
@@ -61,7 +65,7 @@ if (isset($_GET['save'])) {
         if (in_array($key, $arrint))
             $newconf[$key] = intval($newconf[$key]);
         if (in_array($key, $Arrbol))
-            $newconf[$key] = ($newconf[$key] == 'on')? 1: 2;
+            $newconf[$key] = ($newconf[$key] == 'on')? 1: 0;
 
     }    
 
@@ -282,7 +286,7 @@ foreach ($config as $key => $value) {
                                     message: "Разрешено только число."
                                 }
                             },
-                            hint: "Введите количество похожих публикаций, которые будут выводится при просмотре публикаций."
+                            hint: "Введите количество похожих публикаций, которые будут выводится при просмотре публикаций.<br> 0 - отключить блок."
                         },
                         {
                             field: "top_number",
@@ -363,10 +367,16 @@ foreach ($config as $key => $value) {
                             hint: "Eсли 'Включено', то публикации опубликованные в субкатегориях будут показываться также при просмотре основной категории. В противном случае вам необходимо будет указывать несколько категорий при публикации."
                         },
                         {
+                            field: "allow_tags",
+                            label: "Включить поддержку модуля \"Облако тегов\":",
+                            editor: "Switch",
+                            hint: "Если вы не используете в своей базе \"Облако тегов\", то данный модуль рекомендуется отключить."
+                        },
+                        {
                             field: "allow_add_tags",
                             label: "Разрешить добавление ключевых слов в облако тегов при добавлении публикации:",
                             editor: "Switch",
-                            hint: "Eсли 'Включено', то при добавлении публикации с сайта будет разрешено добавление ключевых слов в облако тегов."
+                            hint: "Eсли 'Включено', то при добавлении публикации с сайта будет разрешено добавление ключевых слов в облако тегов для группы 'Запись'. Eсли 'Отключено', то только Владелец и Модератор смогут добавлять теги."
                         },
                         {
                             field: "related_only_cats",
@@ -417,6 +427,12 @@ foreach ($config as $key => $value) {
                             <b>'Нравится' или 'Не нравится'</b> - при данном типе посетители отмечают нравится ли им публикация или не нравится. В данном случае выводится общее значение рейтинга, например, +20 или -10<br>
                             <b>'Нравится' и 'Не нравится'</b> - при данном типе посетители отмечают нравится ли им публикация или не нравится. И выводятся отдельные значения количества лайков и дизлайков, например, +20 и -10<br>
                             `
+                        },
+                        {
+                            field: "last_viewed",
+                            label: "Вести учет последних просмотренных публикаций:",
+                            editor: "Switch",
+                            hint: "При включении данной настройки будет происходит запись последних просмотренных публикаций посетителем."
                         },
                     ]
                 },
@@ -606,10 +622,6 @@ foreach ($config as $key => $value) {
                                 required: {
                                     message: "Поле обязательно для заполнения."
                                 },
-                                pattern: {
-                                    value: "[0-9]+",
-                                    message: "Разрешено только число."
-                                }
                             },
                             hint: `Существует две возможности использования данной настройки:<br>
                             <b>Первая:</b> Вы задаете максимальный размер в пикселях любой из сторон загружаемой картинки при превышении которого будет создаваться уменьшенная копия. Например: <b>400</b><br>
@@ -623,10 +635,6 @@ foreach ($config as $key => $value) {
                                 required: {
                                     message: "Поле обязательно для заполнения."
                                 },
-                                pattern: {
-                                    value: "[0-9]+",
-                                    message: "Разрешено только число."
-                                }
                             },
                             hint: `Существует две возможности использования данной настройки:<br>
                             <b>Первая:</b> Вы задаете максимальный размер в пикселях любой из сторон загружаемой картинки при превышении которого будет создаваться уменьшенная копия. Например: <b>400</b><br>
@@ -736,9 +744,9 @@ foreach ($config as $key => $value) {
         $('#setupbzform fieldset').eq(2).appendTo('#fil3');
 
         $('#setupbzform .k-form-buttons').appendTo('#setupbzform');
-        $('#setupbzform .k-form-buttons').prepend("<button id='setcloseform' onclick='default_setting();' style='position: absolute; left: 81px;'><span class='k-icon k-i-invert-colors'></span>Сбросить по умолчанию</button>");
-        $('#setupbzform .k-form-buttons').append("<button id='setcloseform' onclick='winsetup.close();'><span class='k-icon k-i-x-outline'></span>Отмена</button>");
-        $("#setcloseform").kendoButton({
+        $('#setupbzform .k-form-buttons').prepend("<button id='iddefaultder' onclick='default_setting();' style='position: absolute; left: 81px;'><span class='k-icon k-i-invert-colors'></span>Сбросить по умолчанию</button>");
+        $('#setupbzform .k-form-buttons').append("<button id='setcloseform' onclick='winsetup.close(); return false;'><span class='k-icon k-i-x-outline'></span>Отмена</button>");
+        $("#setcloseform, #iddefaultder").kendoButton({
 
         });
 

@@ -152,7 +152,7 @@ if ( !$allow_addnews ) {
       if ( $disable_rss_turbo AND $disable_rss_turbo = count( $catlist ) )$allow_rss_turbo = 0;
     }
 
-    if ( !$config[ 'allow_add_tags' ] )$_POST[ 'tags' ] = "";
+    if ( !$config[ 'allow_add_tags' ] && ( $member_id[ 'user_group' ] > 2 ) )$_POST[ 'tags' ] = "";
     elseif ( @preg_match( "/[\||\<|\>]/", $_POST[ 'tags' ] ) )$_POST[ 'tags' ] = "";
     else $_POST[ 'tags' ] = @$db->safesql( htmlspecialchars( strip_tags( stripslashes( trim( $_POST[ 'tags' ] ) ) ), ENT_COMPAT, $config[ 'charset' ] ) );
 
@@ -809,15 +809,25 @@ define( 'TEMPLATE_DIR', $tpl->dir );
 
     if ( $user_group[ $member_id[ 'user_group' ] ][ 'moderation' ] ) {
 
-      $admintag = "<div class=\"checkbox\"><label><input type=\"checkbox\" name=\"approve\" id=\"approve\" value=\"1\" checked=\"checked\" />{$lang['add_al_ap']}</label></div>";
+      $admintag = "<div class=\"checkbox\"><label><input name=\"approve\" id=\"approve\" value=\"1\" checked=\"checked\" />{$lang['add_al_ap']}</label></div>";
 
-      $admintag .= "<div id=\"opt_holder_comments\" class=\"checkbox\"><label><input type=\"checkbox\" name=\"allow_comm\" value=\"1\" checked=\"checked\" />" . $lang[ 'add_al_com' ] . "</label></div>";
+      $admintag .= "<div id=\"opt_holder_comments\" class=\"checkbox\"><label><input name=\"allow_comm\" value=\"1\" checked=\"checked\" />" . $lang[ 'add_al_com' ] . "</label></div>";
 
-      if ( $user_group[ $member_id[ 'user_group' ] ][ 'allow_main' ] )$admintag .= "<div id=\"opt_holder_main\" class=\"checkbox\"><label><input type=\"checkbox\" name=\"allow_main\" id=\"allow_main\" value=\"1\" checked=\"checked\" />" . $lang[ 'add_al_m' ] . "</label></div>";
+      if ( $user_group[ $member_id[ 'user_group' ] ][ 'allow_main' ] )$admintag .= "<div id=\"opt_holder_main\" class=\"checkbox\" style='display:none'><label><input name=\"allow_main\" id=\"allow_main\" value=\"1\" checked=\"checked\" />" . $lang[ 'add_al_m' ] . "</label></div>";
 
-      $admintag .= "<div id=\"opt_holder_rating\" class=\"checkbox\"><label><input type=\"checkbox\" name=\"allow_rating\" id=\"allow_rating\" value=\"1\" checked=\"checked\" />{$lang['addnews_allow_rate']}</label></div>";
+      $admintag .= "<div id=\"opt_holder_rating\" class=\"checkbox\"><label><input name=\"allow_rating\" id=\"allow_rating\" value=\"1\" checked=\"checked\" />{$lang['addnews_allow_rate']}</label></div>";
 
-      if ( $user_group[ $member_id[ 'user_group' ] ][ 'allow_fixed' ] )$admintag .= "<div class=\"checkbox\"><label><input type=\"checkbox\" name=\"news_fixed\" id=\"news_fixed\" value=\"1\" />{$lang['add_al_fix']}</label></div>";
+      if ( $user_group[ $member_id[ 'user_group' ] ][ 'allow_fixed' ] )$admintag .= "<div class=\"checkbox\"><label><input name=\"news_fixed\" id=\"news_fixed\" value=\"1\" />{$lang['add_al_fix']}</label></div>";
+
+      $admintag .= "<script>
+      $('#approve').kendoSwitch();
+      $('#opt_holder_comments input').kendoSwitch();
+      $('#allow_rating').kendoSwitch();
+      $('#news_fixed').kendoSwitch();
+      
+      </script>
+      ";
+
 
       $tpl->set( '{admintag}', $admintag );
 
@@ -1141,7 +1151,7 @@ $('[data-rel=links]').autocomplete({
 });
 HTML;
 
-    if ( $config[ 'allow_add_tags' ] ) {
+    if ( $config[ 'allow_add_tags' ] || ( $member_id[ 'user_group' ] < 3 )) {
 
       $onload_scripts[] = <<<HTML
 $( '#tags' ).autocomplete({

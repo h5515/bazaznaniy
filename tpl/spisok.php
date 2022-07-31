@@ -175,10 +175,6 @@ if (isset($_GET['searc'])) {
         cursor: pointer;
     }
 
-    .clspis:hover {
-        background-color: #e5e5e5;
-    }
-
     input#inpspis {
         width: 88%;
         height: 24px;

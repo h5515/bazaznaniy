@@ -426,6 +426,8 @@ function Hidekp() {
 
 function SendMails(id, edit, fir) {
     // IzimodalClose('sendform');
+    // if (!$('#sendform')[0])
+    //     $('body').append("<div id='sendform'></div>");
     $('#sendform').iziModal({
         headerColor: '#006d86c4',
         width: 300,
@@ -487,6 +489,7 @@ function ShowNews(ids) {
         $(t).css({
             '-webkit-transform': 'rotateX(180deg)'
         });
+        save_last_viewed(ids);
     } else {
         $(c).slideToggle(300);
         $(t).css({
@@ -517,9 +520,10 @@ function showalert(title, subtitl, id, app) {
     });
     var emsend = "";
     if (app == 'app') {
-        emsend = "<div id='mailadd' align='center' class='boxmail2'><br>Отправить рассылку о добавлении статьи?<br><br><a href='#' onclick='IzimodalClose(\"modalEdit\");SendMails(" + id + "); return false;'><b>Отправить</b></a><br>&nbsp;</div>";
-
-        emsend = emsend + "<div id='mailadd2' align='center' class='boxmail2'><br>Отправить рассылку о редактировании статьи?<br><br><a href='#' onclick='IzimodalClose(\"modalEdit\");SendMails(" + id + ",\"edit\",\"mailadd2\"); return false;'><b>Отправить</b></a></div>";
+        // Почта отключена 
+        emsend = "<div id='mailadd' align='center' class='boxmail2'>Модуль отправки сообщений на почту временно отключен.</div>"
+            //  emsend = "<div id='mailadd' align='center' class='boxmail2'><br>Отправить рассылку о добавлении статьи?<br><br><a href='#' onclick='IzimodalClose(\"modalEdit\");SendMails(" + id + "); return false;'><b>Отправить</b></a><br>&nbsp;</div>";
+            //  emsend = emsend + "<div id='mailadd2' align='center' class='boxmail2'><br>Отправить рассылку о редактировании статьи?<br><br><a href='#' onclick='IzimodalClose(\"modalEdit\");SendMails(" + id + ",\"edit\",\"mailadd2\"); return false;'><b>Отправить</b></a></div>";
 
     }
     emsend = emsend + "&nbsp;<br>&nbsp;<br><div align='center'><a href='#' onclick='IzimodalClose(\"modalalert\"); return false;' class='button21'>Закрыть.</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='IzimodalClose(\"modalalert\"); window.location.reload(); return false;' class='button21'>Закрыть и обновить.</a></div><br>&nbsp;"
@@ -640,7 +644,7 @@ function send_form(form_id, ids, viv) {
 function ShowEdit(Idnews, bur) {
     editbol = true;
     document.body.style.overflow = 'hidden';
-    $('#modalEdit').iziModal('startLoading');
+
     $("#modalEdit").iziModal({
         overlayColor: 'rgba(2,2,2,0.54)',
         radius: 15,
@@ -658,6 +662,9 @@ function ShowEdit(Idnews, bur) {
         onClosing: function() {
             $("#layer2").attr("id", "layer");
             document.body.style.overflow = 'visible';
+            setTimeout(() => {
+                $("#modalEdit").remove();
+            }, 1000);
             editbol = false;
             if (oks) {
                 //window.location.reload();
@@ -667,6 +674,7 @@ function ShowEdit(Idnews, bur) {
 
     });
     var htm = '';
+    $('#modalEdit').iziModal('startLoading');
     //$("#modalEdit" + Idnews).iziModal('startLoading');
     $("#layer").attr("id", "layer2");
     var viv = "";
@@ -675,16 +683,16 @@ function ShowEdit(Idnews, bur) {
     }
 
     $.post(dle_root + "index.php?do=editbz&id=" + Idnews + "&stroka=ok&cluck=" + Idnews + viv + project_url, {
-        idnews: Idnews,
-    }, function(b) {
-        //  alert(b);
-        //$("#modalEdit" + Idnews).iziModal('stopLoading');
-        $('#modalEdit').iziModal('stopLoading');
-        $("#modalEdit").iziModal('resetContent');
-        $("#modalEdit").iziModal('setContent', b);
+            idnews: Idnews,
+        }, function(b) {
+            //  alert(b);
+            //$("#modalEdit" + Idnews).iziModal('stopLoading');
+            $('#modalEdit').iziModal('stopLoading');
+            $("#modalEdit").iziModal('resetContent');
+            $("#modalEdit").iziModal('setContent', b);
 
-    })
-    $("#modalEdit").iziModal('setTitle', 'Редактировать статью');
+        })
+        // $("#modalEdit").iziModal('setTitle', 'Редактировать статью');
     $("#modalEdit").iziModal('open');
 
 }
@@ -802,21 +810,21 @@ function ShowModal(Title, URL, ID, Group, Comand, Full) {
     $("#modalID" + str).iziModal({
         iframeURL: URL + "&random=" + (new Date()).getTime() + Math.floor(Math.random() * 1000000),
         overlayColor: 'rgba(2,2,2,0.54)',
-        radius: 15,
-        headerColor: '#006d86c4',
+        radius: 0,
+        // headerColor: '#0053df',
         borderBottom: false,
         group: Group,
         focusInput: false,
         loop: true,
-        width: '90%',
-        height: '90%',
+        width: '100%',
+        height: '100%',
         closeOnEscape: true,
         transitionIn: tIn,
         transitionOut: tOut,
-        fullscreen: true,
-        openFullscreen: Full,
+        // fullscreen: true,
+        openFullscreen: true,
         iframe: true,
-        iframeWidth: '90%',
+        iframeWidth: '100%',
         iframeHeight: document.documentElement.clientHeight - 80,
         onClosing: function() {
             document.body.style.overflow = 'visible';
@@ -840,11 +848,11 @@ function ShowModal(Title, URL, ID, Group, Comand, Full) {
     if (Title != '') {
         $("#modalID" + str).iziModal('setTitle', Title);
     } else {
-        $("#modalID" + str).append("<span class='modbutclose k-icon k-i-x-outline'></span>");
-        $('.modbutclose').unbind();
-        $('.modbutclose').on('click', function() {
-            $("#modalID" + str).iziModal('close');
-        })
+        // $("#modalID" + str).append("<span class='modbutclose k-icon k-i-x-outline'></span>");
+        // $('.modbutclose').unbind();
+        // $('.modbutclose').on('click', function() {
+        //     $("#modalID" + str).iziModal('close');
+        // })
     }
 
     /*$("#modal").iziModal('setSubtitle',"SubTitle : " + Title);*/

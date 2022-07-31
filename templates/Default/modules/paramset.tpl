@@ -10,17 +10,19 @@
 
         <table class="nonaram">
           <tr>
-            <td><input  align="left" type="checkbox" id="slovcheck" checked ></td>
+            <td><input  align="left" type="checkbox" id="slovcheck" ></td>
             <td valign ="baseline" class="tddcls" onClick="ioscheck('slovcheck')">&nbsp;Точное совпадение слов.</td>
           </tr>
         </table>
 
+        [tags]
         <table class="nonaram">
           <tr>
             <td><input  align="left" type="checkbox" id="tagscheck" ></td>
             <td valign ="baseline" class="tddcls" onClick="ioscheck('tagscheck')">&nbsp;Показывать теги.</td>
           </tr>
         </table>
+        [/tags]
       
       <!--      <ul class="login_pane__menu">
             <li><a href="/index.php?do=pm">Сообщения <span class="right grey"><b>0</b> из 0</span></a></li>

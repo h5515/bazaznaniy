@@ -34,13 +34,16 @@
 						name="sec_code" id="sec_code" required>
 				</div>
 				[/sec_code]
-				<button class="btn btn-big" type="submit" name="submit" title="Отправить комментарий"><b>Отправить
-						комментарий</b></button>
+				<button id="idcomrit" type="submit" name="submit" title="Отправить комментарий"><span class='k-icon k-i-comment'></span>Отправить
+						комментарий</button>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
+	$("#idcomrit").kendoButton({
+		themeColor: "primary",
+	});
 	$("#btaddcomment").kendoButton({
 		themeColor: "info",
 		icon: "comment",
@@ -48,7 +51,7 @@
 			$("#addcomment .box_in").slideDown(100);
 			$("#otmencomment").show();
 			$("#btaddcomment").hide();
-				//$("html, body").animate({ scrollTop: $(document).height() }, 100);
+			//$("html, body").animate({ scrollTop: $(document).height() }, 100);
 		}
 	});
 	$("#otmencomment").kendoButton({

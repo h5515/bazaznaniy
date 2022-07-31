@@ -163,11 +163,11 @@ if ($param == "" && ($obs == '' || $zak == ''))
 else {
     if ($obs != '') {
         $html .= "
-    <li><a href='#' onclick='return false;' style='justify-content: space-between;'>Внутренние инструкции</a>
+    <li><a href='#' onclick='return false;' style='justify-content: space-between;'><span class='k-icon k-i-file-mdb'></span>Внутренние инструкции</a>
     <ul>$obs</ul></li>";
     }
     if ($zak != '') {
-        $html .= "<li><a href='#' onclick='return false;' style='justify-content: space-between;'>Инструкции заказчика</a>
+        $html .= "<li><a href='#' onclick='return false;' style='justify-content: space-between;'><span class='k-icon k-i-file-ascx'></span>Инструкции заказчика</a>
     <ul>$zak</ul></li>";
     }
 }

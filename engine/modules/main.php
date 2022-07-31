@@ -87,19 +87,25 @@ if ($member_id['user_id']) {
   $result = $db->super_query($sql);
   $tpl->set('{read-count}', $result['c']);
 
-  $sql = "SELECT COUNT(id) as c FROM " . PREFIX . "_post $regcategor and id in (SELECT post_id FROM dle_post_view WHERE user = '{$member_id['name']}') AND approve=1 and arhiv=0";
-  $result = $db->super_query($sql);
-  $tpl->set('{prosmotr-count}', $result['c']);
+  if ($config['last_viewed']) {
+    $sql = "SELECT COUNT(id) as c FROM " . PREFIX . "_post $regcategor and id in (SELECT post_id FROM dle_post_view WHERE user = '{$member_id['name']}') AND approve=1 and arhiv=0";
+    $result = $db->super_query($sql);
+    $tpl->set('{prosmotr-count}', $result['c']);
+  }
 
   $users = $member_id['name'];
   $sql = "SELECT COUNT(id) as count FROM " . PREFIX . "_post $regcategor and autor = '{$users}' and approve=1";
   $result = $db->super_query($sql);
   $tpl->set('{my-count}', $result['count']);
 
-  $sql = "SELECT COUNT(id) as count FROM " . PREFIX . "_post $regcategor and approve=0 and arhiv=0";
+  $myopbl = '';
+  if ($member_id['user_group'] > 2)
+      $myopbl = " AND (autor = '{$member_id['name']}' OR edit_autor = '{$member_id['name']}') ";
+
+  $sql = "SELECT COUNT(id) as count FROM " . PREFIX . "_post $regcategor and approve=0 and arhiv=0 $myopbl";
   $result = $db->super_query($sql);
 
-  $sql = "SELECT COUNT(id) as count FROM " . PREFIX . "_post_arhiv $regcategor and approve=0";
+  $sql = "SELECT COUNT(id) as count FROM " . PREFIX . "_post_arhiv $regcategor and approve=0 $myopbl";
   $result2 = $db->super_query($sql);
   $res = $result['count'] + $result2['count'];
 
@@ -489,14 +495,14 @@ $mytheme = 'Blue'; //Тема по умолчанию
 if ((stripos($tpl->copy_template, "{mytheme}") !== false) || (stripos($tpl->copy_template, "{themecss}") !== false)) {
   if (isset($member_id['name'])) {
     $theme = $db_gl->super_query("SELECT theme FROM dle_users WHERE name = '{$member_id['name']}'")['theme'];
-    if (isset($theme)&&$theme!=$mytheme) {
+    if (isset($theme) && $theme != $mytheme) {
       $mytheme = $theme;
       $tpl->set('{themecss}', '<link href="/templates/Default/css/theme/' . $theme . '.css" rel="stylesheet" type="text/css">');
     } else {
       $tpl->set('{themecss}', '');
     }
-  }else{
-      $tpl->set('{themecss}', '');
+  } else {
+    $tpl->set('{themecss}', '');
   }
 }
 
@@ -909,6 +915,20 @@ if (!$dostup_bz) {
   $tpl->set('{content}', "<div id='dle-content'>" . $tpl->result['content'] . "</div>");
   $tpl->set('[not-dostup]', "");
   $tpl->set('[/not-dostup]', "");
+}
+
+if ($config['last_viewed']) {
+  $tpl->set('[last_viewed]', "");
+  $tpl->set('[/last_viewed]', "");
+} else {
+  $tpl->set_block("'\\[last_viewed\\](.*?)\\[/last_viewed\\]'si", "");
+}
+
+if($config['allow_tags']) {	
+  $tpl->set( '[tags]', "" );
+  $tpl->set( '[/tags]', "" );
+}else{
+  $tpl->set_block( "'\\[tags\\](.*?)\\[/tags\\]'si", "" );
 }
 
 $tpl->compile('main');

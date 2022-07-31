@@ -238,7 +238,7 @@ switch ( $do ) {
 		
 		if ($user_group[$member_id['user_group']]['allow_short']) { $stop_list = ""; $cat_join = ""; $cat_join_count = ""; }
 		
-		$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}userinfo=1 AND allow_main=1" . $where_date . " ORDER BY " . $fixed . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+		$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}userinfo=1 AND allow_main=1" . $where_date . " ORDER BY " . $fixed . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 
 		$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}WHERE {$stop_list}approve=1 AND arhiv=0 AND allow_main=1" . $where_date;
 		$sql_news = "";
@@ -340,7 +340,7 @@ switch ( $do ) {
                 
                 $join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND q.user='".$member_id['name']."') ";
 				
-				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story, p.xfields, p.approve,p.arhiv, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason, q.id_news as id_news FROM " . PREFIX . "_post p {$join_category}{$join_read}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$where_category}approve=1 AND arhiv=0" . $where_date . " ORDER BY " . $fixed . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+				$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story, p.xfields, p.approve,p.arhiv, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason, q.id_news as id_news FROM " . PREFIX . "_post p {$join_category}{$join_read}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$where_category}approve=1 AND arhiv=0" . $where_date . " ORDER BY " . $fixed . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
                 
                 //echo $sql_select;
 
@@ -389,7 +389,7 @@ switch ( $do ) {
 			if (isset ( $_SESSION['dle_direction_lastnews'] )) $news_direction_by = $_SESSION['dle_direction_lastnews'];
 			else $news_direction_by = "DESC";
 			
-			$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+			$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 			$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}WHERE {$stop_list}approve=1 AND arhiv=0" . $where_date;
 		
 		} elseif ($do == 'tags') {
@@ -443,7 +443,7 @@ switch ( $do ) {
 
 			$tag = @$db->safesql ( $tag );
 			
-						$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p INNER JOIN " . PREFIX . "_tags t on (t.news_id=p.id) {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE $catser {$stop_list}t.tag = '{$tag}' AND p.approve=1" . $where_date .  " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+						$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p INNER JOIN " . PREFIX . "_tags t on (t.news_id=p.id) {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE $catser {$stop_list}t.tag = '{$tag}' AND p.approve=1" . $where_date .  " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 			$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post p INNER JOIN " . PREFIX . "_tags t on (t.news_id=p.id) {$cat_join}WHERE {$stop_list}t.tag = '{$tag}' AND approve=1 AND arhiv=0" . $where_date;
 
 		/*	$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, CHAR_LENGTH(p.full_story) as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p INNER JOIN " . PREFIX . "_tags t on (t.news_id=p.id) {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}t.tag = '{$tag}' AND p.approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
@@ -524,7 +524,7 @@ switch ( $do ) {
 					}
 				}
 
-				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p INNER JOIN " . PREFIX . "_xfsearch xf on (xf.news_id=p.id) {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}xf.tagname = '{$xfname}' AND xf.tagvalue='{$xf}' AND p.approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+				$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p INNER JOIN " . PREFIX . "_xfsearch xf on (xf.news_id=p.id) {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}xf.tagname = '{$xfname}' AND xf.tagvalue='{$xf}' AND p.approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 				$sql_count  = "SELECT COUNT(*) as count FROM " . PREFIX . "_post p INNER JOIN " . PREFIX . "_xfsearch xf on (xf.news_id=p.id) {$cat_join}WHERE {$stop_list}xf.tagname = '{$xfname}' AND xf.tagvalue='{$xf}' AND approve=1 AND arhiv=0" . $where_date;
 		
 			} else {
@@ -539,7 +539,7 @@ switch ( $do ) {
 					die("Redirect");
 				}
 				
-				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}xfields LIKE '%{$xf}%' AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+				$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}xfields LIKE '%{$xf}%' AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 				$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}WHERE {$stop_list}xfields LIKE '%{$xf}%' AND approve=1" . $where_date;
 		
 				$xf = str_replace ( '|', '', $xf );
@@ -563,7 +563,7 @@ switch ( $do ) {
 				
 				$join_read = " LEFT JOIN " . PREFIX . "_post_read q ON (p.id=q.id_news AND q.user='".$member_id['name']."') ";
 				
-				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, p.approve, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason, q.id_news as id_news FROM " . PREFIX . "_post p{$join_read} LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE autor = '{$user}' AND approve=0 ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+				$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, p.approve, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason, q.id_news as id_news FROM " . PREFIX . "_post p{$join_read} LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE autor = '{$user}' AND approve=0 ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 				$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post WHERE autor = '$user' AND approve=0";
 				
 				if( !$config['profile_news'] ) {
@@ -600,7 +600,7 @@ switch ( $do ) {
 				if (isset ( $_SESSION['dle_sort_allnews'] )) $news_sort_by = $_SESSION['dle_sort_allnews'];
 				if (isset ( $_SESSION['dle_direction_allnews'] )) $news_direction_by = $_SESSION['dle_direction_allnews'];
 				
-				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}autor = '$user' AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+				$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}autor = '$user' AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 				$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}WHERE {$stop_list}autor = '$user' AND approve=1 AND arhiv=0" . $where_date;
 			}
 		
@@ -627,7 +627,7 @@ switch ( $do ) {
 			if (isset ( $_SESSION['dle_sort_newposts'] )) $news_sort_by = $_SESSION['dle_sort_newposts'];
 			if (isset ( $_SESSION['dle_direction_newposts'] )) $news_direction_by = $_SESSION['dle_direction_newposts'];
 			
-			$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}approve=1 AND date between '$lasttime' and '$thistime' order by " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+			$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}approve=1 AND date between '$lasttime' and '$thistime' order by " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 			$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}WHERE {$stop_list}approve=1 AND arhiv=0 AND date between '$lasttime' and '$thistime'";
 			
 			$config['allow_cache'] = false;
@@ -671,7 +671,7 @@ switch ( $do ) {
         //$gid = $id = get_idcategories( $id );
         $catname = get_cat_name( $id );
 
-      $sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story,p.approve, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p LEFT JOIN dle_post_extras e ON (p.id=e.news_id) WHERE approve=0" . $tcat . " ORDER by date desc";
+      $sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story,p.approve, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p LEFT JOIN dle_post_extras e ON (p.id=e.news_id) WHERE approve=0" . $tcat . " ORDER by date desc";
         $sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}WHERE {$stop_list}approve=0 " . $tcat . " AND date between '$lasttime' and '$thistime'";
       $config[ 'allow_cache' ] = false;
 			
@@ -716,7 +716,7 @@ switch ( $do ) {
 			if (isset ( $_SESSION['dle_sort_catalog'] )) $news_sort_by = $_SESSION['dle_sort_catalog'];
 			if (isset ( $_SESSION['dle_direction_catalog'] )) $news_direction_by = $_SESSION['dle_direction_catalog'];
 			
-			$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}symbol = '$catalog' AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+			$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}symbol = '$catalog' AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 			$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}WHERE {$stop_list}symbol = '$catalog' AND approve=1 AND arhiv=0 " . $where_date;
 
 		} else {
@@ -794,7 +794,7 @@ switch ( $do ) {
 					if (isset ( $_SESSION['dle_sort_main'] )) $news_sort_by = $_SESSION['dle_sort_main'];
 					if (isset ( $_SESSION['dle_direction_main'] )) $news_direction_by = $_SESSION['dle_direction_main'];
 					
-					$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}approve=1 AND allow_main=1" . $where_date . " ORDER BY " . $fixed . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+					$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}approve=1 AND allow_main=1" . $where_date . " ORDER BY " . $fixed . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 					$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}WHERE {$stop_list}approve=1 AND arhiv=0 AND allow_main=1" . $where_date;
 				
 				}
@@ -840,7 +840,7 @@ switch ( $do ) {
 				if (isset ( $_SESSION['dle_sort_date'] )) $news_sort_by = $_SESSION['dle_sort_date'];
 				if (isset ( $_SESSION['dle_direction_date'] )) $news_direction_by = $_SESSION['dle_direction_date'];
 				
-				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}date >= '{$year}-01-01'AND date < '{$year}-01-01' + INTERVAL 1 YEAR AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+				$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}date >= '{$year}-01-01'AND date < '{$year}-01-01' + INTERVAL 1 YEAR AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 				$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}where {$stop_list}date >= '{$year}-01-01'AND date < '{$year}-01-01' + INTERVAL 1 YEAR AND approve=1 AND arhiv=0 " . $where_date;
 			}
 			
@@ -888,7 +888,7 @@ switch ( $do ) {
 				if (isset ( $_SESSION['dle_sort_date'] )) $news_sort_by = $_SESSION['dle_sort_date'];
 				if (isset ( $_SESSION['dle_direction_date'] )) $news_direction_by = $_SESSION['dle_direction_date'];
 				
-				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}date >= '{$year}-{$month}-01'AND date < '{$year}-{$month}-01' + INTERVAL 1 MONTH AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+				$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}date >= '{$year}-{$month}-01'AND date < '{$year}-{$month}-01' + INTERVAL 1 MONTH AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 				$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}where {$stop_list}date >= '{$year}-{$month}-01'AND date < '{$year}-{$month}-01' + INTERVAL 1 MONTH AND approve=1 AND arhiv=0" . $where_date;
 			}
 		
@@ -943,7 +943,7 @@ switch ( $do ) {
 				if (isset ( $_SESSION['dle_sort_date'] )) $news_sort_by = $_SESSION['dle_sort_date'];
 				if (isset ( $_SESSION['dle_direction_date'] )) $news_direction_by = $_SESSION['dle_direction_date'];
 				
-				$sql_select = "SELECT p.id, p.autor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}date >= '{$year}-{$month}-{$day}' AND date < '{$year}-{$month}-{$day}' + INTERVAL 24 HOUR AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
+				$sql_select = "SELECT p.id, p.autor, p.edit_autor as editor, p.date, p.short_story, p.full_story as full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason FROM " . PREFIX . "_post p {$cat_join}LEFT JOIN " . PREFIX . "_post_extras e ON (p.id=e.news_id) WHERE {$stop_list}date >= '{$year}-{$month}-{$day}' AND date < '{$year}-{$month}-{$day}' + INTERVAL 24 HOUR AND approve=1" . $where_date . " ORDER BY " . $news_sort_by . " " . $news_direction_by . " LIMIT " . $cstart . "," . $config['news_number'];
 				$sql_count = "SELECT COUNT(*) as count FROM " . PREFIX . "_post {$cat_join_count}WHERE {$stop_list}date >= '{$year}-{$month}-{$day}' AND date < '{$year}-{$month}-{$day}' + INTERVAL 24 HOUR AND approve=1 AND arhiv=0" . $where_date;
 		
 			}

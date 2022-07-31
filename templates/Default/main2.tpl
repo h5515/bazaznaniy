@@ -63,15 +63,15 @@
 
             <!--{include file="modules/footside1.tpl"}-->
           </div>
-          [histor]
+          {* [histor]
           {include file="modules/rigthedit.tpl"}
-          [/histor]
+          [/histor] *}
         </div>
 
 
 
         {AJAX}
-        <script src="{THEME}/js/lib.js?v={VERSION}"></script>
+       
         <script src="{THEME}/js/iziModal.js?v={VERSION}"></script>
         <script src="{THEME}/js/iziModal.min.js?v={VERSION}"></script>
         <script>
@@ -107,6 +107,21 @@
             jQuery('html, body').animate({ scrollTop: destination }, 1100);
             return false;
           })
+          setTimeout(() => {
+            $('.addboxk .highslide').attr("onclick", "").unbind("click");
+            // $('.addboxk .highslide').each(function(){
+            // // $el = $(this).find('img');
+            // // $el.appendTo($(this).closest('span'));
+            // // $(this).remove();
+            
+            // $(this).on('click',function(event){
+            //   alert(1)
+            //   event.stopImmediatePropagation();
+            //   return false;
+            // })
+            // });
+          }, 1000);
+          
         </script>
   </body>
 

@@ -1,20 +1,40 @@
 <script src="{THEME}/js/jquery.tagify.min.js"></script>
-<br>
-<article class="box story">
+<style>
+body {
+    background-color: white;
+}
+.addboxk .highslide img{
+	cursor: pointer;
+}
+</style>
+<article class="box story addboxk" style="display:none">
+	<div id="idtoolbar"></div>
 	<div class="box_in">
-		<h4 class="title h1">[not-editor]Добавить статью[/not-editor][editor]Редкатировать статью[/editor]</h4>
+		{* <h4 class="title h1">[not-editor]Добавить статью[/not-editor][editor]Редкатировать статью[/editor]</h4> *}
 		<div class="addform">
 			<ul class="ui-form">
-				<li class="form-group">
-					<label for="title" class="imp">Заголовок</label>
-					<input type="text" name="title" id="title" value="{title}" class="wide" required>
-				</li>
 				[urltag]
 				<!--<li class="form-group">
 					<label for="alt_name" class="imp">URL статьи</label>
 					<input type="text" name="alt_name" id="alt_name" value="{alt-name}" class="wide">
 				</li>-->
 				[/urltag]
+				<li class="form-group">
+					{* <label for="title" class="imp">Заголовок</label> *}
+					<input type="text" name="title" id="title" value="{title}" class="wide inedit" placeholder="Заголовок" required>
+				</li>
+				<li class="form-group" style="border-bottom: 1px dashed #919191;">
+					[not-wysywyg]
+					<div class="bb-editor">
+						{bbcode}
+						<textarea name="full_story" id="full_story" onfocus="setFieldName(this.name)" rows="12"
+							class="wide inedit">{full-story}</textarea>
+					</div>
+					[/not-wysywyg]
+					{fullarea}
+				</li>
+
+				
 				<li class="form-group">
 					<label for="category" class="imp">Категория</label>
 					{category}
@@ -59,18 +79,7 @@
 					[/not-wysywyg]
 					{shortarea}
 				</li>-->
-				<li class="form-group">
-					<label for="full_story">Описание</label>
-					[not-wysywyg]
-					<div class="bb-editor">
-						{bbcode}
-						<textarea name="full_story" id="full_story" onfocus="setFieldName(this.name)" rows="12"
-							class="wide">{full-story}</textarea>
-					</div>
-					[/not-wysywyg]
-					{fullarea}
-				</li>
-
+				
 				<li class="form-group">
 					<table style="width:100%">
 						{xfields}
@@ -92,6 +101,7 @@
 					<input type="text" name="reason" id="reason" value="{reason}" class="wide" required>
 
 				</li>
+				<input type="hidden" value="{edit_autor}" name="edit_autor">
 				[/editor]
 
 				<li class="form-group addtags">
@@ -154,6 +164,9 @@
 						dropdownMaxHeight: 'auto'
 					})
 				});
+				function doneattr(){
+					$('.addboxk .highslide').RemoveAttr("onclick");
+				}
 			</script>
 
 			<p style="margin: 20px 0 0 0;" class="grey"><span style="color: #e85319">*</span> — поля отмеченные
@@ -168,6 +181,11 @@
 				</div>
 				<script>
 					kendo.init("#idbutinit");
+					setTimeout(() => {
+						$('.second-toolbar').remove();	
+						$('.addboxk').fadeIn(400)
+					}, 300);
+					
 				</script>
 			</div>
 		</div>

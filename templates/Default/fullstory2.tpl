@@ -71,7 +71,7 @@
 		</div>
 		[fixed]<span class="fixed_label" title="Важная новость"></span>[/fixed]
 	</div>
-	<div class="meta ignore-select">
+	<div class="meta ignore-select mryignore-select">
 		<ul class="right">
 			<!--		<li class="complaint" title="Жалоба">[complaint]<svg class="icon icon-bad"><use xlink:href="#icon-bad"></use></svg><span class="title_hide">Жалоба</span>[/complaint]</li>-->
                   [redact]  

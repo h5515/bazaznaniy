@@ -4,6 +4,7 @@
 	
 [available=cat]
 		<!-- Теги -->
+		[tags]
 	<div class="blockmy block top_block">
 		    <div class="tegiformcl2" >   
 			<div class="fixnavig" onClick="opentegform({category-id});return false;">
@@ -31,7 +32,7 @@
 		</div>
         </div>
 	</div>
-
+	[/tags]
 	<!-- / Теги -->	
 	
 	
@@ -51,8 +52,9 @@
 	<!--		[available=main|favorites]
 			<span><a href="index.php?do=favorites"><table class="navigatr"><tr><td>Закладки</td><td id="favorit" align="right">{favorite-count}</td></tr></table></a></span>
 			[/available]-->
+			[last_viewed]
 			<span><a href="#" onClick="filtered(this,'esread');return false;"><table class="navigatr"><tr><td>Просмотренные статьи</td><td id="reades" align="right">{prosmotr-count}</td></tr></table></a></span>
-
+			[/last_viewed]
 			<span><a href="#" onClick="filtered(this,'noread');return false;"><table class="navigatr"><tr><td>Непрочитанные статьи</td><td id="readno" align="right">{read-count}</td></tr></table></a></span>
             
 			<span><a href="#" onClick="filtered(this,'myst');return false;"><table class="navigatr"><tr><td>Мои статьи</td><td align="right">{my-count}</td></tr></table></a></span>

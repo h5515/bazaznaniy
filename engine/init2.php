@@ -202,6 +202,9 @@ if ($config['start_site'] == 3 and !$_SERVER['QUERY_STRING'] and !$_POST['do']) 
 //################# Definition of user groups
 $user_group = get_vars("usergroup");
 
+if (isset($user_group) && count($user_group) < 1)
+  unset($user_group);
+
 if (!is_array($user_group)) {
 	$user_group = array();
 

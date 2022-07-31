@@ -418,7 +418,7 @@ if (!$allow_addnews) {
             $count = $db2->super_query("SELECT COUNT(id) as c, approve, fixed, allow_comm, allow_main, autor, tags FROM dle_post WHERE id = '{$id}' ");
             if ($count['c'] > 0 && $count['autor'] == $member_id['name'] && $count['approve'] == '0')
               $mystat = true;
-
+            $nasavtor = $count['autor'];
             $added_time = time();
           }
           if (!$mystat) {
@@ -435,7 +435,14 @@ if (!$allow_addnews) {
               $prox = true;
               //if ($gid=="")$gid = $_GET['id'];	
               $gid = $_GET['id'];
-              $sql = "INSERT INTO " . PREFIX . "_post_arhiv (id, date, autor, short_story, full_story, xfields, title, keywords, category, alt_name, allow_comm, approve, allow_main, fixed, allow_br, symbol, tags, edate) values ('{$gid}','$thistime', '{$member_id['name']}', '$reason', '$full_story', '$filecontents', '$title', '', '$category_list', '$alt_name', '$allow_comm', '0', '$allow_main', '$news_fixed', '$allow_br', '$catalog_url', '" . $_POST['tags'] . "', '$added_time')";
+              if (isset($nasavtor)) {
+                $treautor = $nasavtor;
+                $treeditav = $member_id['name'];
+              } else {
+                $treautor = $member_id['name'];
+                $treeditav = '';
+              }
+              $sql = "INSERT INTO " . PREFIX . "_post_arhiv (id, date, autor, edit_autor, short_story, full_story, xfields, title, keywords, category, alt_name, allow_comm, approve, allow_main, fixed, allow_br, symbol, tags, edate) values ('{$gid}','$thistime', '{$treautor}', '$treeditav', '$reason', '$full_story', '$filecontents', '$title', '', '$category_list', '$alt_name', '$allow_comm', '0', '$allow_main', '$news_fixed', '$allow_br', '$catalog_url', '" . $_POST['tags'] . "', '$added_time')";
             }
           }
         }
@@ -455,8 +462,8 @@ if (!$allow_addnews) {
             $tags_array = array();
             $temp_array = explode(",", $mtr);
             $uator = $db_gl->super_query("SELECT name FROM dle_users WHERE fullname = '{$temp_array[0]}'");
-            if (isset($uator['fullname']))
-              $temp_array[0] = $uator;
+            if (isset($uator['name']))
+              $temp_array[0] = $uator['name'];
             $atr = "autor = '{$temp_array[0]}', ";
           } else {
             $atr = "";
@@ -471,7 +478,7 @@ if (!$allow_addnews) {
             }
             if ($_GET['vivid'] == "ok" and $approve) {
               $db2 = new db;
-              $count = $db2->super_query("SELECT id, title, full_story, category, date, autor, tags, alt_name FROM dle_post WHERE id = (SELECT id FROM dle_post_arhiv WHERE ids = {$id}) ");
+              $count = $db2->super_query("SELECT id, title, full_story, category, date, autor, edit_autor, tags, alt_name FROM dle_post WHERE id = (SELECT id FROM dle_post_arhiv WHERE ids = {$id}) ");
               $vid = $count['id'];
               $vtitle = $count['title'];
               $vfull_story = $count['full_story'];
@@ -480,11 +487,28 @@ if (!$allow_addnews) {
               $vautor = $count['autor'];
               $vtags = $count['tags'];
               $valt_name = $count['alt_name'];
+              $vedit_autor = $count['edit_autor'];
               $zamen = true;
               $idv = $id;
               $id = $vid;
 
-              $sqlv = "UPDATE dle_post_arhiv set autor='$vautor', date='$vdate', title='$vtitle', full_story='$vfull_story', category='$vcategory', alt_name='$valt_name', approve='1',  tags='$vtags' WHERE ids='{$idv}'";
+              $btim = true;
+              if (isset($vedit_autor))
+                $raut = $vedit_autor;
+              else 
+                $raut = $vautor;
+
+              if (isset($_POST['edit_autor']))
+                $raut = $_POST['edit_autor'];
+
+              if ((time() - strtotime($vdate) < 3 * 60 * 60)&&($raut==$member_id['name']))
+                $btim = false;
+
+              $prititle = $db->safesql($parse->process(trim(strip_tags($_POST['title']))));
+              $pristory = $db->safesql($parse->BB_Parse($parse->process($_POST['full_story']), false));
+
+              if (($vfull_story != $pristory) || ($prititle != $vtitle) && $btim)
+              $sqlv = "UPDATE dle_post_arhiv set autor='$vautor', edit_autor='$vedit_autor', date='$vdate', title='$vtitle', full_story='$vfull_story', category='$vcategory', alt_name='$valt_name', approve='1',  tags='$vtags' WHERE ids='{$idv}'";
 
               $count = $db2->super_query("SELECT autor, date, edate, short_story FROM dle_post_arhiv WHERE ids = {$idv}");
               if ($temp_array[0] != $count['autor'])
@@ -495,7 +519,7 @@ if (!$allow_addnews) {
               $reason = $count['short_story'];
             } else if ($approve and $approveest == 'ok') {
               $db2 = new db;
-              $count = $db2->super_query("SELECT id, title, full_story, category, date, autor, tags, alt_name FROM dle_post WHERE id = {$id}");
+              $count = $db2->super_query("SELECT id, title, full_story, category, date, autor, edit_autor, tags, alt_name FROM dle_post WHERE id = {$id}");
               $vid = $count['id'];
               $vtitle = $count['title'];
               $vfull_story = $count['full_story'];
@@ -504,24 +528,49 @@ if (!$allow_addnews) {
               $vautor = $count['autor'];
               $vtags = $count['tags'];
               $valt_name = $count['alt_name'];
+              $vedit_autor = $count['edit_autor'];
               $zamen = true;
               $idv = $id;
               $id = $vid;
 
-              $sqlv = "INSERT INTO dle_post_arhiv (id, autor, date, title, full_story, category, alt_name, approve, tags) VALUES ('$id','$vautor','$vdate', '$vtitle','$vfull_story','$vcategory','$valt_name', '1', '$vtags')";
+              $btim = true;
+              if (isset($vedit_autor))
+                $raut = $vedit_autor;
+              else 
+                $raut = $vautor;
+
+              if ((time() - strtotime($vdate) < 3 * 60 * 60)&&($raut==$member_id['name']))
+                $btim = false;
+
+              $prititle = $db->safesql($parse->process(trim(strip_tags($_POST['title']))));
+              $pristory = $db->safesql($parse->BB_Parse($parse->process($_POST['full_story']), false));
+              if ((($vfull_story != $pristory) || ($prititle != $vtitle)) && $btim)
+                $sqlv = "INSERT INTO dle_post_arhiv (id, autor, edit_autor, date, title, full_story, category, alt_name, approve, tags) VALUES ('$id','$vautor', '$vedit_autor', '$vdate', '$vtitle','$vfull_story','$vcategory','$valt_name', '1', '$vtags')";
 
               $added_time = time();
               $thistime = date("Y-m-d H:i:s", $added_time);
               $vdates = "date = '{$thistime}',";
             }
           }
-          //$vdates
-          $sql = "UPDATE $tabl set $atr title='$title', $vdates short_story='$short_story', full_story='$full_story', xfields='$filecontents', category='$category_list', alt_name='$alt_name', allow_comm='$allow_comm', approve='$approve', allow_main='$allow_main', fixed='$news_fixed', allow_br='$allow_br', tags='" . $_POST['tags'] . "' WHERE $idsviv='{$id}'";
+          $eautor = "";
+          if ($_POST['edit_autor'])
+            $eautor = "edit_autor = '{$_POST['edit_autor']}',";
+          else {
+            if ($member_id['user_group'] < 3) {
+              $eautor = "edit_autor = '{$member_id['name']}',";
+
+              $appsrow = (int)$db->super_query("SELECT approve as count FROM dle_post WHERE id = $id")['count'];
+              if (!$appsrow)
+                $eautor = "";
+            }
+          }
+
+          $sql = "UPDATE $tabl set $atr $eautor title='$title', $vdates short_story='$short_story', full_story='$full_story', xfields='$filecontents', category='$category_list', alt_name='$alt_name', allow_comm='$allow_comm', approve='$approve', allow_main='$allow_main', fixed='$news_fixed', allow_br='$allow_br', tags='" . $_POST['tags'] . "' WHERE $idsviv='{$id}'";
         }
         $db->query("DELETE FROM dle_draft WHERE id={$id} and user='{$member_id['name']}'");
         $db->query($sql);
 
-        if ($zamen)
+        if ($zamen && $sqlv != "")
           $db->query($sqlv);
 
         if (!$estst) {
@@ -621,6 +670,7 @@ if (!$allow_addnews) {
           }
         }
         clear_all_caches();
+        $ceshbol = true;
       } else {
 
         if ($max_detected) die("Hacking attempt!");
@@ -805,16 +855,13 @@ if (!$allow_addnews) {
       }
 
       if ($vse)
-        msgbox($lang['add_mok'], $lang['add_ok_m2'] . "<br><script>oks=true; showalert('" . $lang['add_mok'] . "','" . $lang['add_ok_m2'] . "','" . $id . "','" . $app . "');</script><a href=\"#\" onclick=\"IzimodalClose('modalEdit')\">" . $lang['all_close'] . "</a>");
+        msgbox($lang['add_mok'], $lang['add_ok_m2'] . "<script>oks=true; showalert('" . $lang['add_mok'] . "','" . $lang['add_ok_m2'] . "','" . $id . "','" . $app . "');</script><a href=\"#\" onclick=\"IzimodalClose('modalEdit')\">" . $lang['all_close'] . "</a>");
       else
-        msgbox($lang['add_mok'], $lang['add_ok_m1'] . "<br><script>oks=true; showalert('" . $lang['add_mok'] . "','" . $lang['add_ok_m1'] . "','" . $id . "');</script><a href=\"#\" onclick=\"IzimodalClose('modalEdit')\">" . $lang['all_close'] . "</a>");
+        msgbox($lang['add_mok'], $lang['add_ok_m1'] . "<script>oks=true; showalert('" . $lang['add_mok'] . "','" . $lang['add_ok_m1'] . "','" . $id . "');</script><a href=\"#\" onclick=\"IzimodalClose('modalEdit')\">" . $lang['all_close'] . "</a>");
 
       //  if ( $approve ) {
-
-      clear_cache(array('news_', 'related_', 'tagscloud_', 'archives_', 'topnews_', 'rss', 'stats'));
-      foreach ($catlist as $selected) {
-        clear_cache(array('calendar' . $selected . '_', 'archives' . $selected . '_'));
-      }
+      //   if (empty($ceshbol)||!$ceshbol)
+      //    clear_all_caches();
       //}
 
     }
@@ -853,7 +900,10 @@ if (!$allow_addnews) {
     } else {
       $row = array();
     }
-    $myautr = $row['autor'];
+    if ($_GET['vivid'] == 'ok')
+      $myautr = $row['edit_autor'];
+    else
+      $myautr = $row['autor'];
     if ($found) {
       $fixed = $row['fixed'];
       $approve = $row['approve'];
@@ -1008,44 +1058,52 @@ if (!$allow_addnews) {
 
       if ($_GET['vivid'] == 'ok') {
         $sqls = "SELECT autor FROM dle_post WHERE id = (SELECT id FROM dle_post_arhiv WHERE ids = {$_GET['id']}) ";
-        $results = $db->query($sqls);
-        while ($row3 = $db->get_row($results)) {
-          if ($row3['autor'] != $myautr) {
-            $polautor = $row3['autor'];
-            $glautor = $polautor;
-            $estrez = true;
-          }
+        // $row3 = $db->super_query("SELECT edit_autor FROM dle_post_arhiv WHERE ids = {$_GET['id']}");
+
+        // if (empty($row3['edit_autor']))
+        $row3 = $db->super_query($sqls);
+        // else
+        //   $row3['autor'] = $row3['edit_autor'];
+
+        if ($row3['autor'] != $myautr) {
+          $polautor = $row3['autor'];
+          $glautor = $polautor;
+          $estrez = true;
         }
         if (isset($polautor))
           $polautor = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '$polautor'")['fullname'];
 
-          if (isset($myautr))
+        $edit_autor = $myautr;
+        if (isset($myautr))
           $myautr = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '$myautr'")['fullname'];
 
-          if (isset($glautor))
+        if (isset($glautor))
           $glautor = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '$glautor'")['fullname'];
 
         if ($estrez) {
           $polautor = " главной статьи:<a href='#' onClick = 'smenautor(\"{$glautor}\");return false;'><b> {$polautor} </b></a>изменить на автора отредактировавшего статью: <a href='#' onClick = 'smenautor(\"{$myautr}\");return false;'>{$myautr}</a>";
+
           $myautr = $glautor;
         } else $polautor = "";
       } else {
         $polautor = "";
         if (isset($myautr))
           $myautr = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '$myautr'")['fullname'];
-
       }
 
-     
+
 
       $autr =  '<label for="alt_name"  class="imp">Автор' . $polautor . '</label>
 					<input placeholder="" type="text" name="autor12" id="autor12" value="' . $myautr . '" maxlength="150" autocomplete="off"  class="wide" minlength="1" required> ';
 
 
-
-
       $tpl->set('{autor}', $autr);
     } else $tpl->set('{autor}', '');
+
+    if (isset($edit_autor))
+      $tpl->set('{edit_autor}', $edit_autor);
+    else
+      $tpl->set('{edit_autor}', '');
     // echo "Moderator".$user_group[ $member_id[ 'user_group' ] ][ 'moderation' ];
     // echo "allow_all_edit".$user_group[$member_id['user_group']]['allow_all_edit'];
     if ($user_group[$member_id['user_group']]['moderation']) {
@@ -1059,7 +1117,7 @@ if (!$allow_addnews) {
 
       $admintag .= "<div id=\"opt_holder_comments\" class=\"checkbox\"><label><input type=\"checkbox\" name=\"allow_comm\" value=\"1\" checked=\"checked\" />" . $lang['add_al_com'] . "</label></div>";
 
-      if ($user_group[$member_id['user_group']]['allow_main']) $admintag .= "<div id=\"opt_holder_main\" class=\"checkbox\"><label><input type=\"checkbox\" name=\"allow_main\" id=\"allow_main\" value=\"1\" checked=\"checked\" />" . $lang['add_al_m'] . "</label></div>";
+      if ($user_group[$member_id['user_group']]['allow_main']) $admintag .= "<input type=\"hidden\" name=\"allow_main\" id=\"allow_main\" value=\"1\" checked=\"checked\" />";
 
       $admintag .= "<div id=\"opt_holder_rating\" class=\"checkbox\"><label><input type=\"checkbox\" name=\"allow_rating\" id=\"allow_rating\" value=\"1\" checked=\"checked\" />{$lang['addnews_allow_rate']}</label></div>";
 
@@ -1069,6 +1127,15 @@ if (!$allow_addnews) {
       } else {
         if ($user_group[$member_id['user_group']]['allow_fixed']) $admintag .= "<div class=\"checkbox\"><label><input type=\"checkbox\" name=\"news_fixed\" id=\"news_fixed\" value=\"1\" checked=\"checked\" />{$lang['add_al_fix']}</label></div>";
       }
+
+      $admintag .= "<script>
+      $('#approve').kendoSwitch();
+      $('#opt_holder_comments input').kendoSwitch();
+      $('#allow_rating').kendoSwitch();
+      $('#news_fixed').kendoSwitch();
+      
+      </script>
+      ";
 
       $tpl->set('{admintag}', $admintag);
     } else $tpl->set('{admintag}', '');
@@ -1085,9 +1152,9 @@ if (!$allow_addnews) {
     $tpl->set('[/editor]', '');
     $tpl->set_block("'\\[not-editor\\].*?\\[/not-editor\\]'si", "");
 
-    if (!$config['allow_add_tags']){
+    if (!$config['allow_add_tags']) {
       $tpl->set_block("'\\[allow_tags\\].*?\\[/allow_tags\\]'si", "");
-    }else{
+    } else {
       $tpl->set('[allow_tags]', '');
       $tpl->set('[/allow_tags]', '');
     }

@@ -83,3 +83,12 @@
 #idsvitr .k-switch-on .k-switch-track {
     background-color: #0a4bbf;
 }
+
+.k-window-titlebar {
+    background-color: #0053df;
+    color: white;
+}
+
+.k-window {
+    background-color: aliceblue;
+}

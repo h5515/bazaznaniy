@@ -36,10 +36,8 @@ if (!check_dostup($_GET['category'], $prj, 1)) {
 
 <div id="buttonadduser">
     <p>
-        <button type="button" data-role="button" data-icon="add" data="user" onclick="spisoc_on(this)">Добавить
-            пользователей</button>
-        <button type="button" data-role="button" data-icon="add" data="grup" onclick="spisoc_on(this)">Добавить
-            группы</button>
+        <button type="button" data-role="button" data-icon="add" data="user" onclick="spisoc_on(this)">Добавить пользователей</button>
+        <button type="button" data-role="button" data-icon="add" data="grup" onclick="spisoc_on(this)">Добавить группы</button>
     </p>
 </div>
 <div class="dostupitems">
@@ -163,7 +161,13 @@ if (!check_dostup($_GET['category'], $prj, 1)) {
             resizable: false,
             autoFocus: true,
             open: function(e) {
-                this.center()
+                this.center();
+                this.setOptions({
+                    position: {
+                        top: 100, // or "100px"
+                        left: "75%"
+                    }
+                })
             },
             close: function(e) {
                 $(document).off('click', '.clspis');

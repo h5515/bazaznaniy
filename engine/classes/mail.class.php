@@ -109,11 +109,13 @@ class dle_mail {
 			}
 			
 		}
-		
-		if (!$this->mail->send()) {
-			$this->smtp_msg = $this->mail->ErrorInfo;
+		// Отправка почты отключена почта выключена 
+		// if (!$this->mail->send()) {
+		// 	$this->smtp_msg = $this->mail->ErrorInfo;
+		// 	$this->send_error = true;
+		// }
+		$this->smtp_msg = 'Модуль отправки почты временно отключен.';
 			$this->send_error = true;
-		}
 		
 		$this->mail->clearAllRecipients();
 		$this->mail->clearAttachments();

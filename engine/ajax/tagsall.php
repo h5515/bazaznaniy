@@ -73,7 +73,7 @@ $favorites = '';
 $noread = '';
 
 if (!$tagson == "") {
-  if ($tagcheck == 'true'&&empty($_SESSION['sernews_id'])) {
+  if ($tagcheck == 'true' && empty($_SESSION['sernews_id'])) {
     $nser = mb_strtolower($tagson, 'utf-8');
     $nser = " AND " . build_like_and($nser, 'tags');
     $sql = "SELECT id  FROM " . PREFIX . "_post $catserch $nser";
@@ -164,6 +164,9 @@ if ($dlin > -1) {
 
 
 if ($_POST['command'] == 'myst') {
+  if ($catserch == '' && $autor != '')
+  $autor = str_replace('AND', 'WHERE', $autor);
+
   $sql = "SELECT id  FROM " . PREFIX . "_post $catserch $autor $arhiv $arh";
   $row = $db->query($sql);
   $news_id = array();
@@ -258,8 +261,17 @@ if ($comand == 'search') {
   $sql = "SELECT tag, category, COUNT(*) AS count FROM " . PREFIX . "_tags $catserch $tagson $news_ids $my_id $favorites $noread LOWER (tag) LIKE '%{$search}%' GROUP BY tag ORDER BY tag";
 }
 
-if ($catserch=='' && $tagson=='' && $news_ids != '')
+if ($catserch == '' && $tagson == '' && $news_ids != '')
   $news_ids = str_replace('AND', 'WHERE', $news_ids);
+
+  if ($catserch==''&&$tagson==''&& $news_ids==''&& $my_id!='')
+  $my_id = str_replace('AND', 'WHERE', $my_id);
+
+  if ($catserch==''&&$tagson==''&& $news_ids==''&& $my_id=='' &&$favorites!='')
+  $favorites = str_replace('AND', 'WHERE', $favorites);
+
+  if ($catserch==''&&$tagson==''&& $news_ids==''&& $my_id=='' &&$favorites=='' && $noread!='')
+  $noread = str_replace('AND', 'WHERE', $noread);
 
 if ($comand == 'all') {
   $sql = "SELECT tag, category, COUNT(*) AS count FROM " . PREFIX . "_tags $catserch $tagson $news_ids $my_id $favorites $noread GROUP BY tag ORDER BY tag";
@@ -280,13 +292,15 @@ if ($_POST['command'] == 'noapp' || $_POST['command'] == 'arhiv') {
   //echo $nser;
   if ($_POST['command'] == 'noapp') {
     $stex = " approve =0 and arhiv=0 ";
+    if ($member_id['user_group'] > 2)
+      $stex .= " AND autor = '{$member_id['name']}' ";
   }
   if ($_POST['command'] == 'arhiv') {
     $stex = " approve =1 and arhiv=1 ";
   }
-  if (empty($catserch)&& $nser == "AND")
+  if (empty($catserch) && $nser == "AND")
     $posnser = 'WHERE';
-  else 
+  else
     $posnser = "$catserch $nser";
 
   $sql = "SELECT tags FROM " . PREFIX . "_post $posnser $search $stex AND tags <>'' ";

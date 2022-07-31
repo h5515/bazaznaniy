@@ -1,7 +1,7 @@
 kendo.init(".clmacategory");
 $('.clmacategory button').on('click', function() {
-    if (!$('.mainzagal')[0])
-        $('.container').prepend('<h1 class="mainzagal"></h1>')
+    // if (!$('.mainzagal')[0])
+    //     $('.container').prepend('<h1 class="mainzagal"></h1>')
     cat = $(this).attr('categor');
     $('.clmacategory button').removeClass('k-button-solid-warning');
 
@@ -11,7 +11,7 @@ $('.clmacategory button').on('click', function() {
         $('.container [cat="1"]').css('display', '');
         $('.container [cat="2"]').css('display', '');
         localStorage.removeItem('catbut');
-        $('.mainzagal').remove();
+        // $('.mainzagal').remove();
         return;
     }
     $(this).addClass('k-button-solid-warning');
@@ -19,11 +19,11 @@ $('.clmacategory button').on('click', function() {
     if (cat == '1') {
         $('.container [cat="2"]').css('display', 'none');
         $('.container [cat="1"]').css('display', '');
-        $('.mainzagal').text('Внутренние инструкции');
+        // $('.mainzagal').text('Внутренние инструкции');
     } else {
         $('.container [cat="1"]').css('display', 'none');
         $('.container [cat="2"]').css('display', '');
-        $('.mainzagal').text('Инструкции заказчика');
+        // $('.mainzagal').text('Инструкции заказчика');
     }
     localStorage.setItem('catbut', cat);
 })

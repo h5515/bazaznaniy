@@ -74,7 +74,7 @@ blockquote {
 }
 
 .hide {
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     padding: 5px;
     color: #4c6d0f;
     margin: 0 0 1em 0

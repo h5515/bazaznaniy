@@ -150,7 +150,7 @@ if (!$allow_addnews) {
       if ($disable_rss_turbo and $disable_rss_turbo = count($catlist)) $allow_rss_turbo = 0;
     }
 
-    if (!$config['allow_add_tags']) $_POST['tags'] = "";
+    if (!$config['allow_add_tags'] && ( $member_id[ 'user_group' ] > 2 )) $_POST['tags'] = "";
     elseif (@preg_match("/[\||\<|\>]/", $_POST['tags'])) $_POST['tags'] = "";
     else $_POST['tags'] = @$db->safesql(htmlspecialchars(strip_tags(stripslashes(trim($_POST['tags']))), ENT_COMPAT, $config['charset']));
 
@@ -618,29 +618,29 @@ if (!$allow_addnews) {
 
         if (!$approve and $config['mail_news']) {
 
-          include_once(DLEPlugins::Check(ENGINE_DIR . '/classes/mail.class.php'));
+          // include_once(DLEPlugins::Check(ENGINE_DIR . '/classes/mail.class.php'));
 
-          $row = $db->super_query("SELECT * FROM " . PREFIX . "_email WHERE name='new_news' LIMIT 0,1");
-          $mail = new dle_mail($config, $row['use_html']);
+          // $row = $db->super_query("SELECT * FROM " . PREFIX . "_email WHERE name='new_news' LIMIT 0,1");
+          // $mail = new dle_mail($config, $row['use_html']);
 
-          $row['template'] = stripslashes($row['template']);
-          $row['template'] = str_replace("{%username%}", $member_id['name'], $row['template']);
-          $row['template'] = str_replace("{%date%}", langdate("j F Y H:i", $added_time, true), $row['template']);
-          $row['template'] = str_replace("{%title%}", stripslashes(stripslashes($title)), $row['template']);
+          // $row['template'] = stripslashes($row['template']);
+          // $row['template'] = str_replace("{%username%}", $member_id['name'], $row['template']);
+          // $row['template'] = str_replace("{%date%}", langdate("j F Y H:i", $added_time, true), $row['template']);
+          // $row['template'] = str_replace("{%title%}", stripslashes(stripslashes($title)), $row['template']);
 
-          $category_list = explode(",", $category_list);
-          $my_cat = array();
+          // $category_list = explode(",", $category_list);
+          // $my_cat = array();
 
-          foreach ($category_list as $element) {
+          // foreach ($category_list as $element) {
 
-            $my_cat[] = $cat_info[$element]['name'];
-          }
+          //   $my_cat[] = $cat_info[$element]['name'];
+          // }
 
-          $my_cat = stripslashes(implode(', ', $my_cat));
+          // $my_cat = stripslashes(implode(', ', $my_cat));
 
-          $row['template'] = str_replace("{%category%}", $my_cat, $row['template']);
+          // $row['template'] = str_replace("{%category%}", $my_cat, $row['template']);
 
-          $mail->send($config['admin_mail'], $lang['mail_news'], $row['template']);
+          // $mail->send($config['admin_mail'], $lang['mail_news'], $row['template']);
         }
       }
 
@@ -678,7 +678,9 @@ if (!$allow_addnews) {
 
 
       if ($user_group[$member_id['user_group']]['moderation']) { //top.postMessage("close", "*");  SendMails(" . $row[ 'id' ] . ")
-        $emsend = "<div id='mailadd' align='center' class='boxmail'><br>" . $lang['add_ok_mail'] . "<br><br><a href='#' onclick=' SendMails(" . $row['id'] . "); return false;'><button class='btn btn-big'><b>Отправить</b></button></a><br>&nbsp;</div>";
+        // Почта отключена 
+        $emsend = "<div id='mailadd' align='center' class='boxmail'>Модуль отправки сообщений на почту временно отключен.</div>";
+        //$emsend = "<div id='mailadd' align='center' class='boxmail'><br>" . $lang['add_ok_mail'] . "<br><br><a href='#' onclick=' SendMails(" . $row['id'] . "); return false;'><button id='idsendmes'>Отправить</button></a><br>&nbsp;</div><script>$('#idsendmes').kendoButton({themeColor: 'primary'});</script>";
       } else {
         $emsend = "<div align='left'>Статья ожидает модерацию.</div>";
       }
@@ -686,7 +688,7 @@ if (!$allow_addnews) {
 
       if ($man) {
         $emsend = $emsend . "<br><div align='center'><a href='#' onclick='top.postMessage(\"closemodal\", \"*\"); return false;' class='button21'>Закрыть.</a><br><br><a href='#' onclick='top.postMessage(\"closemodalr\", \"*\"); return false;' class='button21'>Закрыть и обновить.</a></div>";
-        $emsend = $emsend . "<script>proverload('stop')</script>";
+        $emsend = $emsend . "<script>proverload('stop');$('.berrors').css('margin-top','50px');</script>";
       }
 
 
@@ -890,11 +892,20 @@ if (!$allow_addnews) {
 
       $admintag .= "<div id=\"opt_holder_comments\" class=\"checkbox\"><label><input type=\"checkbox\" name=\"allow_comm\" value=\"1\" checked=\"checked\" />" . $lang['add_al_com'] . "</label></div>";
 
-      if ($user_group[$member_id['user_group']]['allow_main']) $admintag .= "<div id=\"opt_holder_main\" class=\"checkbox\"><label><input type=\"checkbox\" name=\"allow_main\" id=\"allow_main\" value=\"1\" checked=\"checked\" />" . $lang['add_al_m'] . "</label></div>";
+      if ($user_group[$member_id['user_group']]['allow_main']) $admintag .= "<input type=\"hidden\" name=\"allow_main\" id=\"allow_main\" value=\"1\" checked=\"checked\" />";
 
       $admintag .= "<div id=\"opt_holder_rating\" class=\"checkbox\"><label><input type=\"checkbox\" name=\"allow_rating\" id=\"allow_rating\" value=\"1\" checked=\"checked\" />{$lang['addnews_allow_rate']}</label></div>";
 
       if ($user_group[$member_id['user_group']]['allow_fixed']) $admintag .= "<div class=\"checkbox\"><label><input type=\"checkbox\" name=\"news_fixed\" id=\"news_fixed\" value=\"1\" />{$lang['add_al_fix']}</label></div>";
+
+      $admintag .= "<script>
+      $('#approve').kendoSwitch();
+      $('#opt_holder_comments input').kendoSwitch();
+      $('#allow_rating').kendoSwitch();
+      $('#news_fixed').kendoSwitch();
+      
+      </script>
+      ";
 
       $tpl->set('{admintag}', $admintag);
     } else $tpl->set('{admintag}', '');
@@ -910,7 +921,7 @@ if (!$allow_addnews) {
       $tpl->set('[/not-editor]', '');
       $tpl->set_block("'\\[editor\\].*?\\[/editor\\]'si", "");
 
-    if (!$config['allow_add_tags']){
+    if (!$config['allow_add_tags'] && ( $member_id[ 'user_group' ] > 2 )){
       $tpl->set_block("'\\[allow_tags\\].*?\\[/allow_tags\\]'si", "");
     }else{
       $tpl->set('[allow_tags]', '');
@@ -1230,7 +1241,7 @@ $('[data-rel=links]').autocomplete({
 });
 HTML;
 
-    if ($config['allow_add_tags']) {
+    if ($config['allow_add_tags'] || ( $member_id[ 'user_group' ] < 3 )) {
 
       $onload_scripts[] = <<<HTML
 $( '#tags' ).autocomplete({

@@ -28,7 +28,7 @@ define('ENGINE_DIR', '..');
 
 $config['search_number'] = intval($config['search_number']);
 
-if ( $config['search_number'] < 1) $config['search_number'] = 50;
+if ($config['search_number'] < 1) $config['search_number'] = 50;
 
 if (empty($_POST['query']))
   $config['search_number'] = 50;
@@ -244,6 +244,8 @@ if ($_POST['command'] == 'arhiv') {
 if ($_POST['command'] == 'noapp') {
   $appr = true;
   $apps = " AND approve =0 ";
+  if ($member_id['user_group'] > 2)
+    $apps .= " AND (autor = '{$member_id['name']}' OR edit_autor = '{$member_id['name']}') ";
   $vivid = true;
 }
 
@@ -365,7 +367,7 @@ if ($vivid and $proxod) {
   $edat = '';
 }
 //echo $categor;
-$sql = "SELECT $ids p.id, p.autor, p.date $edat, p.short_story, p.full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, p.approve, p.arhiv, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.editor, e.reason" . $jprot . " FROM " . PREFIX . "_" . $tabl . " p" . $join_read . " LEFT JOIN dle_post_extras e ON (p.id=e.news_id) WHERE" . $sear . $tcat . $tagson . $favorites . $noread . $myst . $apps . $autor . $arhiv . $arh . $fixed . $sorted . " " . $directory . " LIMIT $news_limit";
+$sql = "SELECT $ids p.id, p.autor, p.edit_autor as editor, p.date $edat, p.short_story, p.full_story, p.xfields, p.title, p.category, p.alt_name, p.comm_num, p.allow_comm, p.fixed, p.tags, p.approve, p.arhiv, e.news_read, e.allow_rate, e.rating, e.vote_num, e.votes, e.view_edit, e.editdate, e.reason" . $jprot . " FROM " . PREFIX . "_" . $tabl . " p" . $join_read . " LEFT JOIN dle_post_extras e ON (p.id=e.news_id) WHERE" . $sear . $tcat . $tagson . $favorites . $noread . $myst . $apps . $autor . $arhiv . $arh . $fixed . $sorted . " " . $directory . " LIMIT $news_limit";
 
 
 $dlin = -1;
@@ -724,9 +726,12 @@ while ($row = $db->get_row()) {
       $tpl->set('{edit-date}', langdate($config['timestamp_active'], $row['editdate'], $short_news_cache));
     }
 
-    if ($proxod)
-      $editst = $row['autor'];
-    else
+    if ($proxod) {
+      if (isset($row['editor']))
+        $editst = $row['editor'];
+      else
+        $editst = $row['autor'];
+    } else
       $editst = $row['editor'];
 
     $editst = $db_gl->super_query("SELECT fullname FROM dle_users WHERE name = '{$editst}'")['fullname'];

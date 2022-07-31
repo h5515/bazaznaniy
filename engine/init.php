@@ -42,6 +42,16 @@ if (isset($_GET['project'])) {
 
 require_once(ENGINE_DIR . '/classes/plugins.class.php');
 
+$url = mb_strtolower(str_replace('/','',((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+$homeurl = mb_strtolower(str_replace('/','',$config['http_home_url']));
+if ($homeurl == $url && empty($_SERVER['HTTP_REFERER'])&&isset($_SESSION['referrer'])&&empty($_SESSION['perehod'])){
+  $_SESSION['referrer'] = str_replace("&amp;", "&", $_SESSION['referrer']);
+  $_SESSION['perehod'] = true;
+  header("Location: {$_SESSION['referrer']}");
+  die();
+}
+unset($_SESSION['perehod']);
+
 date_default_timezone_set($config['date_adjust']);
 
 $Timer = new microTimer();
@@ -204,6 +214,9 @@ if ($config['start_site'] == 3 and !$_SERVER['QUERY_STRING'] and !$_POST['do']) 
 
 //################# Definition of user groups
 $user_group = get_vars("usergroup");
+
+if (isset($user_group) && count($user_group) < 1)
+  unset($user_group);
 
 if (!is_array($user_group)) {
   $user_group = array();
@@ -643,17 +656,17 @@ if (isset($_GET['project'])) {
 
 if ($_SESSION['super_admin'])
   $member_id['user_group'] = 1;
-else{
+else {
   $member_id['user_group'] = $member_id['dostup'][$bz_cat][$bz_category]['roly'];
-  if (empty($member_id['user_group'])&&isset($_GET['subaction'])&&$_GET['subaction']=='allnews'){
+  if (empty($member_id['user_group']) && isset($_GET['subaction']) && $_GET['subaction'] == 'allnews') {
     $member_id['user_group'] = 4;
   }
 }
 
-if ($bz_cat==1)
-$dopconfigFile = "dopconfig$bz_category.php";
+if ($bz_cat == 1)
+  $dopconfigFile = "dopconfig$bz_category.php";
 else
-$dopconfigFile = "dopconfig{$_GET['project']}.php";
+  $dopconfigFile = "dopconfig{$_GET['project']}.php";
 
 $_SESSION['dopconfig'] = $dopconfigFile;
 
