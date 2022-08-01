@@ -42,15 +42,15 @@ if (isset($_GET['project'])) {
 
 require_once(ENGINE_DIR . '/classes/plugins.class.php');
 
-$url = mb_strtolower(str_replace('/','',((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
-$homeurl = mb_strtolower(str_replace('/','',$config['http_home_url']));
-if ($homeurl == $url && empty($_SERVER['HTTP_REFERER'])&&isset($_SESSION['referrer'])&&empty($_SESSION['perehod'])){
-  $_SESSION['referrer'] = str_replace("&amp;", "&", $_SESSION['referrer']);
-  $_SESSION['perehod'] = true;
-  header("Location: {$_SESSION['referrer']}");
-  die();
-}
-unset($_SESSION['perehod']);
+// $url = mb_strtolower(str_replace('/','',((!empty($_SERVER['HTTPS'])) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+// $homeurl = mb_strtolower(str_replace('/','',$config['http_home_url']));
+// if ($homeurl == $url && empty($_SERVER['HTTP_REFERER'])&&isset($_SESSION['referrer'])&&empty($_SESSION['perehod'])){
+//   $_SESSION['referrer'] = str_replace("&amp;", "&", $_SESSION['referrer']);
+//   $_SESSION['perehod'] = true;
+//   header("Location: {$_SESSION['referrer']}");
+//   die();
+// }
+// unset($_SESSION['perehod']);
 
 date_default_timezone_set($config['date_adjust']);
 
