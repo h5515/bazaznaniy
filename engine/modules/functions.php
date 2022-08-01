@@ -930,7 +930,7 @@ function get_mass_cats($id)
 
 function custom_comments($matches = array())
 {
-	global $db, $db_gl, $is_logged, $member_id, $cat_info, $config, $user_group, $category_id, $_TIME, $lang, $smartphone_detected, $dle_module, $allow_comments_ajax, $PHP_SELF, $dle_login_hash, $replace_links;
+	global $db, $db_gl, $is_logged, $gl_bd, $member_id, $cat_info, $config, $user_group, $category_id, $_TIME, $lang, $smartphone_detected, $dle_module, $allow_comments_ajax, $PHP_SELF, $dle_login_hash, $replace_links;
 
 	if (!count($matches)) return "";
 
@@ -942,7 +942,11 @@ function custom_comments($matches = array())
 	$comm_msort = "DESC";
 	$where = array();
 	$thisdate = date("Y-m-d H:i:s", $_TIME);
-	$sql_select = "SELECT cm.id, post_id, cm.user_id, cm.date, cm.autor as gast_name, cm.email as gast_email, text, ip, is_register, cm.rating, cm.vote_num, name, u.email, news_num, u.comm_num, user_group, lastdate, reg_date, signature, foto, fullname, land, u.xfields, p.title, p.date as newsdate, p.alt_name, p.category FROM " . PREFIX . "_comments cm LEFT JOIN " . PREFIX . "_post p ON cm.post_id=p.id {cat_join}LEFT JOIN " . USERPREFIX . "_users u ON cm.user_id=u.user_id ";
+	$sql_select = "SELECT cm.id, post_id, cm.user_id, cm.date, cm.autor as gast_name, cm.email as gast_email, text, ip, 
+	is_register, cm.rating, cm.vote_num, name, u.email, news_num, u.comm_num, user_group, 
+	lastdate, reg_date, signature, foto, fullname, land, u.xfields, p.title, p.date as newsdate, 
+	p.alt_name, p.category FROM " . PREFIX . "_comments cm 
+	LEFT JOIN " . PREFIX . "_post p ON cm.post_id=p.id {cat_join}LEFT JOIN {$gl_bd}.dle_users u ON cm.user_id=u.user_id ";
 
 	$allow_cache = $config['allow_cache'];
 	$cats_select = false;
@@ -1204,7 +1208,7 @@ function custom_comments($matches = array())
 		$tpl = new dle_template();
 		$tpl->dir = TEMPLATE_DIR;
 
-		$comments = new DLE_Comments($db_gl, $custom_limit, $custom_limit);
+		$comments = new DLE_Comments($db, $custom_limit, $custom_limit);
 		$comments->query = $sql_select;
 		$content = $comments->build_customcomments($tpl, $custom_template . '.tpl');
 
@@ -3200,9 +3204,9 @@ function deletecomments($id)
 	$db->query("DELETE FROM " . PREFIX . "_comments WHERE id = '{$id}'");
 	$db->query("DELETE FROM " . PREFIX . "_comment_rating_log WHERE c_id = '{$id}'");
 
-	if ($row['is_register']) {
-		$db->query("UPDATE " . USERPREFIX . "_users SET comm_num=comm_num-1 WHERE user_id ='{$row['user_id']}'");
-	}
+	// if ($row['is_register']) {
+	// 	$db->query("UPDATE " . USERPREFIX . "_users SET comm_num=comm_num-1 WHERE user_id ='{$row['user_id']}'");
+	// }
 
 	if ($row['approve']) $db->query("UPDATE " . PREFIX . "_post SET comm_num=comm_num-1 WHERE id='{$row['post_id']}'");
 
@@ -3277,10 +3281,10 @@ function deletecommentsbynewsid($id)
 
 	$result = $db->query("SELECT COUNT(*) as count, user_id FROM " . PREFIX . "_comments WHERE post_id='{$id}' AND is_register='1' GROUP BY user_id");
 
-	while ($row = $db->get_array($result)) {
+	// while ($row = $db->get_array($result)) {
 
-		$db->query("UPDATE " . USERPREFIX . "_users SET comm_num=comm_num-{$row['count']} WHERE user_id='{$row['user_id']}'");
-	}
+	// 	$db->query("UPDATE " . USERPREFIX . "_users SET comm_num=comm_num-{$row['count']} WHERE user_id='{$row['user_id']}'");
+	// }
 
 	$db->query("DELETE FROM " . PREFIX . "_comments WHERE post_id='{$id}'");
 }

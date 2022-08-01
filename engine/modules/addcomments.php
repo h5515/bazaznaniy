@@ -76,47 +76,47 @@ if( $_REQUEST['user_hash'] == "" OR $_REQUEST['user_hash'] != $dle_login_hash ) 
 	
 }
 	
-if ( $user_group[$member_id['user_group']]['spamfilter'] ) {
+// if ( $user_group[$member_id['user_group']]['spamfilter'] ) {
 
-	$row = $db->super_query( "SELECT * FROM " . PREFIX . "_spam_log WHERE ip = '{$_IP}'" );
+// 	$row = $db->super_query( "SELECT * FROM " . PREFIX . "_spam_log WHERE ip = '{$_IP}'" );
 
-	if ( !$row['id'] OR !$row['email'] ) {
+// 	if ( !$row['id'] OR !$row['email'] ) {
 
-		include_once (DLEPlugins::Check(ENGINE_DIR . '/classes/stopspam.class.php'));
-		$sfs = new StopSpam($config['spam_api_key'], $user_group[$member_id['user_group']]['spamfilter'] );
-		$args = array('ip' => $_IP, 'email' => $mail);
+// 		include_once (DLEPlugins::Check(ENGINE_DIR . '/classes/stopspam.class.php'));
+// 		$sfs = new StopSpam($config['spam_api_key'], $user_group[$member_id['user_group']]['spamfilter'] );
+// 		$args = array('ip' => $_IP, 'email' => $mail);
 
-		if ($sfs->is_spammer( $args )) {
+// 		if ($sfs->is_spammer( $args )) {
 
-			if ( !$row['id'] ) {
-				$db->query( "INSERT INTO " . PREFIX . "_spam_log (ip, is_spammer, email, date) VALUES ('{$_IP}','1', '{$mail}', '{$_TIME}')" );
-			} else {
-				$db->query( "UPDATE " . PREFIX . "_spam_log SET is_spammer='1', email='{$mail}' WHERE id='{$row['id']}'" );
-			}
+// 			if ( !$row['id'] ) {
+// 				$db->query( "INSERT INTO " . PREFIX . "_spam_log (ip, is_spammer, email, date) VALUES ('{$_IP}','1', '{$mail}', '{$_TIME}')" );
+// 			} else {
+// 				$db->query( "UPDATE " . PREFIX . "_spam_log SET is_spammer='1', email='{$mail}' WHERE id='{$row['id']}'" );
+// 			}
 
-			$stop[] = $lang['reg_err_29']." ";
-			$CN_HALT = TRUE;
+// 			$stop[] = $lang['reg_err_29']." ";
+// 			$CN_HALT = TRUE;
 
-		} else {
-			if ( !$row['id'] ) {
-				$db->query( "INSERT INTO " . PREFIX . "_spam_log (ip, is_spammer, email, date) VALUES ('{$_IP}','0', '{$mail}', '{$_TIME}')" );
-			} else {
-				$db->query( "UPDATE " . PREFIX . "_spam_log SET email='{$mail}' WHERE id='{$row['id']}'" );
-			}
-		}
+// 		} else {
+// 			if ( !$row['id'] ) {
+// 				$db->query( "INSERT INTO " . PREFIX . "_spam_log (ip, is_spammer, email, date) VALUES ('{$_IP}','0', '{$mail}', '{$_TIME}')" );
+// 			} else {
+// 				$db->query( "UPDATE " . PREFIX . "_spam_log SET email='{$mail}' WHERE id='{$row['id']}'" );
+// 			}
+// 		}
 	
-	} else {
+// 	} else {
 
-		if ($row['is_spammer']) {
+// 		if ($row['is_spammer']) {
 
-			$stop[] = $lang['reg_err_29']." ";
-			$CN_HALT = TRUE;
+// 			$stop[] = $lang['reg_err_29']." ";
+// 			$CN_HALT = TRUE;
 		
-		}
+// 		}
 
-	}
+// 	}
 
-}
+// }
 
 if ($is_logged AND $config['comments_restricted'] AND (($_TIME - $member_id['reg_date']) < ($config['comments_restricted'] * 86400)) ) {
 	$stop[] = str_replace( '{days}', intval($config['comments_restricted']), $lang['news_info_8'] );
@@ -440,9 +440,9 @@ if( $CN_HALT ) {
 
 			if( $where_approve ) $db->query( "UPDATE " . PREFIX . "_post SET comm_num=comm_num+1 WHERE id='{$post_id}'" );
 			
-			if( $is_logged ) {
-				$db->query( "UPDATE " . USERPREFIX . "_users SET comm_num=comm_num+1 WHERE user_id ='{$member_id['user_id']}'" );
-			}
+			// if( $is_logged ) {
+			// 	$db->query( "UPDATE " . USERPREFIX . "_users SET comm_num=comm_num+1 WHERE user_id ='{$member_id['user_id']}'" );
+			// }
 		}
 		
 		if ( $user_group[$member_id['user_group']]['allow_up_image'] ){
@@ -493,8 +493,9 @@ if( $CN_HALT ) {
 	
 			$title = stripslashes($row['title']);
 			
-			$row = $db->super_query( "SELECT * FROM " . PREFIX . "_email WHERE name='comments' LIMIT 0,1" );
-			$mail = new dle_mail( $config, $row['use_html'] );
+			//Почта отключена
+			// $row = $db->super_query( "SELECT * FROM " . PREFIX . "_email WHERE name='comments' LIMIT 0,1" );
+			// $mail = new dle_mail( $config, $row['use_html'] );
 
 			if (strpos($full_link, "//") === 0) $full_link = "http:".$full_link;
 			elseif (strpos($full_link, "/") === 0) $full_link = "http://".$_SERVER['HTTP_HOST'].$full_link;
@@ -527,7 +528,9 @@ if( $CN_HALT ) {
 			$body = str_replace( "{%ip%}", $_IP, $row['template'] );
 			$body = str_replace( "{%username_to%}", $lang['admin'], $body );
 			$body = str_replace( "{%unsubscribe%}", "--", $body );			
-			$mail->send( $config['admin_mail'], $lang['mail_comments'], $body );
+
+			//Почта отключена
+			//$mail->send( $config['admin_mail'], $lang['mail_comments'], $body );
 		
 		}
 
@@ -539,10 +542,10 @@ if( $CN_HALT ) {
 			$found_news_author_subscribe = false;
 			$found_reply_author_subscribe = false;
 			
-			$news_author_subscribe = $db->super_query( "SELECT " . USERPREFIX . "_users.user_id, " . USERPREFIX . "_users.name, " . USERPREFIX . "_users.email, " . USERPREFIX . "_users.news_subscribe FROM " . PREFIX . "_post_extras LEFT JOIN " . USERPREFIX . "_users ON " . PREFIX . "_post_extras.user_id=" . USERPREFIX . "_users.user_id WHERE " . PREFIX . "_post_extras.news_id='{$post_id}'" );
+			$news_author_subscribe = $db->super_query( "SELECT {$gl_bd}.dle_users.user_id, {$gl_bd}.dle_users.name, {$gl_bd}.dle_users.email, {$gl_bd}.dle_users.news_subscribe FROM " . PREFIX . "_post LEFT JOIN {$gl_bd}.dle_users ON " . PREFIX . "_post.autor={$gl_bd}.dle_users.name WHERE " . PREFIX . "_post.id='{$post_id}'" );
 			
 			if( $parent ) {
-				$reply_author_subscribe = $db->super_query( "SELECT " . USERPREFIX . "_users.user_id, " . USERPREFIX . "_users.name, " . USERPREFIX . "_users.email, " . USERPREFIX . "_users.comments_reply_subscribe FROM " . PREFIX . "_comments LEFT JOIN " . USERPREFIX . "_users ON " . PREFIX . "_comments.user_id=" . USERPREFIX . "_users.user_id WHERE " . PREFIX . "_comments.id='{$parent}'" );
+				$reply_author_subscribe = $db->super_query( "SELECT {$gl_bd}.dle_users.user_id, {$gl_bd}.dle_users.name, {$gl_bd}.dle_users.email, {$gl_bd}.dle_users.comments_reply_subscribe FROM " . PREFIX . "_comments LEFT JOIN {$gl_bd}.dle_users ON " . PREFIX . "_comments.autor={$gl_bd}.dle_users.name WHERE " . PREFIX . "_comments.id='{$parent}'" );
 			} else $reply_author_subscribe = array();
 
 			if (strpos($config['http_home_url'], "//") === 0) $slink = "https:".$config['http_home_url'];

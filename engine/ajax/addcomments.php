@@ -44,7 +44,7 @@ if( $CN_HALT != TRUE ) {
 	$comments->intern_count = -1;
 	if($parent) $comments->indent = $indent+1;
 	
-	$comments->query = "SELECT " . PREFIX . "_comments.id, post_id, " . PREFIX . "_comments.user_id, date, autor as gast_name, " . PREFIX . "_comments.email as gast_email, text, ip, is_register, " . PREFIX . "_comments.rating, " . PREFIX . "_comments.vote_num, name, " . USERPREFIX . "_users.email, news_num, comm_num, user_group, lastdate, reg_date, signature, foto, fullname, land, xfields FROM " . PREFIX . "_comments LEFT JOIN " . USERPREFIX . "_users ON " . PREFIX . "_comments.user_id=" . USERPREFIX . "_users.user_id WHERE " . PREFIX . "_comments.id = '{$added_comments_id}'";
+	$comments->query = "SELECT " . PREFIX . "_comments.id, post_id, " . PREFIX . "_comments.user_id, date, autor as gast_name, " . PREFIX . "_comments.email as gast_email, text, ip, is_register, " . PREFIX . "_comments.rating, " . PREFIX . "_comments.vote_num, name, {$gl_bd}.dle_users.email, news_num, comm_num, user_group, lastdate, reg_date, signature, foto, fullname, land, xfields FROM " . PREFIX . "_comments LEFT JOIN {$gl_bd}.dle_users ON " . PREFIX . "_comments.autor=" . USERPREFIX . "_users.name WHERE " . PREFIX . "_comments.id = '{$added_comments_id}'";
 	$comments->build_comments('comments.tpl', 'ajax' );
 
 }
