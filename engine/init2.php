@@ -690,7 +690,7 @@ if (isset($_GET['project'])) {
 				$bz_id = $_GET['id'];
 		} else
 			$bz_id = $newsid;
-		if ($do != "addnews") {
+		if ($do != "addnews" && $do != "stats") {
 			$row = $db->super_query("SELECT category FROM dle_post WHERE id = {$bz_id}");
 			if (isset($row['category'])) {
 				$dcat = explode(',', $row['category']);
