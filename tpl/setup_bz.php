@@ -36,10 +36,10 @@ if (isset($idproject)&&$idproject!='') {
 
 $dopconfigFile = "dopconfig$bz_category.php";
 
-echo "1<br>";
+
 if (empty($_REQUEST['default']))
 include ENGINE_DIR . '/data/dopconfig.php';
-echo "5<br>";
+
 if (isset($_GET['save'])) {
 
     foreach ($Arrbol as $key => $value) {
