@@ -114,7 +114,7 @@ if (isset($_GET['save'])) {
     }
     fwrite($handler, ");\n\n?>");
     fclose($handler);
-    @chmod($dir.$file, 0777);
+    chmod($dir.$file, 0777);
 
     clear_all_caches();
     $_SESSION['referrer'] = str_replace("&amp;", "&", $_SESSION['referrer']);
