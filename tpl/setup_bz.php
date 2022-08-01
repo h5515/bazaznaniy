@@ -1,7 +1,7 @@
 <?php
 session_start();
 define('DATALIFEENGINE', true);
-define('ROOT_DIR', dirname(__FILE__) . '../../');
+define('ROOT_DIR', dirname(__FILE__) . '/../../');
 define('ENGINE_DIR', ROOT_DIR . 'engine');
 include ENGINE_DIR . '/data/config.php';
 require_once ENGINE_DIR . '/classes/mysql.php';
