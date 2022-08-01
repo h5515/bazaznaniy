@@ -30,6 +30,8 @@ $('.clmacategory button').on('click', function() {
 $(function() {
     if (!$('.container [cat="1"]')[0] || !$('.container [cat="2"]')[0]) {
         $('.clmacategory button').css('display', 'none');
+    } else {
+        $('.clmacategory button').css('display', 'block');
     }
 
     if (!$('.container [cat="1"]')[0] && !$('.container [cat="2"]')[0]) {
