@@ -405,7 +405,7 @@ if (isset($_POST['login']) and $_POST['login_name'] and $_POST['login_password']
 
 	if ($allow_login) {
 
-		$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_COOKIE['dle_user_id']) . "'");
+		$member_id = $db_gl->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_COOKIE['dle_user_id']) . "'");
 
 	/*	if (isset($_COOKIE['dbname']) && $_COOKIE['dbname'] != $gl_bd && $_COOKIE['user_name'] && empty($member_id)) {
 			$db2 = new db;
