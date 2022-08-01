@@ -5,7 +5,7 @@ session_start();
 @ini_set('html_errors', false);
 @ini_set('error_reporting', E_ALL ^ E_WARNING ^ E_NOTICE);
 define('DATALIFEENGINE', true);
-define('ROOT_DIR', dirname(__FILE__) . '../../');
+define('ROOT_DIR', dirname(__FILE__) . '/../');
 define('ENGINE_DIR', ROOT_DIR . 'engine');
 
 include ENGINE_DIR . '/data/config.php';
