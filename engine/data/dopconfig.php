@@ -1,5 +1,5 @@
 <?php
-echo "2<br>";
+echo ENGINE_DIR."   - 2<br>";
 if (is_file(ENGINE_DIR . '/data/dopconfig/'.$dopconfigFile)){
     echo "3<br>";
     include ENGINE_DIR . '/data/dopconfig/'.$dopconfigFile;
