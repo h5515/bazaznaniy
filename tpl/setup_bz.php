@@ -1,14 +1,12 @@
 <?php
 session_start();
 define('DATALIFEENGINE', true);
-define('ROOT_DIR', dirname(__FILE__) . '../../');
+define('ROOT_DIR', dirname(__FILE__) . '/../');
 define('ENGINE_DIR', ROOT_DIR . 'engine');
 include ENGINE_DIR . '/data/config.php';
 require_once ENGINE_DIR . '/classes/mysql.php';
 require_once ENGINE_DIR . '/data/dbconfig.php';
 require_once ENGINE_DIR . '/modules/functions.php';
-
-echo ENGINE_DIR . '/modules/functions.php<br>';
 
 $arrint = array(
     'news_number', 'search_number', 'search_length_min', 'related_number', 'top_number', 'tags_number', 'news_navigation',
@@ -40,7 +38,7 @@ $dopconfigFile = "dopconfig$bz_category.php";
 
 echo "1<br>";
 if (empty($_REQUEST['default']))
-require_once ENGINE_DIR . '/data/dopconfig.php';
+include ENGINE_DIR . '/data/dopconfig.php';
 echo "5<br>";
 if (isset($_GET['save'])) {
 
