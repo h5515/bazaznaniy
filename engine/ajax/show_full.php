@@ -1,13 +1,13 @@
 <?php
 /*
 =====================================================
- Модуль: Show Full
- Версия: v2.0
+ пїЅпїЅпїЅпїЅпїЅпїЅ: Show Full
+ пїЅпїЅпїЅпїЅпїЅпїЅ: v2.0
 =====================================================
- Автор: MSW
- Сайт поддержки: http://0-web.ru/
+ пїЅпїЅпїЅпїЅпїЅ: MSW
+ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: http://0-web.ru/
 =====================================================
- Файл: show_full.php
+ пїЅпїЅпїЅпїЅ: show_full.php
 =====================================================
 */
 
@@ -30,11 +30,30 @@ require_once ENGINE_DIR . '/modules/sitelogin.php';
 
 @header("Content-type: text/xml; charset={$config['charset']}");
 $news_id = intval($_POST['id']);
-if(!$news_id) die("Ошибка! Перезагрузите страницу и попробуйте снова!");
-if(!$template = file_get_contents(ROOT_DIR."/templates/{$config['skin']}/ajax_news_full.tpl"))die("Ошибка! Не получилось загрузить шаблон фаил");
+if(!$news_id) die("пїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!");
+if(!$template = file_get_contents(ROOT_DIR."/templates/{$config['skin']}/ajax_news_full.tpl"))die("пїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
 if ($config['version_id'] > 9.6) $row = $db->super_query("SELECT * FROM dle_post LEFT JOIN dle_post_extras ON (dle_post.id=dle_post_extras.news_id) WHERE id='{$news_id}'" );
 else $row = $db->super_query("SELECT allow_rate,full_story,short_story,xfields,id,title,rating,vote_num,access FROM ".PREFIX."_post WHERE id='{$news_id}'" );
+
 $user_group = get_vars("usergroup");
+if (isset($user_group) && count($user_group) < 1)
+  unset($user_group);
+
+if (!$user_group) {
+	$user_group = array();
+
+	$db_gl->query("SELECT * FROM " . USERPREFIX . "_usergroups ORDER BY id ASC");
+
+	while ($row = $db_gl->get_row()) {
+
+		$user_group[$row['id']] = array();
+
+		foreach ($row as $key => $value) {
+			$user_group[$row['id']][$key] = stripslashes($value);
+		}
+	}
+	set_vars("usergroup", $user_group);
+}
 
 		
 if(empty($row['full_story']))
@@ -74,7 +93,7 @@ $full_story = stripslashes($row['full_story']);
 
 #*** hide ***#
 if($user_group[$member_id['user_group']]['allow_hide']) $full_story = str_ireplace("[hide]", "", str_ireplace("[/hide]", "", $full_story));
-else $full_story = preg_replace("#\[hide\](.+?)\[/hide\]#ims", "<div class=\"quote\">Скрытый текст</div>", $full_story);
+else $full_story = preg_replace("#\[hide\](.+?)\[/hide\]#ims", "<div class=\"quote\">пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ</div>", $full_story);
 
 #*** THEME ***#
 if($_COOKIE['dle_skin']) {

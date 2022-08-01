@@ -65,6 +65,24 @@ if (!$is_logged) $member_id['user_group'] = 5;
 
 //################# Определение групп пользователей
 $user_group = get_vars("usergroup");
+if (isset($user_group) && count($user_group) < 1)
+  unset($user_group);
+
+if (!$user_group) {
+	$user_group = array();
+
+	$db_gl->query("SELECT * FROM " . USERPREFIX . "_usergroups ORDER BY id ASC");
+
+	while ($row = $db_gl->get_row()) {
+
+		$user_group[$row['id']] = array();
+
+		foreach ($row as $key => $value) {
+			$user_group[$row['id']][$key] = stripslashes($value);
+		}
+	}
+	set_vars("usergroup", $user_group);
+}
 
 function Colors($int)
 {

@@ -117,13 +117,15 @@ if (substr($config['http_home_url'], -1, 1) != '/') $config['http_home_url'] .= 
 dle_session();
 
 $user_group = get_vars("usergroup");
+if (isset($user_group) && count($user_group) < 1)
+  unset($user_group);
 
 if (!$user_group) {
 	$user_group = array();
 
 	$db_gl->query("SELECT * FROM " . USERPREFIX . "_usergroups ORDER BY id ASC");
 
-	while ($row = $db->get_row()) {
+	while ($row = $db_gl->get_row()) {
 
 		$user_group[$row['id']] = array();
 
@@ -132,7 +134,6 @@ if (!$user_group) {
 		}
 	}
 	set_vars("usergroup", $user_group);
-	$db->free();
 }
 
 $cat_info = get_vars("category");
@@ -196,7 +197,7 @@ if ($_SESSION['super_admin'])
 else
 	$member_id['user_group'] = $member_id['dostup'][$bz_cat][$glcat]['roly'];
 
-if (empty($glcat) || empty($_GET['project'])) {
+if (empty($glcat) && empty($_GET['project']) && empty($member_id['user_group'])) {
 	$dopconfigFile = $_SESSION['dopconfig'];
 } else {
 	if ($bz_cat == 1)
