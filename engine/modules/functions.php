@@ -946,7 +946,7 @@ function custom_comments($matches = array())
 	is_register, cm.rating, cm.vote_num, name, u.email, news_num, u.comm_num, user_group, 
 	lastdate, reg_date, signature, foto, fullname, land, u.xfields, p.title, p.date as newsdate, 
 	p.alt_name, p.category FROM " . PREFIX . "_comments cm 
-	LEFT JOIN " . PREFIX . "_post p ON cm.post_id=p.id {cat_join}LEFT JOIN {$gl_bd}.dle_users u ON cm.user_id=u.user_id ";
+	LEFT JOIN " . PREFIX . "_post p ON cm.post_id=p.id {cat_join}LEFT JOIN {$gl_bd}.dle_users u ON cm.autor=u.name ";
 
 	$allow_cache = $config['allow_cache'];
 	$cats_select = false;
