@@ -157,6 +157,7 @@ img.bzarhive {
     justify-content: flex-start;
     flex-wrap: nowrap;
     align-items: center;
+    height: 30px;
 }
 
 .clmacategory button {

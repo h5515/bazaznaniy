@@ -29,7 +29,7 @@ $('.clmacategory button').on('click', function() {
 })
 $(function() {
     if (!$('.container [cat="1"]')[0] || !$('.container [cat="2"]')[0]) {
-        $('.clmacategory').css('display', 'none');
+        $('.clmacategory button').css('display', 'none');
     }
 
     if (!$('.container [cat="1"]')[0] && !$('.container [cat="2"]')[0]) {
