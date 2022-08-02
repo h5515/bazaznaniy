@@ -457,7 +457,7 @@ class dle_template
       if (stristr(dirname($url['path']), "engine/inc") !== false)
         return "Include files from directory /engine/inc/ is denied";
 
-      if ($chmod_value == 777) return "File {$url['path']} is in the folder, which is available to write (CHMOD 777). For security purposes the connection files from these folders is impossible. Change the permissions on the folder that it had no rights to the write.";
+      //if ($chmod_value == 777) return "File {$url['path']} is in the folder, which is available to write (CHMOD 777). For security purposes the connection files from these folders is impossible. Change the permissions on the folder that it had no rights to the write.";
 
       if (!file_exists(DLEPlugins::Check($file_path . "/" . $file_name))) return "File {$url['path']} not found.";
 
