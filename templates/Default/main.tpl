@@ -125,8 +125,8 @@
         <div class="conteiner">
         [available=main]
         <div class="clmacategory">
-                    <button type="button" data-role="button" categor="1" id="idvnut"><span class="k-icon k-i-file-mdb"></span>Внутренние инструкции</button>
-                    <button type="button" data-role="button" categor="2" id="idzac"><span class="k-icon k-i-file-ascx"></span>Инструкции заказчика</button>
+                    <button type="button" data-role="button" categor="1" id="idvnut"><span class="k-icon k-i-file-mdb" style="margin-right: 3px; margin-top: -2px;"></span>Внутренние инструкции</button>
+                    <button type="button" data-role="button" categor="2" id="idzac"><span class="k-icon k-i-file-ascx" style="margin-right: 3px; margin-top: -2px;"></span>Инструкции заказчика</button>
                   </div>
                   <script src="{THEME}/js/new/bz_main.js?v={VERSION}"></script>
           [/available] 
