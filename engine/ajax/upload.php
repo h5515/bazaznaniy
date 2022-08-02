@@ -1064,7 +1064,6 @@ jQuery(function($){
 		maxConnections: 1,
 		encoding: 'multipart',
         sizeLimit: {$max_file_size},
-		
 	    params: {"subaction" : "upload", "news_id" : "{$news_id}", "area" : "{$area}", "author" : "{$author}", "user_hash" : "{$dle_login_hash}"},
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-drop-area"><span>{$lang['media_upload_st5']}</span></div>' +

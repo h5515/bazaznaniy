@@ -514,12 +514,13 @@ if (!$user_group[$member_id['user_group']]['allow_admin']) $config['admin_path']
 if (empty($member_id['user_group'])) $member_id['user_group'] = 5;
 
 $ajax .= <<<HTML
-{$pm_alert}{$twofactor_alert}<script>
+{$pm_alert}{$twofactor_alert}<script> 
 <!--
 var dle_root       = '{$config['http_home_url']}';
 var dle_admin      = '{$config['admin_path']}';
 var dle_login_hash = '{$dle_login_hash}';
 var dle_group      = {$member_id['user_group']};
+var version        = '{$config['version_id']}';
 var mytheme        =  '{$mytheme}';
 var dle_skin       = '{$config['skin']}';
 var dle_wysiwyg    = '{$config['allow_comments_wysiwyg']}';
