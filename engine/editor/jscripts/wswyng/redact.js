@@ -141,6 +141,8 @@ function ActiveeditorNew(elem, upload_area, height_min, sheight = null, autosave
         placeholderText: platetext,
         heightMax: sheight,
         language: 'ru',
+
+        theme: 'gray',
         //toolbarSticky: true,
         //toolbarContainer: '#dle-content',
         // toolbarStickyOffset: toolbarofset,

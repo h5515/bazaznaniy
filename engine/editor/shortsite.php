@@ -71,6 +71,8 @@ if ($config['allow_site_wysiwyg'] == "1") {
 	$css_array[] = "engine/editor/jscripts/wswyng/css/plugins/help.css";
 	$css_array[] = "engine/editor/jscripts/wswyng/css/plugins/special_characters.css";
 	$css_array[] = "engine/editor/jscripts/wswyng/css/third_party/spell_checker.css";
+	$css_array[] = "engine/editor/jscripts/wswyng/css/themes/dark.css";
+	$css_array[] = "engine/editor/jscripts/wswyng/css/themes/gray.css";
 
 	$js_array[] = "engine/editor/jscripts/wswyng/js/froala_editor.min.js";
 	$js_array[] = "engine/editor/jscripts/wswyng/js/plugins/align.min.js";
