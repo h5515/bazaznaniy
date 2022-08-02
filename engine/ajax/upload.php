@@ -1049,7 +1049,7 @@ HTML;
 $max_file_size = number_format($max_file_size, 0, '', '');
 
 if ( $uploaded_list ) $im_show = "tabClick(0);"; else $im_show = "";
-
+//allowedExtensions: ['{$simple_ext}'], расширение файла
 echo <<<HTML
 <script>
 jQuery(function($){
@@ -1064,7 +1064,7 @@ jQuery(function($){
 		maxConnections: 1,
 		encoding: 'multipart',
         sizeLimit: {$max_file_size},
-		//allowedExtensions: ['{$simple_ext}'], расширение файла
+		
 	    params: {"subaction" : "upload", "news_id" : "{$news_id}", "area" : "{$area}", "author" : "{$author}", "user_hash" : "{$dle_login_hash}"},
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-drop-area"><span>{$lang['media_upload_st5']}</span></div>' +

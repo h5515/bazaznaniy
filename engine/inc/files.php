@@ -170,7 +170,7 @@ HTML;
 	</div>";
 
 	$max_file_size = number_format($max_file_size, 0, '', '');
-
+// allowedExtensions: ['{$simple_ext}'],
 	echo <<<HTML
    </div>
 </form>
@@ -186,7 +186,7 @@ jQuery(function($){
 		maxConnections: 1,
 		encoding: 'multipart',
         sizeLimit: {$max_file_size},
-		// allowedExtensions: ['{$simple_ext}'],
+		
 	    params: {"subaction" : "upload", "news_id" : "0", "area" : "adminupload", "userdir" : "{$userdir}", "user_hash" : "{$dle_login_hash}"},
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-drop-area"><span>{$lang['media_upload_st5']}</span></div>' +

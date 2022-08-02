@@ -582,7 +582,7 @@ HTML;
 			} else { $show="display:none;"; $fileid="";}
 
 			$max_file_size = number_format($max_file_size, 0, '', '');
-			
+			//allowedExtensions: ['{$allowed_files}'],
 $uploadscript = <<<HTML
 	new qq.FileUploader({
 		element: document.getElementById('xfupload_{$fieldname}'),
@@ -592,7 +592,7 @@ $uploadscript = <<<HTML
 		allowdrop: false,
 		encoding: 'multipart',
         sizeLimit: {$max_file_size},
-		allowedExtensions: ['{$allowed_files}'],
+		
 	    params: {"subaction" : "upload", "news_id" : "{$row['id']}", "area" : "xfieldsfile", "author" : "{$author}", "xfname" : "{$fieldname}", "user_hash" : "{$dle_login_hash}"},
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-button btn btn-green" style="width: auto;">{$lang['xfield_xfif']}</div>' +
