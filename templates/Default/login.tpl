@@ -23,7 +23,7 @@
 
 <script>
 	$("#radiogroup").kendoRadioGroup({
-		items: ["White", "Blue", "test"],
+		items: {include file="tpl/theme_serarch.php"},/*["White", "Blue", "test"],*/
 		layout: "vertical",
 		value: mytheme,
 		change: function(e) {

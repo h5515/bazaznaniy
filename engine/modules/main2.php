@@ -446,7 +446,7 @@ if( $yandex_url ) {
 	$tpl->set( '{yandex_url}', '' );
 }
 
-$mytheme = 'Blue'; //Тема по умолчанию
+$mytheme = 'blue'; //Тема по умолчанию
 if ((stripos($tpl->copy_template, "{mytheme}") !== false) || (stripos($tpl->copy_template, "{themecss}") !== false)) {
   if (isset($member_id['name'])) {
     $theme = mb_strtolower($db_gl->super_query("SELECT theme FROM dle_users WHERE name = '{$member_id['name']}'")['theme']);
