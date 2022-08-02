@@ -736,7 +736,7 @@ jQuery(function($){
 		allowdrop: false,
 		encoding: 'multipart',
         sizeLimit: {$max_file_size},
-		allowedExtensions: ['{$simple_ext}'],
+		// allowedExtensions: ['{$simple_ext}'],
 	    params: {"subaction" : "upload", "news_id" : "0", "area" : "adminupload", "userdir" : "icons", "subdir" : "", "user_hash" : "{$dle_login_hash}"},
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-button btn bg-teal btn-sm btn-raised position-left" style="width: auto;">{$lang['xfield_xfim']}</div>' +
@@ -1099,7 +1099,7 @@ jQuery(function($){
 		allowdrop: false,
 		encoding: 'multipart',
         sizeLimit: {$max_file_size},
-		allowedExtensions: ['{$simple_ext}'],
+		// allowedExtensions: ['{$simple_ext}'],
 	    params: {"subaction" : "upload", "news_id" : "0", "area" : "adminupload", "userdir" : "icons", "subdir" : "", "user_hash" : "{$dle_login_hash}"},
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-button btn bg-teal btn-sm btn-raised position-left" style="width: auto;">{$lang['xfield_xfim']}</div>' +
