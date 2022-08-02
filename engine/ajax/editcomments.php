@@ -128,13 +128,14 @@ if( $_REQUEST['action'] == "edit" ) {
 			if ($user_group[$member_id['user_group']]['media_comments']) $link_icon .= "'dlemedia',";
 			if ($user_group[$member_id['user_group']]['edit_allc'])  $code_icon = ",'html'"; else $code_icon = "";
 		
+		$news_id = $db->super_query("SELECT post_id FROM dle_comments WHERE id = $id")['post_id'];
 		$bb_code = <<<HTML
 <script>
 
 	  var text_upload = "{$lang['bb_t_up']}";
 	  toolbarofset = 35;
 	p_name = '{$p_name}';
-	id = '{$id}';
+	id = '{$news_id}';
 	maxsize = {$config['max_up_size']};
 	logincache= '{$dle_login_hash}';
 	platetext = 'Напишите комментарий...';

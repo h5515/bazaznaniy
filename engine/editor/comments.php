@@ -72,7 +72,7 @@ if( $config['allow_comments_wysiwyg'] == 1 ) {
 
     toolbarofset =35;
 	p_name = '{$p_name}';
-	id = '{$id_bz}';
+	id = '{$news_id}';
 	maxsize = {$config['max_up_size']};
 	logincache= '{$dle_login_hash}';
 	platetext = 'Напишите комментарий...';

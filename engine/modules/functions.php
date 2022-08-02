@@ -1975,6 +1975,16 @@ HTML;
 			else $tpl->set('{size}', formatsize(@filesize(ROOT_DIR . '/uploads/files/' . $row['onserver'])));
 		}
 
+		if (stripos($tpl->copy_template, "{icon}") !== false) {
+			$extfile = mb_strtoupper(pathinfo(ROOT_DIR . '/uploads/files/' . $row['onserver'],PATHINFO_EXTENSION));
+			if (file_exists(ROOT_DIR . '/images/typefiles/'.$extfile.'.png'))
+				$fileicon = '/images/typefiles/'.$extfile.'.png';
+			else 
+				$fileicon = '/images/typefiles/__SATORI.png';
+			$tpl->set('{icon}', $fileicon);
+		}
+
+
 		$onlineview_ext = array('doc', 'docx', 'odt', 'pdf', 'xls', 'xlsx');
 
 		if (isset($_COOKIE['dbname'])) {
@@ -1987,7 +1997,8 @@ HTML;
 
 			$tpl->set('[allow-online]', "");
 			$tpl->set('[/allow-online]', "");
-			$tpl->set('{online-view-link}', "https://docs.google.com/viewer?url=" . urlencode($root . "index.php?do=download&id=" . $row['id'] . $area . "&viewonline=1" . $prjlink));
+			//$tpl->set('{online-view-link}', "https://docs.google.com/viewer?url=" . urlencode($root . "index.php?do=download&id=" . $row['id'] . $area . "&viewonline=1" . $prjlink));
+			$tpl->set('{online-view-link}', "/viewer.php?&id=" . $row['id'] ."&viewonline=1" . $prjlink);
 		} else {
 
 			$tpl->set('{online-view-link}', "");

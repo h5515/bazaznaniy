@@ -131,8 +131,8 @@ if ( $news_id AND $area != "template" AND $area != "comments" ) {
 // }
 
 if( $area == "comments" ) {
-	$user_group[$member_id['user_group']]['allow_image_size'] = false;
-	$user_group[$member_id['user_group']]['allow_file_upload'] = false;
+	//$user_group[$member_id['user_group']]['allow_image_size'] = false;
+	//$user_group[$member_id['user_group']]['allow_file_upload'] = false;
 	$config['max_up_side'] = $user_group[$member_id['user_group']]['up_image_side'];
 	$config['max_up_size'] = $user_group[$member_id['user_group']]['up_image_size'];
 	
@@ -239,9 +239,9 @@ if( $_REQUEST['subaction'] == "upload" ) {
 	}
 	
 	if( $area == "comments" ) {
-		$user_group[$member_id['user_group']]['allow_image_size'] = false;
-		$user_group[$member_id['user_group']]['allow_file_upload'] = false;
-		$user_group[$member_id['user_group']]['allow_image_upload'] = true;
+		//$user_group[$member_id['user_group']]['allow_image_size'] = false;
+		//$user_group[$member_id['user_group']]['allow_file_upload'] = false;
+		//$user_group[$member_id['user_group']]['allow_image_upload'] = true;
 		$config['max_up_side'] = $user_group[$member_id['user_group']]['up_image_side'];
 		$config['max_up_size'] = $user_group[$member_id['user_group']]['up_image_size'];
 		$config['min_up_side'] = $user_group[$member_id['user_group']]['min_image_side'];
