@@ -51,7 +51,7 @@ function openmenu(e) {
         menus.element.find('[elem=arhive]').text(' Восстановить ').attr('elem', 'noarhive')
     }
 }
-var windostup;
+var windostup; // фф
 
 function selectmenu(e) {
     $elem = $(e.target)
