@@ -1135,7 +1135,7 @@ jQuery(function($){
 						}
 		},
         messages: {
-            typeError: "{$lang['media_upload_st11']}",
+          //  typeError: "{$lang['media_upload_st11']}",
             sizeError: "{$lang['media_upload_st12']}",
             emptyError: "{$lang['media_upload_st13']}"
         },
