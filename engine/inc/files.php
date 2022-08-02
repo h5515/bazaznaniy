@@ -186,7 +186,7 @@ jQuery(function($){
 		maxConnections: 1,
 		encoding: 'multipart',
         sizeLimit: {$max_file_size},
-		allowedExtensions: ['{$simple_ext}'],
+		// allowedExtensions: ['{$simple_ext}'],
 	    params: {"subaction" : "upload", "news_id" : "0", "area" : "adminupload", "userdir" : "{$userdir}", "user_hash" : "{$dle_login_hash}"},
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-drop-area"><span>{$lang['media_upload_st5']}</span></div>' +
@@ -224,7 +224,7 @@ jQuery(function($){
 						}
 		},
         messages: {
-            typeError: "{$lang['media_upload_st11']}",
+            // typeError: "{$lang['media_upload_st11']}",
             sizeError: "{$lang['media_upload_st12']}",
             emptyError: "{$lang['media_upload_st13']}"
         },
