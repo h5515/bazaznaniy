@@ -3066,7 +3066,7 @@
 
 .gray-theme.fr-toolbar.fr-top {
     top: 0;
-    border-bottom: 0;
+    /* border-bottom: 0; */
     border-radius: 10px 10px 0 0;
     -moz-border-radius: 10px 10px 0 0;
     -webkit-border-radius: 10px 10px 0 0;
