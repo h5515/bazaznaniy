@@ -449,7 +449,7 @@ if( $yandex_url ) {
 $mytheme = 'Blue'; //Тема по умолчанию
 if ((stripos($tpl->copy_template, "{mytheme}") !== false) || (stripos($tpl->copy_template, "{themecss}") !== false)) {
   if (isset($member_id['name'])) {
-    $theme = $db_gl->super_query("SELECT theme FROM dle_users WHERE name = '{$member_id['name']}'")['theme'];
+    $theme = mb_strtoupper($db_gl->super_query("SELECT theme FROM dle_users WHERE name = '{$member_id['name']}'")['theme']);
     if (isset($theme)&&$theme!=$mytheme) {
       $mytheme = $theme;
       $tpl->set('{themecss}', '<link href="/templates/Default/css/theme/' . $theme . '.css" rel="stylesheet" type="text/css">');
