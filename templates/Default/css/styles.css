@@ -6534,8 +6534,10 @@ input[type="submit"] {
 
 .action-login .titavt h1 {
     font-size: 29px;
-    font-family: cursive;
+    /* font-family: cursive; */
     color: #fb8d24;
+    margin-top: 53px;
+    text-shadow: 1px 1px 1px #383838;
 }
 
 .action-login .avtlogo {

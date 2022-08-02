@@ -60,7 +60,7 @@ function ldap_auth($user, $pass)
     $ldapbind = false;
     if ($ldapconn) {
         // try to bind/authenticate against ldap
-        $ldapbind = ldap_bind($ldapconn, $ldap_user, $ldap_pass);
+        $ldapbind = @ldap_bind($ldapconn, $ldap_user, $ldap_pass);
 
 /*        if (($ldapbind) && (is_null($member_id['avtoriz_ad']))) {
             ldap_get_option($ldapconn, LDAP_OPT_DIAGNOSTIC_MESSAGE, $extended_error);

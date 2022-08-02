@@ -14,13 +14,13 @@
  Use: authorization of visitors to the site
 =====================================================
 */
-if ($_POST['avtkey']!='jfdskal289234pfg$#84532'){
-    die("Hacking attempt!");
+if ($_POST['avtkey'] != 'jfdskal289234pfg$#84532') {
+	die("Hacking attempt!");
 }
 session_start();
-define( 'DATALIFEENGINE', true );
-define( 'ROOT_DIR', '../..' );
-define( 'ENGINE_DIR', '..' );
+define('DATALIFEENGINE', true);
+define('ROOT_DIR', '../..');
+define('ENGINE_DIR', '..');
 include ENGINE_DIR . '/data/config.php';
 require_once ENGINE_DIR . '/classes/mysql.php';
 require_once ENGINE_DIR . '/data/dbconfig.php';
@@ -49,11 +49,11 @@ if (isset($_REQUEST['action']) and $_REQUEST['action'] == "logout") {
 	@session_destroy();
 	@session_unset();
 	$is_logged = false;
-	
-	if ((isset( $_REQUEST['rezim'])) and ($_REQUEST['rezim']=="tui")){
-		header( "Location: ".str_replace("index.php","index.php",$_SERVER['PHP_SELF']) );
-	}else{
-		header( "Location: ".str_replace("index.php","",$_SERVER['PHP_SELF']) );
+
+	if ((isset($_REQUEST['rezim'])) and ($_REQUEST['rezim'] == "tui")) {
+		header("Location: " . str_replace("index.php", "index.php", $_SERVER['PHP_SELF']));
+	} else {
+		header("Location: " . str_replace("index.php", "", $_SERVER['PHP_SELF']));
 	}
 
 	die();
@@ -89,9 +89,9 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 	}
 
 	if ($allow_login and $allow_user) {
-	//	include(ENGINE_DIR ."/data/supconfig.php");
-	//	$bd2 = new db;
-//		$bd2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
+		//	include(ENGINE_DIR ."/data/supconfig.php");
+		//	$bd2 = new db;
+		//		$bd2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
 		$member_id = $db_gl->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
 
 
@@ -111,7 +111,7 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 		// 	$db3->free();
 		// }
 
-	//	$bd2->free();
+		//	$bd2->free();
 
 		if ((isset($member_id['avtoriz_ad'])) && ($member_id['avtoriz_ad'] == 0)) {
 			if ($member_id['user_id'] and $member_id['password']) {
@@ -125,13 +125,18 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 
 					if (password_verify($_POST['login_password'], $member_id['password'])) {
 						$is_logged = true;
+					} else {
+						die('Не верный пароль.');
 					}
 				}
 			}
 		} else {
-			include(ENGINE_DIR ."/modules/ldapconnect.php");
-			$is_logged = ldap_auth($_POST['login_name'], $_POST['login_password']);
-			if ($is_logged && is_null($member_id['avtoriz_ad'])) {
+			if (isset($member_id['name'])) {
+				include(ENGINE_DIR . "/modules/ldapconnect.php");
+				$is_logged = ldap_auth($_POST['login_name'], $_POST['login_password']);
+				if (!$is_logged)
+					die('Не верный пароль.');
+			} else {
 				//$member_id = $db->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE {$where_name}");
 				die('Пользователь не найден в базе данных. Обратитесь к Администратору.');
 			}
@@ -221,7 +226,7 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 				$_SESSION['super_admin'] = true;
 			}
 
-			
+
 			/*if ($config['twofactor_auth'] and $member_id['twofactor_auth']) {
 
 				$is_logged = false;
@@ -268,8 +273,8 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 				header("Pragma: no-cache");
 			} else {*/
 
-				$attempt_login = true;
-				$dostup_bz = true;
+			$attempt_login = true;
+			$dostup_bz = true;
 			//}
 		} else {
 
@@ -283,6 +288,8 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 
 			$member_id = array();
 		}
+	} else {
+		$otver = 'Пользователь не найден в базе данных.';
 	}
 } elseif (isset($_SESSION['dle_user_id']) and  intval($_SESSION['dle_user_id']) > 0 and $_SESSION['dle_password']) {
 
@@ -373,11 +380,11 @@ if (isset($_POST['login_name']) and isset($_POST['login_password'])) {
 	} else {
 		$dostup_bz = true;
 	}
-	include(ENGINE_DIR ."/data/supconfig.php");
-	$db2 = new db;
-	$db2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
-	$member_id = $db2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_SESSION['dle_user_id']) . "'");
-	$db2->free();
+	// include(ENGINE_DIR ."/data/supconfig.php");
+	// $db2 = new db;
+	// $db2->connect($supconfig['dbuser'], $supconfig['dbpass'], $supconfig['dbname'], $supconfig['dbhost']);
+	// $member_id = $db2->super_query("SELECT * FROM " . USERPREFIX . "_users WHERE user_id='" . intval($_SESSION['dle_user_id']) . "'");
+	// $db2->free();
 	//and md5($member_id['password']) == $_SESSION['dle_password']
 	if ($member_id['user_id'] and $member_id['password']) {
 
@@ -518,11 +525,11 @@ if ($is_logged) {
 
 	$dle_login_hash = sha1(SECURE_AUTH_KEY . $member_id['user_id'] . sha1($member_id['password']) . $member_id['hash']);
 
-    $dat = array(
-        "session" => $member_id['hash'],
-        "status" => "OK"
-    );
-    echo json_encode($dat);
+	$dat = array(
+		"session" => $member_id['hash'],
+		"status" => "OK"
+	);
+	echo json_encode($dat);
 
 	/*if ($user_group[$member_id['user_group']]['time_limit']) {
 		if ($member_id['time_limit'] != "" and (intval($member_id['time_limit']) < $_TIME)) {
@@ -591,7 +598,7 @@ if ($is_logged) {
 }
 
 if (isset($member_id['name']))
-check_adgrup();
+	check_adgrup();
 
 
 if (!$is_logged and $attempt_login) {
