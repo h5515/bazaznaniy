@@ -34,15 +34,17 @@
     {* <link href="/kendo/styles/kendo.fiori.min.css?v=4" rel="stylesheet"> *}
     {* <link href="/kendo/styles/kendo.classic-main.css?v=4" rel="stylesheet">  *}
     <link href="/kendo/styles/kendo.default-main.min.css?v={VERSION}" rel="stylesheet">
+    
     <link href="{THEME}/css/mykendo.css?v={VERSION}" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/tagify.css?v={VERSION}" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/mycss.css?v={VERSION}" rel="stylesheet" type="text/css">
+    <link href="{THEME}/css/new/new.css?v={VERSION}" rel="stylesheet" type="text/css">
 
     {themecss}
 
     <script src="/kendo/js/kendo.all.min.js?v={VERSION}"></script>
 
-    <link href="{THEME}/css/tagify.css?v={VERSION}" rel="stylesheet" type="text/css">
-    <link href="{THEME}/css/mycss.css?v={VERSION}" rel="stylesheet" type="text/css">
-    <link href="{THEME}/css/new/new.css?v={VERSION}" rel="stylesheet" type="text/css">
+
     <script src="{THEME}/js/mayscript.js?v=4?v={VERSION}"></script>
     <script src="{THEME}/js/jquery.cookie.js?v={VERSION}"></script>
     <script src="{THEME}/js/easySelect.js?v={VERSION}"></script>

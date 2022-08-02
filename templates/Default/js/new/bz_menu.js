@@ -51,6 +51,7 @@ function openmenu(e) {
         menus.element.find('[elem=arhive]').text(' Восстановить ').attr('elem', 'noarhive')
     }
 }
+var windostup;
 
 function selectmenu(e) {
     $elem = $(e.target)
@@ -81,7 +82,7 @@ function selectmenu(e) {
     }
     if (poper == 'dostup') {
         if (!$('#iddostup')[0]) {
-            $('#addbz').after('<div id="iddostup"></div>')
+            $('body').after('<div id="iddostup"></div>')
         }
         windostup = $('#iddostup').kendoWindow({
             width: '600px',

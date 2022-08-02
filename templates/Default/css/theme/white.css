@@ -1,5 +1,6 @@
 body {
     background: #ffffff;
+    background-color: white;
 }
 
 #header_menu {
@@ -323,4 +324,18 @@ input[type="color"]:focus,
 
 .pagetools {
     border: 1px solid #a7a7a7;
+}
+
+.k-window {
+    background-color: white;
+}
+
+.k-button-solid-info.k-hover,
+.k-button-solid-info:hover {
+    border-color: #606060;
+    background-color: #0d0d0d;
+}
+
+.iziModal-header {
+    background-color: #3c3c3c !important;
 }

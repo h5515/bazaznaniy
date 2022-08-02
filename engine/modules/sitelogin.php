@@ -20,7 +20,7 @@ if (!defined('DATALIFEENGINE')) {
 	header('Location: ../../');
 	die("Hacking attempt!");
 }
-
+session_start();
 $_IP = get_ip();
 $_TIME = time();
 $dle_login_hash = "";
